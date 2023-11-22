@@ -1,2 +1,5 @@
+\documentclass{article}
+\begin{document}
 \texttt{Aire boule (aire sphere)}\newline
 4\pi^2
+\end{Document}
