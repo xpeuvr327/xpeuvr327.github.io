@@ -2,4 +2,6 @@
 ## Cool, isn't?
 > Qui ne dort pas ne se réveille pas.
 \
-![image](documents/CodeCogsEqn.png)
+
+
+![](documents/CodeCogsEqn.png)
