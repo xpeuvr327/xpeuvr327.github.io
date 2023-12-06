@@ -4,4 +4,4 @@
 \
 
 
-![](documents/CodeCogsEqn.png)
+![](documents/CodeCogsEqn.png) </br>
