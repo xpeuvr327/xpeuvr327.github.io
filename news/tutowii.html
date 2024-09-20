@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>easter egg</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            color: #000;
+            text-decoration: none;
+        }
+        ol {
+            counter-reset: item;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            display: block;
+            margin-bottom: 10px;
+        }
+        li:before {
+            content: counters(item, ".") ". ";
+            counter-increment: item;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="news.html" class="back-link">Retour à l'accueil</a>
+        <h1>Comment mettre des backups obtenus de façon complètement légale sur votre Wii</h1>
+        <p>Ce site ne sera jamais référencé, j'inclus donc les téléchargements ici même. (Liens indiqués comme miroir) À noter que le serveur télécharge à environ 3.2 Mb/s Date: Juin 24</p>
+		<a href="./download/downloads.html">Tous les programmes mentionnés (Windows x64)</a> <br> <br>
+        <ol>
+        <div class="content">
+            
+                <li>Télécharger des ROMs (<a href="https://romsfun.com/roms/nintendo-wii">sur romsfun</a>, <a href="https://www.romsgames.net/roms/nintendo-wii/">romsgames</a>, <a href="https://www.romspedia.com/roms/nintendo-wii">romspedia</a>).</li>
+                <li>Décompressez le fichier. (Devrait contenir un .rvz)</li>
+                <li>Ouvrez Dolphin.</li>
+                <li>Supprimez le jeu précédent (conservez-le ailleurs si nécessaire).</li>
+                <li>Double-cliquez sur l'écran et sélectionnez le dossier où vous avez décompressé le fichier.</li>
+                <li>Sélectionnez, puis cliquez avec le bouton droit sur Convertir le fichier.</li>
+                <li>Sélectionnez ISO.</li>
+                <li>Convertissez et enregistrez-le dans "C://wbfs".</li>
+                <li>Insérez la carte SD / le lecteur USB où vous souhaitez enregistrer le jeu.</li>
+                <li>Ouvrez Wii Backup Manager.</li>
+                <li>Dans l'onglet Fichier, cliquez sur Ajouter, Fichier.</li>
+                <li>Sélectionnez l'ISO que vous venez de créer.</li>
+                <li>Dans C://wbfs, créez un dossier nommé "NOM DU JEU [ID DU JEU]" (Tel que "Super Smash Bros. Brawl [RSBP01]").</li>
+                <li>Faites glisser l'ISO dans ce dossier.</li>
+                <li>Dans l'onglet Lecteur 1, sélectionnez C:</li>
+                <li>Dans l'onglet Lecteur 2, sélectionnez le lecteur correct (E:, F:, etc.).</li>
+                <li>Retournez à l'onglet Lecteur 1.</li>
+                <li>Sélectionnez les jeux que vous souhaitez transférer sur votre lecteur (assurez-vous que la case à cocher est cochée).</li>
+                <li>Cliquez sur Transférer, puis sélectionnez Lecteur 2.</li>
+                <p>Cette partie est uniquement pour ajouter des couvertures et est donc optionnelle. À partir de là, vous pouvez éjecter votre support, aller dans USB loader GX, et votre jeu devrait apparaître</p>
+                <li>Allez dans l'onglet Lecteur 2.</li>
+                <li>Cliquez sur Couvertures, Synchroniser et Télécharger tout.</li>
+                <li>Dans le dossier de Wii Backup Manager, allez dans Couvertures, puis GX.</li>
+                <li>Sélectionnez les couvertures des jeux dont vous avez besoin (clic droit, copier).</li>
+                <li>Ouvrez un autre onglet de l'Explorateur de fichiers.</li>
+                <li>Allez dans /apps/usbloader_gx/images (Sur votre carte SD / clé USB).</li>
+                <li>Collez-le ici.</li>
+            
+            <p>Note : Les mêmes étapes pour les couvertures peuvent être effectuées avec les images de disques, il suffit d'aller dans wiibackupmanager/covers/gx/disc et dans la carte SD/USB dans /apps/usbloader_gx/images/disc.</p>
+            <p>Note : N'oubliez pas d'éjecter les lecteurs.</p>
+        </div>
+    </div>
+
+        </ol>
+    </div>
+</body>
+</html>

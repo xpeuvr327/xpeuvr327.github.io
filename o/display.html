@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Display Property Examples</title>
+    <style>
+        .block {
+            display: block;
+            background-color: lightcoral;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .inline {
+            display: inline;
+            background-color: green;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .inline-block {
+            display: inline-block;
+            background-color: lightblue;
+            margin: 10px;
+            padding: 10px;
+            width: 100px;
+            text-align: center;
+        }
+
+        .flex-container {
+            display: flex;
+            background-color: lightgrey;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .flex-item {
+            background-color: orange;
+            margin: 5px;
+            padding: 10px;
+            width: 50px;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            background-color: lightyellow;
+            margin: 10px;
+            padding: 10px;
+            grid-template-columns: auto auto auto;
+        }
+
+        .grid-item {
+            background-color: purple;
+            margin: 5px;
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .table {
+            display: table;
+            background-color: pink;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .table-row {
+            display: table-row;
+        }
+
+        .table-cell {
+            display: table-cell;
+            border: 1px solid black;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CSS Display Property Examples</h1>
+
+    <div class="block">This is a block element.</div>
+    <span class="inline">This is an inline element.</span>
+    <span class="inline">Another inline element.</span>
+
+    <div class="inline-block">Inline-block 1</div>
+    <div class="inline-block">Inline-block 2</div>
+
+    <div class="flex-container">
+        <div class="flex-item">flex1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">3</div>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+    </div>
+
+    <div class="none">This element will not be displayed.</div>
+
+    <div class="table">
+        <div class="table-row">
+            <div class="table-cell">Cell 1</div>
+            <div class="table-cell">Cell 2</div>
+            <div class="table-cell">Cell 3</div>
+        </div>
+        <div class="table-row">
+            <div class="table-cell">Cell 4</div>
+            <div class="table-cell">Cell 5</div>
+            <div class="table-cell">Cell 6</div>
+        </div>
+    </div>
+
+</body>
+</html>

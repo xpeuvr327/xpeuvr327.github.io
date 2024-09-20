@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7s CPS Test</title>
+    <style>
+        #multiTouchButton {
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            margin: 50px auto;
+            border: 2px solid blue;
+            user-select: none; /* Prevent text selection */
+        }
+        .console {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .console .error {
+            color: red;
+        }
+        .console .info {
+            color: blue;
+        }
+        #result {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="multiTouchButton">Touch Me</div>
+    <div class="console" id="fakeConsole"></div>
+    <div id="result"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('multiTouchButton');
+            const resultDiv = document.getElementById('result');
+            let touchCount = 0;
+            let startTime = null;
+            let isTestRunning = false;
+
+            button.addEventListener('touchstart', handleTouchStart, false);
+            button.addEventListener('touchend', handleTouchEnd, false);
+
+            function handleTouchStart(event) {
+                event.preventDefault();
+                if (!isTestRunning) {
+                    startTime = Date.now();
+                    isTestRunning = true;
+                    touchCount = 0;
+                    resultDiv.textContent = '';
+                    setTimeout(endTest, 7000);
+                }
+                touchCount++;
+                console.log('Touch started:', event.touches);
+            }
+
+            function handleTouchEnd(event) {
+                event.preventDefault();
+                console.log('Touch ended:', event.touches);
+            }
+
+            function endTest() {
+                isTestRunning = false;
+                const cps = touchCount / 7;
+                resultDiv.textContent = `Your CPS: ${cps.toFixed(2)}`;
+                console.log(`Test ended. Your CPS: ${cps.toFixed(2)}`);
+            }
+        });
+
+        (function() {
+            const fakeConsole = document.getElementById('fakeConsole');
+
+            const originalLog = console.log;
+            const originalError = console.error;
+
+            console.log = function(message) {
+                const logEntry = document.createElement('div');
+                logEntry.className = 'info';
+                logEntry.textContent = message;
+                fakeConsole.appendChild(logEntry);
+                fakeConsole.scrollTop = fakeConsole.scrollHeight; // Scroll to the bottom
+                originalLog.apply(console, arguments);
+            };
+
+            console.error = function(message) {
+                const logEntry = document.createElement('div');
+                logEntry.className = 'error';
+                logEntry.textContent = message;
+                fakeConsole.appendChild(logEntry);
+                fakeConsole.scrollTop = fakeConsole.scrollHeight; // Scroll to the bottom
+                originalError.apply(console, arguments);
+            };
+        })();
+    </script>
+</body>
+</html>
+

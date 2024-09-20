@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>MP4 to IMG v2h.3</title> 
+	<style>
+	body { font-family: Arial, sans-serif; background-color: #f0f0f0; margin: 20px; padding: 0; }
+
+input[type="file"],
+    input[type="number"],
+    select,
+    label,
+    button {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #progressBar {
+        margin-top: 20px;
+        width: 100%;
+        background-color: #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    #progress {
+        background-color: #007bff;
+        height: 20px;
+    }
+
+    #progressText {
+        padding: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    #etaText {
+        padding: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    #packCounter {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    #downloadButtons button {
+        margin-right: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    #downloadButtons button:hover {
+        background-color: #0056b3;
+    }
+
+    #previewContainer img {
+        max-width: 200px;
+        max-height: 200px;
+    }
+</style>
+<input type="file" id="videoInput" accept="video/*">
+
+<label for="frequency">
+    Screenshot Frequency (seconds):<br>
+    <span style="font-size: 12px;">Enter the time interval between each screenshot</span>
+</label>
+<input type="number" id="frequency" min="1" step="1" value="1">
+
+<label for="format">
+    Output Format:<br>
+    <span style="font-size: 12px;">Choose the output format for screenshots</span>
+</label>
+<select id="format">
+    <option value="png">PNG</option>
+    <option value="jpeg">JPEG</option>
+</select>
+
+<label for="playAudio">
+    Mute Audio:<br>
+    <span style="font-size: 12px;">Toggle to mute audio from the video</span>
+    <input type="checkbox" id="playAudio" checked>
+</label>
+
+<label for="previewCheckbox">
+    Show Preview:<br>
+    <span style="font-size: 12px;">Toggle to display a preview of each screenshot</span>
+    <input type="checkbox" id="previewCheckbox" checked>
+</label>
+
+<label for="fastMode">
+    Fast Mode:<br>
+    <span style="font-size: 12px;">Enable fast mode to capture screenshots at a faster rate</span>
+    <input type="checkbox" id="fastMode">
+</label>
+
+<label for="reverseMode">
+    Reverse Mode:<br>
+    <span style="font-size: 12px;">Enable reverse mode to download screenshots in reverse order</span>
+    <input type="checkbox" id="reverseMode">
+</label>
+
+
+<button onclick="startScreenshot()">Convert</button>
+
+<div id="screenshotContainer"></div>
+<div id="previewContainer"></div>
+
+<div id="progressBar">
+    <div id="progress" style="width: 0%;"></div>
+    <div id="progressText">0%</div>
+    <div id="etaText">ETA: --</div>
+</div>
+
+<div id="packCounter"></div>
+<div id="downloadButtons"></div>
+<p>This tool converts MP4 videos into a series of images based on a specified time interval. Simply select a video file, set your desired screenshot frequency, choose an output format, and click 'Convert'. The tool will generate and download a ZIP file containing all the screenshots.</p>
+
+<script>
+    let screenshots = [];
+    let packNumber = 1;
+    let startTime;
+    let interval;
+
+function startScreenshot() {
+    clearInterval(interval);
+    screenshots = [];
+    packNumber = 1;
+    startTime = new Date();
+
+    const videoInput = document.getElementById('videoInput');
+    const frequency = parseInt(document.getElementById('frequency').value);
+    const format = document.getElementById('format').value;
+    const playAudio = !document.getElementById('playAudio').checked;
+    const previewEnabled = document.getElementById('previewCheckbox').checked;
+    const fastMode = document.getElementById('fastMode').checked;
+
+    let playbackSpeed = 1;
+
+    if (fastMode) {
+        playbackSpeed = 16; // set maximum playback speed to 16x
+    }
+
+    if (!videoInput.files || !videoInput.files[0]) {
+        alert('Please select a video file.');
+        return;
+    }
+
+    const videoFile = videoInput.files[0];
+    const videoURL = URL.createObjectURL(videoFile);
+    const video = document.createElement('video');
+    video.src = videoURL;
+    video.crossOrigin = 'anonymous';
+    video.muted = !playAudio;
+    video.playbackRate = playbackSpeed;
+
+        video.addEventListener('loadedmetadata', () => {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            const videoWidth = video.videoWidth;
+            const videoHeight = video.videoHeight;
+            canvas.width = videoWidth / 2; // Reduce canvas size for performance
+            canvas.height = videoHeight / 2;
+
+            const duration = video.duration;
+            let currentTime = 0;
+
+            interval = setInterval(() => {
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const image = canvas.toDataURL(`image/${format}`);
+                if (reverseMode) {
+                    screenshots.unshift(image);
+                } else {
+                    screenshots.push(image);
+                }
+
+                if (previewEnabled) {
+                    showLatestScreenshotPreview(image);
+                }
+
+                const progress = (currentTime / duration) * 100;
+                updateProgress(progress);
+
+                if (currentTime >= duration) {
+                    clearInterval(interval);
+                    updatePackCounter();
+                    createDownloadButtons();
+                } else {
+                    currentTime += frequency;
+                    video.currentTime = currentTime;
+                }
+            }, frequency * 1000 / playbackSpeed); // Convert seconds to milliseconds
+        });
+
+        video.load();
+        video.play();
+    }
+
+    function updateProgress(progress) {
+        const progressBar = document.getElementById('progress');
+        const progressText = document.getElementById('progressText');
+        const etaText = document.getElementById('etaText');
+
+        progressBar.style.width = `${progress}%`;
+        progressText.textContent = `${Math.round(progress)}%`;
+
+        if (progress === 100) {
+            etaText.textContent = 'Ended';
+        } else {
+            const elapsedTime = (new Date() - startTime) / 1000; // in seconds
+            const remainingTime = (elapsedTime / progress) * (100 - progress);
+            etaText.textContent = remainingTime > 0 ? `ETA: ${formatTime(remainingTime)}` : 'Ended';
+        }
+    }
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}m ${remainingSeconds}s`;
+    }
+
+    function updatePackCounter() {
+        const packCounter = document.getElementById('packCounter');
+        const totalScreenshots = screenshots.length;
+
+        packCounter.textContent = `${totalScreenshots} files`;
+    }
+
+    function createDownloadButtons() {
+        const container = document.getElementById('downloadButtons');
+        container.innerHTML = '';
+
+        const downloadAllButton = document.createElement('button');
+        downloadAllButton.textContent = 'Download';
+        downloadAllButton.onclick = function() {
+            downloadImages(0, screenshots.length);
+        };
+        container.appendChild(downloadAllButton);
+    }
+
+    function downloadImages(start, end) {
+        const zip = new JSZip();
+
+        for (let i = start; i < end; i++) {
+            const imgData = screenshots[i].split(';base64,')[1];
+            zip.file(`screenshot_${i + 1}.png`, imgData, { base64: true });
+        }
+
+        zip.generateAsync({ type: "blob" })
+            .then(function (content) {
+                saveAs(content, `screenshot_1-${screenshots.length}.zip`);
+            });
+    }
+
+    function showLatestScreenshotPreview(image) {
+        const previewContainer = document.getElementById('previewContainer');
+        previewContainer.innerHTML = '';
+
+        const img = document.createElement('img');
+        img.src = image;
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        previewContainer.appendChild(img);
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.0/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body> </html>

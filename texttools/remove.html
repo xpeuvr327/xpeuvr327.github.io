@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="general-styles.css">
+  <title>Outil de suppression</title>
+</head>
+<body>
+  <h1>Outil de suppression</h1>
+  <textarea id="input" style="width: 90%; margin: 0 auto; display: block; font-family: 'SFUIText-Regular';"" rows="4"></textarea><br>
+  <div style="text-align:center;">
+  <input id="term" type="text" placeholder="Terme à supprimer" style="font-family: 'SF-Pro-Text-Medium', sans-serif;"><br>
+  <label for="caseSensitive" style="font-family: 'SF-Pro-Text-Medium', sans-serif;">Sensible à la casse</label>
+  <input id="caseSensitive" type="checkbox"><br>
+  </div>
+  <button id="replaceAll" class="button">Supprimer tout</button>
+  <button id="replaceNext" class="button">Supprimer suivant</button><br>
+  <textarea id="output" style="width: 90%; margin: 0 auto; display: block; resize: none;" rows="4"></textarea><br>
+  <button id="setInputToOutput" class="button">Définir l'entrée comme sortie</button><br>
+  <button id="copyToClipboard" class="button">Copier dans le presse-papiers</button><br>
+  <button id="refreshOutput" class="button">Rafraîchir la sortie</button> <br>
+  <a href="index.html" class="button">Retour à l'accueil</a>
+  <br>
+  <p>Pour plus d'aide, consultez <a href="help.html#:~:text=Comment%20utiliser%20l%27outil%20de%20suppression">la page d'aide associée</a>.</p>
+  <script src="remove.js"></script>
+</body>
+</html>

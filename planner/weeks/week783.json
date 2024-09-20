@@ -1,0 +1,182 @@
+{
+  "days": [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi"
+  ],
+  "timeScheme":"sism",
+  "schedule": {
+    "Lundi": [
+      {
+        "period": 1,
+        "subject": "Physique ",
+        "notes": "A117"
+      },
+      {
+        "period": 2,
+        "subject": "Physique",
+        "notes": "A117"
+      },
+      {
+        "period": 3,
+        "subject": "Allemand",
+        "notes": "A211"
+      },
+      {
+        "period": 4,
+        "subject": "Allemand",
+        "notes": "A211"
+      }
+    ],
+    "Mardi": [
+      {
+        "period": 1,
+        "subject": "Français",
+        "notes": "BE16"
+      },
+      {
+        "period": 2,
+        "subject": "Français",
+        "notes": "BE16"
+      },
+      {
+        "period": 3,
+        "subject": "Mathématiques",
+        "notes": "BE17"
+      },
+      {
+        "period": 4,
+        "subject": "Mathématiques",
+        "notes": "BE17"
+      },
+      {
+        "period": 7,
+        "subject": "Chimie",
+        "notes": "A217"
+      },
+      {
+        "period": 8,
+        "subject": "Chimie",
+        "notes": "A217"
+      },
+      {
+        "period": 9,
+        "subject": "Anglais",
+        "notes": "C113"
+      }
+    ],
+    "Mercredi": [
+      {
+        "period": 1,
+        "subject": "Arts Plastiques",
+        "notes": "B219"
+      },
+      {
+        "period": 2,
+        "subject": "Arts Plastiques",
+        "notes": "B219"
+      },
+      {
+        "period": 3,
+        "subject": "Français",
+        "notes": "BE16"
+      },
+      {
+        "period": 4,
+        "subject": "Français",
+        "notes": "BE16"
+      },
+      {
+        "period": 5,
+        "subject": "DARS",
+        "notes": "C217"
+      }
+    ],
+    "Jeudi": [
+      {
+        "period": 1,
+        "subject": "Histoire",
+        "notes": "C218"
+      },
+      {
+        "period": 2,
+        "subject": "Histoire",
+        "notes": "C218"
+      },
+      {
+        "period": 3,
+        "subject": "Français",
+        "notes": "BE16"
+      },
+      {
+        "period": 4,
+        "subject": "Français",
+        "notes": "BE16"
+      },
+      {
+        "period": 6,
+        "subject": "Rsp. Gr.",
+        "notes": "A211"
+      },
+      {
+        "period": 7,
+        "subject": "Informatique",
+        "notes": "B116"
+      },
+      {
+        "period": 8,
+        "subject": "Informatique",
+        "notes": "B116"
+      },
+      {
+        "period": 9,
+        "subject": "Éd. Ph.",
+        "notes": "Gym B"
+      },
+      {
+        "period": 10,
+        "subject": "Éd. Ph.",
+        "notes": "Gym B"
+      }
+    ],
+    "Vendredi": [
+      {
+        "period": 3,
+        "subject": "Économie",
+        "notes": "C115"
+      },
+      {
+        "period": 4,
+        "subject": "Économie",
+        "notes": "C115"
+      },
+      {
+        "period": 6,
+        "subject": "Allemand",
+        "notes": "A111"
+      },
+      {
+        "period": 7,
+        "subject": "Mathématiques",
+        "notes": "BE17"
+      },
+      {
+        "period": 8,
+        "subject": "Mathématiques",
+        "notes": "BE17"
+      },
+      {
+        "period": 9,
+        "subject": "Anglais",
+        "notes": "C114"
+      },
+      {
+        "period": 10,
+        "subject": "Anglais",
+        "notes": "C114"
+      }
+    ]
+  }
+}

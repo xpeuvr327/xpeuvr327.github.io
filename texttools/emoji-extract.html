@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'emoji aléatoire</title>
+    <link rel="stylesheet" href="general-styles.css">
+    <style>
+        #emojiContainer {
+            text-align: center;
+            font-size: 3em;
+            margin-top: 20px;
+        }
+
+        /* Styles pour centrer les boîtes de texte */
+        .centered-box {
+            margin: 0 auto; /* Marge automatique sur les côtés */
+            display: block; /* Affiche comme un bloc */
+            text-align: center; /* Centre le contenu */
+        }
+
+        #inputTextArea,
+        #emojiTextArea {
+            width: 90%;
+            font-size: 1em; /* Taille de police adaptée */
+            margin: 10px auto; /* Marge automatique sur les côtés */
+            display: block; /* Affiche comme un bloc */
+            resize: none; /* Empêche le redimensionnement */
+        }
+
+        #noEmojiMessage {
+            display: none; /* Initialement masqué */
+            color: red;
+            margin-top: 10px;
+            text-align: center; /* Centre le message */
+        }
+    </style>
+</head>
+<body>
+    <h1>Générateur d'emoji aléatoire</h1>
+    
+    <!-- Input text area -->
+    <textarea id="inputTextArea" rows="5" class="centered-box" placeholder="Entrez du texte"></textarea>
+    <br>
+
+    <!-- Button to Extract Emojis -->
+    <button id="extractEmojisButton" class="button centered-box">Extraire les emojis</button>
+
+    <!-- Emoji Textarea -->
+    <textarea id="emojiTextArea" rows="1" readonly class="centered-box"></textarea>
+    <div id="noEmojiMessage" class="centered-box">Aucun emoji détecté</div>
+
+    <!-- Copy Button with Tooltip -->
+    <button id="copyButton" class="button centered-box">Copier</button>
+    <div id="tooltip" class="tooltip centered-box"></div>
+
+    <!-- "Retour à l'accueil" button -->
+    <br>
+    <a href="index.html" class="button centered-box">Retour à l'accueil</a>
+
+    <script>
+        // Function to extract emojis from text
+        function extractEmojis(text) {
+            const regex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+            return text.match(regex) || [];
+        }
+
+        // Function to display emojis
+        function displayEmojis(emojis) {
+            const emojiTextArea = document.getElementById('emojiTextArea');
+            const noEmojiMessage = document.getElementById('noEmojiMessage');
+            if (emojis.length > 0) {
+                emojiTextArea.value = emojis.join(' ');
+                emojiTextArea.style.display = 'block';
+                noEmojiMessage.style.display = 'none';
+            } else {
+                emojiTextArea.style.display = 'none';
+                noEmojiMessage.style.display = 'block';
+            }
+        }
+
+        // Function to copy emojis to clipboard
+        function copyEmojisToClipboard() {
+            const emojis = document.getElementById('emojiTextArea').value;
+            if (emojis) {
+                navigator.clipboard.writeText(emojis).then(function() {
+                    const tooltip = document.getElementById('tooltip');
+                    tooltip.innerText = `Copie des emojis ${emojis} réussie!`;
+                    tooltip.style.visibility = 'visible';
+                    setTimeout(function() {
+                        tooltip.style.visibility = 'hidden';
+                    }, 2000);
+                }, function() {
+                    console.error('Failed to copy emojis to clipboard');
+                });
+            }
+        }
+
+        // Event listener for the "Extraire les emojis" button
+        document.getElementById('extractEmojisButton').addEventListener('click', function() {
+            const inputText = document.getElementById('inputTextArea').value;
+            const emojis = extractEmojis(inputText);
+            displayEmojis(emojis);
+        });
+
+        // Event listener for the "Copier" button
+        document.getElementById('copyButton').addEventListener('click', copyEmojisToClipboard);
+    </script>
+</body>
+</html>

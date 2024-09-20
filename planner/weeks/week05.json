@@ -1,0 +1,23 @@
+{
+  "days": [
+    "Lundi 23",
+    "Mardi 24",
+    "Mercredi 25",
+    "Jeudi 26",
+    "Vendredi 27"
+  ],
+  "timeScheme": "sism",
+  "schedule": {
+    "Lundi 23": [],
+    "Mardi 24": [],
+    "Mercredi 25": [],
+    "Jeudi 26": [
+      {
+        "period": 7,
+        "subject": "Allemand",
+        "notes": "Éval 50 verbes (p52 53 feuilleté) et articles der die das"
+      }
+    ],
+    "Vendredi 27": []
+  }
+}

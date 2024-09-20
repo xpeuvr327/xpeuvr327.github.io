@@ -1,0 +1,79 @@
+#board {
+    display: grid;
+    /* Modifier le style de la grille pour qu'elle s'adapte à la taille des cases */
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    gap: 1px;
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+}
+
+.cell {
+    background-color: #ddd;
+    border: 1px solid #fff;
+    /* Modifier la taille de la police pour qu'elle s'adapte à la taille des cases */
+    font-size: calc(10px + 1vmin);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.cell.revealed {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.cell.mine {
+    /* Enlever le code pour changer la couleur des mines en rouge */
+    /* background-color: #f00; */
+}
+
+.cell.flagged {
+    background-color: #ff0;
+}
+
+/*.cell.flagged::before { //old, no need now
+    content: "\1F6A9"; /* Unicode code for 🚩 */
+
+
+.cell.maybe {
+    background-color: #0ff;
+}
+/* Styles pour le mode sombre */
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode #board {
+    border-color: #fff;
+}
+
+body.dark-mode .cell {
+    background-color: #555;
+    border-color: #777;
+    color: #fff; /* Assurez-vous que le texte est blanc */
+    user-select: none; /* Empêche la sélection du texte */
+    -webkit-user-select: none; /* Pour les navigateurs basés sur WebKit (Safari, Chrome) */
+    -moz-user-select: none; /* Pour Firefox */
+    -ms-user-select: none; 
+}
+
+/* Styles pour les cellules révélées en mode sombre */
+body.dark-mode .cell.revealed {
+    background-color: #777;
+    border-color: #999;
+    color: #fff; /* Assurez-vous que le texte est blanc */
+}
+
+body.dark-mode .cell.flagged {
+    background-color: #ff0;
+    color: #fff; /* Assurez-vous que le texte est blanc pour un meilleur contraste */
+}
+
+body.dark-mode .cell.maybe {
+    background-color: #0ff;
+    color: #fff; /* Assurez-vous que le texte est blanc pour un meilleur contraste */
+}
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clicker Game</title>
+</head>
+<body>
+    <h1 id="mainVar">0</h1>
+    <button onclick="checkValue()">Check Value with 3rd</button>
+    <h2 id="result"></h2>
+
+    <h2 id="secondVar">0</h2>
+    <button onclick="incrementSecond()">Increment Second</button>
+    <button onclick="decrementSecond()">Decrement Second</button>
+    <button onclick="addSecondToMain()">Add Second to Main</button>
+
+    <h2 id="compareVar">0</h2>
+    <button onclick="incrementCompare()">Increment Compare</button>
+    <button onclick="decrementCompare()">Decrement Compare</button>
+    <button onclick="compareValues()">Compare Main with Compare</button>
+    <h2 id="compareResult"></h2>
+
+    <h2 id="thirdVar">0</h2>
+    <button onclick="incrementThird()">Increment Third</button>
+    <button onclick="decrementThird()">Decrement Third</button>
+    <button onclick="compareThirdAndAdd()">Compare Third and Add to Second</button>
+
+    <script>
+        var mainVar = 0;
+        var secondVar = 0;
+        var compareVar = 0;
+        var thirdVar = 0;
+
+
+        function checkValue() {
+            var result = document.getElementById('result');
+            if (mainVar > 0) {
+                result.innerText = 'The value is positive.';
+            } else if (mainVar < 0) {
+                result.innerText = 'The value is negative.';
+            } else {
+                result.innerText = 'The value is zero.';
+            }
+        }
+
+        function incrementSecond() {
+            secondVar++;
+            document.getElementById('secondVar').innerText = secondVar;
+        }
+
+        function decrementSecond() {
+            secondVar--;
+            document.getElementById('secondVar').innerText = secondVar;
+        }
+
+        function addSecondToMain() {
+            mainVar += secondVar;
+            document.getElementById('mainVar').innerText = mainVar;
+        }
+
+        function incrementCompare() {
+            compareVar++;
+            document.getElementById('compareVar').innerText = compareVar;
+        }
+
+        function decrementCompare() {
+            compareVar--;
+            document.getElementById('compareVar').innerText = compareVar;
+        }
+
+        function compareValues() {
+            var compareResult = document.getElementById('compareResult');
+            if (mainVar > compareVar) {
+                compareResult.innerText = 'Main variable is greater than compare variable.';
+            } else if (mainVar < compareVar) {
+                compareResult.innerText = 'Main variable is less than compare variable.';
+            } else {
+                compareResult.innerText = 'Main variable is equal to compare variable.';
+            }
+        }
+
+        function incrementThird() {
+            thirdVar++;
+            document.getElementById('thirdVar').innerText = thirdVar;
+        }
+
+        function decrementThird() {
+            thirdVar--;
+            document.getElementById('thirdVar').innerText = thirdVar;
+        }
+
+        function compareThirdAndAdd() {
+            if (thirdVar <= 1) {
+                secondVar++;
+                document.getElementById('secondVar').innerText = secondVar;
+            }
+        }
+    </script>
+</body>
+</html>
+

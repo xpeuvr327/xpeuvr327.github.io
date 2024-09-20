@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="general-styles.css">
+  <style>
+    .result {
+      font-size: 1.2em;
+      margin-top: 1em;
+    }
+    #text1, #text2 {
+      width: 90%;
+      margin: 0 auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Comparateur de chaînes</h1>
+  <div id="text1-container">
+    <textarea id="text1" rows="5" style="font-family: 'SFUIText-Regular';"></textarea> <br>
+  </div>
+  <div id="text2-container">
+    <textarea id="text2" rows="5" style="font-family: 'SFUIText-Regular';"></textarea>
+  </div>
+  <div id="options-container" style="text-align:center;">
+  <label for="caseSensitive" style="font-family: 'SF-Pro-Text-Medium', sans-serif;">Sensible à la casse</label>
+  <input type="checkbox" id="caseSensitive" checked>
+  <br>
+  <label for="accentSensitive" style="font-family: 'SF-Pro-Text-Medium', sans-serif;">Sensible aux accents</label>
+  <input type="checkbox" id="accentSensitive">
+</div>
+
+  <br>
+  <button id="compare" class="button">Comparer</button>
+  <p class="result"></p>
+  <br>
+  <a href="index.html" class="button">Retour à l'accueil</a>
+  <br>
+  <p>Pour plus d'aide, consultez <a href="help.html#:~:text=Comment%20utiliser%20l'outil%20de%20comparaison">la page d'aide associée</a>.</p>
+  <script src="compare.js"></script>
+</body>
+</html>

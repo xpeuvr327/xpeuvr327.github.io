@@ -1,0 +1,42 @@
+#board {
+    display: grid;
+    /* Modifier le style de la grille pour qu'elle s'adapte à la taille des cases */
+    grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(30px, 1fr));
+    gap: 1px;
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+}
+
+.cell {
+    background-color: #ddd;
+    border: 1px solid #fff;
+    /* Modifier la taille de la police pour qu'elle s'adapte à la taille des cases */
+    font-size: calc(10px + 1vmin);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.cell.revealed {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.cell.mine {
+    /* Enlever le code pour changer la couleur des mines en rouge */
+    /* background-color: #f00; */
+}
+
+.cell.flagged {
+    background-color: #ff0;
+}
+
+/*.cell.flagged::before { //old, no need now
+    content: "\1F6A9"; /* Unicode code for 🚩 */
+
+
+.cell.maybe {
+    background-color: #0ff;
+}

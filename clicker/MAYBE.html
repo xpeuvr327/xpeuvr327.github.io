@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clicker Game</title>
+</head>
+<body>
+    <h1 id="money">0</h1>
+    <button onclick="click()">Click</button>
+
+    <h2>Increment: <span id="increment">1</span> | Price: <span id="price">10</span></h2>
+    <button onclick="upgrade()">Upgrade</button>
+
+    <h6 id="log"></h6>
+
+    <script>
+        var money = 0;
+        var increment = 1;
+        var incrementPrice = 10;
+
+        function click() {
+            money += increment;
+            document.getElementById('money').innerText = money;
+            log('Clicked. Money increased by ' + increment + '. Total money: ' + money);
+        }
+
+        function upgrade() {
+            if (money >= incrementPrice) {
+                money -= incrementPrice;
+                increment++;
+                incrementPrice += 10; // Increase the price for the next upgrade
+                document.getElementById('money').innerText = money;
+                document.getElementById('increment').innerText = increment;
+                document.getElementById('price').innerText = incrementPrice;
+                log('Upgraded. Money decreased by ' + incrementPrice + '. Total money: ' + money + '. Increment increased to ' + increment + '. Price for next upgrade: ' + incrementPrice);
+            } else {
+                log('Not enough money to upgrade. Need ' + incrementPrice + ' but have ' + money);
+            }
+        }
+
+        function log(message) {
+            console.log(message);
+            var logElement = document.getElementById('log');
+            logElement.innerHTML += message + '<br>';
+        }
+    </script>
+</body>
+</html>
+

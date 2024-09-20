@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cookies</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        input, button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Cookies</h1>
+        <label for="cookieName">Cookie Name:</label>
+        <input type="text" id="cookieName" placeholder="Enter cookie name to set/retrieve">
+
+        <label for="cookieValue">Cookie Value:</label>
+        <input type="text" id="cookieValue" placeholder="Enter cookie value">
+		<label for="cookieDuration">Cookie Duration:</label>
+		<input type="number" id="cookieDuration" placeholder="Enter cookie duration in days">
+
+        <button onclick="setCookie()">Set Cookie</button>
+        <button onclick="getCookie()">Get Cookie</button>
+
+        <h2>Cookie Value:</h2>
+        <p id="cookieResult">No cookie retrieved yet.</p>
+    </div>
+
+    <script>
+        function setCookie() {
+            const cookieName = document.getElementById('cookieName').value;
+            const cookieValue = document.getElementById('cookieValue').value;
+            const cookieDuration = document.getElementById('cookieDuration').value;
+            const expirationDate = new Date();
+            expirationDate.setTime(expirationDate.getTime() + (cookieDuration * 24 * 60 * 60 * 1000)); // 30 days
+            const expires = "expires=" + expirationDate.toUTCString();
+            document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+            alert('Cookie set: ' + cookieName + '=' + cookieValue);
+        }
+
+        function getCookie() {
+            const cookieName = document.getElementById('cookieName').value;
+            const name = cookieName + "=";
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
+            let cookieValue = '';
+
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i];
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1);
+                }
+                if (cookie.indexOf(name) === 0) {
+                    cookieValue = cookie.substring(name.length, cookie.length);
+                    break;
+                }
+            }
+
+            document.getElementById('cookieResult').innerText = cookieValue || 'No cookie found with that name.';
+        }
+    </script>
+</body>
+</html>

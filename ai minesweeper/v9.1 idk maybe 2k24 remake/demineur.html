@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Démineur</title>
+    <link rel="stylesheet" href="styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+<body>
+    <h1>Démineur by IA</h1>
+<div onclick="this.style.display = 'none'">
+démineur normal en javascript. le numéro aléatoire entre parenthèses est pour indiquer qu'une nouvelle grille a été générée. fais moi savoir si des erreurs graphiques sont à signaler. clique ce texte pour le cacher. <br>
+</div>
+    <!-- Ajouter un menu déroulant avec les options de 10, 20, 30 ou 40 mines -->
+    <label for="mines">Nombre de mines:</label>
+    <select id="mines" onchange="changeMines()">
+        <option value="10" selected>10x10, 10 mines</option>
+        <option value="20">15x15, 30 mines</option>
+        <option value="30">20x20, 50 mines</option>
+        <option value="40">25x25, 70 mines</option>
+    </select>
+    <!-- Ajouter un bouton pour recommencer le jeu -->
+    <button id="restart" onclick="createBoard()">Recommencer</button>
+    <!-- Ajouter un paragraphe pour afficher le message du jeu -->
+    <p id="message"></p>
+    <div id="board"></div>
+    <script src="game.js"></script>
+</body>
+</html>

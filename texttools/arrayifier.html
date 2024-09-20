@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrayifier</title>
+  <link rel="stylesheet" href="general-styles.css">
+  <style>
+    /* Additional styles for arrayifier */
+    #input-container {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    /* Apply the same styles to both input and preview textareas */
+    #inputTextArea, #previewTextArea {
+      width: 90%;
+      margin: 0 auto;
+      resize: vertical;
+    }
+  </style>
+</head>
+<body>
+  <h1>Arrayifier</h1>
+  <div id="input-container">
+    <textarea id="inputTextArea" rows="5" placeholder="Entrez du texte"></textarea>
+  </div>
+  <button id="convertButton" class="button">Convertir en JSON</button>
+  <br>
+  <div id="input-container">
+    <textarea id="previewTextArea" rows="5" readonly></textarea>
+    <br>
+  </div>
+  <label for="downloadCheckbox">Télécharger le fichier JSON</label>
+  <input type="checkbox" id="downloadCheckbox">
+  <br>
+  <button class="button" onclick="copyToClipboard()">Copier dans le presse-papiers</button>
+  <button class="button" onclick="downloadJSON()">Télécharger</button>
+  <p id="copyMessage"></p>
+  <br>
+  <a href="index.html" class="button">Retour à l'accueil</a>
+
+  <script>
+    document.getElementById('convertButton').addEventListener('click', function() {
+      const inputText = document.getElementById('inputTextArea').value.trim();
+      const values = Array.from(inputText);
+      const jsonArray = JSON.stringify(values);
+      const downloadCheckbox = document.getElementById('downloadCheckbox');
+      
+      if (downloadCheckbox.checked) {
+        const blob = new Blob([jsonArray], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'data.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+      
+      document.getElementById('previewTextArea').value = jsonArray;
+    });
+
+    function copyToClipboard() {
+      const inputText = document.getElementById('previewTextArea').value.trim();
+      navigator.clipboard.writeText(inputText).then(function() {
+        document.getElementById('copyMessage').innerText = 'Texte copié dans le presse-papiers.';
+      }, function() {
+        document.getElementById('copyMessage').innerText = 'Impossible de copier le texte dans le presse-papiers.';
+      });
+    }
+
+    function downloadJSON() {
+      const inputText = document.getElementById('previewTextArea').value.trim();
+      const blob = new Blob([inputText], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'data.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+.block-example {
+    display: block;
+    background-color: lightblue;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.inline-example {
+    display: inline;
+    background-color: lightgreen;
+    padding: 5px;
+}
+
+.inline-block-example {
+    display: inline-block;
+    background-color: lightyellow;
+    padding: 10px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.flex-example {
+    display: flex;
+    justify-content: space-between;
+    background-color: lightgray;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.flex-item {
+    background-color: lightpink;
+    padding: 10px;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.none-example {
+    display: none;
+}

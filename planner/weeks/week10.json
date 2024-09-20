@@ -1,0 +1,16 @@
+{
+  "days": [
+    "Lundi 28",
+    "Mardi 29",
+    "Mercredi 30",
+    "Jeudi 31",
+    "Vendredi 1"
+  ],"timeScheme":"sism",
+  "schedule": {
+    "Lundi 28": [],
+    "Mardi 29": [],
+    "Mercredi 30": [],
+    "Jeudi 31": [],
+    "Vendredi 1": []
+  }
+}

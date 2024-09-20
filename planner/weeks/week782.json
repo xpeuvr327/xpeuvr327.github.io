@@ -1,0 +1,191 @@
+{
+  "days": [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi"
+  ],
+  "schedule": {
+    "Lundi": [
+      {
+        "period": 1,
+        "subject": "Français",
+        "notes": "201"
+      },
+      {
+        "period": 2,
+        "subject": "Français - 201",
+        "notes": ""
+      },
+      {
+        "period": 3,
+        "subject": "Allemand",
+        "notes": "219"
+      },
+      {
+        "period": 4,
+        "subject": "Allemand - 219",
+        "notes": ""
+      },
+      {
+        "period": 7,
+        "subject": "Droit",
+        "notes": "224"
+      },
+      {
+        "period": 8,
+        "subject": "Droit - 224",
+        "notes": ""
+      },
+      {
+        "period": 9,
+        "subject": "Math",
+        "notes": "325"
+      },
+      {
+        "period": 10,
+        "subject": "Math - 325",
+        "notes": ""
+      }
+    ],
+    "Mardi": [
+      {
+        "period": 1,
+        "subject": "Histoire",
+        "notes": "207"
+      },
+      {
+        "period": 2,
+        "subject": "Histoire - 207",
+        "notes": ""
+      },
+      {
+        "period": 3,
+        "subject": "Chimie",
+        "notes": "305"
+      },
+      {
+        "period": 4,
+        "subject": "Chimie - 305",
+        "notes": ""
+      },
+      {
+        "period": 7,
+        "subject": "Anglais",
+        "notes": "113"
+      },
+      {
+        "period": 8,
+        "subject": "Anglais - 113",
+        "notes": ""
+      },
+      {
+        "period": 9,
+        "subject": "Diction",
+        "notes": "128"
+      },
+      {
+        "period": 10,
+        "subject": "Français",
+        "notes": "201"
+      },
+      {
+        "period": 11,
+        "subject": "H de Gr.",
+        "notes": "Void"
+      }
+    ],
+    "Mercredi": [
+      {
+        "period": 1,
+        "subject": "Éd. Ph.",
+        "notes": "SP2"
+      },
+      {
+        "period": 2,
+        "subject": "Éd. Ph",
+        "notes": "Service Pack 2"
+      },
+      {
+        "period": 3,
+        "subject": "la blague avant c'est que windows SP2 c'est service pack2",
+        "notes": "la blague était pas très drôle j'avoue"
+      },
+      {
+        "period": 4,
+        "subject": "mais mec le mercredi tu te mets bien",
+        "notes": ""
+      }
+    ],
+    "Jeudi": [
+      {
+        "period": 2,
+        "subject": "Allemand",
+        "notes": "219"
+      },
+      {
+        "period": 3,
+        "subject": "Biologie",
+        "notes": "306"
+      },
+      {
+        "period": 4,
+        "subject": "Biologie - 306",
+        "notes": ""
+      },
+      {
+        "period": 7,
+        "subject": "Arts Plastiques",
+        "notes": "125"
+      },
+      {
+        "period": 8,
+        "subject": "Arts Plastiques - 125",
+        "notes": ""
+      },
+      {
+        "period": 9,
+        "subject": "Histoire de l'art",
+        "notes": "111"
+      },
+      {
+        "period": 10,
+        "subject": "Histoire de l'art - 111",
+        "notes": ""
+      }
+    ],
+    "Vendredi": [
+      {
+        "period": 1,
+        "subject": "Informatique",
+        "notes": "212"
+      },
+      {
+        "period": 2,
+        "subject": "Informatique - 212",
+        "notes": ""
+      },
+      {
+        "period": 3,
+        "subject": "Math",
+        "notes": "325"
+      },
+      {
+        "period": 4,
+        "subject": "Math - 325",
+        "notes": ""
+      },
+      {
+        "period": 7,
+        "subject": "Français",
+        "notes": "205"
+      },
+      {
+        "period": 8,
+        "subject": "Français - 205",
+        "notes": ""
+      }
+    ]
+  }
+}

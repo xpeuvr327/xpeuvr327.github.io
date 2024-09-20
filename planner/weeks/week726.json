@@ -1,0 +1,186 @@
+{
+  "days": [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi"
+  ],
+  "schedule": {
+    "Lundi": [
+      {
+        "period": 1,
+        "subject": "Latin",
+        "notes": "118"
+      },
+      {
+        "period": 2,
+        "subject": "Latin",
+        "notes": "118"
+      },
+      {
+        "period": 3,
+        "subject": "Histoire",
+        "notes": "210"
+      },
+      {
+        "period": 4,
+        "subject": "Géographie",
+        "notes": "210"
+      },
+      {
+        "period": 7,
+        "subject": "Physique",
+        "notes": "217"
+      },
+      {
+        "period": 8,
+        "subject": "Physique",
+        "notes": "217"
+      },
+      {
+        "period": 9,
+        "subject": "Math",
+        "notes": "210"
+      }
+    ],
+    "Mardi": [
+      {
+        "period": 1,
+        "subject": "Math",
+        "notes": "210"
+      },
+      {
+        "period": 2,
+        "subject": "Math",
+        "notes": "210"
+      },
+      {
+        "period": 3,
+        "subject": "Histoire",
+        "notes": "210"
+      },
+      {
+        "period": 4,
+        "subject": "Allemand Labo/Anglais",
+        "notes": "226/210"
+      },
+      {
+        "period": 7,
+        "subject": "Français ",
+        "notes": "210"
+      },
+      {
+        "period": 8,
+        "subject": "Allemand",
+        "notes": "210"
+      },
+      {
+        "period": 9,
+        "subject": "Anglais",
+        "notes": "210"
+      }
+    ],
+    "Mercredi": [
+      {
+        "period": 1,
+        "subject": "Arts visuels",
+        "notes": "028"
+      },
+      {
+        "period": 2,
+        "subject": "Arts visuels",
+        "notes": "028"
+      },
+      {
+        "period": 3,
+        "subject": "Math",
+        "notes": "210"
+      },
+      {
+        "period": 4,
+        "subject": "Math",
+        "notes": "210"
+      }
+    ],
+    "Jeudi": [
+      {
+        "period": 1,
+        "subject": "Français ",
+        "notes": "210"
+      },
+      {
+        "period": 2,
+        "subject": "Français ",
+        "notes": "210"
+      },
+      {
+        "period": 3,
+        "subject": "Latin",
+        "notes": "118"
+      },
+      {
+        "period": 4,
+        "subject": "Latin",
+        "notes": "118"
+      },
+      {
+        "period": 6,
+        "subject": "Éd. Ph.",
+        "notes": "G02"
+      },
+      {
+        "period": 7,
+        "subject": "Allemand/Anglais Labo",
+        "notes": "210/225"
+      },
+      {
+        "period": 8,
+        "subject": "Allemand",
+        "notes": "210"
+      },
+      {
+        "period": 9,
+        "subject": "Médias & Images",
+        "notes": "210"
+      }
+    ],
+    "Vendredi": [
+      {
+        "period": 1,
+        "subject": "Anglais",
+        "notes": "210"
+      },
+      {
+        "period": 2,
+        "subject": "Géographie",
+        "notes": "210"
+      },
+      {
+        "period": 3,
+        "subject": "Éd. Ph.",
+        "notes": "G02"
+      },
+      {
+        "period": 4,
+        "subject": "Éd. Ph.",
+        "notes": "G02"
+      },
+      {
+        "period": 7,
+        "subject": "Français ",
+        "notes": "210"
+      },
+      {
+        "period": 8,
+        "subject": "Français ",
+        "notes": "210"
+      },
+      {
+        "period": 9,
+        "subject": "Maîtrise",
+        "notes": "210"
+      }
+    ]
+  }
+}

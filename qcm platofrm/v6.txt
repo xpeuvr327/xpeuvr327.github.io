@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f1f1f1;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: both;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        #helpPage {
+            display: none;
+        }
+
+        .helpLink {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .dropdownContainer {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- En-tête fixe en mode édition -->
+<header>
+    <h1>Quiz App</h1>
+    <label for="quizTitle">Titre :</label>
+    <input type="text" id="quizTitle" placeholder="Titre du QCM">
+
+    <label for="quizDescription">Description :</label>
+    <textarea id="quizDescription" placeholder="Description du QCM"></textarea>
+
+    <label for="quizAuthor">Auteur :</label>
+    <input type="text" id="quizAuthor" placeholder="Auteur du QCM">
+</header>
+
+<!-- Mode d'édition -->
+<main id="editionMode">
+    <h2>Mode Édition</h2>
+
+    <div id="questionsContainer">
+        <!-- Conteneur pour les questions -->
+    </div>
+
+    <button onclick="addQuestion()">Ajouter une question</button>
+
+    <button onclick="exportQuiz()">Exporter QCM</button>
+    <button onclick="switchMode()">Passer au Mode Utilisation</button>
+    <span class="helpLink" onclick="showHelp()">Aide</span>
+</main>
+
+<!-- Mode utilisation -->
+<main id="usageMode" style="display: none;">
+    <h2 id="usageTitle">Mode Utilisation</h2>
+    <label for="importQuiz">Importer le QCM :</label>
+    <input type="file" id="importQuiz" accept=".txt">
+
+    <div id="questionsContainerUsage">
+        <!-- Conteneur pour les questions en mode utilisation -->
+    </div>
+
+    <button onclick="switchMode()">Passer au Mode Édition</button>
+</main>
+
+<!-- Page d'aide -->
+<main id="helpPage">
+    <h2>Aide</h2>
+    <p>Cette application vous permet de créer et de jouer à des quiz.</p>
+    <p><strong>Mode Édition :</strong> Ajoutez des questions, spécifiez les options et les bonnes réponses.</p>
+    <p><strong>Mode Utilisation :</strong> Importez des quiz, répondez et vérifiez les réponses.</p>
+    <p>N'oubliez pas d'exporter votre quiz après l'avoir créé.</p>
+    <span class="helpLink" onclick="hideHelp()">Fermer l'aide</span>
+</main>
+
+<script>
+    var commonInfo = {
+        title: '',
+        description: '',
+        author: ''
+    };
+
+    var questions = [];
+
+    function switchMode() {
+        var editionMode = document.getElementById('editionMode');
+        var usageMode = document.getElementById('usageMode');
+
+        if (editionMode.style.display === 'none') {
+            editionMode.style.display = 'block';
+            usageMode.style.display = 'none';
+            document.title = 'Quiz App'; // Rétablir le titre de l'onglet en mode édition
+        } else {
+            editionMode.style.display = 'none';
+            usageMode.style.display = 'block';
+            displayQuizUsage();
+        }
+    }
+
+    function addQuestion() {
+        var questionContainer = document.getElementById('questionsContainer');
+
+        var questionDiv = document.createElement('div');
+        questionDiv.innerHTML = `
+            <label for="quizQuestion">Question :</label>
+            <textarea class="quizQuestion" placeholder="Entrez votre question" style="resize: both;"></textarea>
+
+            <label for="quizType">Type de Question :</label>
+            <select class="quizType" onchange="toggleOptions(this)">
+                <option value="checkbox">Case à cocher</option>
+                <option value="dropdown">Menu déroulant</option>
+            </select>
+
+            <label for="quizOptions">Options (séparées par des virgules) :</label>
+            <input type="text" class="quizOptions" placeholder="Option 1, Option 2, ..." style="display: none;">
+
+            <label for="correctAnswer">Bonne réponse :</label>
+            <input type="text" class="correctAnswer" placeholder="Réponse correcte">
+        `;
+
+        questionContainer.appendChild(questionDiv);
+    }
+
+    function toggleOptions(selectElement) {
+        var optionsInput = selectElement.parentElement.querySelector('.quizOptions');
+        optionsInput.style.display = (selectElement.value === 'dropdown') ? 'block' : 'none';
+    }
+
+    function exportQuiz() {
+        commonInfo.title = document.getElementById('quizTitle').value;
+        commonInfo.description = document.getElementById('quizDescription').value;
+        commonInfo.author = document.getElementById('quizAuthor').value;
+
+        questions = [];
+
+        var questionDivs = document.querySelectorAll('#questionsContainer > div');
+        questionDivs.forEach(questionDiv => {
+            var question = questionDiv.querySelector('.quizQuestion').value;
+            var type = questionDiv.querySelector('.quizType').value;
+            var options = questionDiv.querySelector('.quizOptions').value.split(',');
+            var correctAnswer = questionDiv.querySelector('.correctAnswer').value;
+
+            var exportedQuestion = {
+                question: question,
+                type: type,
+                options: options,
+                correctAnswer: correctAnswer
+            };
+
+            questions.push(exportedQuestion);
+        });
+
+        var content = JSON.stringify({ commonInfo: commonInfo, questions: questions });
+        downloadFile(content, 'quiz.txt', 'text/plain');
+        displayQuizUsage();
+    }
+
+    function displayQuizUsage() {
+        var questionsContainerUsage = document.getElementById('questionsContainerUsage');
+        questionsContainerUsage.innerHTML = '';
+
+        questions.forEach((q, index) => {
+            var questionDiv = document.createElement('div');
+            questionDiv.innerHTML = `<p><strong>Question ${index + 1} :</strong> ${q.question}</p>`;
+
+            if (q.type === 'checkbox') {
+                q.options.forEach(option => {
+                    questionDiv.innerHTML += `
+                        <label>
+                            <input type="checkbox" name="question${index}" value="${option}">
+                            ${option}
+                        </label>
+                    `;
+                });
+            } else if (q.type === 'dropdown') {
+                var dropdownContainer = document.createElement('div');
+                dropdownContainer.className = 'dropdownContainer';
+
+                dropdownContainer.innerHTML = `
+                    <label for="dropdownQuestion${index}">Réponse :</label>
+                    <select id="dropdownQuestion${index}" name="dropdownQuestion${index}">
+                        ${q.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+                    </select>
+                `;
+
+                questionDiv.appendChild(dropdownContainer);
+            }
+
+            questionDiv.innerHTML += `<button onclick="checkAnswer(${index}, '${q.correctAnswer}')">Confirmer</button>`;
+            questionsContainerUsage.appendChild(questionDiv);
+        });
+
+        // Mettre à jour le titre de l'onglet en mode utilisation
+        document.title = `${commonInfo.title} by ${commonInfo.author}`;
+        document.getElementById('usageTitle').innerText = `${commonInfo.title} by ${commonInfo.author}`;
+    }
+
+    function checkAnswer(questionIndex, correctAnswer) {
+        var userAnswer;
+
+        if (questions[questionIndex].type === 'checkbox') {
+            var checkboxes = document.getElementsByName(`question${questionIndex}`);
+            userAnswer = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value).join(', ');
+        } else if (questions[questionIndex].type === 'dropdown') {
+            var dropdown = document.getElementById(`dropdownQuestion${questionIndex}`);
+            userAnswer = dropdown.value;
+        }
+
+        var resultDiv = document.createElement('div');
+        resultDiv.innerHTML = `<p>Réponse : ${userAnswer}</p>`;
+
+        if (userAnswer === correctAnswer) {
+            resultDiv.className = 'correct';
+            resultDiv.innerHTML += '<p>Correct !</p>';
+        } else {
+            resultDiv.className = 'incorrect';
+            resultDiv.innerHTML += `<p>Incorrect. La réponse correcte est : ${correctAnswer}</p>`;
+        }
+
+        document.getElementById('questionsContainerUsage').appendChild(resultDiv);
+    }
+
+    function downloadFile(content, fileName, contentType) {
+        var a = document.createElement('a');
+        var file = new Blob([content], { type: contentType });
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+    }
+
+    document.getElementById('importQuiz').addEventListener('change', function () {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var content = e.target.result;
+                var quizData = JSON.parse(content);
+                commonInfo = quizData.commonInfo;
+                questions = quizData.questions;
+
+                // Switch to usage mode after importing
+                switchMode();
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    function showHelp() {
+        document.getElementById('helpPage').style.display = 'block';
+    }
+
+    function hideHelp() {
+        document.getElementById('helpPage').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

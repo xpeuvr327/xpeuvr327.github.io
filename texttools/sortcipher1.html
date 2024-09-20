@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cesar of one</title>
+    <link rel="stylesheet" href="general-styles.css">
+    <style>
+        .console {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .console .error {
+            color: red;
+        }
+        .console .info {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Alphabetical Sorting</h1>
+        <textarea type="text" id="inputText" placeholder="Enter text here" class="sigma-input" style="padding:0.5em" rows="5"></textarea><br>
+        <button class="button" onclick="decalText()">Sort</button><br>
+        <button class="button" onclick="copyToClipboard()">Copy Result</button>
+        <div class="result" id="result"></div>
+        <div class="console" id="fakeConsole"></div>
+    </div>
+  <br><a href="index.html" class="button centered-box">Retour à l'accueil</a>
+    <script>
+        // Override console methods to output to the fake console
+        (function() {
+            const fakeConsole = document.getElementById('fakeConsole');
+
+            const originalLog = console.log;
+            const originalError = console.error;
+
+            console.log = function(message) {
+                const logEntry = document.createElement('div');
+                logEntry.className = 'info';
+                logEntry.textContent = message;
+                fakeConsole.appendChild(logEntry);
+                fakeConsole.scrollTop = fakeConsole.scrollHeight; // Scroll to the bottom
+                originalLog.apply(console, arguments);
+            };
+
+            console.error = function(message) {
+                const logEntry = document.createElement('div');
+                logEntry.className = 'error';
+                logEntry.textContent = message;
+                fakeConsole.appendChild(logEntry);
+                fakeConsole.scrollTop = fakeConsole.scrollHeight; // Scroll to the bottom
+                originalError.apply(console, arguments);
+            };
+        })();
+
+        function decalText() {
+            console.log('decalText function initialized');
+            try {
+                const inputText = document.getElementById('inputText').value;
+                const result = shiftText(inputText);
+                document.getElementById('result').innerText = result;
+            } catch (error) {
+                console.error('Error in decalText:', error);
+            }
+        }
+
+        function shiftText(text) {
+            return text.split('').map(char => {
+                if (char.match(/[a-z]/i)) {
+                    const charCode = char.charCodeAt(0);
+                    if (charCode >= 65 && charCode <= 90) { // Uppercase letters
+                        return String.fromCharCode(((charCode - 65 + 1) % 26) + 65);
+                    } else if (charCode >= 97 && charCode <= 122) { // Lowercase letters
+                        return String.fromCharCode(((charCode - 97 + 1) % 26) + 97);
+                    }
+                }
+                return char;
+            }).join('');
+        }
+
+        function copyToClipboard() {
+            console.log('copyToClipboard function initialized');
+            try {
+                const resultText = document.getElementById('result').innerText;
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(resultText).then(() => {
+                        alert('Result copied to clipboard');
+                        console.log('Result copied to clipboard:', resultText);
+                    }).catch(err => {
+                        console.error('Failed to copy using Clipboard API:', err);
+                        fallbackCopyTextToClipboard(resultText);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(resultText);
+                }
+            } catch (error) {
+                console.error('Error in copyToClipboard:', error);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            console.log('Fallback copy method initialized');
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Fallback copy text command was ' + msg);
+                if (successful) {
+                    alert('Result copied to clipboard');
+                } else {
+                    console.error('Fallback copy failed');
+                }
+            } catch (err) {
+                console.error('Fallback copy error: ', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>

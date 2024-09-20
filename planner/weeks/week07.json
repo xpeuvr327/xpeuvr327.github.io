@@ -1,0 +1,16 @@
+{
+  "days": [
+    "Lundi 7",
+    "Mardi 8",
+    "Mercredi 9",
+    "Jeudi 10",
+    "Vendredi 11"
+  ],"timeScheme":"sism",
+  "schedule": {
+    "Lundi 7": [],
+    "Mardi 8": [],
+    "Mercredi 9": [],
+    "Jeudi 10": [],
+    "Vendredi 11": []
+  }
+}

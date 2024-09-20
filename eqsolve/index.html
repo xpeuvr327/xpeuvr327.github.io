@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Equation Solver</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Equation Solver</h1>
+    <form onsubmit="solveEquation()" id="myForm">
+	<input type="text" id="equation" placeholder="Enter your equation">
+	</form>
+    <button onclick="solveEquation()">Solve</button>
+    <h2 id="result"></h2>
+    <h2 id="steps"></h2>
+    <h2 id="error"></h2>
+
+    <script>
+        var form = document.getElementById("myForm");
+		function handleForm(event) { event.preventDefault(); } 
+			form.addEventListener('submit', handleForm);
+		function solveEquation() {
+            var equation = document.getElementById('equation').value;
+            var result = nerdamer.solve(equation, 'x');
+
+            if (result === undefined) {
+                document.getElementById('error').innerHTML = "Error: Cannot solve the given equation.";
+            } else {
+                document.getElementById('result').innerHTML = "Solution: " + result.toString();
+                document.getElementById('steps').innerHTML = "Steps: " + result.steps.join('<br>');
+                document.getElementById('error').innerHTML = "";
+            }
+        }
+    </script>
+</body>
+
+</html>

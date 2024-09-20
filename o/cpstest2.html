@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Test</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        #multiTouchButton {
+            display:block;
+            width: 90vw;
+            height: 40vh;
+            background-color: lightblue;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+            margin: 20px,;
+            border: 2px solid blue;
+            user-select: none; /* Prevent text selection */
+            cursor: pointer;
+        }
+        #timer {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+            color: green;
+        }
+        #clickCount {
+            font-size: 18px;
+            margin-top: 10px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>CPS Test</h1>
+<p>maintenant avec support mobile</p>
+<div id="multiTouchButton">Touch Me</div>
+    <div id="timer">7 seconds</div>
+    <div id="result"></div>
+    <div id="clickCount">Clicks: 0</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const button = document.getElementById('multiTouchButton');
+            const timerDiv = document.getElementById('timer');
+            const resultDiv = document.getElementById('result');
+            const clickCountDiv = document.getElementById('clickCount');
+            let touchCount = 0;
+            let startTime = null;
+            let isTestRunning = false;
+            let timerInterval;
+            let testDuration = 7; // Default duration
+
+            // Parse the URL parameter to get the test duration
+            const urlParams = new URLSearchParams(window.location.search);
+            const timeParam = urlParams.get('time');
+            if (timeParam) {
+                testDuration = parseInt(timeParam, 10);
+                if (isNaN(testDuration) || testDuration <= 0) {
+                    testDuration = 7; // Fallback to default if invalid
+                }
+            }
+
+            timerDiv.textContent = `${testDuration} seconds`;
+
+            button.addEventListener('touchstart', handleTouchStart, false);
+            button.addEventListener('touchend', handleTouchEnd, false);
+
+        
+            function handleTouchStart(event) {
+                event.preventDefault();
+}
+
+            function handleTouchEnd(event) {
+                event.preventDefault();
+                if (!isTestRunning) {
+                    startTime = Date.now();
+                    isTestRunning = true;
+                    touchCount = 0;
+                    resultDiv.textContent = '';
+                    startTimer();
+                }
+                touchCount++;
+                updateClickCount();
+            }
+
+            function startTimer() {
+                let timeLeft = testDuration -1;
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerDiv.textContent = `${timeLeft} seconds`;
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        endTest();
+                    }
+                }, 1000);
+            }
+
+            function endTest() {
+                isTestRunning = false;
+                const cps = touchCount / testDuration;
+                resultDiv.textContent = `Your CPS: ${cps.toFixed(2)}`;
+                alert(`Your CPS: ${cps.toFixed(2)}`);
+            }
+
+            function updateClickCount() {
+                clickCountDiv.textContent = `Clicks: ${touchCount}`;
+            }
+        });
+    </script>
+</body>
+</html>
+

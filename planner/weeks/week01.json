@@ -1,0 +1,23 @@
+{
+    "days": ["Lundi 27", "Mardi 28", "Mercredi 29", "Jeudi 30", "Vendredi 31"],
+    "timeScheme":"sism",
+    "schedule": {
+        "Lundi 27": [
+            {
+                "period": 1,
+                "subject": "Math",
+                "notes": "rien enft, c juste un test"
+            }
+        ],
+        "Mardi": [],
+        "Mercredi 29": [
+            {
+                "period":5,
+                "subject": "DARS",
+                "notes": "ce n'est PAS dans l'aula"
+            }
+        ],
+        "Jeudi": [],
+        "Vendredi": []
+    }
+}

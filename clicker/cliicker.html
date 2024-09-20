@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clicker Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cliicker</h1>
+<h2 id="mainVar">0</h1>
+    <p>Price: <span id="price">10</span></p>
+    <p>Increment: <span id="increment">1</span></p>
+    <button onclick="addSecondToMain()">Click</button>
+    <button onclick="upgrade()">Upgrade</button>
+<br><br><details>
+<summary>The goal?</summary>
+<p>Provide a minimalistic clicker experience <br> :) btw that took me 8hrs</p>
+</details>
+    <script>
+        var mainVar = 0;
+        var increment = 1;
+        var price = 10;
+        var incrementIncrement = 1.1;
+
+        function upgrade() {
+            if (mainVar >= price) {
+                increment++;
+                mainVar -= price;
+                price *= incrementIncrement;
+                price = Math.ceil(price); // Increase the price for the next upgrade
+                document.getElementById('mainVar').innerText = mainVar;
+                document.getElementById('price').innerText = price;
+                document.getElementById('increment').innerText = increment;
+            }
+        }
+
+        function addSecondToMain() {
+            mainVar += increment;
+            document.getElementById('mainVar').innerText = mainVar;
+        }
+    </script>
+</body>
+</html>
+

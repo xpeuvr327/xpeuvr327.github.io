@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Copier dans le presse-papiers</title>
+  <link rel="stylesheet" href="general-styles.css">
+</head>
+<body>
+  <h1>Copier du texte</h1>
+  <p>Cliquez sur le bouton pour copier le texte dans votre presse-papiers.</p>
+  <div style="text-align: center;">
+    <textarea id="myInput" placeholder="Copier..." style="resize: none; width: 90%; height: 30%;" rows="4"></textarea>
+    <br><button onclick="copyToClipboard()" class="button">Copier</button> <br>
+    <button onclick="clearClipboard()" class="button">Vider le presse-papiers</button>
+    <p id="copyMessage"></p>
+  </div>
+  <br>
+  <a href="index.html" class="button">Retour à l'accueil</a>
+  <br>
+  <p>Pour plus d'aide, consultez <a href="help.html#:~:text=Comment%20utiliser%20l%27outil%20de%20copie%20de%20texte">la page d'aide associée</a>.</p>
+  <script>
+    function copyToClipboard() {
+      var copyText = document.getElementById("myInput");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText.value)
+          .then(() => {
+            document.getElementById("copyMessage").innerHTML = "Texte copié !";
+            setTimeout(() => {
+              document.getElementById("copyMessage").innerHTML = "";
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy text: ", err);
+            fallbackCopyTextToClipboard(copyText.value);
+          });
+      } else {
+        fallbackCopyTextToClipboard(copyText.value);
+      }
+    }
+
+    function fallbackCopyTextToClipboard(text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Fallback copy text command was ' + msg);
+        if (successful) {
+          document.getElementById("copyMessage").innerHTML = "Texte copié !";
+          setTimeout(() => {
+            document.getElementById("copyMessage").innerHTML = "";
+          }, 2000);
+        } else {
+          console.error('Fallback copy failed');
+        }
+      } catch (err) {
+        console.error('Fallback copy error: ', err);
+      }
+
+      document.body.removeChild(textArea);
+    }
+
+    function clearClipboard() {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText("")
+          .then(() => {
+            document.getElementById("copyMessage").innerHTML = "Presse-papiers vidé !";
+            setTimeout(() => {
+              document.getElementById("copyMessage").innerHTML = "";
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to clear clipboard: ", err);
+          });
+      } else {
+        var clearText = document.createElement("textarea");
+        document.body.appendChild(clearText);
+        clearText.value = "";
+        clearText.select();
+        document.execCommand("copy");
+        document.body.removeChild(clearText);
+        document.getElementById("copyMessage").innerHTML = "Presse-papiers vidé !";
+        setTimeout(() => {
+          document.getElementById("copyMessage").innerHTML = "";
+        }, 2000);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById("myInput").addEventListener("click", function() {
+        this.select();
+      });
+    });
+  </script>
+</body>
+</html>

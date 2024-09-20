@@ -1,0 +1,202 @@
+{
+  "days": [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi"
+  ],
+  "timeScheme":"sism",
+  "schedule": {
+    "Lundi": [
+      {
+        "period": 1,
+        "subject": "Math",
+        "notes": "C214"
+      },
+      {
+        "period": 2,
+        "subject": "Math",
+        "notes": "C214"
+      },
+      {
+        "period": 3,
+        "subject": "Chimie",
+        "notes": "A219"
+      },
+      {
+        "period": 4,
+        "subject": "Chimie",
+        "notes": "A219"
+      },
+      {
+        "period": 6,
+        "subject": "Anglais",
+        "notes": "AR12"
+      },
+      {
+        "period": 7,
+        "subject": "Histoire de l'art",
+        "notes": "B218"
+      },
+      {
+        "period": 8,
+        "subject": "Histoire de l'art",
+        "notes": "B218"
+      },
+      {
+        "period": 9,
+        "subject": "Italien",
+        "notes": "B113"
+      },
+      {
+        "period": 10,
+        "subject": "Italien",
+        "notes": "B113"
+      }
+    ],
+    "Mardi": [
+      {
+        "period": 3,
+        "subject": "Italien",
+        "notes": "AR12"
+      },
+      {
+        "period": 4,
+        "subject": "Italien",
+        "notes": "AR12"
+      },
+      {
+        "period": 5,
+        "subject": "RG",
+        "notes": "AR12"
+      },
+      {
+        "period": 7,
+        "subject": "Éd. Ph.",
+        "notes": "Gym A"
+      },
+      {
+        "period": 8,
+        "subject": "Éd. Ph.",
+        "notes": "Gym A"
+      },
+      {
+        "period": 9,
+        "subject": "Arts plastiques",
+        "notes": "B218"
+      },
+      {
+        "period": 10,
+        "subject": "Arts Plastiques",
+        "notes": "B218"
+      }
+    ],
+    "Mercredi": [
+      {
+        "period": 1,
+        "subject": "Français",
+        "notes": "CR15"
+      },
+      {
+        "period": 2,
+        "subject": "Français",
+        "notes": "CR15"
+      },
+      {
+        "period": 3,
+        "subject": "Allemand",
+        "notes": "C219"
+      },
+      {
+        "period": 4,
+        "subject": "Allemand - C219",
+        "notes": ""
+      },
+      {
+        "period": 5,
+        "subject": "DARS",
+        "notes": ""
+      }
+    ],
+    "Jeudi": [
+      {
+        "period": 3,
+        "subject": "Histoire",
+        "notes": "B219"
+      },
+      {
+        "period": 4,
+        "subject": "Histoire - B219",
+        "notes": ""
+      },
+      {
+        "period": 6,
+        "subject": "Allemand",
+        "notes": "BE17"
+      },
+      {
+        "period": 7,
+        "subject": "FR/Diction",
+        "notes": "B219/AULA"
+      },
+      {
+        "period": 8,
+        "subject": "Français",
+        "notes": "B219"
+      },
+      {
+        "period": 9,
+        "subject": "Informatique",
+        "notes": "B117"
+      },
+      {
+        "period": 10,
+        "subject": "Informatique - B117",
+        "notes": ""
+      }
+    ],
+    "Vendredi": [
+      {
+        "period": 1,
+        "subject": "Anglais",
+        "notes": "A111"
+      },
+      {
+        "period": 2,
+        "subject": "Anglais - A111",
+        "notes": ""
+      },
+      {
+        "period": 3,
+        "subject": "Français",
+        "notes": "B219"
+      },
+      {
+        "period": 4,
+        "subject": "Français - B219",
+        "notes": ""
+      },
+      {
+        "period": 6,
+        "subject": "Droit",
+        "notes": "C116"
+      },
+      {
+        "period": 7,
+        "subject": "Droit - C116",
+        "notes": ""
+      },
+      {
+        "period": 8,
+        "subject": "Mathématiques",
+        "notes": "BE16"
+      },
+      {
+        "period": 9,
+        "subject": "Mathématiques - BE16",
+        "notes": ""
+      }
+    ]
+  }
+}

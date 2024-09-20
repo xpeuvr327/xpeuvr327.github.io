@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Agenda (:</h1>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <button id="prevWeek" class="nav-button">Voir sem. avant</button>
+            <button id="nextWeek" class="nav-button">Voir sem. prochaine</button>
+            <button id="createEvent" class="action-button">Ajouter un évènement (temporaire)</button>
+            <input type="file" id="uploadJson" accept=".json" class="upload-input">
+            <label for="uploadJson" class="custom-file-upload">
+                <i class="fa fa-cloud-upload"></i>Choisir un fichier de Planning
+            </label>
+            <div id="listContent">
+                <form id="redirectForm">
+                    <select id="nameSelect" class="nav-button">
+                        <option value="1">attends...</option>
+                    </select>
+                    <input type="submit" value="Aller à ce planning" class="nav-button">
+                </form>
+            </div>
+        </div>
+        <table id="planner" class="planner-table"></table>
+        <br>
+        <button id="downloadUpdatedJson" class="action-button">télécharger le planning tel qu'on le voit (va aller dans "choisir un fichier planning")</button>
+        <a style="text-decoration:none" href="view.html" class="action-button">Horaires uniquement</a>
+    </div>
+
+    <script src="planner.js"></script>
+</body>
+</html>

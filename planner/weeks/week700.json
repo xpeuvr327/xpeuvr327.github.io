@@ -1,0 +1,11 @@
+{
+    "days": ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"],
+    "schedule": {
+        "Lundi": [],
+        "Mardi": [],
+        "Mercredi": [],
+        "Jeudi": [],
+        "Vendredi": []
+    }
+}
+    

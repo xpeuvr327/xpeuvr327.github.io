@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="monofont/VeraMono.ttf" rel="font-family">
+    <title>some Wii game</title>
+    <style>
+body {
+    font-family: 'VeraMono', monospace;
+}
+
+.move-buttons {
+    display: table;
+    background-color: pink;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    display: table-cell;
+    padding: 5px;
+}
+
+.xy-display {
+    text-align: right;
+}
+
+.inline {
+    display: inline-block; /* Changed from inline to inline-block */
+    background-color: lightgreen;
+    margin: 10px;
+    padding: 10px;
+    text-align: left;
+}
+
+    </style>
+</head>
+<body>
+    <p> <!-- Use this capitalisation: for displays, use "$#", where # is a number and $ a letter-->
+        <!-- For functions, use "addHealthPointsToPlayer(hea)", so put a capital at each word start -->
+        <!-- For the stats display, use the displayed value but in lowercase (hea, dmg, hun, luc, exp)-->
+        <p>Scroll&nbsp;down&nbsp;(Hold&nbsp;B)&nbsp;until&nbsp;you&nbsp;no&nbsp;longer&nbsp;see&nbsp;this&nbsp;message&nbsp;to&nbsp;play&nbsp;as&nbsp;intended.<br></p>
+        +=================================================================================================+<br>
+¦<span id="a1">`</span><span id="a2">`</span><span id="a3">`</span><span id="a4">`</span><span id="a5">`</span><span id="a6">`</span><span id="a7">`</span><span id="a8">`</span><span id="a9">`</span><span id="a10">`</span><span id="a11">`</span><span id="a12">`</span><span id="a13">`</span><span id="a14">`</span><span id="a15">`</span><span id="a16">`</span><span id="a17">`</span><span id="a18">`</span><span id="a19">`</span><span id="a20">`</span><span id="a21">`</span><span id="a22">`</span><span id="a23">`</span><span id="a24">`</span><span id="a25">`</span><span id="a26">`</span><span id="a27">`</span><span id="a28">`</span><span id="a29">`</span><span id="a30">`</span><span id="a31">`</span><span id="a32">`</span><span id="a33">`</span><span id="a34">`</span><span id="a35">`</span><span id="a36">`</span><span id="a37">`</span><span id="a38">`</span><span id="a39">`</span><span id="a40">`</span><span id="a41">`</span><span id="a42">`</span><span id="a43">`</span><span id="a44">`</span><span id="a45">`</span><span id="a46">`</span><span id="a47">`</span><span id="a48">`</span><span id="a49">`</span><span id="a50">`</span><span id="a51">`</span><span id="a52">`</span><span id="a53">`</span><span id="a54">`</span><span id="a55">`</span><span id="a56">`</span><span id="a57">`</span><span id="a58">`</span><span id="a59">`</span><span id="a60">`</span><span id="a61">`</span><span id="a62">`</span><span id="a63">`</span><span id="a64">`</span><span id="a65">`</span><span id="a66">`</span><span id="a67">`</span><span id="a68">`</span><span id="a69">`</span><span id="a70">`</span><span id="a71">`</span><span id="a72">`</span><span id="a73">`</span><span id="a74">`</span><span id="a75">`</span><span id="a76">`</span><span id="a77">`</span><span id="a78">`</span><span id="a79">`</span><span id="a80">`</span><span id="a81">`</span><span id="a82">`</span><span id="a83">`</span><span id="a84">`</span><span id="a85">`</span><span id="a86">`</span><span id="a87">`</span><span id="a88">`</span><span id="a89">`</span><span id="a90">`</span><span id="a91">`</span><span id="a92">`</span><span id="a93">`</span><span id="a94">`</span><span id="a95">`</span><span id="a96">`</span><span id="a97">`</span>¦
+¦<span id="b1">`</span><span id="b2">`</span><span id="b3">`</span><span id="b4">`</span><span id="b5">`</span><span id="b6">`</span><span id="b7">`</span><span id="b8">`</span><span id="b9">`</span><span id="b10">`</span><span id="b11">`</span><span id="b12">`</span><span id="b13">`</span><span id="b14">`</span><span id="b15">`</span><span id="b16">`</span><span id="b17">`</span><span id="b18">`</span><span id="b19">`</span><span id="b20">`</span><span id="b21">`</span><span id="b22">`</span><span id="b23">`</span><span id="b24">`</span><span id="b25">`</span><span id="b26">`</span><span id="b27">`</span><span id="b28">`</span><span id="b29">`</span><span id="b30">`</span><span id="b31">`</span><span id="b32">`</span><span id="b33">`</span><span id="b34">`</span><span id="b35">`</span><span id="b36">`</span><span id="b37">`</span><span id="b38">`</span><span id="b39">`</span><span id="b40">`</span><span id="b41">`</span><span id="b42">`</span><span id="b43">`</span><span id="b44">`</span><span id="b45">`</span><span id="b46">`</span><span id="b47">`</span><span id="b48">`</span><span id="b49">`</span><span id="b50">`</span><span id="b51">`</span><span id="b52">`</span><span id="b53">`</span><span id="b54">`</span><span id="b55">`</span><span id="b56">`</span><span id="b57">`</span><span id="b58">`</span><span id="b59">`</span><span id="b60">`</span><span id="b61">`</span><span id="b62">`</span><span id="b63">`</span><span id="b64">`</span><span id="b65">`</span><span id="b66">`</span><span id="b67">`</span><span id="b68">`</span><span id="b69">`</span><span id="b70">`</span><span id="b71">`</span><span id="b72">`</span><span id="b73">`</span><span id="b74">`</span><span id="b75">`</span><span id="b76">`</span><span id="b77">`</span><span id="b78">`</span><span id="b79">`</span><span id="b80">`</span><span id="b81">`</span><span id="b82">`</span><span id="b83">`</span><span id="b84">`</span><span id="b85">`</span><span id="b86">`</span><span id="b87">`</span><span id="b88">`</span><span id="b89">`</span><span id="b90">`</span><span id="b91">`</span><span id="b92">`</span><span id="b93">`</span><span id="b94">`</span><span id="b95">`</span><span id="b96">`</span><span id="b97">`</span>¦
+¦<span id="c1">`</span><span id="c2">`</span><span id="c3">`</span><span id="c4">`</span><span id="c5">`</span><span id="c6">`</span><span id="c7">`</span><span id="c8">`</span><span id="c9">`</span><span id="c10">`</span><span id="c11">`</span><span id="c12">`</span><span id="c13">`</span><span id="c14">`</span><span id="c15">`</span><span id="c16">`</span><span id="c17">`</span><span id="c18">`</span><span id="c19">`</span><span id="c20">`</span><span id="c21">`</span><span id="c22">`</span><span id="c23">`</span><span id="c24">`</span><span id="c25">`</span><span id="c26">`</span><span id="c27">`</span><span id="c28">`</span><span id="c29">`</span><span id="c30">`</span><span id="c31">`</span><span id="c32">`</span><span id="c33">`</span><span id="c34">`</span><span id="c35">`</span><span id="c36">`</span><span id="c37">`</span><span id="c38">`</span><span id="c39">`</span><span id="c40">`</span><span id="c41">`</span><span id="c42">`</span><span id="c43">`</span><span id="c44">`</span><span id="c45">`</span><span id="c46">`</span><span id="c47">`</span><span id="c48">`</span><span id="c49">`</span><span id="c50">`</span><span id="c51">`</span><span id="c52">`</span><span id="c53">`</span><span id="c54">`</span><span id="c55">`</span><span id="c56">`</span><span id="c57">`</span><span id="c58">`</span><span id="c59">`</span><span id="c60">`</span><span id="c61">`</span><span id="c62">`</span><span id="c63">`</span><span id="c64">`</span><span id="c65">`</span><span id="c66">`</span><span id="c67">`</span><span id="c68">`</span><span id="c69">`</span><span id="c70">`</span><span id="c71">`</span><span id="c72">`</span><span id="c73">`</span><span id="c74">`</span><span id="c75">`</span><span id="c76">`</span><span id="c77">`</span><span id="c78">`</span><span id="c79">`</span><span id="c80">`</span><span id="c81">`</span><span id="c82">`</span><span id="c83">`</span><span id="c84">`</span><span id="c85">`</span><span id="c86">`</span><span id="c87">`</span><span id="c88">`</span><span id="c89">`</span><span id="c90">`</span><span id="c91">`</span><span id="c92">`</span><span id="c93">`</span><span id="c94">`</span><span id="c95">`</span><span id="c96">`</span><span id="c97">`</span>¦
+¦<span id="d1">`</span><span id="d2">`</span><span id="d3">`</span><span id="d4">`</span><span id="d5">`</span><span id="d6">`</span><span id="d7">`</span><span id="d8">`</span><span id="d9">`</span><span id="d10">`</span><span id="d11">`</span><span id="d12">`</span><span id="d13">`</span><span id="d14">`</span><span id="d15">`</span><span id="d16">`</span><span id="d17">`</span><span id="d18">`</span><span id="d19">`</span><span id="d20">`</span><span id="d21">`</span><span id="d22">`</span><span id="d23">`</span><span id="d24">`</span><span id="d25">`</span><span id="d26">`</span><span id="d27">`</span><span id="d28">`</span><span id="d29">`</span><span id="d30">`</span><span id="d31">`</span><span id="d32">`</span><span id="d33">`</span><span id="d34">`</span><span id="d35">`</span><span id="d36">`</span><span id="d37">`</span><span id="d38">`</span><span id="d39">`</span><span id="d40">`</span><span id="d41">`</span><span id="d42">`</span><span id="d43">`</span><span id="d44">`</span><span id="d45">`</span><span id="d46">`</span><span id="d47">`</span><span id="d48">`</span><span id="d49">`</span><span id="d50">`</span><span id="d51">`</span><span id="d52">`</span><span id="d53">`</span><span id="d54">`</span><span id="d55">`</span><span id="d56">`</span><span id="d57">`</span><span id="d58">`</span><span id="d59">`</span><span id="d60">`</span><span id="d61">`</span><span id="d62">`</span><span id="d63">`</span><span id="d64">`</span><span id="d65">`</span><span id="d66">`</span><span id="d67">`</span><span id="d68">`</span><span id="d69">`</span><span id="d70">`</span><span id="d71">`</span><span id="d72">`</span><span id="d73">`</span><span id="d74">`</span><span id="d75">`</span><span id="d76">`</span><span id="d77">`</span><span id="d78">`</span><span id="d79">`</span><span id="d80">`</span><span id="d81">`</span><span id="d82">`</span><span id="d83">`</span><span id="d84">`</span><span id="d85">`</span><span id="d86">`</span><span id="d87">`</span><span id="d88">`</span><span id="d89">`</span><span id="d90">`</span><span id="d91">`</span><span id="d92">`</span><span id="d93">`</span><span id="d94">`</span><span id="d95">`</span><span id="d96">`</span><span id="d97">`</span>¦
+¦<span id="e1">`</span><span id="e2">`</span><span id="e3">`</span><span id="e4">`</span><span id="e5">`</span><span id="e6">`</span><span id="e7">`</span><span id="e8">`</span><span id="e9">`</span><span id="e10">`</span><span id="e11">`</span><span id="e12">`</span><span id="e13">`</span><span id="e14">`</span><span id="e15">`</span><span id="e16">`</span><span id="e17">`</span><span id="e18">`</span><span id="e19">`</span><span id="e20">`</span><span id="e21">`</span><span id="e22">`</span><span id="e23">`</span><span id="e24">`</span><span id="e25">`</span><span id="e26">`</span><span id="e27">`</span><span id="e28">`</span><span id="e29">`</span><span id="e30">`</span><span id="e31">`</span><span id="e32">`</span><span id="e33">`</span><span id="e34">`</span><span id="e35">`</span><span id="e36">`</span><span id="e37">`</span><span id="e38">`</span><span id="e39">`</span><span id="e40">`</span><span id="e41">`</span><span id="e42">`</span><span id="e43">`</span><span id="e44">`</span><span id="e45">`</span><span id="e46">`</span><span id="e47">`</span><span id="e48">`</span><span id="e49">`</span><span id="e50">`</span><span id="e51">`</span><span id="e52">`</span><span id="e53">`</span><span id="e54">`</span><span id="e55">`</span><span id="e56">`</span><span id="e57">`</span><span id="e58">`</span><span id="e59">`</span><span id="e60">`</span><span id="e61">`</span><span id="e62">`</span><span id="e63">`</span><span id="e64">`</span><span id="e65">`</span><span id="e66">`</span><span id="e67">`</span><span id="e68">`</span><span id="e69">`</span><span id="e70">`</span><span id="e71">`</span><span id="e72">`</span><span id="e73">`</span><span id="e74">`</span><span id="e75">`</span><span id="e76">`</span><span id="e77">`</span><span id="e78">`</span><span id="e79">`</span><span id="e80">`</span><span id="e81">`</span><span id="e82">`</span><span id="e83">`</span><span id="e84">`</span><span id="e85">`</span><span id="e86">`</span><span id="e87">`</span><span id="e88">`</span><span id="e89">`</span><span id="e90">`</span><span id="e91">`</span><span id="e92">`</span><span id="e93">`</span><span id="e94">`</span><span id="e95">`</span><span id="e96">`</span><span id="e97">`</span>¦
+¦<span id="f1">`</span><span id="f2">`</span><span id="f3">`</span><span id="f4">`</span><span id="f5">`</span><span id="f6">`</span><span id="f7">`</span><span id="f8">`</span><span id="f9">`</span><span id="f10">`</span><span id="f11">`</span><span id="f12">`</span><span id="f13">`</span><span id="f14">`</span><span id="f15">`</span><span id="f16">`</span><span id="f17">`</span><span id="f18">`</span><span id="f19">`</span><span id="f20">`</span><span id="f21">`</span><span id="f22">`</span><span id="f23">`</span><span id="f24">`</span><span id="f25">`</span><span id="f26">`</span><span id="f27">`</span><span id="f28">`</span><span id="f29">`</span><span id="f30">`</span><span id="f31">`</span><span id="f32">`</span><span id="f33">`</span><span id="f34">`</span><span id="f35">`</span><span id="f36">`</span><span id="f37">`</span><span id="f38">`</span><span id="f39">`</span><span id="f40">`</span><span id="f41">`</span><span id="f42">`</span><span id="f43">`</span><span id="f44">`</span><span id="f45">`</span><span id="f46">`</span><span id="f47">`</span><span id="f48">`</span><span id="f49">`</span><span id="f50">`</span><span id="f51">`</span><span id="f52">`</span><span id="f53">`</span><span id="f54">`</span><span id="f55">`</span><span id="f56">`</span><span id="f57">`</span><span id="f58">`</span><span id="f59">`</span><span id="f60">`</span><span id="f61">`</span><span id="f62">`</span><span id="f63">`</span><span id="f64">`</span><span id="f65">`</span><span id="f66">`</span><span id="f67">`</span><span id="f68">`</span><span id="f69">`</span><span id="f70">`</span><span id="f71">`</span><span id="f72">`</span><span id="f73">`</span><span id="f74">`</span><span id="f75">`</span><span id="f76">`</span><span id="f77">`</span><span id="f78">`</span><span id="f79">`</span><span id="f80">`</span><span id="f81">`</span><span id="f82">`</span><span id="f83">`</span><span id="f84">`</span><span id="f85">`</span><span id="f86">`</span><span id="f87">`</span><span id="f88">`</span><span id="f89">`</span><span id="f90">`</span><span id="f91">`</span><span id="f92">`</span><span id="f93">`</span><span id="f94">`</span><span id="f95">`</span><span id="f96">`</span><span id="f97">`</span>¦
+¦<span id="g1">`</span><span id="g2">`</span><span id="g3">`</span><span id="g4">`</span><span id="g5">`</span><span id="g6">`</span><span id="g7">`</span><span id="g8">`</span><span id="g9">`</span><span id="g10">`</span><span id="g11">`</span><span id="g12">`</span><span id="g13">`</span><span id="g14">`</span><span id="g15">`</span><span id="g16">`</span><span id="g17">`</span><span id="g18">`</span><span id="g19">`</span><span id="g20">`</span><span id="g21">`</span><span id="g22">`</span><span id="g23">`</span><span id="g24">`</span><span id="g25">`</span><span id="g26">`</span><span id="g27">`</span><span id="g28">`</span><span id="g29">`</span><span id="g30">`</span><span id="g31">`</span><span id="g32">`</span><span id="g33">`</span><span id="g34">`</span><span id="g35">`</span><span id="g36">`</span><span id="g37">`</span><span id="g38">`</span><span id="g39">`</span><span id="g40">`</span><span id="g41">`</span><span id="g42">`</span><span id="g43">`</span><span id="g44">`</span><span id="g45">`</span><span id="g46">`</span><span id="g47">`</span><span id="g48">`</span><span id="g49">`</span><span id="g50">`</span><span id="g51">`</span><span id="g52">`</span><span id="g53">`</span><span id="g54">`</span><span id="g55">`</span><span id="g56">`</span><span id="g57">`</span><span id="g58">`</span><span id="g59">`</span><span id="g60">`</span><span id="g61">`</span><span id="g62">`</span><span id="g63">`</span><span id="g64">`</span><span id="g65">`</span><span id="g66">`</span><span id="g67">`</span><span id="g68">`</span><span id="g69">`</span><span id="g70">`</span><span id="g71">`</span><span id="g72">`</span><span id="g73">`</span><span id="g74">`</span><span id="g75">`</span><span id="g76">`</span><span id="g77">`</span><span id="g78">`</span><span id="g79">`</span><span id="g80">`</span><span id="g81">`</span><span id="g82">`</span><span id="g83">`</span><span id="g84">`</span><span id="g85">`</span><span id="g86">`</span><span id="g87">`</span><span id="g88">`</span><span id="g89">`</span><span id="g90">`</span><span id="g91">`</span><span id="g92">`</span><span id="g93">`</span><span id="g94">`</span><span id="g95">`</span><span id="g96">`</span><span id="g97">`</span>¦
+¦<span id="h1">`</span><span id="h2">`</span><span id="h3">`</span><span id="h4">`</span><span id="h5">`</span><span id="h6">`</span><span id="h7">`</span><span id="h8">`</span><span id="h9">`</span><span id="h10">`</span><span id="h11">`</span><span id="h12">`</span><span id="h13">`</span><span id="h14">`</span><span id="h15">`</span><span id="h16">`</span><span id="h17">`</span><span id="h18">`</span><span id="h19">`</span><span id="h20">`</span><span id="h21">`</span><span id="h22">`</span><span id="h23">`</span><span id="h24">`</span><span id="h25">`</span><span id="h26">`</span><span id="h27">`</span><span id="h28">`</span><span id="h29">`</span><span id="h30">`</span><span id="h31">`</span><span id="h32">`</span><span id="h33">`</span><span id="h34">`</span><span id="h35">`</span><span id="h36">`</span><span id="h37">`</span><span id="h38">`</span><span id="h39">`</span><span id="h40">`</span><span id="h41">`</span><span id="h42">`</span><span id="h43">`</span><span id="h44">`</span><span id="h45">`</span><span id="h46">`</span><span id="h47">`</span><span id="h48">`</span><span id="h49">`</span><span id="h50">`</span><span id="h51">`</span><span id="h52">`</span><span id="h53">`</span><span id="h54">`</span><span id="h55">`</span><span id="h56">`</span><span id="h57">`</span><span id="h58">`</span><span id="h59">`</span><span id="h60">`</span><span id="h61">`</span><span id="h62">`</span><span id="h63">`</span><span id="h64">`</span><span id="h65">`</span><span id="h66">`</span><span id="h67">`</span><span id="h68">`</span><span id="h69">`</span><span id="h70">`</span><span id="h71">`</span><span id="h72">`</span><span id="h73">`</span><span id="h74">`</span><span id="h75">`</span><span id="h76">`</span><span id="h77">`</span><span id="h78">`</span><span id="h79">`</span><span id="h80">`</span><span id="h81">`</span><span id="h82">`</span><span id="h83">`</span><span id="h84">`</span><span id="h85">`</span><span id="h86">`</span><span id="h87">`</span><span id="h88">`</span><span id="h89">`</span><span id="h90">`</span><span id="h91">`</span><span id="h92">`</span><span id="h93">`</span><span id="h94">`</span><span id="h95">`</span><span id="h96">`</span><span id="h97">`</span>¦
+¦<span id="i1">`</span><span id="i2">`</span><span id="i3">`</span><span id="i4">`</span><span id="i5">`</span><span id="i6">`</span><span id="i7">`</span><span id="i8">`</span><span id="i9">`</span><span id="i10">`</span><span id="i11">`</span><span id="i12">`</span><span id="i13">`</span><span id="i14">`</span><span id="i15">`</span><span id="i16">`</span><span id="i17">`</span><span id="i18">`</span><span id="i19">`</span><span id="i20">`</span><span id="i21">`</span><span id="i22">`</span><span id="i23">`</span><span id="i24">`</span><span id="i25">`</span><span id="i26">`</span><span id="i27">`</span><span id="i28">`</span><span id="i29">`</span><span id="i30">`</span><span id="i31">`</span><span id="i32">`</span><span id="i33">`</span><span id="i34">`</span><span id="i35">`</span><span id="i36">`</span><span id="i37">`</span><span id="i38">`</span><span id="i39">`</span><span id="i40">`</span><span id="i41">`</span><span id="i42">`</span><span id="i43">`</span><span id="i44">`</span><span id="i45">`</span><span id="i46">`</span><span id="i47">`</span><span id="i48">`</span><span id="i49">`</span><span id="i50">`</span><span id="i51">`</span><span id="i52">`</span><span id="i53">`</span><span id="i54">`</span><span id="i55">`</span><span id="i56">`</span><span id="i57">`</span><span id="i58">`</span><span id="i59">`</span><span id="i60">`</span><span id="i61">`</span><span id="i62">`</span><span id="i63">`</span><span id="i64">`</span><span id="i65">`</span><span id="i66">`</span><span id="i67">`</span><span id="i68">`</span><span id="i69">`</span><span id="i70">`</span><span id="i71">`</span><span id="i72">`</span><span id="i73">`</span><span id="i74">`</span><span id="i75">`</span><span id="i76">`</span><span id="i77">`</span><span id="i78">`</span><span id="i79">`</span><span id="i80">`</span><span id="i81">`</span><span id="i82">`</span><span id="i83">`</span><span id="i84">`</span><span id="i85">`</span><span id="i86">`</span><span id="i87">`</span><span id="i88">`</span><span id="i89">`</span><span id="i90">`</span><span id="i91">`</span><span id="i92">`</span><span id="i93">`</span><span id="i94">`</span><span id="i95">`</span><span id="i96">`</span><span id="i97">`</span>¦
+¦<span id="j1">`</span><span id="j2">`</span><span id="j3">`</span><span id="j4">`</span><span id="j5">`</span><span id="j6">`</span><span id="j7">`</span><span id="j8">`</span><span id="j9">`</span><span id="j10">`</span><span id="j11">`</span><span id="j12">`</span><span id="j13">`</span><span id="j14">`</span><span id="j15">`</span><span id="j16">`</span><span id="j17">`</span><span id="j18">`</span><span id="j19">`</span><span id="j20">`</span><span id="j21">`</span><span id="j22">`</span><span id="j23">`</span><span id="j24">`</span><span id="j25">`</span><span id="j26">`</span><span id="j27">`</span><span id="j28">`</span><span id="j29">`</span><span id="j30">`</span><span id="j31">`</span><span id="j32">`</span><span id="j33">`</span><span id="j34">`</span><span id="j35">`</span><span id="j36">`</span><span id="j37">`</span><span id="j38">`</span><span id="j39">`</span><span id="j40">`</span><span id="j41">`</span><span id="j42">`</span><span id="j43">`</span><span id="j44">`</span><span id="j45">`</span><span id="j46">`</span><span id="j47">`</span><span id="j48">`</span><span id="j49">`</span><span id="j50">`</span><span id="j51">`</span><span id="j52">`</span><span id="j53">`</span><span id="j54">`</span><span id="j55">`</span><span id="j56">`</span><span id="j57">`</span><span id="j58">`</span><span id="j59">`</span><span id="j60">`</span><span id="j61">`</span><span id="j62">`</span><span id="j63">`</span><span id="j64">`</span><span id="j65">`</span><span id="j66">`</span><span id="j67">`</span><span id="j68">`</span><span id="j69">`</span><span id="j70">`</span><span id="j71">`</span><span id="j72">`</span><span id="j73">`</span><span id="j74">`</span><span id="j75">`</span><span id="j76">`</span><span id="j77">`</span><span id="j78">`</span><span id="j79">`</span><span id="j80">`</span><span id="j81">`</span><span id="j82">`</span><span id="j83">`</span><span id="j84">`</span><span id="j85">`</span><span id="j86">`</span><span id="j87">`</span><span id="j88">`</span><span id="j89">`</span><span id="j90">`</span><span id="j91">`</span><span id="j92">`</span><span id="j93">`</span><span id="j94">`</span><span id="j95">`</span><span id="j96">`</span><span id="j97">`</span>¦
+        +=================================================================================================+<br>
+    <div class="move-buttons">
+        <div class="table-row">
+            <div class="table-cell"></div>
+            <div class="table-cell"><button onclick="moveUp()">W</button></div>
+            <div class="table-cell"><button onclick="updateXYDisplay()">F</button></div>
+        </div>
+        <div class="table-row">
+            <div class="table-cell"><button onclick="moveLeft()">A</button></div>
+            <div class="table-cell"><button onclick="moveDown()">S</button></div>
+            <div class="table-cell"><button onclick="moveRight()">D</button></div>
+            <div class="table-cell"></div>
+        </div>
+    </div>
+
+
+    <p>
+        <span class="inline">
+            STATS&nbsp;:&nbsp;HEA&nbsp;:&nbsp;<span id="hea">100</span>&nbsp;/&nbsp;DMG&nbsp;:&nbsp;<span id="dmg">10</span>&nbsp;/&nbsp;HUN&nbsp;:&nbsp;<span id="hun">00</span>&nbsp;/&nbsp;LUC&nbsp;:&nbsp;<span id="luc">05</span>&nbsp;IGT&nbsp;:&nbsp;<span id="hours">09</span>:<span id="minutes">41</span> // BY XPEUVR 2024
+        </span>
+    </p>
+    <p>
+        <span class="inline">
+            X : <span id="xDisplay2"></span>
+            Y : <span id="yDisplay"></span>
+        </span>
+    </p>
+
+<script>
+    const x = Math.random();
+    const xDisplay = document.getElementById("xDisplay2");
+    const hoursDisplay = document.getElementById("hours");
+    const minutesDisplay = document.getElementById("minutes");
+    
+    function moveUp() {
+        console.log("Move up");
+        // Add code to move up here
+    }
+    
+    function moveRight() {
+        console.log("Move right");
+        // Add code to move right here
+    }
+    
+    function moveDown() {
+        console.log("Move down");
+        // Add code to move down here
+    }
+    
+    function moveLeft() {
+        console.log("Move left");
+        // Add code to move left here
+    }
+    
+    function updateXYDisplay() {
+        xDisplay.innerText = x;
+    }
+    
+    function updateTime() {
+    // Get the current IRL time
+    let now = new Date();
+    let irlHours = now.getHours();
+    let irlMinutes = now.getMinutes();
+
+    // Convert IRL time to total seconds
+    let irlSeconds = irlHours * 60 * 60 + irlMinutes * 60;
+
+    // Apply the conversion factor
+    let igtSeconds = irlSeconds * 4;
+
+    // Convert IGT seconds to hours and minutes
+    let igtHours = Math.floor(igtSeconds / 3600);
+    let igtMinutes = Math.floor((igtSeconds % 3600) / 60);
+
+    // Determine the IGT hour within the day
+    let igtHourOfDay = igtHours % 24;
+
+    // Update the display
+    hoursDisplay.innerText = igtHourOfDay.toString().padStart(2, '0');
+    minutesDisplay.innerText = igtMinutes.toString().padStart(2, '0');
+}
+
+// Update the time on page load
+updateTime();
+
+// Update the time every 30 seconds
+setInterval(updateTime, 30000);
+
+
+</script>
+</body>
+</html>

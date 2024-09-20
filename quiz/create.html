@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créateur de Quiz</title>
+    <link rel="stylesheet" href="create.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Crée un Quiz!</h1>
+        <p>Comment utilser: Tout est assez explicite, sauf "correct answer": 
+            tu dois mettre 0 si la bonne réponse est ce que tu as mis dans
+        "reponse1", 1 si c'est la 2e, etc. jusqu'à 3. Tu peux ne rien mettre dans un champ de réponse (il en faut au moins 2).
+    <br> "Explanation if Missed" est le texte qui sera affiché si le joueur se trompe.
+<br>Quand tu as terminé, clique sur "generate quiz json" et clique sur le bouton vert pour le telecharger.
+clique <a href="quiz.html">ici</a> pour retourner à la page d'acceuil</p>
+        <form id="quiz-form">
+            <label for="quiz-title">Titre du Quiz:</label>
+            <input type="text" id="quiz-title" name="quiz-title" required>
+            <label for="quiz-description">Description du quiz:</label>
+            <textarea id="quiz-description" name="quiz-description" required></textarea>
+            <div id="questions-container">
+                <div class="question-block">
+                    <label for="question-0">Question:</label>
+                    <input type="text" id="question-0" name="question-0" required>
+                    <div class="answers-container">
+                        <label for="answer-0-0">Réponse 1:</label>
+                        <input type="text" id="answer-0-0" name="answer-0-0" required>
+                        <label for="answer-0-1">Réponse 2:</label>
+                        <input type="text" id="answer-0-1" name="answer-0-1" required>
+                        <label for="answer-0-2">Réponse 3:</label>
+                        <input type="text" id="answer-0-2" name="answer-0-2">
+                        <label for="answer-0-3">Réponse 4:</label>
+                        <input type="text" id="answer-0-3" name="answer-0-3">
+                    </div>
+                    <label for="correct-answer-0">(N° de la réponse correcte) -1 (comme expliqué en haut):</label>
+                    <input type="text" id="correct-answer-0" name="correct-answer-0" required>
+                    <label for="explanation-0">Texte affiché en cas de mauvaise réponse:</label>
+                    <textarea id="explanation-0" name="explanation-0" required></textarea>
+                </div>
+            </div>
+            <button type="button" id="add-question-btn">Ajouter une autre question</button>
+            <button type="submit">Générer le fichier de Quiz</button>
+        </form>
+        <a id="download-link" style="display: none;">Télécharger le Quiz</a>
+    </div>
+    <script src="create.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+PENDING rename file before sending to discord 
+FIXED title is wrong (this one will be MAJOR v.2.2)
+FIXED add link to help in supprimer.html
+FIXED center "terme a remplacer" dans supprimer
+FIXED IDEM replace
+FIXED sha 256: make input and hash box 90% width
+FIXED sha 256 make link to help.html "la page d'aide"
+FIXED length: make box 90width
+FIXED telechargement: la page d'aide link to help.html, input box to 90width and 30% height make link to help.html 'la page d'aide' au lieu de juste d'aide associée
+FIXED index.html: add nombre d'occurence d'une chaîne de caractère dans une autre
+CANCELED move description to help.html
+FIXED SYNC HELP AND INDEX BUTTONS ORDER (help is master)
+FIXED sync order of appearance of buttons on index.html based on help.html
+ADDED add a previous versions (text tools v1.1, 2, 2.1, 2.2) in changelog with their link
+FIXED remove wiki link in sha 256 in help.html
+7 in help 7 in index order of help replace 2 remove 1 hash 3 compare4 length5 download6 count7 (help)
+FIXED order of numbers are order of appearance in index.html
+FIXED add a mailto link with object pre enrered
+mailto:rmequests@gmx.ch?subject="Bug on X feature"
+FIXED new feature: "keybord zone" : alphanumerical (normal),ascii only, numerical(,.#*) strict numerical(0-9) auto complete, https://www.w3schools.com/html/html_form_input_types.asp
+FIXED non ascii to french (sha 256)
+FIXED copied to clipboard in french (sha 256)
+FIXED add copy to clipboard in textbox.html
+TODO add help to arrayfier and rand emoji gen
+FIXED random emoji generator
+FIXED random password generator with copy to clipboard (and options: length, 0-9 a-z A-Z, spec. chars. etc.)
+FIXED add a copy confirmation
+NO add text merge
+TODO add text dupe: repeat (user choice) times -> numbers keyboard select separator: new line , _ - etc 
+FIXED add "crackeur de mot de passe" tests sha256 of ascii characters of lengrh 7
+TODO add md5 hash generator
+FIXED compare.html (length comparison) indicate length difference
+add theme switch (just black theme, NOT absolite black but like in text tools v1.1 with grayish)
+FIXED, in compare folder. remove useless fonts (ones that arent used in general-styles.css)
+TODO in length.html: add a length indicator w/o spaces ex: la longueurdu text est de 90 avec les espaces et est de 76 sans les espaces
+TODO add a avg length of words in a text : ex: input = this is a long sentence with relatively short words
+calc avg length of words, sentences per paragraph, paragraph per chapters, etc
+LIST OF THINGS TO DO WHEN ADDING A NEW FEATURE
+add to: index.html, help.html
+on page: title in sf font
+any placeholder text must be with sf font 
+br between any buttons (except those who almost do the same thing) ex:replace next/all
+add a tooltip when copied
+add refresh output (sets out to in)
+add return to home (whole width of screen)
+add related help page at the end
+use sf font for inputs
+add a mailto link in help.html with preentered subject
+add help for all
+TODO in length.html: count number of words
+TODO put sf font in text boxes(as in occurence)
+FIX space isn't accepted as term to search
+TODO occurence.html: add "count only if total word"
+TODO occurence.html remove a br /div entre rechercher et retour a l'accueil
+FIXED fix help.html l'outil de calcul de longueur qui est un lien
+FIXED accent sensitive
+FIXED textbox.html: make error message down

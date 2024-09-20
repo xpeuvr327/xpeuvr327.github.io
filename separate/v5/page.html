@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text File Manipulator</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #warning {
+            margin-top: 10px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<input type="file" id="fileInput" />
+<br />
+<label for="chunkSize">Chunk Size:</label>
+<input type="number" id="chunkSize" value="4096" />
+<button onclick="splitText()">Split Text</button>
+<br />
+<textarea id="output" rows="10" cols="50" readonly></textarea>
+<br />
+<label for="removeString">Remove String:</label>
+<input type="text" id="removeString" />
+<button onclick="removeText()">Remove Text</button>
+<br />
+<button onclick="downloadFiles()">Download Files</button>
+<p id="warning"></p>
+
+<script>
+    let originalContent = "";
+    let currentContent = "";
+
+    function splitText() {
+        const fileInput = document.getElementById('fileInput');
+        const chunkSize = parseInt(document.getElementById('chunkSize').value);
+        const outputTextArea = document.getElementById('output');
+        const warningMessage = document.getElementById('warning');
+
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                originalContent = e.target.result;
+                currentContent = originalContent;
+                updateOutputTextarea(chunkSize);
+                warningMessage.textContent = "";
+            };
+
+            reader.readAsText(file);
+        } else {
+            alert('Please select a file.');
+        }
+    }
+
+    function updateOutputTextarea(chunkSize) {
+        const outputTextArea = document.getElementById('output');
+        const chunks = [];
+
+        let index = 0;
+        while (index < currentContent.length) {
+            const chunk = currentContent.substring(index, index + chunkSize);
+            chunks.push(chunk);
+            index += chunk.length;
+        }
+
+        outputTextArea.value = chunks.join('\n');
+    }
+
+    function removeText() {
+        const outputTextArea = document.getElementById('output');
+        const removeString = document.getElementById('removeString').value;
+
+        if (removeString.trim() === "") {
+            alert('Please enter a string to remove.');
+            return;
+        }
+
+        currentContent = currentContent.replace(new RegExp(removeString, 'g'), '');
+        updateOutputTextarea(parseInt(document.getElementById('chunkSize').value));
+    }
+
+    function downloadFiles() {
+        const chunkSize = parseInt(document.getElementById('chunkSize').value);
+        const chunks = [];
+
+        let index = 0;
+        while (index < currentContent.length) {
+            const chunk = currentContent.substring(index, index + chunkSize);
+            chunks.push(chunk);
+            index += chunk.length;
+        }
+
+        const filteredChunks = chunks.filter(chunk => chunk.trim() !== "");
+
+        const warningMessage = document.getElementById('warning');
+        if (filteredChunks.length === 0) {
+            warningMessage.textContent = "No content to download.";
+            return;
+        }
+
+        for (let i = 0; i < filteredChunks.length; i++) {
+            const blob = new Blob([filteredChunks[i]], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `file_part_${i + 1}.txt`;
+            link.click();
+        }
+
+        const downloadedSize = filteredChunks.join('').length;
+        if (downloadedSize !== currentContent.length) {
+            warningMessage.textContent = `Error: Downloaded size (${downloadedSize} bytes) does not match the original size (${currentContent.length} bytes).`;
+        } else {
+            warningMessage.textContent = `${filteredChunks.length} file(s) downloaded. Total size: ${formatBytes(currentContent.length)}`;
+        }
+    }
+
+    function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return '0 Bytes';
+
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    }
+</script>
+
+</body>
+</html>

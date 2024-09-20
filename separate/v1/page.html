@@ -1,0 +1,137 @@
+<html>
+<head>
+    <style>
+        /* Définir le style de la page */
+        body {
+            background-color: lightblue; /* Couleur de fond */
+            font-family: Arial, sans-serif; /* Police de caractère */
+        }
+
+        h1 {
+            color: white; /* Couleur du titre */
+            text-align: center; /* Alignement du titre */
+        }
+
+        #preview {
+            border: 1px solid black; /* Bordure du bloc de prévisualisation */
+            padding: 10px; /* Espacement entre le contenu et la bordure */
+            margin: 10px; /* Espacement entre le bloc et les autres éléments */
+            overflow: auto; /* Permettre le défilement si le contenu dépasse la hauteur */
+            height: 300px; /* Hauteur du bloc */
+        }
+
+        #files {
+            display: flex; /* Afficher les fichiers en ligne */
+            flex-wrap: wrap; /* Passer à la ligne si nécessaire */
+            justify-content: center; /* Centrer les fichiers */
+        }
+
+        .file {
+            border: 1px solid black; /* Bordure du bloc de fichier */
+            padding: 10px; /* Espacement entre le contenu et la bordure */
+            margin: 10px; /* Espacement entre le bloc et les autres éléments */
+            width: 200px; /* Largeur du bloc */
+            height: 200px; /* Hauteur du bloc */
+        }
+
+        .file p {
+            text-align: center; /* Alignement du texte */
+        }
+
+        .file a {
+            display: block; /* Afficher le lien en bloc */
+            background-color: white; /* Couleur de fond du lien */
+            color: black; /* Couleur du texte du lien */
+            text-decoration: none; /* Pas de soulignement */
+            padding: 5px; /* Espacement entre le contenu et la bordure */
+        }
+
+        .file a:hover {
+            background-color: black; /* Couleur de fond du lien au survol */
+            color: white; /* Couleur du texte du lien au survol */
+        }
+    </style>
+    <script>
+        // Fonction pour importer un fichier texte
+        function importFile() {
+            // Récupérer le fichier sélectionné
+            var file = document.getElementById("fileInput").files[0];
+            // Créer un objet FileReader
+            var reader = new FileReader();
+            // Définir la fonction à exécuter lorsque le fichier est chargé
+            reader.onload = function(event) {
+                // Récupérer le contenu du fichier
+                var text = event.target.result;
+                // Afficher le contenu dans le bloc de prévisualisation
+                document.getElementById("preview").textContent = text;
+                // Séparer le contenu en fichiers séparés
+                splitFile(text);
+            };
+            // Lire le fichier comme du texte
+            reader.readAsText(file);
+        }
+
+        // Fonction pour séparer le contenu en fichiers séparés
+        function splitFile(text) {
+            // Récupérer le nombre de caractères par fichier
+            var size = parseInt(document.getElementById("sizeInput").value);
+            // Vérifier que la taille est valide
+            if (isNaN(size) || size <= 0) {
+                alert("Veuillez entrer une taille positive");
+                return;
+            }
+            // Vider le contenu précédent
+            document.getElementById("files").innerHTML = "";
+            // Créer un compteur de fichiers
+            var count = 1;
+            // Tant qu'il reste du texte à traiter
+            while (text.length > 0) {
+                // Extraire le premier morceau de texte
+                var chunk = text.slice(0, size);
+                // Supprimer le morceau du texte
+                text = text.slice(size);
+                // Créer un élément div pour le fichier
+                var div = document.createElement("div");
+                div.className = "file";
+                // Créer un élément p pour le nom du fichier
+                var p = document.createElement("p");
+                p.textContent = "Fichier " + count;
+                // Créer un élément a pour le lien de téléchargement
+                var a = document.createElement("a");
+                a.textContent = "Télécharger";
+                a.href = createURL(chunk);
+                a.download = "fichier" + count + ".txt";
+                // Ajouter les éléments au div
+                div.appendChild(p);
+                div.appendChild(a);
+                // Ajouter le div à la page
+                document.getElementById("files").appendChild(div);
+                // Incrémenter le compteur de fichiers
+                count++;
+            }
+        }
+
+        // Fonction pour créer une URL à partir d'un texte
+        function createURL(text) {
+            // Créer un objet Blob à partir du texte
+            var blob = new Blob([text], {type: "text/plain"});
+            // Créer une URL à partir du blob
+            var url = URL.createObjectURL(blob);
+            // Retourner l'URL
+            return url;
+        }
+    </script>
+</head>
+<body>
+    <h1>Page HTML qui permet d'importer, de prévisualiser, de séparer et de télécharger un fichier texte</h1>
+    <p>Sélectionnez un fichier texte à importer:</p>
+    <input type="file" id="fileInput" accept=".txt">
+    <button onclick="importFile()">Importer</button>
+    <p>Entrez le nombre de caractères par fichier séparé:</p>
+    <input type="number" id="sizeInput" value="4096">
+    <p>Prévisualisez le contenu du fichier importé:</p>
+    <div id="preview"></div>
+    <p>Téléchargez les fichiers séparés:</p>
+    <div id="files"></div>
+</body>
+</html>

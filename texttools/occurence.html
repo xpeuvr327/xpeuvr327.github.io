@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nombre d'occurrences d'une chaîne</title>
+  <link rel="stylesheet" href="general-styles.css">
+</head>
+<body>
+  <h1>Nombre d'occurrences d'une chaîne</h1>
+  <p>Entrez la chaîne à rechercher et le texte dans lequel rechercher dans les champs de texte ci-dessous. Cliquez sur le bouton "Rechercher" pour trouver le nombre d'occurrences de la chaîne dans le texte.</p>
+<div id="search-container">
+  <center><input id="searchInput" type="text" placeholder="Chaîne à rechercher" style="font-family: 'SF-Pro-Text-Medium', sans-serif; margin: 0 auto;"></center>
+  <br>
+  <textarea id="textInput" style="width: 90%; margin: 0 auto; display: block; font-family: 'SFUIText-Regular';" rows="10"></textarea>
+  <br>
+  <center><label for="caseSensitive">Sensible à la casse</label>
+  <input id="caseSensitive" type="checkbox"></center>
+</div>
+  <br>
+  <button id="searchButton" class="button">Rechercher</button>
+  <br>
+  <p id="result"></p>
+  <br>
+  <a href="index.html" class="button">Retour à l'accueil</a>
+  <br>
+  <p>Pour plus d'aide, consultez <a href="help.html#:~:text=Comment%20utiliser%20l'outil%20de%20compte%20d'occurrences">la page d'aide associée</a>.</p>
+  <script src="occurence.js"></script>
+</body>
+</html>

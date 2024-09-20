@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crackeur de Hash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="general-styles.css">
+    <style>
+        #input-container {
+            width: 90%;
+            margin: 0 auto;
+            resize: vertical;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crackeur de mot de passe</h1>
+    <center>
+        <input type="text" id="hash" placeholder="Entrez un hash" name="hash"></input>
+        <br>
+        <label for="max-test-to">Longueur maximale de test :</label>
+        <input type="number" id="max-test-to" name="max-test-to" value="8" min="1" max="20">
+        <br>
+        <input type="checkbox" id="test-numbers" name="test-numbers" value="numbers">
+        <label for="test-numbers">Tester les chiffres</label>
+        <br>
+        <input type="checkbox" id="test-letters" name="test-letters" value="letters">
+        <label for="test-letters">Tester les lettres</label>
+        <br>
+        <input type="checkbox" id="test-capitals" name="test-capitals" value="capitals">
+        <label for="test-capitals">Tester les majuscules</label>
+        <br>
+        <input type="checkbox" id="test-special" name="test-special" value="special">
+        <label for="test-special">Tester les caractères spéciaux ASCII</label>
+        <br>
+        <div id="alert-message" style="color: red; display: none;">Veuillez choisir au moins une option.</div>
+    </center>
+    <button class="button" onclick="crackHash()">Cracker le Hash!</button>
+    <p id="result"></p>
+    <p id="speed"></p>
+    <a href="index.html" class="button">Retour à l'accueil</a>
+    <script src="cryptojs.js"></script>
+    <script src="tempcrack.js"></script>
+</body>
+</html>

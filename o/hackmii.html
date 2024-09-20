@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Inserter</title>
+</head>
+<body>
+
+    <h1>Insertion du Flag</h1>
+    <p id="flagContainer">Le flag sera affiché ici</p>
+
+    <script>
+        // Fonction pour récupérer le paramètre "flag" dans l'URL
+        function getFlagFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('flag');
+        }
+
+        // Récupération du flag de l'URL
+        const flag = getFlagFromURL();
+
+        // Insertion brute dans l'élément <p> (dangerous)
+        if (flag) {
+            document.getElementById("flagContainer").innerHTML = decodeURIComponent(flag);
+        } else {
+            document.getElementById("flagContainer").innerText = "Aucun flag trouvé.";
+        }
+
+        // Encodage du flag pour l'utiliser dans l'URL
+        const encodedFlag = encodeURIComponent('<h1 id="id0">0</h1><button onclick="var counter=parseInt(document.getElementById(\'id0\').innerText);counter+=1;document.getElementById(\'id0\').innerText=counter">click me</button>');
+
+        // Fonction pour rediriger vers la page avec le flag encodé dans l'URL
+        function redirectToPage() {
+            window.location.href = window.location.pathname + "?flag=" + encodedFlag;
+        }
+    </script>
+
+    <!-- Bouton pour rediriger avec le flag encodé dans l'URL -->
+    <button onclick="redirectToPage()">Rediriger avec le Flag</button>
+
+</body>
+</html>

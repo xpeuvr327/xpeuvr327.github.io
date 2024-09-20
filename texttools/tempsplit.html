@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="bgkhkcyo idc0_350">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Splitter at Sentence</title>
+    <link rel="stylesheet" href="general-styles.css">
+    <style>
+        .part {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Text Splitter at Sentence</h1>
+    <br><p>Text splitted at sentence. It will split equally between your number of parts at sentence, ideal for group text reading equal split.</p>
+    <br>
+    <textarea id="inputText" rows="10" class="sigma-input">Mets ton texte ici. Clique sur le bouton split text pour commencer la démo. Les phrases séparées apparaitront magiquement.</textarea>
+    <br>
+    <label for="numParts">Number of Parts:</label>
+    <input type="number" id="numParts" min="1" value="3">
+    <br><br>
+    <button class="button" onclick="splitText()">Split Text</button><br>
+    <div id="output"></div>
+  <br><a href="index.html" class="button">Retour à l'accueil</a>
+    <script>
+        function splitText() {
+            const text = document.getElementById('inputText').value;
+            const numParts = parseInt(document.getElementById('numParts').value);
+            const sentences = text.match(/[^\.!\?]+[\.!\?]+/g);
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+
+            if (!sentences || numParts <= 0) {
+                return;
+            }
+
+            const totalSentences = sentences.length;
+            const sentencesPerPart = Math.ceil(totalSentences / numParts);
+            let parts = [];
+            let currentPart = '';
+
+            sentences.forEach((sentence, index) => {
+                currentPart += sentence;
+                if ((index + 1) % sentencesPerPart === 0 || index === totalSentences - 1) {
+                    parts.push(currentPart.trim());
+                    currentPart = '';
+                }
+            });
+
+            parts.forEach((part, index) => {
+                const partDiv = document.createElement('div');
+                partDiv.className = 'part';
+                partDiv.innerHTML = `<strong>Part ${index + 1}:</strong><br>${part}`;
+                outputDiv.appendChild(partDiv);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Bouncer</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: rgb(0, 0, 0);
+      overflow: hidden; /* Prevent scroll bars */
+    }
+
+    #bouncingImage {
+      max-width: 10%;
+      max-height: 10%;
+      position: absolute;
+    }
+  </style>
+</head>
+<body onload="loadDefaultImage()">
+  
+  <div id="animationContainer"></div>
+
+  <script>
+    function loadDefaultImage() {
+      const defaultImageUrl = 'dvd.gif';
+      const animationContainer = document.getElementById('animationContainer');
+
+      // Create image element
+      const image = new Image();
+      image.src = defaultImageUrl;
+      image.id = 'bouncingImage';
+      animationContainer.innerHTML = '';
+      animationContainer.appendChild(image);
+
+      // Start bouncing animation
+      bounceImage();
+    }
+
+    function handleImageUpload() {
+      const imageInput = document.getElementById('imageInput');
+      const animationContainer = document.getElementById('animationContainer');
+
+      if (imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+          const imageUrl = e.target.result;
+
+          // Create image element
+          const image = new Image();
+          image.src = imageUrl;
+          image.id = 'bouncingImage';
+          animationContainer.innerHTML = '';
+          animationContainer.appendChild(image);
+
+          // Hide the import button
+          imageInput.style.display = 'none';
+
+          // Start bouncing animation
+          bounceImage();
+        };
+
+        reader.readAsDataURL(imageInput.files[0]);
+      }
+    }
+
+    function bounceImage() {
+      const bouncingImage = document.getElementById('bouncingImage');
+      let x = 0;
+      let y = 0;
+      let xSpeed = 5;
+      let ySpeed = 5;
+      let cornerHit = false;
+      let originalTitle = document.title;
+      let cornerHitTitle = '';
+
+      function animate() {
+        x += xSpeed;
+        y += ySpeed;
+
+        if (x + bouncingImage.width >= window.innerWidth || x <= 0) {
+          xSpeed = -xSpeed;
+          x = Math.min(Math.max(x, 0), window.innerWidth - bouncingImage.width);
+          if (y <= 0 || y + bouncingImage.height >= window.innerHeight) {
+            cornerHit = true;
+            cornerHitTitle = `corner hit: (${x <= 0 ? 'left' : 'right'}, ${y <= 0 ? 'top' : 'bottom'})`;
+          }
+        }
+
+        if (y + bouncingImage.height >= window.innerHeight || y <= 0) {
+          ySpeed = -ySpeed;
+          y = Math.min(Math.max(y, 0), window.innerHeight - bouncingImage.height);
+          if (x <= 0 || x + bouncingImage.width >= window.innerWidth) {
+            cornerHit = true;
+            cornerHitTitle = `corner hit: (${x <= 0 ? 'left' : 'right'}, ${y <= 0 ? 'top' : 'bottom'})`;
+          }
+        }
+
+        bouncingImage.style.left = x + 'px';
+        bouncingImage.style.top = y + 'px';
+
+        if (cornerHit) {
+          document.title = cornerHitTitle;
+          setTimeout(() => {
+            document.title = originalTitle;
+            cornerHit = false;
+          }, 5000);
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+  </script>
+</body>
+</html>

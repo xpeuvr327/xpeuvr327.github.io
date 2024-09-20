@@ -1,0 +1,20 @@
+{
+  "name": "Page d'acceuil des Quiz",
+  "description": "API gratuite de quiz",
+  "questions": [
+    {
+      "question": "Découvre:",
+      "answers": [
+        "<a href=\"quiz.html?quiz=animaux\">Notre Quiz du jour</a>",
+        "<a href=\"quiz.html?quiz=test\">Le quiz de culture générale</a> (test)",
+        "La liste complète <a href=\"files\">des fichiers Quiz</a>",
+        "4e option",
+        "<a href=\"create.html\">Notre Créateur de Quiz</a>",
+        "<a href=\"../news.html\">L'article sur le quiz</a>"
+      ],
+      "correctAnswer": "3",
+      "explanation": "youtu.be/GidKaYjm63s allez cadeau"
+    }
+    
+  ]
+}

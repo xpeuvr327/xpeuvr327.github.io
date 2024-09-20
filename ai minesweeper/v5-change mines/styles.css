@@ -1,0 +1,37 @@
+#board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    gap: 1px;
+    border: 1px solid black;
+    width: 300px;
+    height: 300px;
+}
+
+.cell {
+    background-color: #ddd;
+    border: 1px solid #fff;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.cell.revealed {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.cell.mine {
+    background-color: #ddd;
+}
+
+.cell.flagged {
+    background-color: #ff0;
+}
+
+
+
+.cell.maybe {
+    background-color: #0ff;
+}

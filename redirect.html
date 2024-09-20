@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input[type="text"] {
+            width: 3ch;
+        }
+        input[type="text2"]{width: 5ch;}
+    </style>
+</head>
+<body>
+    <form>
+        <label for="inputBox1">192.168.</label>
+        <input type="text" id="inputBox1" name="inputBox1" maxlength="3">
+        <label for="inputBox2">.</label>
+        <input type="text" id="inputBox2" name="inputBox2" maxlength="3">
+        <label for="inputBox3">:</label>
+        <input type="text2" id="inputBox3" name="inputBox3" maxlength="5" placeholder="Port">
+        <label for="inputBox4">/</label>
+        <input type="text0" id="inputBox4" name="inputBox4" placeholder="Path">
+        <br><br>
+        <p id="urlPreview"></p>
+        <br>
+        <input type="button" value="ACCESS" onclick="redirect()">
+		
+    </form>
+
+    <script>
+	window.addEventListener('load', updatePreview);
+        function updatePreview() {
+            var input1 = document.getElementById('inputBox1').value;
+            var input2 = document.getElementById('inputBox2').value;
+            var input3 = document.getElementById('inputBox3').value;
+            var input4 = document.getElementById('inputBox4').value;
+            var url = 'http://192.168.' + input1 + '.' + input2;
+            if (input3) {
+                url += ':' + input3;
+            }
+            if (input4) {
+                url += '/' + input4;
+            }
+            document.getElementById('urlPreview').textContent = url;
+        }
+
+        function redirect() {
+            var input1 = document.getElementById('inputBox1').value;
+            var input2 = document.getElementById('inputBox2').value;
+            var input3 = document.getElementById('inputBox3').value;
+            var input4 = document.getElementById('inputBox4').value;
+            var url = 'http://192.168.' + input1 + '.' + input2;
+            if (input3) {
+                url += ':' + input3;
+            }
+            if (input4) {
+                url += '/' + input4;
+            }
+            window.location.href = url;
+        }
+
+        document.getElementById('inputBox1').addEventListener('input', updatePreview);
+        document.getElementById('inputBox2').addEventListener('input', updatePreview);
+        document.getElementById('inputBox3').addEventListener('input', updatePreview);
+        document.getElementById('inputBox4').addEventListener('input', updatePreview);
+    </script>
+</body>
+</html>

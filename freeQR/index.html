@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Generator</title>
+  <script src="qrcode.js"></script>
+  <script src="html2canvas.js"></script>
+</head>
+<body>
+  <h1>QR Code Generator</h1>
+
+  <input type="text" id="qrcode-text" placeholder="Enter text to encode">
+  <button onclick="generateQrCode()">Generate QR Code</button>
+
+  <div id="qrcode"></div>
+
+  <button onclick="downloadQrCode()">Download QR Code as PNG</button>
+<p><br>known issues: downloads as ${default-language}download <br>
+fix: rename to .png
+<br>
+issue: too many QRs<br>
+fix: hit f5
+<br>right click and save as</p>
+  <script>
+    function generateQrCode() {
+      var qrcodeText = document.getElementById("qrcode-text").value;
+      new QRCode(document.getElementById("qrcode"), qrcodeText);
+    }
+
+    function downloadQrCode() {
+      html2canvas(document.getElementById("qrcode")).then(function(canvas) {
+        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.location.href=image;
+      });
+    }
+  </script>
+</body>
+</html>

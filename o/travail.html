@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #console {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 20px;
+            height: 100px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Phone Number Extractor</h1>
+    <textarea id="inputText" rows="10" cols="50" placeholder="Paste your text here..."></textarea>
+    <br>
+    <button onclick="extractNumbers()">Extract Numbers</button>
+    <div id="results"></div>
+    <div id="console"></div>
+
+    <script>
+        let phoneNumbers = [];
+        let currentIndex = 0;
+
+        function extractNumbers() {
+            const inputText = document.getElementById('inputText').value;
+            const regex = /\+33\s?\d{1}\s?\d{2}\s?\d{2}\s?\d{2}\s?\d{2}/g;
+            phoneNumbers = inputText.match(regex) || [];
+            currentIndex = 0;
+
+            if (phoneNumbers.length > 0) {
+                displayNumber();
+                logConsole(`Extracted ${phoneNumbers.length} numbers.`);
+            } else {
+                logConsole("No numbers found.");
+            }
+        }
+
+        function displayNumber() {
+            if (phoneNumbers.length === 0) return;
+
+            const number = phoneNumbers[currentIndex].replace(/\s+/g, '');
+            const waLink = `https://wa.me/${number}?text=salut!%20je%20pourrais%20te%20demander%20souhaiter%20un%20joyeux%20anniv%20à%20bryan%20stp?%20si%20tu%20veux%20pas%20le%20faire,%20ne%20reponds%20pas%20au%20message.%20ecris%20juste%20"joyeux%20anniv%20bryan%20"%20avec%20un%20emoji%20si%20tu%20le%20veux,%20et%20je%20prendrai%20un%20screen.%20note,%20que%20ce%20msg%20sera%20supprimé%20pour%20moi.%20je%20peux%20t'envoyer%20une%20copie%20du%20screen%20et%20tu%20peux%20choisir%20si%20ton%20numéro%20sera%20flouté%20(il%20apparaitra%20moins%20d'⅕%20de%20seconde%20sur%20la%20video)`;
+            const resultDiv = document.getElementById('results');
+
+            resultDiv.innerHTML = `
+                <p>Number: ${number}</p>
+                <p>Total: ${phoneNumbers.length}</p>
+                <p>Current: ${currentIndex + 1} / ${phoneNumbers.length}</p>
+                <a href="${waLink}" target="_blank" id="waLink">${waLink}</a>
+                <br>
+                <button onclick="prevNumber()">Previous</button>
+                <button onclick="nextNumber()">Next</button>
+                <button onclick="importFile()">Import File</button>
+            `;
+        }
+
+        function prevNumber() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayNumber();
+            } else {
+                logConsole("No previous number.");
+            }
+        }
+
+        function nextNumber() {
+            if (currentIndex < phoneNumbers.length - 1) {
+                currentIndex++;
+                displayNumber();
+            } else {
+                logConsole("No next number.");
+            }
+        }
+
+        function importFile() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'text/plain';
+            input.onchange = (event) => {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('inputText').value = e.target.result;
+                    extractNumbers();
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function logConsole(message) {
+            const consoleDiv = document.getElementById('console');
+            const timestamp = new Date().toLocaleTimeString();
+            consoleDiv.innerHTML += `[${timestamp}] ${message}<br>`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+    </script>
+</body>
+</html>
+

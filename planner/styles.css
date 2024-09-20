@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.container {
+    max-width: 100%; /* Ensure the container takes up full width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow the buttons to wrap on smaller screens */
+}
+
+.nav-button, .action-button, .custom-file-upload {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin-bottom: 10px; /* Add margin for better spacing */
+}
+
+.nav-button:hover, .action-button:hover {
+    background-color: #0056b3;
+}
+
+.planner-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+    display: block; /* Make the table block-level for better scrolling */
+}
+
+.planner-table th, .planner-table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+    min-width: 100px; /* Ensure cells have a minimum width */
+}
+
+.planner-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Event-specific styles */
+.planner-table td.event {
+    background-color: #e6e6e6;
+    color: #000;
+    font-weight: bold;
+}
+
+.planner-table td:hover {
+    background-color: #c0c0c0;
+    cursor: pointer;
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-button, .action-button {
+        width: 100%; /* Full width for buttons on mobile */
+        text-align: center;
+    }
+}
+
+input[type="file"] {
+    display: none;
+}

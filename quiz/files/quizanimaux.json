@@ -1,0 +1,121 @@
+{
+  "name": "Quiz sur l'alimentation des animaux exotiques",
+  "description": "Fais ce test et envoie le résultat!",
+  "questions": [
+    {
+      "question": "Que mange un babouin?",
+      "answers": [
+        "Son ami",
+        "Son ennemi",
+        "Des insectes",
+"Des feuilles"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Les babouins ne sont pas cannibales"
+    },
+    {
+      "question": "Que mange un koala?",
+      "answers": [
+  
+        "Des fruits",
+        "Des insectes",
+      "Des feuilles d'eucalyptus",
+        "Des poissons"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Les koalas se nourrissent principalement de feuilles d'eucalyptus"
+    },
+    {
+      "question": "Que mange un panda géant?",
+      "answers": [
+        "Des bambous",
+        "Des viandes",
+        "Des fruits",
+        "Des insectes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Les pandas géants se nourrissent principalement de bambous"
+    },
+    {
+      "question": "Que mange un flamant rose?",
+      "answers": [
+        "Des crevettes",
+        "Des poissons",
+        "Des feuilles",
+        "Des insectes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Les flamants roses se nourrissent principalement de crevettes"
+    },
+    {
+      "question": "Que mange un ornithorynque?",
+      "answers": [
+   
+        "Des feuilles",
+     "Des insectes",
+        "Des poissons",
+        "Des fruits"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Les ornithorynques se nourrissent principalement d'insectes"
+    },
+    {
+      "question": "Que mange un léopard des neiges?",
+      "answers": [
+       
+        "Des feuilles",
+        "Des insectes",
+        "Des fruits", "Des petits mammifères"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Les léopards des neiges se nourrissent principalement de petits mammifères"
+    },
+    {
+      "question": "Que mange un kangourou?",
+      "answers": [
+        "Ses enfants",
+        "Des insectes",
+        "De l'herbe",
+        "Des poissons"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Les kangourous se nourrissent principalement d'herbe"
+    },
+    {
+      "question": "Que mange un tigre de Sibérie?",
+      "answers": [
+        "Des cerfs",
+        "Des feuilles",
+        "Des insectes",
+        "Des fruits secs donnés par les locaux",
+"La population locale elle-même"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Les tigres de Sibérie se nourrissent principalement de cerfs"
+    },
+    {
+      "question": "Que mange un lémurien?",
+      "answers": [
+        "De l'écorce",
+        "Des insectes",
+"Des fruits",
+        "Des crevettes",
+        "Des poissons"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Les lémuriens se nourrissent principalement de fruits"
+    },
+    {
+      "question": "Que mange un anaconda?",
+      "answers": [
+        "De sable",
+"Des petis mammifères",
+        "Des feuilles",
+        "Des insectes",
+        "Des graines"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Les anacondas se nourrissent principalement de petits mammifères"
+    }
+  ]
+}

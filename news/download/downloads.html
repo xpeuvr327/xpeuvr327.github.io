@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>download</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background: rgb(0,0,0);
+            background: linear-gradient(90deg, rgba(0,0,0,1) 9%, rgba(255,128,0,1) 45%);
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            color: #000;
+            text-decoration: none;
+        }
+        ol {
+            counter-reset: item;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            display: block;
+            margin-bottom: 10px;
+        }
+        li:before {
+            content: counters(item, ".") ". ";
+            counter-increment: item;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        
+    </div>
+    <div class="container">
+        <h1>téléchargements windows x64</h1>
+        <p>3.5 mbps</p>
+        <a href="../tutowii.html">revenir au tuto</a> <br> <br>
+        <ol>
+            <li><a href="7z.exe">7z</a></li>
+            <li><a href="WiiBackupManager_Build78.7z">Wii backup manager</a></li>
+			<li><a href="https://fr.dolphin-emu.org/download/">dolphin (officiel)</a></li>
+            <!-- Add more list items as needed -->
+        </ol>
+    </div>
+</body>
+</html>

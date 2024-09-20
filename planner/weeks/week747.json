@@ -1,0 +1,192 @@
+{
+  "days": [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi"
+  ],
+  "timeScheme":"sism",
+  "schedule": {
+    "Lundi": [
+      {
+        "period": 1,
+        "subject": "Physique",
+        "notes": "A117"
+      },
+      {
+        "period": 2,
+        "subject": "Physique ",
+        "notes": "A117"
+      },
+      {
+        "period": 3,
+        "subject": "Arts plastiques",
+        "notes": "B218"
+      },
+      {
+        "period": 4,
+        "subject": "Arts plastiques",
+        "notes": "B218"
+      },
+      {
+        "period": 7,
+        "subject": "Français ",
+        "notes": "BE17"
+      },
+      {
+        "period": 8,
+        "subject": "Français ",
+        "notes": "BE17"
+      },
+      {
+        "period": 9,
+        "subject": "Allemand",
+        "notes": "BE16"
+      }
+    ],
+    "Mardi": [
+      {
+        "period": 1,
+        "subject": "Français ",
+        "notes": "BE17"
+      },
+      {
+        "period": 2,
+        "subject": "Français ",
+        "notes": "BE17"
+      },
+      {
+        "period": 3,
+        "subject": "Math",
+        "notes": "C215"
+      },
+      {
+        "period": 4,
+        "subject": "Math",
+        "notes": "C215"
+      },
+      {
+        "period": 6,
+        "subject": "RG",
+        "notes": "C219"
+      },
+      {
+        "period": 7,
+        "subject": "Allemand ",
+        "notes": "C219"
+      },
+      {
+        "period": 8,
+        "subject": "Allemand",
+        "notes": "C219"
+      },
+      {
+        "period": 9,
+        "subject": "Anglais ",
+        "notes": "A111"
+      }
+    ],
+    "Mercredi": [
+      {
+        "period": 1,
+        "subject": "Éd. Ph. ",
+        "notes": "Gym C"
+      },
+      {
+        "period": 2,
+        "subject": "Éd. Ph.",
+        "notes": "Gym C"
+      },
+      {
+        "period": 3,
+        "subject": "Anglais ",
+        "notes": "A111"
+      },
+      {
+        "period": 4,
+        "subject": "Anglais ",
+        "notes": "A111"
+      },
+      {
+        "period": 5,
+        "subject": "DARS",
+        "notes": "C215"
+      }
+    ],
+    "Jeudi": [
+      {
+        "period": 1,
+        "subject": "Fr/Dict°",
+        "notes": "C119/Aula"
+      },
+      {
+        "period": 2,
+        "subject": "Français ",
+        "notes": "C119"
+      },
+      {
+        "period": 3,
+        "subject": "Math",
+        "notes": "C215"
+      },
+      {
+        "period": 4,
+        "subject": "Math",
+        "notes": "C215"
+      },
+      {
+        "period": 7,
+        "subject": "Histoire",
+        "notes": "B112"
+      },
+      {
+        "period": 8,
+        "subject": "Histoire",
+        "notes": "B112"
+      },
+      {
+        "period": 9,
+        "subject": "Chimie ",
+        "notes": "A218"
+      },
+      {
+        "period": 10,
+        "subject": "Chimie ",
+        "notes": "A218"
+      }
+    ],
+    "Vendredi": [
+      {
+        "period": 1,
+        "subject": "Droit",
+        "notes": "C115"
+      },
+      {
+        "period": 2,
+        "subject": "Droit",
+        "notes": "C115"
+      },
+      {
+        "period": 3,
+        "subject": "Informatique ",
+        "notes": "B116"
+      },
+      {
+        "period": 4,
+        "subject": "Informatique ",
+        "notes": "B116"
+      },
+      {
+        "period": 9,
+        "subject": "Histoire de l'art ",
+        "notes": "B219"
+      },
+      {
+        "period": 10,
+        "subject": "Histoire de l'art ",
+        "notes": "B219 "
+      }
+    ]
+  }
+}

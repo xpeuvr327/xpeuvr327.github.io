@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Démineur</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Démineur de l'IA</h1>
+    <!-- Ajouter un menu déroulant avec les options de 10, 20, 30 ou 40 mines -->
+    <label for="mines">Nombre de mines:</label>
+    <select id="mines" onchange="changeMines()">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+    </select>
+    <div id="board"></div>
+    <script src="game.js"></script>
+</body>
+</html>

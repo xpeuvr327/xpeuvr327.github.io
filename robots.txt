@@ -1,0 +1,6 @@
+User-agent : *
+Disallow: /fakecreds.html
+Disallow: /defi
+Disallow: /m
+Disallow: /o
+Disallow: /

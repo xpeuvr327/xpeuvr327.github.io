@@ -1,0 +1,17 @@
+{
+  "name": "es-tu le sigma que tu penses être ?",
+  "description": "seuls les vrais sigma pourront venir à bout de ce test impossible. effectue ce test pour savoir si tu es le sigma que tu penses / prétends être.",
+  "questions": [
+    {
+      "question": "es-tu un sigma?",
+      "answers": [
+        "oui🗿",
+        "Oui",
+        "non",
+        "4e option"
+      ],
+      "correctAnswer": 3,
+      "explanation": "tu n'es pas le sigma que tu prétends être🤥😔"
+    }
+  ]
+}

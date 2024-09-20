@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Screenshot v2b</title>
+</head>
+<body>
+    <input type="file" id="videoInput" accept="video/*">
+    <label for="frequency">Screenshot Frequency (seconds):</label>
+    <input type="number" id="frequency" min="1" step="1" value="1">
+    <label for="format">Output Format:</label>
+    <select id="format">
+        <option value="png">PNG</option>
+        <option value="jpeg">JPEG</option>
+    </select>
+    <button onclick="startScreenshot()">Start Screenshot</button>
+
+    <div id="screenshotContainer"></div>
+
+    <button id="downloadPackBtn" onclick="downloadPack()">Download Pack</button>
+    <span id="packCounter">0/0</span>
+    <button id="downloadZipBtn" onclick="downloadZip()">Download All (Zip)</button>
+
+    <script>
+        let screenshots = [];
+        let packNumber = 1;
+
+        function startScreenshot() {
+            const videoInput = document.getElementById('videoInput');
+            const frequency = parseInt(document.getElementById('frequency').value);
+            const format = document.getElementById('format').value;
+
+            if (!videoInput.files || !videoInput.files[0]) {
+                alert('Please select a video file.');
+                return;
+            }
+
+            const videoFile = videoInput.files[0];
+            const videoURL = URL.createObjectURL(videoFile);
+            const video = document.createElement('video');
+            video.src = videoURL;
+            video.crossOrigin = 'anonymous';
+
+            video.addEventListener('loadedmetadata', () => {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                const interval = setInterval(() => {
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const image = canvas.toDataURL(`image/${format}`);
+                    screenshots.push(image);
+
+                    const currentTime = video.currentTime;
+                    if (currentTime >= video.duration) {
+                        clearInterval(interval);
+                        updatePackCounter();
+                    } else {
+                        video.currentTime += frequency;
+                    }
+                }, frequency * 1000); // Convert seconds to milliseconds
+            });
+
+            video.load();
+            video.play();
+        }
+
+        function downloadPack() {
+            const start = (packNumber - 1) * 10;
+            const end = Math.min(packNumber * 10, screenshots.length);
+            const zip = new JSZip();
+            
+            for (let i = start; i < end; i++) {
+                const imgData = screenshots[i].split(';base64,')[1];
+                zip.file(`screenshot_${i + 1}.png`, imgData, {base64: true});
+            }
+            
+            zip.generateAsync({type:"blob"})
+               .then(function(content) {
+                    saveAs(content, `screenshot_pack_${packNumber}.zip`);
+            });
+
+            packNumber++;
+            updatePackCounter();
+        }
+
+        function downloadZip() {
+            const zip = new JSZip();
+
+            screenshots.forEach((screenshot, index) => {
+                const imgData = screenshot.split(';base64,')[1];
+                zip.file(`screenshot_${index + 1}.png`, imgData, {base64: true});
+            });
+
+            zip.generateAsync({type:"blob"})
+               .then(function(content) {
+                    saveAs(content, "all_screenshots.zip");
+            });
+        }
+
+        function updatePackCounter() {
+            const packCounter = document.getElementById('packCounter');
+            packCounter.textContent = `${(packNumber - 1) * 10}/${screenshots.length}`;
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body>
+</html>

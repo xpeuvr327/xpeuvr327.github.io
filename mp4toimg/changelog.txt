@@ -1,0 +1,35 @@
+================================================
+Old name - Changelog / Notes - What version it is based on - New name
+I'll modify the names in the pages another day
+(trashcan) indicates that it is in the trashcan folder and that there is no point in using them
+================================================
+v1-works - First version, works by right clicking images and selecting "Saving image as" - None - v1-works
+v2-fasterprocessmaybe  - Restored from .bak file, doesn't change anything useful - v1 - v2 (trashcan)
+v2a-playbackspdchg - Is definitely broken, 1st added playback speed - previous - v2.1 (trashcan)
+v2b-download - Added download all and download by packs of 10, the 10 pack download is useless - v2 - v3
+v2c-generalQOLupg - General quality of life upgrade, added ETA, % and mute option, how it works is super legacy: video plays and there are screenshots - previous - v3.1
+v2d-betterv2c - added show preview option - previous - v3.2
+v2e-backendrework - added playback speed and fast mode (fast mode just doubles plaback speed) there is no download button :/ - previous - v4-fastmodebutmissingdownloads (trashcan)
+v4.1-fastmode - basically v4 but with a div added so we can download it NVM too much work so abandonned - previous - v4.1-fastmode (trashcan)
+v2f-inal - thought it was the final one but there was tons of small fixes, plus it's not the original v2f, since css styles were added - previous - v5-Styles
+v2f.1-test - test but I don't remember of what - previous - v5.1-experimental (trashcan)
+v2f.2-smallchange - it reorganises the variables (backend), and the packets count are now fixed (previously, it just added 10, now it's fixed by adding 10, but when it comes to the end it stops) but the 10pack are just blank zip files and the video plays automatically so it's deleted - previous - v5.2-10packcountfix (trashcan)
+v2g-slider - Added a slider for changing fastiness but is completely broken - v5 - v6-slider (trashcan)
+v2h-onlydldall - Removed 10 pack download since they don't work anymore - v5.2 - v7-removedDowload
+================================================
+now things start to get crazy
+v2h is v7
+v2h.X are v2h based
+v2h.3.X are v2h.3 based
+v2h.3.1b is v2h.3 based, not v2h.3.1
+================================================
+v2h.1-TOOfastFASTmode - browser limit playback speed but it is indeed too fast and only captures one frame removed playback speed option- previous - v7.1-SuperFastMode (trashcan)
+v2h.2-fixedv2h.1 - fixed the previous version by adding some dark magic script (that doesn't work yet) btw the ui says mute but the js logic wasn't implemented yet added reverse too - previous - v7.2-importantUpdate (trashcan)
+v2h.3-WORKSsuperWELL - took v7.2 promises and made them real added help section at the end - previous - v8-stableRelease
+v2h.3.1-addingQUALITY - added quality factor but doesn't work - previous - v8.1-qualityFactor (trashcan)
+v2h.1b-defaults - fresh start, alternative branch of v2h. there was too many bugs. basically the same as v2h but with changed default parameters - v7 - v9-Works
+v2h.1b.1-infotxt - adds a info.txt file to the zip folder. will probably be the last one... - previous - v9.1-info
+================================================
+Name - Changelog / Notes - What version it is based on (only if not based on previous one)
+v9.2 - trying to avoid duplicates by hashing the frames
+v9.3 - starting from scratch to avoid duplicates - v9.1
