@@ -12,7 +12,7 @@ def create_dir_listing(root_dir):
             index_file.write('<title>Liste du répertoire</title>\n')
             index_file.write('</head>\n')
             index_file.write('<body>\n')
-            index_file.write(f'<h1>Liste des fichiers dans {os.path.basename(dirpath)}</h1>\n')
+            index_file.write(f'<h1>Directory Listing de {os.path.basename(dirpath)}</h1>\n')
             index_file.write('<ul>\n')
 
             # Add link to the parent directory
