@@ -1,0 +1,82 @@
+<head>
+<style>:root {
+    --accent-color: #007bff;
+    --background-color: #f7f9fc;
+    --text-color: #333;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Update button and other accent styles */
+.nav-button, .action-button, .custom-file-upload {
+    background-color: var(--accent-color);
+}
+
+/* Dark theme */
+body.dark-mode {
+    --background-color: #333;
+    --text-color: #f7f9fc;
+}
+
+/* Dark mode specific button colors */
+body.dark-mode .nav-button,
+body.dark-mode .action-button,
+body.dark-mode .custom-file-upload {
+    background-color: var(--accent-color);
+}
+
+/* Additional dark mode specific styles as needed */
+</style>
+</head>
+<body>
+<div class="settings">
+    <label for="colorPicker" class="action-button">Choose Accent Color</label>
+    <input type="color" id="colorPicker" class="upload-input" value="#007bff" style="display:none;">
+    
+    <label for="themeToggle" class="action-button">Dark Mode</label>
+    <input type="checkbox" id="themeToggle" class="upload-input">
+</div>
+<script>
+// On window load, set the theme and accent color from localStorage
+window.onload = function() {
+    const savedAccentColor = localStorage.getItem('accentColor');
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    // Apply saved accent color
+    if (savedAccentColor) {
+        document.documentElement.style.setProperty('--accent-color', savedAccentColor);
+        document.getElementById('colorPicker').value = savedAccentColor;
+    }
+
+    // Apply saved dark mode setting
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        document.getElementById('themeToggle').checked = true;
+    }
+
+    loadWeek(currentWeek);
+    loadProfiles();
+};
+
+// Color picker logic
+document.getElementById('colorPicker').addEventListener('input', function() {
+    const selectedColor = this.value;
+    document.documentElement.style.setProperty('--accent-color', selectedColor);
+    localStorage.setItem('accentColor', selectedColor); // Save to localStorage
+});
+
+// Dark mode toggle logic
+document.getElementById('themeToggle').addEventListener('change', function() {
+    if (this.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'true');
+    } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'false');
+    }
+});
+</script>
+</body>
