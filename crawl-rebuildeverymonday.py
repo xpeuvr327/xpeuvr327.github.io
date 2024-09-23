@@ -1,6 +1,6 @@
 import os
 
-def create_dir_listing(root_dir, ignore_list):
+def create_dir_listing(root_dir, ignore_list, ignore_extensions):
     for dirpath, dirnames, filenames in os.walk(root_dir):
         # Remove ignored directories from dirnames
         dirnames[:] = [d for d in dirnames if d not in ignore_list]
@@ -30,8 +30,11 @@ def create_dir_listing(root_dir, ignore_list):
 
             # Add files
             for filename in filenames:
-                if filename not in ignore_list and filename != 'crawlindex.html':  # Skip ignored files and index.html
-                    index_file.write(f'<li><a href="{filename}">{filename}</a></li>\n')
+                if filename not in ignore_list and filename != 'crawlindex.html':
+                    # Check if the file extension is in the ignore_extensions list
+                    file_extension = os.path.splitext(filename)[1]
+                    if file_extension not in ignore_extensions:
+                        index_file.write(f'<li><a href="{filename}">{filename}</a></li>\n')
 
             index_file.write('</ul>\n')
             index_file.write('</body>\n')
@@ -39,6 +42,7 @@ def create_dir_listing(root_dir, ignore_list):
 
 if __name__ == "__main__":
     root_directory = os.getcwd()  # Use the current working directory as the root directory
-    ignore_files = ['.git', '.DS_Store', '__pycache__']  # Add your ignored files/directories here
-    create_dir_listing(root_directory, ignore_files)
+    ignore_files = ['.git', '.DS_Store', '__pycache__', '.gitignore', '404.md']  # Add your ignored files/directories here
+    ignore_extensions = ['.log', '.tmp', '.bak', '.bat', '.py']  # Add your ignored file extensions here
+    create_dir_listing(root_directory, ignore_files, ignore_extensions)
     print("Directory listing created successfully.")
