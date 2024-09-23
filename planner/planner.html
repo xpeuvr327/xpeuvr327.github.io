@@ -28,6 +28,7 @@
                     <input type="submit" value="Aller à ce planning" class="nav-button">
                 </form>
             </div>
+            <button id="toggleDarkMode" class="action-button">Thème sombre</button>
         </div>
         <table id="planner" class="planner-table"></table>
         <br>
@@ -42,6 +43,21 @@
                 document.getElementById('uploadJson').click();
             }
         });
+
+        // Dark mode toggle functionality
+        document.getElementById('toggleDarkMode').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Check local storage for dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
     </script>
 </body>
 </html>
