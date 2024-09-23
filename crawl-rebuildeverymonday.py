@@ -1,7 +1,10 @@
 import os
 
-def create_dir_listing(root_dir):
+def create_dir_listing(root_dir, ignore_list):
     for dirpath, dirnames, filenames in os.walk(root_dir):
+        # Remove ignored directories from dirnames
+        dirnames[:] = [d for d in dirnames if d not in ignore_list]
+
         # Create the index.html file in the current directory
         index_path = os.path.join(dirpath, 'crawlindex.html')
         with open(index_path, 'w', encoding='utf-8') as index_file:
@@ -27,7 +30,7 @@ def create_dir_listing(root_dir):
 
             # Add files
             for filename in filenames:
-                if filename != 'crawlindex.html':  # Skip the index.html file itself
+                if filename not in ignore_list and filename != 'crawlindex.html':  # Skip ignored files and index.html
                     index_file.write(f'<li><a href="{filename}">{filename}</a></li>\n')
 
             index_file.write('</ul>\n')
@@ -36,5 +39,6 @@ def create_dir_listing(root_dir):
 
 if __name__ == "__main__":
     root_directory = os.getcwd()  # Use the current working directory as the root directory
-    create_dir_listing(root_directory)
+    ignore_files = ['.git', '.DS_Store', '__pycache__']  # Add your ignored files/directories here
+    create_dir_listing(root_directory, ignore_files)
     print("Directory listing created successfully.")
