@@ -1,3 +1,13 @@
 git add .
-git commit -m "some update"
-git push origin main
+
+echo 'Message du commit:'
+read commitMessage
+
+git commit -m "$commitMessage"
+
+echo 'Nom de la branche (main):'
+read branch
+
+git push origin $branch
+
+read
