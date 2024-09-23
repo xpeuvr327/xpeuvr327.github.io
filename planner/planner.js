@@ -8,10 +8,7 @@ window.onload = function() {
         currentWeek = parseInt(weekParam, 10);
     } else {
         // Calculate the week number based on the current date
-        const startDate = new Date('2024-08-26');
-        const currentDate = new Date();
-        const diffInDays = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
-        currentWeek = Math.ceil(diffInDays / 7);
+        currentWeek = weeksBetweenDates('2024-08-26');
     }
 
     loadProfiles();
@@ -34,6 +31,18 @@ window.onload = function() {
         console.log(currentWeek);
     });
 };
+function weeksBetweenDates(date) {
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const firstDate = new Date(date);
+    const secondDate = new Date();
+
+    const diffDays = Math.ceil(Math.abs((firstDate - secondDate) / oneDay));
+    const diffWeeks = Math.ceil(diffDays / 7);
+
+    return diffWeeks;
+}
+
+console.log(weeksBetweenDates('2024-08-26')); // replace with your date
 
 function loadWeek(week) {
     fetch(`weeks/week${week < 10 ? '0' + week : week}.json`)
