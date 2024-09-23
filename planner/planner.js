@@ -1,5 +1,3 @@
-let currentWeek = 1;
-
 window.onload = function() {
     // Parse the query parameter to get the initial week
     const urlParams = new URLSearchParams(window.location.search);
@@ -17,7 +15,8 @@ window.onload = function() {
     if (!urlParams.get('profile')) {
         loadWeek(currentWeek);
     }
-        // Add event listeners for navigation buttons
+
+    // Add event listeners for navigation buttons
     document.getElementById('prevWeek').addEventListener('click', function() {
         if (currentWeek > 1) {
             currentWeek--;
@@ -30,7 +29,26 @@ window.onload = function() {
         loadWeek(currentWeek);
         console.log(currentWeek);
     });
+
+    // Add event listener for file upload
+    document.getElementById('uploadJson').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    sessionStorage.setItem(`week${currentWeek}`, JSON.stringify(data));
+                    displayPlanner(data);
+                } catch (error) {
+                    console.error('Error parsing JSON file:', error);
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
 };
+
 function weeksBetweenDates(date) {
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const firstDate = new Date(date);
@@ -223,17 +241,17 @@ function loadProfiles() {
                 selectElement.value = profileParam;
             }
 
-// Add event listener to update URL when a profile is selected
-selectElement.addEventListener('change', function() {
-    const selectedProfile = selectElement.value;
-    if (selectedProfile) {
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.set('week', selectedProfile);
-        window.history.pushState({}, '', newUrl);
-        currentWeek = parseInt(selectedProfile, 10);
-        loadWeek(currentWeek);
-    }
-});
+            // Add event listener to update URL when a profile is selected
+            selectElement.addEventListener('change', function() {
+                const selectedProfile = selectElement.value;
+                if (selectedProfile) {
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('week', selectedProfile);
+                    window.history.pushState({}, '', newUrl);
+                    currentWeek = parseInt(selectedProfile, 10);
+                    loadWeek(currentWeek);
+                }
+            });
 
         })
         .catch(error => {
