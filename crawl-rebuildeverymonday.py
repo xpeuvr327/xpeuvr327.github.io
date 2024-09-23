@@ -42,7 +42,7 @@ def create_dir_listing(root_dir, ignore_list, ignore_extensions):
 
 if __name__ == "__main__":
     root_directory = os.getcwd()  # Use the current working directory as the root directory
-    ignore_files = ['.git', '.DS_Store', '__pycache__', '.gitignore', '404.md']  # Add your ignored files/directories here
-    ignore_extensions = ['.log', '.tmp', '.bak', '.bat', '.py']  # Add your ignored file extensions here
+    ignore_files = ['.git', '.DS_Store', '__pycache__', '.gitignore', '404.md', 'presentation']  # Add your ignored files/directories here
+    ignore_extensions = ['.log', '.tmp', '.bak', '.bat', '.py', '.ps1']  # Add your ignored file extensions here
     create_dir_listing(root_directory, ignore_files, ignore_extensions)
     print("Directory listing created successfully.")
