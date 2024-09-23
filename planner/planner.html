@@ -17,7 +17,7 @@
             <button id="nextWeek" class="nav-button">Voir sem. prochaine</button>
             <button id="createEvent" class="action-button">Ajouter un évènement (temporaire)</button>
             <input type="file" id="uploadJson" accept=".json" class="upload-input">
-            <label for="uploadJson" class="custom-file-upload">
+            <label for="uploadJson" class="custom-file-upload" tabindex="0">
                 <i class="fa fa-cloud-upload"></i>Choisir un fichier de Planning
             </label>
             <div id="listContent">
@@ -36,5 +36,12 @@
     </div>
 
     <script src="planner.js"></script>
+    <script>
+        document.querySelector('.custom-file-upload').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('uploadJson').click();
+            }
+        });
+    </script>
 </body>
 </html>
