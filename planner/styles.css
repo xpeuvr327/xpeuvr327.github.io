@@ -7,11 +7,6 @@ body {
     overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
-body.dark-mode {
-    background-color: #121212;
-    color: #ffffff;
-}
-
 .container {
     max-width: 100%; /* Ensure the container takes up full width */
     margin: 0 auto; /* Center the container */
@@ -21,11 +16,6 @@ body.dark-mode {
     border-radius: 8px;
     min-height: 100vh; /* Ensure the container takes up the full height of the viewport */
     box-sizing: border-box;
-}
-
-.container.dark-mode {
-    background-color: #1e1e1e;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 .header {
