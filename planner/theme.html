@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
+	<link rel="x-ico">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,7 +50,6 @@
         }
 
         .nav-button,
-        .action-button,
         .custom-file-upload {
             background-color: #007bff;
             color: #ffffff;
@@ -63,8 +63,7 @@
             /* Add margin for better spacing */
         }
 
-        .nav-button:hover,
-        .action-button:hover {
+        .nav-button:hover {
             background-color: #0056b3;
         }
 
@@ -110,8 +109,7 @@
                 align-items: center;
             }
 
-            .nav-button,
-            .action-button {
+            .nav-button {
                 width: 100%;
                 /* Full width for buttons on mobile */
                 text-align: center;
@@ -135,7 +133,6 @@
 
         /* Update button and other accent styles */
         .nav-button,
-        .action-button,
         .custom-file-upload {
             background-color: var(--accent-color);
         }
@@ -148,12 +145,9 @@
 
         /* Dark mode specific button colors */
         body.dark-mode .nav-button,
-        body.dark-mode .action-button,
         body.dark-mode .custom-file-upload {
             background-color: var(--accent-color);
         }
-
-        /* Additional dark mode specific styles as needed */
     </style>
 </head>
 
@@ -166,7 +160,7 @@
         <div class="header">
             <button id="prevWeek" class="nav-button">Voir sem. avant</button>
             <button id="nextWeek" class="nav-button">Voir sem. prochaine</button>
-            <button id="createEvent" class="action-button">Ajouter un évènement (temporaire)</button>
+            <button id="createEvent" class="nav-button">Ajouter un évènement (temporaire)</button>
             <input type="file" id="uploadJson" accept=".json" class="upload-input">
             <label for="uploadJson" class="custom-file-upload" tabindex="0">
                 <i class="fa fa-cloud-upload"></i>Choisir un fichier de Planning
@@ -182,18 +176,16 @@
         </div>
         <table id="planner" class="planner-table"></table>
         <br>
-        <button id="downloadUpdatedJson" class="action-button">télécharger le planning tel qu'on le voit (va aller dans
+        <button id="downloadUpdatedJson" class="nav-button">télécharger le planning tel qu'on le voit (va aller dans
             "choisir un fichier planning")</button>
-        <a style="text-decoration:none" href="view.html" class="action-button">Horaires uniquement</a>
-    </div>
-    <div class="settings">
-        <label for="colorPicker" class="action-button">Changer la couleur</label>
+        <a style="text-decoration:none" href="view.html" class="nav-button">Horaires uniquement</a>
+
+        <label for="colorPicker" class="nav-button">Changer la couleur</label>
         <input type="color" id="colorPicker" class="upload-input" value="#007bff" style="display:none;">
 
-        <label for="themeToggle" class="action-button">Thèmr sombre</label>
-        <input type="checkbox" id="themeToggle" class="upload-input" style="display:none;">
-    </div>
-    <script src="planner.js"></script><script>
+        <label for="themeToggle" class="nav-button">Thème sombre</label>
+        <input type="checkbox" id="themeToggle" class="upload-input" style="display:none;">    </div>
+<script>
         document.querySelector('.custom-file-upload').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 document.getElementById('uploadJson').click();
@@ -216,29 +208,331 @@
                 document.getElementById('themeToggle').checked = true;
             }
 
-            loadWeek(currentWeek);
-            loadProfiles();
-        };
-
-        // Color picker logic
-        document.getElementById('colorPicker').addEventListener('input', function () {
-            const selectedColor = this.value;
-            document.documentElement.style.setProperty('--accent-color', selectedColor);
-            localStorage.setItem('accentColor', selectedColor); // Save to localStorage
-        });
-
-        // Dark mode toggle logic
-        document.getElementById('themeToggle').addEventListener('change', function () {
-            if (this.checked) {
-                document.body.classList.add('dark-mode');
-                document.getElementById("container").classList.add("dark-mode")
-                localStorage.setItem('darkMode', 'true');
+            // Parse the query parameter to get the initial week
+            const urlParams = new URLSearchParams(window.location.search);
+            const weekParam = urlParams.get('week');
+            if (weekParam) {
+                currentWeek = parseInt(weekParam, 10);
             } else {
-                document.body.classList.remove('dark-mode');
-                document.getElementById("container").classList.remove("dark-mode")
-                localStorage.setItem('darkMode', 'false');
+                // Calculate the week number based on the current date
+                currentWeek = weeksBetweenDates('2024-08-26');
+            }
+
+            loadProfiles();
+
+            // Load the default week only if no profile is selected
+            if (!urlParams.get('profile')) {
+                loadWeek(currentWeek);
+            }
+
+            // Add event listeners for navigation buttons
+            document.getElementById('prevWeek').addEventListener('click', function () {
+                if (currentWeek > 1) {
+                    currentWeek--;
+                    loadWeek(currentWeek);
+                }
+            });
+
+            document.getElementById('nextWeek').addEventListener('click', function () {
+                currentWeek++;
+                loadWeek(currentWeek);
+            });
+
+            // Add event listener for file upload
+            document.getElementById('uploadJson').addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            sessionStorage.setItem(`week${currentWeek}`, JSON.stringify(data));
+                            displayPlanner(data);
+                        } catch (error) {
+                            console.error('Error parsing JSON file:', error);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            });
+
+            // Color picker logic
+            document.getElementById('colorPicker').addEventListener('input', function () {
+                const selectedColor = this.value;
+                document.documentElement.style.setProperty('--accent-color', selectedColor);
+                localStorage.setItem('accentColor', selectedColor); // Save to localStorage
+
+                // Update the color of the headers
+                document.querySelectorAll('.planner-table th').forEach(header => {
+                    header.style.backgroundColor = selectedColor;
+                });
+            });
+
+            // Dark mode toggle logic
+            document.getElementById('themeToggle').addEventListener('change', function () {
+                if (this.checked) {
+                    document.body.classList.add('dark-mode');
+                    document.getElementById("container").classList.add("dark-mode")
+                    localStorage.setItem('darkMode', 'true');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.getElementById("container").classList.remove("dark-mode")
+                    localStorage.setItem('darkMode', 'false');
+                }
+            });
+			// Apply the lighter color on hover for nav-button
+			document.querySelectorAll('.nav-button').forEach(button => {
+			button.addEventListener('mouseenter', function() {
+			const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+			this.style.backgroundColor = lightenColor(accentColor, 10);
+			});
+			button.addEventListener('mouseleave', function() {
+				this.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+			});
+});
+	
+document.getElementById('colorPicker').addEventListener('input', function() {
+    const selectedColor = this.value;
+    document.documentElement.style.setProperty('--accent-color', selectedColor);
+    localStorage.setItem('accentColor', selectedColor); // Save to localStorage
+
+    // Update the color of the headers
+    document.querySelectorAll('.planner-table th').forEach(header => {
+        header.style.backgroundColor = selectedColor;
+    });
+});
+
+        };
+function weeksBetweenDates(date) {
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const firstDate = new Date(date);
+    const secondDate = new Date();
+
+    const diffDays = Math.ceil(Math.abs((firstDate - secondDate) / oneDay));
+    const diffWeeks = Math.ceil(diffDays / 7);
+
+    return diffWeeks;
+}
+
+function loadWeek(week) {
+    fetch(`weeks/week${week < 10 ? '0' + week : week}.json`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            sessionStorage.setItem(`week${week}`, JSON.stringify(data));
+            console.log(`Week ${week} data loaded from JSON:`, data);
+            displayPlanner(data);
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            // Ask for confirmation before generating new week data
+            if (confirm('Voulez-vous créer une nouvelle semaine? (Reset après reload)')) {
+                // Get the current timeScheme from the last loaded week data
+                const lastWeekData = JSON.parse(sessionStorage.getItem(`week${week - 1}`));
+                const timeScheme = lastWeekData ? lastWeekData.timeScheme : null;
+
+                // Generate new week data with the current timeScheme
+                const newWeekData = generateNewWeekData(week, timeScheme);
+                sessionStorage.setItem(`week${week}`, JSON.stringify(newWeekData));
+                displayPlanner(newWeekData);
             }
         });
+}
+
+
+function generateNewWeekData(week, timeScheme) {
+    const startDate = new Date('2024-08-26');
+    startDate.setDate(startDate.getDate() + (week - 1) * 7);
+
+    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+    const newWeekDays = [];
+
+    for (let i = 0; i < days.length; i++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + i);
+        newWeekDays.push(`${days[i]} ${currentDate.getDate()}`);
+    }
+
+    const schedule = {};
+    newWeekDays.forEach(day => {
+        schedule[day] = [];
+    });
+
+    return {
+        days: newWeekDays,
+        schedule: schedule,
+        timeScheme: timeScheme // Add the timeScheme to the new week data
+    };
+}
+
+
+function displayPlanner(data) {
+    let table = document.getElementById('planner');
+    table.innerHTML = '';
+
+    // Create table headers
+    let headerRow = document.createElement('tr');
+    let header = document.createElement('th');
+    header.textContent = 'Heure/Jour';
+    headerRow.appendChild(header);
+    for(let day of data.days) {
+        header = document.createElement('th');
+        header.textContent = day;
+        headerRow.appendChild(header);
+    }
+    table.appendChild(headerRow);
+
+    // Create table data
+    for(let i = 0; i < 11; i++) {
+        let row = document.createElement('tr');
+        let cell = document.createElement('td');
+        cell.textContent = `Heure ${i + 1}`;
+        row.appendChild(cell);
+        for(let day of data.days) {
+            cell = document.createElement('td');
+            cell.id = day.toLowerCase() + (i + 1);
+            if(data.schedule[day]) {
+                let event = data.schedule[day].find(e => e.period === i + 1);
+                if(event) {
+                    cell.textContent = `${event.subject} - ${event.notes}`;
+                }
+            }
+            // Add event listener to the cell
+            cell.addEventListener('click', function() {
+                let period = i + 1;
+                let subject = prompt('Entrez le sujet de l\'événement');
+                if (subject === null) {
+                    return; // User clicked cancel, do nothing
+                }
+                let notes = prompt('Entrez des notes pour l\'événement');
+
+                let event = {
+                    period: period,
+                    subject: subject,
+                    notes: notes
+                };
+
+                if (!data.schedule[day]) {
+                    data.schedule[day] = [];
+                }
+
+                // Find the index of the existing event for the specified period
+                let eventIndex = data.schedule[day].findIndex(e => e.period === event.period);
+
+                if (eventIndex !== -1) {
+                    // Update the existing event
+                    data.schedule[day][eventIndex] = event;
+                } else {
+                    // Add the new event
+                    data.schedule[day].push(event);
+                }
+
+                sessionStorage.setItem(`week${currentWeek}`, JSON.stringify(data));
+                console.log(`Event created/updated for week ${currentWeek}:`, data);
+                displayPlanner(data);
+            });
+            row.appendChild(cell);
+        }
+        table.appendChild(row);
+    }
+
+    // Add time display feature
+    if (data.timeScheme) {
+        fetch(`time${data.timeScheme}.json`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(timeData => {
+                for (let i = 0; i < timeData.times.length; i++) {
+                    // Select the first column of each row (i.e., the 'Heure' column)
+                    let heureCell = document.querySelector(`tr:nth-child(${i + 2}) td:first-child`);
+
+                    // Prevent duplicate time display by checking if the time is already added
+                    if (heureCell && !heureCell.dataset.timeAdded) {
+                        heureCell.innerHTML += `<br>${timeData.times[i].start} - ${timeData.times[i].end}`;
+                        heureCell.setAttribute('data-time-added', 'true');
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+}
+
+
+function loadProfiles() {
+    fetch('profiles.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(profiles => {
+            const selectElement = document.getElementById('nameSelect');
+            selectElement.innerHTML = ''; // Clear existing options
+
+            // Add a default option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Choisissez un profil';
+            selectElement.appendChild(defaultOption);
+
+            // Add profile options
+            profiles.forEach(profile => {
+                const option = document.createElement('option');
+                option.value = profile.value;
+                option.textContent = profile.name;
+                selectElement.appendChild(option);
+            });
+
+            // Set the current profile based on the query parameter or default
+            const urlParams = new URLSearchParams(window.location.search);
+            const profileParam = urlParams.get('week');
+            if (profileParam) {
+                selectElement.value = profileParam;
+            }
+
+            // Add event listener to update URL when a profile is selected
+            selectElement.addEventListener('change', function() {
+                const selectedProfile = selectElement.value;
+                if (selectedProfile) {
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('week', selectedProfile);
+                    window.history.pushState({}, '', newUrl);
+                    currentWeek = parseInt(selectedProfile, 10);
+                    loadWeek(currentWeek);
+                }
+            });
+
+        })
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+}
+
+document.getElementById('downloadUpdatedJson').addEventListener('click', function() {
+    const data = JSON.parse(sessionStorage.getItem(`week${currentWeek}`));
+    const jsonString = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`;
+    const link = document.createElement('a');
+    link.href = jsonString;
+    link.download = `week${currentWeek}.json`;
+    link.click();
+});
+// Function to calculate a lighter color
+function lightenColor(color, percent) {
+    var num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, G = (num >> 8 & 0x00FF) + amt, B = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (G<255?G<1?0:G:255)*0x100 + (B<255?B<1?0:B:255)).toString(16).slice(1);
+}
+
     </script>
 
 </html>

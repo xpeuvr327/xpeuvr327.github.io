@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="general-styles.css">
+</head>
+<body>
+
+<h2>Calculate Percentage of White Spaces</h2>
+
+<label for="inputText">Enter your text:</label><br>
+<textarea id="inputText" rows="4" cols="50"></textarea><br>
+<button onclick="calculateSpacePercentage()">Calculate</button>
+
+<p id="result"></p>
+
+<script>
+function calculateSpacePercentage() {
+  var inputText = document.getElementById('inputText').value;
+  var totalChars = inputText.length;
+  var totalSpaces = (inputText.split(" ").length - 1);
+  var spacePercentage = (totalSpaces / totalChars) * 100;
+
+  document.getElementById('result').innerHTML = "The percentage of white spaces is: " + spacePercentage.toFixed(2) + "%";
+}
+</script>
+
+</body>
+</html>
