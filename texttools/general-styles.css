@@ -81,4 +81,5 @@ textarea:not(#output) {
   box-sizing: border-box;
   resize: vertical; /* Allow vertical resizing */
   max-height: calc(1.5em * 5); /* Limit to five rows */
+  overflow: hidden;
 }
