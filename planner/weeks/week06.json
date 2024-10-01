@@ -1,16 +1,1 @@
-{
-  "days": [
-    "Lundi 30",
-    "Mardi 1",
-    "Mercredi 2",
-    "Jeudi 3",
-    "Vendredi 4"
-  ],    "timeScheme":"sism",
-  "schedule": {
-    "Lundi 30": [],
-    "Mardi 1": [],
-    "Mercredi 2": [],
-    "Jeudi 3": [],
-    "Vendredi 4": []
-  }
-}
+{"days":["Lundi","Mardi","Mercredi","Jeudi","Vendredi"],"timeScheme":"sism","schedule":{"Lundi":[{"period":6,"subject":"Allemand","notes":"A211"},{"period":7,"subject":"Physique","notes":"A119"},{"period":8,"subject":"Physique","notes":"A119"},{"period":9,"subject":"Arts plastiques","notes":"B214"},{"period":10,"subject":"Arts plastiques","notes":"B214"}],"Mardi":[{"period":1,"subject":"Français ","notes":"BE16"},{"period":2,"subject":"Français","notes":"BE16"},{"period":3,"subject":"Math","notes":"BE17"},{"period":4,"subject":"Math","notes":"BE17"},{"period":7,"subject":"Chimie","notes":"A217"},{"period":8,"subject":"Chimie","notes":"A217"},{"period":9,"subject":"Informatique","notes":"B114"},{"period":10,"subject":"Informatique ","notes":"B114"}],"Mercredi":[{"period":1,"subject":"Éd. Ph. ","notes":"Gym C"},{"period":2,"subject":"Éd. Ph. ","notes":"Gym C"},{"period":3,"subject":"Français","notes":"BE16"},{"period":4,"subject":"Français","notes":"BE16"},{"period":5,"subject":"DARS","notes":"C218"}],"Jeudi":[{"period":3,"subject":"Français ","notes":"BE16 "},{"period":4,"subject":"Français ","notes":"BE16 "},{"period":1,"subject":"Histoire","notes":"C218"},{"period":2,"subject":"Histoire","notes":"C218"},{"period":6,"subject":"RG","notes":"A211"},{"period":7,"subject":"Allemand","notes":"DUDEN s100-107, WiTe K2"},{"period":8,"subject":"Allemand","notes":"A211"},{"period":9,"subject":"Anglais","notes":"pages 7, 84, 85 WB"},{"period":10,"subject":"Anglais","notes":"B219"}],"Vendredi":[{"period":3,"subject":"Droit","notes":"Relire cours classroom, poser questions, lire pages 16-19 \"principes de base\""},{"period":4,"subject":"Droit","notes":"C116"},{"period":5,"subject":"Anglais","notes":"B219"},{"period":7,"subject":"Math","notes":"BE17"},{"period":8,"subject":"Math","notes":"BE17"}]}}
