@@ -1,16 +1,1 @@
-{
-  "days": [
-    "Lundi 7",
-    "Mardi 8",
-    "Mercredi 9",
-    "Jeudi 10",
-    "Vendredi 11"
-  ],"timeScheme":"sism",
-  "schedule": {
-    "Lundi 7": [],
-    "Mardi 8": [],
-    "Mercredi 9": [],
-    "Jeudi 10": [],
-    "Vendredi 11": []
-  }
-}
+{"days":["Lundi 7","Mardi 8","Mercredi 9","Jeudi 10","Vendredi 11"],"timeScheme":"sism","schedule":{"Lundi 7":[{"period":9,"subject":"AV","notes":"dessin one line"}],"Mardi 8":[{"period":7,"subject":"chimie","notes":"éval: clsrm"},{"period":1,"subject":"fr","notes":"commentaire composé"}],"Mercredi 9":[{"period":1,"subject":"fr","notes":"commencer à lire nvls orientales"}],"Jeudi 10":[{"period":9,"subject":"anglais","notes":"test unit1: R/W, grammar"}],"Vendredi 11":[{"period":3,"subject":"droit","notes":"épreuve clsrm"}]}}
