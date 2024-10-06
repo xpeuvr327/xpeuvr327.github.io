@@ -21,7 +21,7 @@ FIXED new feature: "keybord zone" : alphanumerical (normal),ascii only, numerica
 FIXED non ascii to french (sha 256)
 FIXED copied to clipboard in french (sha 256)
 FIXED add copy to clipboard in textbox.html
-TODO add help to arrayfier and rand emoji gen
+FIXED add help to arrayfier and rand emoji gen
 FIXED random emoji generator
 FIXED random password generator with copy to clipboard (and options: length, 0-9 a-z A-Z, spec. chars. etc.)
 FIXED add a copy confirmation
