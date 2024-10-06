@@ -73,5 +73,13 @@ textarea:not(#output) {
   resize: vertical;
 }
 .sigma-input {
-width: 90%; margin: 0 auto; display: block;font-family: 'SF-Pro-Text-Medium'; text-align: center;box-sizing: border-box;
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+  font-family: 'SF-Pro-Text-Medium', sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+  resize: vertical; /* Allow vertical resizing */
+  max-height: calc(1.5em * 5); /* Limit to five rows */
+  overflow: hidden;
 }
