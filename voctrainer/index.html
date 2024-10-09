@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vocabulary Trainer</title>
+    <title>Entraîneur de Vocabulaire</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>Vocabulary Trainer</h1>
+        <h1>Entraîneur de Vocabulaire</h1>
         <div id="random-word-section">
-            <h2>Random Word Guess</h2>
-            <button id="random-word-btn">Get Random Word</button>
+            <h2>Deviner le Mot Aléatoire</h2>
+            <button id="random-word-btn">Obtenir un Mot Aléatoire</button>
             <p id="random-word-display"></p>
-            <button id="reveal-word-btn">Reveal Word</button>
+            <button id="reveal-word-btn">Révéler le Mot</button>
         </div>
         <div id="quiz-section">
-            <h2>Quiz Mode</h2>
-            <button id="start-quiz-btn">Start Quiz</button>
+            <h2>Mode Quiz</h2>
+            <button id="start-quiz-btn">Commencer le Quiz</button>
             <div id="quiz-questions"></div>
-            <button id="submit-quiz-btn" style="display:none;">Submit Quiz</button>
+            <button id="submit-quiz-btn" style="display:none;">Soumettre le Quiz</button>
+            <button id="clear-quiz-btn" style="display:none;">Effacer Tout</button>
+            <button id="retry-quiz-btn" style="display:none;">Réessayer</button>
             <div id="quiz-results" style="display:none;"></div>
         </div>
         <div id="progress-section">
-            <h2>Progress Tracker</h2>
-            <p>Words Learned: <span id="words-learned">0</span></p>
+            <h2>Suivi de la Progression</h2>
+            <p>Mots Appris: <span id="words-learned">0</span></p>
+        </div>
+        <div id="learned-words-section">
+            <h2>Mots Appris Jusqu'à Présent</h2>
+            <ul id="learned-words-list"></ul>
         </div>
     </div>
     <script src="script.js"></script>
