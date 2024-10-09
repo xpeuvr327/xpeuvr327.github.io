@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Trainer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Vocabulary Trainer</h1>
+        <div id="random-word-section">
+            <h2>Random Word Guess</h2>
+            <button id="random-word-btn">Get Random Word</button>
+            <p id="random-word-display"></p>
+            <button id="reveal-word-btn">Reveal Word</button>
+        </div>
+        <div id="quiz-section">
+            <h2>Quiz Mode</h2>
+            <button id="start-quiz-btn">Start Quiz</button>
+            <div id="quiz-questions"></div>
+            <button id="submit-quiz-btn" style="display:none;">Submit Quiz</button>
+            <div id="quiz-results" style="display:none;"></div>
+        </div>
+        <div id="progress-section">
+            <h2>Progress Tracker</h2>
+            <p>Words Learned: <span id="words-learned">0</span></p>
+        </div>
+        <div id="coach-section">
+            <h2>Personal Coach</h2>
+            <p id="coach-message">Keep practicing to improve your vocabulary!</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
