@@ -34,11 +34,11 @@ button:hover {
     background-color: #0056b3;
 }
 
-#random-word-display, #quiz-questions, #quiz-results, #coach-message {
+#random-word-display, #quiz-questions, #quiz-results, #learned-words-list {
     text-align: center;
     margin: 20px 0;
 }
 
-#progress-section, #coach-section {
+#progress-section, #learned-words-section {
     margin-top: 20px;
 }
