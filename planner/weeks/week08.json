@@ -1,16 +1,1 @@
-{
-  "days": [
-    "Lundi 14",
-    "Mardi 15",
-    "Mercredi 16",
-    "Jeudi 17",
-    "Vendredi 18"
-  ],"timeScheme":"sism",
-  "schedule": {
-    "Lundi 14": [],
-    "Mardi 15": [],
-    "Mercredi 16": [],
-    "Jeudi 17": [],
-    "Vendredi 18": []
-  }
-}
+{"days":["Lundi 14","Mardi 15","Mercredi 16","Jeudi 17","Vendredi 18"],"timeScheme":"sism","schedule":{"Lundi 14":[{"period":1,"subject":"rappel général","notes":"commencer à lire nouvelles orientales"},{"period":2,"subject":"rpl gén","notes":"retrv la calc"},{"period":7,"subject":"Physique","notes":"ex. 22 à 24 série 1, ex 1 à 3 série 3"}],"Mardi 15":[{"period":1,"subject":"Français","notes":"RDV à la bibliothèque (dire à joao)"}],"Mercredi 16":[{"period":7,"subject":"","notes":""}],"Jeudi 17":[{"period":7,"subject":"Allemand","notes":"DDN s125"}],"Vendredi 18":[]}}
