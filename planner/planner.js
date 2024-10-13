@@ -6,7 +6,7 @@ window.onload = function() {
         currentWeek = parseInt(weekParam, 10);
     } else {
         // Calculate the week number based on the current date
-        currentWeek = weeksBetweenDates('2024-08-26');
+        currentWeek = weeksBetweenDates('2024-08-24');
     }
 
     loadProfiles();
