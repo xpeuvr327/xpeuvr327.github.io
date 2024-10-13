@@ -6,7 +6,7 @@ window.onload = function() {
     if (weekParam) {
         currentWeek = parseInt(weekParam, 10);
     } else {
-        const startDate = new Date('2024-08-26');
+        const startDate = new Date('2024-08-24');
         const currentDate = new Date();
         const diffInDays = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
         currentWeek = Math.ceil(diffInDays / 7);
