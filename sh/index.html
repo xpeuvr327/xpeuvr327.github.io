@@ -1,3 +1,17 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>URL Shortener</title></head><body><h1>URL Shortener</h1><p>Redirecting...</p><script>function getQueryParams(){return new URLSearchParams(window.location.search)}
-async function redirectUser(){const params=getQueryParams(),route=params.get('r');if(route){try{const response=await fetch('p/redirects.json'),data=await response.json(),redirectEntry=data.find(entry=>entry.sh===route);if(redirectEntry){window.location.href=redirectEntry.url}}}
-window.onload=redirectUser;</script></body></html>
+< !DOCTYPE html > < html lang = "en" > < head > < meta charset = "UTF-8" > < meta name = "viewport"
+content = "width=device-width, initial-scale=1.0" > < title > URL Shortener < /title></head > < body > < h1 > URL Shortener < /h1><p>Redirecting...</p > < script > function getQueryParams() {
+    return new URLSearchParams(window.location.search)
+}
+async function redirectUser() {
+        const params = getQueryParams(),
+            route = params.get('r');
+        if (route) {
+                            const response = await fetch('p/redirects.json'),
+                    data = await response.json(),
+                    redirectEntry = data.find(entry => entry.sh === route);
+                if (redirectEntry) {
+                    window.location.href = redirectEntry.url
+                }
+            
+        }
+        window.onload = redirectUser; < /script></body > < /html>
