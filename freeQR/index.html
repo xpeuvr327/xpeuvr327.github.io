@@ -10,9 +10,9 @@
 
   <input type="text" id="qrcode-text" placeholder="Enter text to encode">
   <button onclick="generateQrCode()">Generate QR Code</button>
-<br>
+<br><br>
   <div id="qrcode"></div>
-<br>
+<br><br>T
   <button onclick="downloadQrCode()">Download QR Code as PNG</button>
 <p><br>known issues: downloads as ${default-language}download <br>
 fix: rename to .png
@@ -23,6 +23,7 @@ fix: hit f5
   issue (fixed): code not readable
   fix: add space
   issue: download includes the whole div, including white stripe
+  fix: unknown
   <script>
     function generateQrCode() {
       var qrcodeText = document.getElementById("qrcode-text").value;
