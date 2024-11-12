@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Cutter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            width: 20em;
+            text-align: center;
+        }
+        button {
+            cursor: pointer;
+        }
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>URL Cutter</h1>
+    <p>Cut and copy the <code>?si=</code> tag from YouTube share links.</p>
+    <div class="center">
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" value="https://youtu.be/dQw4w9WgXcQ?si=uKsbN92">
+        <button onclick="cutURL()">Cut Signature</button>
+        <p id="confirm"></p>
+    </div>
+    <br>
+    <h2>Why Cut?</h2>
+    <p>The <code>?si</code> flag is a signature that will let YouTube know who you share the link to.</p>
+    <script>
+        async function cutURL() {
+            const urlInput = document.getElementById('urlInput').value;
+            const url = new URL(urlInput);
+            url.searchParams.delete('si');
+            const newURL = url.toString();
+            document.getElementById('urlInput').value = newURL;
+            try {
+                await navigator.clipboard.writeText(newURL);
+                document.getElementById('confirm').textContent = "Success!";
+            } catch (err) {
+                alert('Failed to copy URL to clipboard. Error:', err);
+            }
+        }
+    </script>
+</body>
+</html>
