@@ -35,7 +35,7 @@
     <p>Cut and copy the <code>?si=</code> tag from YouTube share links.</p>
     <div class="center">
         <label for="urlInput">Enter URL:</label>
-        <input type="text" id="urlInput" value="https://youtu.be/dQw4w9WgXcQ?si=uKsbN92">
+        <input type="text" id="urlInput" placeholder="https://youtu.be/dQw4w9WgXcQ?si=uKsbN92"value="https://yt.ai/c?si=whatever>
         <button onclick="cutURL()">Cut Signature</button>
         <p id="confirm"></p>
     </div>
@@ -51,7 +51,7 @@
             document.getElementById('urlInput').value = newURL;
             try {
                 await navigator.clipboard.writeText(newURL);
-                document.getElementById('confirm').textContent = "Success!";
+                document.getElementById('confirm').textContent = newURL;
             } catch (err) {
                 alert('Failed to copy URL to clipboard. Error:', err);
             }
