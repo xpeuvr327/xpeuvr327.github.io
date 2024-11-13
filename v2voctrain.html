@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrainement verbes allemand</title>
+    <style>
+        /* General reset and body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #333;
+            color: #f9f9f9;
+        }
+
+        h1 {
+            margin: 20px;
+            font-size: 1.8em;
+            text-align: center;
+            color: #fbfbfb;
+        }
+
+        /* Table styling */
+        table {
+            display:block;
+            overflow-x:auto;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border: 1px solid #f2f2f2;
+            background-color: #0f0f0f;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #f2f2f2;
+            padding: 12px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        th {
+            background-color: #444; /* Lighter grey background */
+            color: #fff; /* Darker coffee text */
+        }
+
+        /* Input and feedback styling */
+        input[type="text"] {
+            background-color: #222;
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #0c0c0c;
+            border-radius: 5px;
+            box-sizing: border-box;
+            color: #f9f9f9;
+        }
+
+        .correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .incorrect {
+            background-color: #ff0015;
+            border-color: #f5c6cb;
+        }
+
+        .correction {
+            font-size: 0.8em;
+            color: #b71c1c;
+        }
+
+        /* Button styling */
+        button {
+            margin: 15px 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #3700ff9f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3700ff9f;
+        }
+
+        #viewSolutionsButton {
+            background-color: #28a745;
+        }
+
+        #viewSolutionsButton:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 600px) {
+            table, th, td {
+                font-size: 0.8em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            button {
+                width: 8.5em;
+                max-width: 300px;
+            }
+        }
+        .container {
+            max-width: 100%; /* Ensure the container takes up full width */
+            margin: 0 auto; /* Center the container */
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <h1>Entrainement verbes allemand</h1>
+    <p><button onclick="startTraining()">Commencer</button>avec <input id="nb2verbes" type="number" style="width:2em;" value=5 onchange="startTraining()"> verbes au hasard</p><div class="container">
+    <table id="verbTable">
+        <thead>
+            <tr>
+                <th>Verbe (En allemand)</th>
+                <th>Pronom</th>
+                <th>Präsens</th>
+                <th>Präteritum</th>
+                <th>Perfekt</th>
+                <th>Français</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Verbs will be dynamically inserted here -->
+        </tbody>
+    </table></div>
+    <button onclick="checkAnswers()">Vérifier les réponses</button>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            startTraining();
+        });
+
+        // Pronoun and auxiliary verb arrays
+        const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+        const hn = ["habe", "hast", "hat", "haben", "habt", "haben"];
+        const sein = ["bin", "bist", "ist", "sind", "seid", "sind"];
+
+        // Verb data structure with Präteritum added
+        const verbs = [{
+    deutsch: "baden",
+    prs: ["bade", "badest", "badet", "baden", "badet", "baden"],
+    prt: ["badete", "badetest", "badete", "badeten", "badetet", "badeten"],
+    prk: "gebadet",
+    frtrad: "se baigner",
+    auxiliary: "hn"
+}, {
+    deutsch: "bedeuten",
+    prs: ["bedeutet"],
+    prt: ["bedeutete"],
+    prk: "bedeutet",
+    frtrad: "signifier/vouloir dire",
+    auxiliary: "hn"
+}, {
+    deutsch: "sich beeilen",
+    prs: ["beeile ich mich", "beeilst du dich", "beeilt er/sie/es sich", "beeilen wir uns", "beeilt ihr euch", "beeilen sie sich"],
+    prt: ["beeilte ich mich", "beeiltest du dich", "beeilte er/sie/es sich", "beeilten wir uns", "beeilten ihr euch", "beeilten sie sich"],
+    prk: "sich beeilt",
+    frtrad: "se dépêcher/se dépêcher",
+    auxiliary: "sein"
+}, {
+    deutsch: "brauchen",
+    prs: ["brauche", "brauchst", "braucht", "brauchen", "braucht", "brauchen"],
+    prt: ["brauchte", "brauchtest", "brauchte", "brauchten", "brauchtet", "brauchten"],
+    prk: "gebraucht",
+    frtrad: "avoir besoin de/avoir besoin de",
+    auxiliary: "hn"
+}, {
+    deutsch: "glauben",
+    prs: ["glaube", "glaubst", "glaubt", "glauben", "glaubt", "glauben"],
+    prt: ["glaubte", "glaubtest", "glaubte", "glaubten", "glaubtet", "glaubten"],
+    prk: "geglaubt",
+    frtrad: "croire/croire",
+    auxiliary: "hn"
+}, {
+    deutsch: "kochen",
+    prs: ["koche", "kochst", "kocht", "kochen", "kocht", "kochen"],
+    prt: ["kochte", "kochtest", "kochte", "kochten", "kochtet", "kochten"],
+    prk: "gekocht",
+    frtrad: "faire la cuisine/cuisiner",
+    auxiliary: "hn"
+}, {
+    deutsch: "kosten",
+    prs: ["kostet"],
+    prt: ["kostete"],
+    prk: "gekostet",
+    frtrad: "coûter/coûter",
+    auxiliary: "hn"
+}, {
+    deutsch: "lachen",
+    prs: ["lache", "lachst", "lacht", "lachen", "lacht", "lachen"],
+    prt: ["lachte", "lachtest", "lachte", "lachten", "lachtet", "lachten"],
+    prk: "gelacht",
+    frtrad: "rire/rire",
+    auxiliary: "hn"
+}, {
+    deutsch: "leben",
+    prs: ["lebe", "lebst", "lebt", "leben", "lebt", "leben"],
+    prt: ["lebte", "lebtest", "lebte", "lebten", "lebtet", "lebten"],
+    prk: "gelebt",
+    frtrad: "vivre/vivre",
+    auxiliary: "hn"
+}, {
+    deutsch: "parken",
+    prs: ["parke", "parkst", "parkt", "parken", "parkt", "parken"],
+    prt: ["parkte", "parktest", "parkte", "parkten", "parktet", "parkten"],
+    prk: "geparkt",
+    frtrad: "garer/se garer",
+    auxiliary: "hn"
+}, {
+    deutsch: "rauchen",
+    prs: ["rauche", "rauchst", "raucht", "rauchen", "raucht", "rauchen"],
+    prt: ["rauchte", "rauchtest", "rauchte", "rauchten", "rauchtet", "rauchten"],
+    prk: "geraucht",
+    frtrad: "fumer/fumer",
+    auxiliary: "hn"
+}, {
+    deutsch: "regnen",
+    prs: ["regnet"],
+    prt: ["regnete"],
+    prk: "geregnet",
+    frtrad: "pleuvoir/pleuvoir",
+    auxiliary: "hn"
+}, {
+    deutsch: "reisen",
+    prs: ["reise", "reist", "reist", "reisen", "reist", "reisen"],
+    prt: ["reiste", "reistest", "reiste", "reisten", "reistet", "reisten"],
+    prk: "gereist",
+    frtrad: "voyager/voyager",
+    auxiliary: "hn"
+}, {
+    deutsch: "schenken",
+    prs: ["schenke", "schenkst", "schenkt", "schenken", "schenkt", "schenken"],
+    prt: ["schenkte", "schenktest", "schenkte", "schenkten", "schenktet", "schenkten"],
+    prk: "geschenkt",
+    frtrad: "offrir/offrir",
+    auxiliary: "hn"
+}, {
+    deutsch: "schmecken",
+    prs: ["schmeckt"],
+    prt: ["schmeckte"],
+    prk: "geschmeckt",
+    frtrad: "être bon/avoir bon goût",
+    auxiliary: "hn"
+}, {
+    deutsch: "sparen",
+    prs: ["spare", "sparst", "spart", "sparen", "spart", "sparen"],
+    prt: ["sparte", "spartest", "sparte", "sparten", "spartet", "sparten"],
+    prk: "gespart",
+    frtrad: "économiser/économiser",
+    auxiliary: "hn"
+}, {
+    deutsch: "stimmen",
+    prs: ["stimme"],
+    prt: ["stimmte"],
+    prk: "gestimmt",
+    frtrad: "être exact/être juste",
+    auxiliary: "hn"
+}, {
+    deutsch: "tanzen",
+    prs: ["tanze", "tanzest", "tanzt", "tanzen", "tanzt", "tanzen"],
+    prt: ["tanzte", "tanztest", "tanzte", "tanzten", "tanztet", "tanzten"],
+    prk: "getanzt",
+    frtrad: "danser/danser",
+    auxiliary: "hn"
+}, {
+    deutsch: "übersetzen",
+    prs: ["übersetze", "übersetzt", "übersetzt", "übersetzen", "übersetzt", "übersetzen"],
+    prt: ["übersetzte", "übersetztest", "übersetzte", "übersetzten", "übersetztet", "übersetzten"],
+    prk: "übersetzt",
+    frtrad: "traduire/traduire",
+    auxiliary: "hn"
+}, {
+    deutsch: "verdienen",
+    prs: ["verdiene", "verdienst", "verdient", "verdienen", "verdient", "verdienen"],
+    prt: ["verdiente", "verdienstest", "verdiente", "verdienten", "verdientet", "verdienten"],
+    prk: "verdient",
+    frtrad: "gagner un salaire/mériter un salaire",
+    auxiliary: "hn"
+}, {
+    deutsch: "verpassen",
+    prs: ["verpasse", "verpasst", "verpasst", "verpassen", "verpasst", "verpassen"],
+    prt: ["verpasste", "verpasstest", "verpasste", "verpassten", "verpasstet", "verpassten"],
+    prk: "verpasst",
+    frtrad: "manquer/rater (train, bus)",
+    auxiliary: "hn"
+}, {
+    deutsch: "weinen",
+    prs: ["weine", "weinst", "weint", "weinen", "weint", "weinen"],
+    prt: ["weinte", "weintest", "weinte", "weinten", "weintet", "weinten"],
+    prk: "geweint",
+    frtrad: "pleurer/pleurer",
+    auxiliary: "hn"
+}, {
+    deutsch: "wiederholen",
+    prs: ["wiederhole", "wiederholst", "wiederholt", "wiederholen", "wiederholt", "wiederholen"],
+    prt: ["wiederholte", "wiederholtest", "wiederholte", "wiederholten", "wiederholtet", "wiederholten"],
+    prk: "wiederholt",
+    frtrad: "répéter/répéter",
+    auxiliary: "hn"
+}, {
+    deutsch: "abholen",
+    prs: ["hole ab", "holst ab", "holt ab", "holen ab", "holt ab", "holen ab"],
+    prt: ["holte ab", "holtest ab", "holte ab", "holten ab", "holtet ab", "holten ab"],
+    prk: "abgeholt",
+    frtrad: "aller chercher qqn/aller chercher quelqu'un",
+    auxiliary: "hn"
+}, {
+    deutsch: "aufpassen",
+    prs: ["passe auf", "passt auf", "passt auf", "passen auf", "passt auf", "passen auf"],
+    prt: ["passte auf", "passtest auf", "passte auf", "passten auf", "passtet auf", "passten auf"],
+    prk: "aufgepasst",
+    frtrad: "faire attention/faire attention",
+    auxiliary: "hn"
+}, {
+    deutsch: "aufräumen",
+    prs: ["räume auf", "räumst auf", "räumt auf", "räumen auf", "räumt auf", "räumen auf"],
+    prt: ["räumte auf", "räumtest auf", "räumte auf", "räumten auf", "räumtet auf", "räumten auf"],
+    prk: "aufgeräumt",
+    frtrad: "ranger/mettre en ordre",
+    auxiliary: "hn"
+}, {
+    deutsch: "umtauschen",
+    prs: ["tausche um", "tauschst um", "tauscht um", "tauschen um", "tauscht um", "tauschen um"],
+    prt: ["tauschte um", "tauschtest um", "tauschte um", "tauschten um", "tauschtet um", "tauschten um"],
+    prk: "umgetauscht",
+    frtrad: "échanger/échanger",
+    auxiliary: "hn"
+}, {
+    deutsch: "fliegen",
+    prs: ["fliege", "fliegst", "fliegt", "fliegen", "fliegt", "fliegen"],
+    prt: ["flog", "flogst", "flog", "flogen", "flogt", "flogen"],
+    prk: "geflogen",
+    frtrad: "voler/aller en avion",
+    auxiliary: "sein"
+}, {
+    deutsch: "gewinnen",
+    prs: ["gewinne", "gewinnst", "gewinnt", "gewinnen", "gewinnt", "gewinnen"],
+    prt: ["gewann", "gewannst", "gewann", "gewannen", "gewannt", "gewannen"],
+    prk: "gewonnen",
+    frtrad: "gagner (à un jeu, concours)/gagner (à un jeu, concours)",
+    auxiliary: "hn"
+}, {
+    deutsch: "halten",
+    prs: ["halte", "hältst", "hält", "halten", "haltet", "halten"],
+    prt: ["hielt", "hieltest", "hielt", "hielten", "hieltet", "hielten"],
+    prk: "gehalten",
+    frtrad: "tenir/s'arrêter",
+    auxiliary: "hn"
+}, {
+    deutsch: "heißen",
+    prs: ["heiße", "heißt", "heißt", "heißen", "heißt", "heißen"],
+    prt: ["hieß", "hießt", "hieß", "hießen", "hießt", "hießen"],
+    prk: "geheißen",
+    frtrad: "s'appeler/s'appeler",
+    auxiliary: "hn"
+}, {
+    deutsch: "helfen",
+    prs: ["helfe", "hilfst", "hilft", "helfen", "helft", "helfen"],
+    prt: ["half", "halfst", "half", "halfen", "halft", "halfen"],
+    prk: "geholfen",
+    frtrad: "aider/aider",
+    auxiliary: "hn"
+}, {
+    deutsch: "lassen",
+    prs: ["lasse", "lässt", "lässt", "lassen", "lasst", "lassen"],
+    prt: ["liess", "liessest", "liess", "liessen", "liesst", "liessen"],
+    prk: "gelassen",
+    frtrad: "laisser/laisser",
+    auxiliary: "hn"
+}, {
+    deutsch: "schneiden",
+    prs: ["schneide", "schneidest", "schneidet", "schneiden", "schneidet", "schneiden"],
+    prt: ["schnitt", "schnittest", "schnitt", "schnitten", "schnittet", "schnitten"],
+    prk: "geschnitten",
+    frtrad: "couper/couper",
+    auxiliary: "hn"
+}, {
+    deutsch: "schwimmen",
+    prs: ["schwimme", "schwimmst", "schwimmt", "schwimmen", "schwimmt", "schwimmen"],
+    prt: ["schwamm", "schwammst", "schwamm", "schwammen", "schwamt", "schwammen"],
+    prk: "geschwommen",
+    frtrad: "nager/nager",
+    auxiliary: "sein"
+}, {
+    deutsch: "steigen",
+    prs: ["steige", "steigst", "steigt", "steigen", "steigt", "steigen"],
+    prt: ["stieg", "stiegst", "stieg", "stiegen", "stiegt", "stiegen"],
+    prk: "gestiegen",
+    frtrad: "monter/monter",
+    auxiliary: "sein"
+}, {
+    deutsch: "tragen",
+    prs: ["trage", "trägst", "trägt", "tragen", "tragt", "tragen"],
+    prt: ["trug", "trugst", "trug", "trugen", "trugt", "trugen"],
+    prk: "getragen",
+    frtrad: "porter/porter",
+    auxiliary: "hn"
+}, {
+    deutsch: "treffen",
+    prs: ["treffe", "triffst", "trifft", "treffen", "trefft", "treffen"],
+    prt: ["traf", "trafst", "traf", "trafen", "traft", "trafen"],
+    prk: "getroffen",
+    frtrad: "rencontrer/rencontrer",
+    auxiliary: "hn"
+}, {
+    deutsch: "tun",
+    prs: ["tue", "tust", "tut", "tun", "tut", "tun"],
+    prt: ["tat", "tatest", "tat", "taten", "tatet", "taten"],
+    prk: "getan",
+    frtrad: "faire (sens général)/faire (sens général)",
+    auxiliary: "hn"
+}, {
+    deutsch: "unterschreiben",
+    prs: ["unterschreibe", "unterschreibst", "unterschreibt", "unterschreiben", "unterschreibt", "unterschreiben"],
+    prt: ["unterschrieb", "unterschriebst", "unterschrieb", "unterschrieben", "unterschrieben", "unterschrieben"],
+    prk: "unterschrieben",
+    frtrad: "signer/signer",
+    auxiliary: "hn"
+}, {
+    deutsch: "verbieten",
+    prs: ["verbiete", "verbietest", "verbietet", "verbieten", "verbietet", "verbieten"],
+    prt: ["verbot", "verbotst", "verbot", "verboten", "verbotet", "verboten"],
+    prk: "verboten",
+    frtrad: "interdire/interdire",
+    auxiliary: "hn"
+}, {
+    deutsch: "verlieren",
+    prs: ["verliere", "verlierst", "verliert", "verlieren", "verliert", "verlieren"],
+    prt: ["verlor", "verlorst", "verlor", "verloren", "verlort", "verloren"],
+    prk: "verloren",
+    frtrad: "perdre/perdre",
+    auxiliary: "hn"
+}, {
+    deutsch: "versprechen",
+    prs: ["verspreche", "versprichst", "verspricht", "versprechen", "versprecht", "versprechen"],
+    prt: ["versprach", "versprachst", "versprach", "versprachen", "verspracht", "versprachen"],
+    prk: "versprochen",
+    frtrad: "promettre/promettre",
+    auxiliary: "hn"
+}, {
+    deutsch: "waschen",
+    prs: ["wasche", "wäschst", "wäscht", "waschen", "wascht", "waschen"],
+    prt: ["wusch", "wuschtest", "wusch", "wuschen", "wuscht", "wuschen"],
+    prk: "gewaschen",
+    frtrad: "laver/laver",
+    auxiliary: "hn"
+}, {
+    deutsch: "annehmen",
+    prs: ["nehme an", "nimmst an", "nimmt an", "nehmen an", "nehmt an", "nehmen an"],
+    prt: ["nahm an", "nahmst an", "nahm an", "nahmen an", "nahmt an", "nahmen an"],
+    prk: "angenommen",
+    frtrad: "accepter/supposer",
+    auxiliary: "hn"
+}, {
+    deutsch: "anrufen",
+    prs: ["rufe an", "rufst an", "ruft an", "rufen an", "ruft an", "rufen an"],
+    prt: ["rief an", "riefst an", "rief an", "riefen an", "riefen an", "riefen an"],
+    prk: "angerufen",
+    frtrad: "appeler au téléphone/appeler au téléphone",
+    auxiliary: "hn"
+}, {
+    deutsch: "ansehen",
+    prs: ["sehe an", "siehst an", "sieht an", "sehen an", "seht an", "sehen an"],
+    prt: ["sah an", "sahst an", "sah an", "sahen an", "sahen an", "sahen an"],
+    prk: "angesehen",
+    frtrad: "regarder/regarder",
+    auxiliary: "hn"
+}, {
+    deutsch: "aussehen",
+    prs: ["sehe aus", "siehst aus", "sieht aus", "sehen aus", "seht aus", "sehen aus"],
+    prt: ["sah aus", "sahst aus", "sah aus", "sahen aus", "sahen aus", "sahen aus"],
+    prk: "ausgesehen",
+    frtrad: "avoir l'air/avoir l'air",
+    auxiliary: "hn"
+}, {
+    deutsch: "(sich) anziehen",
+    prs: ["ziehe an", "ziehst an", "zieht an", "ziehen an", "zieht an", "ziehen an"],
+    prt: ["zog an", "zogst an", "zog an", "zogen an", "zogen an", "zogen an"],
+    prk: "angezogen",
+    frtrad: "mettre (habits)/(s')habiller",
+    auxiliary: "sein"
+}, {
+    deutsch: "(sich) ausziehen",
+    prs: ["ziehe aus", "ziehst aus", "zieht aus", "ziehen aus", "zieht aus", "ziehen aus"],
+    prt: ["zog aus", "zogst aus", "zog aus", "zogen aus", "zogen aus", "zogen aus"],
+    prk: "ausgezogen",
+    frtrad: "enlever (habits)/(se) déshabiller",
+    auxiliary: "sein"
+}, {
+    deutsch: "sich umziehen",
+    prs: ["ziehe um", "ziehst um", "zieht um", "ziehen um", "zieht um", "ziehen um"],
+    prt: ["zog um", "zogst um", "zog um", "zogen um", "zogen um", "zogen um"],
+    prk: "umgezogen",
+    frtrad: "changer (habits)/(se) changer",
+    auxiliary: "sein"
+}];
+
+        function createTableRow(verb) {
+            const randomIndex = Math.floor(Math.random() * pronouns.length);
+            let pronoun = pronouns[randomIndex];
+            let prsForm = verb.prs[randomIndex];
+            const prtForm = verb.prt[randomIndex];
+            const auxiliary = verb.auxiliary === "sein" ? sein[randomIndex] : hn[randomIndex];
+            const prkForm = `${auxiliary} ${verb.prk}`;
+            // Handle the case where there is only one informal verb form
+            if (verb.prs.length === 1) {
+                pronoun = "es";
+                prsForm = verb.prs[0];
+                console.log("exception")
+            }
+            // que display?
+            let cases = [
+                { deutsch: verb.deutsch, pronoun: pronoun },
+                { prs: prsForm },
+                { prt: prtForm },
+                { prk: prkForm,},
+                { frtrad: verb.frtrad, pronoun: pronoun }
+            ];
+            //si pronom = er, alors afficher pronom partout
+            if (randomIndex===2){
+                cases = [
+                { deutsch: verb.deutsch, pronoun: pronoun },
+                { prs: prsForm, pronoun: pronoun  },
+                { prt: prtForm, pronoun: pronoun  },
+                { prk: prkForm, pronoun:pronoun },
+                { frtrad: verb.frtrad, pronoun: pronoun }
+            ]}
+            //si pronom = nous ou Sie, alors afficher pronom partout
+            if (randomIndex===3 || randomIndex===6){
+                cases = [
+                { deutsch: verb.deutsch, pronoun: pronoun },
+                { prs: prsForm, pronoun: pronoun  },
+                { prt: prtForm, pronoun: pronoun  },
+                { prk: prkForm, pronoun:pronoun },
+                { frtrad: verb.frtrad, pronoun: pronoun }
+            ]}
+            //si ich et er et praterit, pronom
+            if (randomIndex==0 ||randomIndex==2){
+                cases = [
+                { deutsch: verb.deutsch, pronoun: pronoun },
+                { prs: prsForm},
+                { prt: prtForm, pronoun: pronoun  },
+                { prk: prkForm},
+                { frtrad: verb.frtrad, pronoun: pronoun }
+            ]}
+            const chosenCase = cases[Math.floor(Math.random() * cases.length)];
+
+            // Build row with inputs where data is not displayed
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${chosenCase.deutsch || `<input type="text" data-answer="${verb.deutsch}">`}</td>
+                <td>${chosenCase.pronoun || `<input type="text" data-answer="${pronoun}"style="width:3em;">`}</td>
+                <td>${chosenCase.prs || `<input type="text" data-answer="${prsForm}">`}</td>
+                <td>${chosenCase.prt || `<input type="text" data-answer="${prtForm}">`}</td>
+                <td>${chosenCase.prk || `<input type="text" data-answer="${prkForm}">`}</td>
+                <td>${chosenCase.frtrad || `<input type="text" data-answer="${verb.frtrad}">`}</td>`;
+            return row;
+        }
+
+        // Initializes the table with random verb entries and chosen conjugations
+        function startTraining() {
+            const tableBody = document.querySelector("#verbTable tbody");
+            tableBody.innerHTML = "";
+            if (document.getElementById("viewSolutionsButton")){document.getElementById("viewSolutionsButton").remove();}
+            nb2verbes0=document.getElementById('nb2verbes').value;
+            // Display 10 random verbs for practice
+            const randomVerbs = verbs.sort(() => 0.5 - Math.random()).slice(0, nb2verbes0);
+            randomVerbs.forEach(verb => {
+                const row = createTableRow(verb);
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Validates user answers and provides feedback with color coding
+        function checkAnswers() {
+            document.querySelectorAll("input").forEach(input => {
+                const userAnswer = input.value.trim();
+                let correctAnswer = input.dataset.answer;
+
+                if (input.id==="nb2verbes"){
+                    return
+                }
+
+                if (correctAnswer === "er/sie/es" && (userAnswer === "er" || userAnswer === "sie" || userAnswer === "es")) {
+                    input.classList.add("correct");
+                    if (input.nextSibling) {
+                        input.nextSibling.remove();
+                    }
+                } else if (userAnswer === correctAnswer) {
+                    input.classList.add("correct");
+                    if (input.nextSibling) {
+                        input.nextSibling.remove();
+                    }
+                } else {
+                    input.classList.add("incorrect");
+                    if (!input.nextSibling) {
+                        const correction = document.createElement("span");
+                        correction.classList.add("correction");
+                        correction.innerHTML = `<br> Correct: ${correctAnswer}`;
+                        input.parentNode.appendChild(correction);
+                    }
+                }
+            });
+
+            if (!document.getElementById("viewSolutionsButton")) {
+                const viewSolutionsButton = document.createElement("button");
+                viewSolutionsButton.id = "viewSolutionsButton";
+                viewSolutionsButton.textContent = "Voir les solutions";
+                viewSolutionsButton.onclick = showSolutions;
+                document.body.appendChild(viewSolutionsButton);
+            }
+        }
+
+ function showSolutions() {
+    document.querySelectorAll("#verbTable tbody tr").forEach(row => {
+        row.querySelectorAll("td").forEach(cell => {
+            const input = cell.querySelector("input");
+            if (input) {
+                // Retrieve the correct answer from the data-answer attribute
+                const correctAnswer = input.dataset.answer;
+                // Replace the input field with the correct answer text
+                cell.innerHTML = correctAnswer;
+            }
+        });
+    });
+
+}
+
+    </script>
+</body>
+</html>
