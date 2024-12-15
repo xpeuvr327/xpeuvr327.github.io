@@ -79,7 +79,5 @@ textarea:not(#output) {
   font-family: 'SF-Pro-Text-Medium', sans-serif;
   text-align: center;
   box-sizing: border-box;
-  resize: vertical; /* Allow vertical resizing */
-  max-height: calc(1.5em * 5); /* Limit to five rows */
-  overflow: hidden;
+  resize: vertical; 
 }
