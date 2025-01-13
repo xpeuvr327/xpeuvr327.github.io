@@ -5,97 +5,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>verbes feuillete</title>
-    <style>body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    
-    .container {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 90%;
-        max-width: 400px;
-        overflow: hidden; /* Hide overflow */
-    }
-    
-    h1 {
-        color: #333;
-    }
-    
-    #verbContainer {
-        margin-bottom: 20px;
-    }
-    
-    #verbQuestion {
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-    
-    .input-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-    
-    #verbInput {
-        flex: 1;
-        padding: 10px;
-        margin-right: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    
-    #submitButton {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-        color: white;
-        cursor: pointer;
-        font-size: 1em;
-    }
-    
-    #submitButton:hover {
-        background: linear-gradient(135deg, #fad0c4 0%, #ff9a9e 100%);
-    }
-    
-    #feedback {
-        font-size: 1em;
-        margin-top: 10px;
-    }
-    
-    .correct {
-        color: green;
-    }
-    
-    .incorrect {
-        color: red;
-    }
-    
-    button {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-        color: white;
-        cursor: pointer;
-        font-size: 1em;
-    }
-    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            position: relative; /* Ensure the container is positioned relative */
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden; /* Hide overflow */
+        }
+
+       .ellipsis {
+    position: absolute; /* Position the ellipsis absolutely */
+    top: 5%; /* Adjust the top position as needed */
+    right: 5%; /* Adjust the right position as needed */
+    font-size: 24px; /* Adjust the font size as needed */
+    transition: background-color 0.3s, border-radius 0.3s; /* Smooth transition for background color and border radius */
+}
+
+.ellipsis:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Change the background color on hover */
+    border-radius: 50%; /* Make the background rounded */
+    padding: 5px; /* Add some padding to make the hover area larger */
+    overflow:hidden;
+}
+
+        h1 {
+            color: #333;
+        }
+
+        #verbContainer {
+            margin-bottom: 20px;
+        }
+
+        #verbQuestion {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #verbInput {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #submitButton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        #submitButton:hover {
+            background: linear-gradient(135deg, #fad0c4 0%, #ff9a9e 100%);
+        }
+
+        #feedback {
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container"><span>&#8942;</span>
+    <div class="container">
+        <span class="ellipsis">&nbsp;&#8942;&nbsp;</span>
         <h1>entraineur de verbes telephone en cours</h1>
         <div id="verbContainer">
             <p id="verbQuestion"></p>
@@ -777,7 +794,7 @@
         "frtrad": "faire la connaissance"
     },
     {"deutsch":"besitzen","prs":["besitze","besitzt","besitzt","besitzen","besitzt","besitzen"],"prt":["besa\u00df","besa\u00dfest","besa\u00df","besa\u00dfen","besa\u00dft","besa\u00dfen"],"prk":"besessen","frtrad":"poss\u00e9der","features":{"isIrreg":1}},{"deutsch":"bitten","prs":["bitte","bittest","bittet","bitten","bittet","bitten"],"prt":["bat","batest","bat","baten","batet","baten"],"prk":"gebeten","frtrad":"f","features":{"isIrreg":1}},{'deutsch': 'fallen', 'prs': ['falle', 'fällst', 'fällt', 'fallen', 'fallt', 'fallen'], 'prt': ['fiel', 'fielst', 'fiel', 'fielen', 'fielt', 'fielen'], 'prk': 'gefallen', 'frtrad': 'tomber', 'features': {'auxSein': 1, 'isIrreg': 0, 'hasReflect': 1, 'hasParticle': 0}}
-    ,{"deutsch":"leiden","prs":["leide","leidest","leidet","leiden","leidet","leiden"],"prt":["litt","littest","litt","litten","littet","litten"],"prk":"gelitten","frtrad":"souffrir","features":{"hasReflect":1,"isIrreg":1}},{"deutsch":"rufen","prs":["rufe","rufst","ruft","rufen","ruft","rufen"],"prt":["rief","riefst","rief","riefen","rieft","riefen"],"prk":"gerufen","frtrad":"appeler","features":{"hasReflect":1,"isIrreg":1}}
+    ,{"deutsch":"leiden an","prs":["leide","leidest","leidet","leiden","leidet","leiden"],"prt":["litt","littest","litt","litten","littet","litten"],"prk":"gelitten","frtrad":"souffrir","features":{"isIrreg":1}},{"deutsch":"rufen","prs":["rufe","rufst","ruft","rufen","ruft","rufen"],"prt":["rief","riefst","rief","riefen","rieft","riefen"],"prk":"gerufen","frtrad":"appeler","features":{"hasReflect":1,"isIrreg":1}}
     ,{"deutsch":"schlagen","prs":["schlage","schl\u00e4gst","schl\u00e4gt","schlagen","schlagt","schlagen"],"prt":["schlug","schlugst","schlug","schlugen","schlugt","schlugen"],"prk":"geschlagen","frtrad":"battre, frapper","features":{"isIrreg":1,"hasReflect":1}},{"deutsch":"singen","prs":["singe","singst","singt","singen","singt","singen"],"prt":["sang","sangst","sang","sangen","sangt","sangen"],"prk":"gesungen","frtrad":"chanter","features":{"isIrreg":1,"hasReflect":1}},{"deutsch":"sterben","prs":["sterbe","stirbst","stirbt","sterben","sterbt","sterben"],"prt":["starb","starbst","starb","starben","starbt","starben"],"prk":"gestorben","frtrad":"mourir","features":{"auxSein":1,"isIrreg":1,"hasReflect":1}},{"deutsch":"streiten","prs":["streite","streitest","streitet","streiten","streitet","streiten"],"prt":["stritt","strittest","stritt","stritten","strittet","stritten"],"prk":"gestritten","frtrad":"se disputer","features":{"isIrreg":1,"hasReflect":1}},{"deutsch":"unterhalten","prs":["unterhalte","unterh\u00e4ltst","unterh\u00e4lt","unterhalten","unterhaltet","unterhalten"],"prt":["unterhielt","unterhieltst","unterhielt","unterhielten","unterhieltet","unterhielten"],"prk":"unterhalten","frtrad":"s'entretenir","features":{"isIrreg":1,"hasReflect":1}},{"deutsch":"werden","prs":["werde","wirst","wird","werden","werdet","werden"],"prt":["wurde","wurdest","wurde","wurden","wurdet","wurden"],"prk":"geworden","frtrad":"devenir","features":{"auxSein":1,"isIrreg":1,"hasReflect":1}},{"deutsch":"werfen","prs":["werfe","wirfst","wirft","werfen","werft","werfen"],"prt":["warf","warfst","warf","warfen","warft","warfen"],"prk":"geworfen","frtrad":"jeter, lancert","features":{"isIrreg":1,"hasReflect":1}}
     ,{"deutsch":"gebenaus","prs":["gebe aus","gibst aus","gibt aus","geben aus","gebt aus","geben aus"],"prt":["gab aus","gabst aus","gab aus","gaben aus","gabt aus","gaben aus"],"prk":"ausgegeben","frtrad":"d\u00e9penser","features":{"isIrreg":1,"hasReflect":1,"hasParticle":1}},{"deutsch":"schlafenein","prs":["schlafe ein","schl\u00e4fst ein","schl\u00e4ft ein","schlafen ein","schlaft ein","schlafen ein"],"prt":["schlief ein","schliefst ein","schlief ein","schliefen ein","schlieft ein","schliefen ein"],"prk":"eingeschlafen","frtrad":"s'endormir","features":{"isIrreg":1,"hasReflect":1,"hasParticle":1}},{"deutsch":"sehenfern","prs":["sehe fern","siehst fern","sieht fern","sehen fern","seht fern","sehen fern"],"prt":["sah fern","sahst fern","sah fern","sahen fern","saht fern","sahen fern"],"prk":"ferngesehen","frtrad":"regarder la t\u00e9l\u00e9vision","features":{"isIrreg":1,"hasReflect":1,"hasParticle":1}},{"deutsch":"schlagenvor","prs":["schlage vor","schl\u00e4gst vor","schl\u00e4gt vor","schlagen vor","schlagt vor","schlagen vor"],"prt":["schlug vor","schlugst vor","schlug vor","schlugen vor","schlugt vor","schlugen vor"],"prk":"vorgeschlagen","frtrad":"proposer","features":{"isIrreg":1,"hasReflect":1,"hasParticle":1}}
     , {'deutsch': 'denken', 'prs': ['denke', 'denkst', 'denkt', 'denken', 'denkt', 'denken'], 'prt': ['dachte', 'dachtest', 'dachte', 'dachten', 'dachtet', 'dachten'], 'prk': 'gedacht', 'frtrad': 'penser à', 'features': {'auxSein': 0, 'isIrreg': 1, 'hasReflect': 1, 'hasParticle': 0, 'isInformal': 0}}, {'deutsch': 'kennen', 'prs': ['kenne', 'kennst', 'kennt', 'kennen', 'kennt', 'kennen'], 'prt': ['kannte', 'kanntest', 'kannte', 'kannten', 'kanntet', 'kannten'], 'prk': 'gekannt', 'frtrad': 'connaître', 'features': {'auxSein': 0, 'isIrreg': 1, 'hasReflect': 1, 'hasParticle': 0, 'isInformal': 0}}
@@ -811,7 +828,7 @@
 
     let pronoun = pronouns[currentFormIndex];
     if (currentVerb.features && currentVerb.features.isInformal === 1) {
-        pronoun = "du"; // Use "du" for informal verbs
+        pronoun = "es"; // Use "du" for informal verbs
     }
 
     let questionText;
