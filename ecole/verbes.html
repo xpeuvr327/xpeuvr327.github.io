@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+9<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -990,13 +990,13 @@ function checkAnswer() {
         correctAnswer = generatePerfectForm(currentVerb, currentFormIndex);
         if (currentVerb.features && currentVerb.features.hasReflect === 1) {
             const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
-            correctAnswer = reflexivePronouns[currentFormIndex] + ' ' + correctAnswer;
+            correctAnswer = correctAnswer + ' ' +reflexivePronouns[currentFormIndex];
         }
     } else {
         correctAnswer = currentVerb[currentTense][currentFormIndex];
         if (currentVerb.features && currentVerb.features.hasReflect === 1) {
             const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
-            correctAnswer = reflexivePronouns[currentFormIndex] + ' ' + correctAnswer;
+            correctAnswer = correctAnswer + ' '+reflexivePronouns[currentFormIndex] ;
         }
     }
 
