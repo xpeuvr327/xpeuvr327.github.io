@@ -125,10 +125,7 @@
         <button onclick="nextVerb()">Next Verb</button>
     </div>
     <script>
-        let currentVerbIndex = 0;
-        let currentVerb;
-        let currentFormIndex;
-        let currentTense = 'prs'; // Default to present tense
+       
         const verbs = [
     {
         "deutsch": "beschweren",
@@ -800,20 +797,52 @@
     , {'deutsch': 'denken', 'prs': ['denke', 'denkst', 'denkt', 'denken', 'denkt', 'denken'], 'prt': ['dachte', 'dachtest', 'dachte', 'dachten', 'dachtet', 'dachten'], 'prk': 'gedacht', 'frtrad': 'penser à', 'features': {'auxSein': 0, 'isIrreg': 1, 'hasReflect': 1, 'hasParticle': 0, 'isInformal': 0}}, {'deutsch': 'kennen', 'prs': ['kenne', 'kennst', 'kennt', 'kennen', 'kennt', 'kennen'], 'prt': ['kannte', 'kanntest', 'kannte', 'kannten', 'kanntet', 'kannten'], 'prk': 'gekannt', 'frtrad': 'connaître', 'features': {'auxSein': 0, 'isIrreg': 1, 'hasReflect': 1, 'hasParticle': 0, 'isInformal': 0}}
 ];
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+        let currentVerbIndex = 0;
+let currentVerb;
+let currentFormIndex;
+let currentTense;
 
-        function startTraining() {
-            shuffleArray(verbs);
-            currentVerbIndex = 0;
-            nextVerb();
-        }
+const TENSE_TYPES = {
+    1: 'prs',    // Present
+    2: 'prk',    // Perfect
+    3: 'prt',    // Preterite
+    4: 'frtrad'  // Translation
+};
 
-        function nextVerb() {    
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function startTraining() {
+    shuffleArray(verbs);
+    currentVerbIndex = 0;
+    nextVerb();
+}
+
+function getRandomTense() {
+    return Math.floor(Math.random() * 4) + 1;
+}
+
+function getPersonIndex(verb) {
+    if (verb.features && verb.features.isInformal === 1) {
+        return 1; // Force "du" form for informal verbs
+    }
+    return Math.floor(Math.random() * 6);
+}
+
+function generatePerfectForm(verb, personIndex) {
+    const auxiliary = verb.features && verb.features.aux === 'sein' ? 'sein' : 'haben';
+    const auxiliaryForms = {
+        'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
+        'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
+    };
+    return `${auxiliaryForms[auxiliary][personIndex]} ${verb.prk}`;
+}
+
+function nextVerb() {
     if (currentVerbIndex >= verbs.length) {
         document.getElementById('verbQuestion').innerText = "Tous les verbes sont terminés !";
         document.getElementById('verbInput').style.display = 'none';
@@ -823,13 +852,12 @@
     }
 
     currentVerb = verbs[currentVerbIndex];
-    currentFormIndex = Math.floor(Math.random() * currentVerb.prs.length);
-    currentTense = ['prs', 'prt', 'prk', 'frtrad'][Math.floor(Math.random() * 4)];
+    const tenseNumber = getRandomTense();
+    currentTense = TENSE_TYPES[tenseNumber];
+    currentFormIndex = getPersonIndex(currentVerb);
 
-    let pronoun = pronouns[currentFormIndex];
-    if (currentVerb.features && currentVerb.features.isInformal === 1) {
-        pronoun = "es"; // Use "du" for informal verbs
-    }
+    const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+    const pronoun = pronouns[currentFormIndex];
 
     let questionText;
     if (currentTense === 'frtrad') {
@@ -841,6 +869,9 @@
             'prk': 'au passé composé'
         };
         questionText = `Conjuguez "${currentVerb.deutsch}" ${tenseNames[currentTense]} pour "${pronoun}"`;
+        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+            questionText += " (verbe réfléchi)";
+        }
     }
 
     document.getElementById('verbQuestion').innerText = questionText;
@@ -849,46 +880,52 @@
     currentVerbIndex++;
 }
 
+function checkAnswer() {
+    const userAnswer = document.getElementById('verbInput').value.trim();
+    let correctAnswer;
 
-        function checkAnswer() {
-            const userAnswer = document.getElementById('verbInput').value.trim();
-            let correctAnswer;
-
-            if (currentTense === 'frtrad') {
-                correctAnswer = currentVerb.deutsch;
-            } else {
-                correctAnswer = currentVerb[currentTense][currentFormIndex];
-            }
-
-            const feedbackElement = document.getElementById('feedback');
-
-            if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
-                feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
-                feedbackElement.className = 'correct';
-            } else {
-                feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
-                feedbackElement.className = 'incorrect';
-            }
+    if (currentTense === 'frtrad') {
+        correctAnswer = currentVerb.deutsch;
+    } else if (currentTense === 'prk') {
+        correctAnswer = generatePerfectForm(currentVerb, currentFormIndex);
+        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+            const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
+            correctAnswer = reflexivePronouns[currentFormIndex] + ' ' + correctAnswer;
         }
-
-        function normalizeString(str) {
-            return str
-                .toLowerCase()
-                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                .replace(/[()]/g, "")
-                .trim();
+    } else {
+        correctAnswer = currentVerb[currentTense][currentFormIndex];
+        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+            const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
+            correctAnswer = reflexivePronouns[currentFormIndex] + ' ' + correctAnswer;
         }
+    }
 
-        const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+    const feedbackElement = document.getElementById('feedback');
+    if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
+        feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
+        feedbackElement.className = 'correct';
+    } else {
+        feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
+        feedbackElement.className = 'incorrect';
+    }
+}
 
-        document.addEventListener("DOMContentLoaded", startTraining);
+function normalizeString(str) {
+    return str
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[()]/g, "")
+        .trim();
+}
 
-        document.getElementById('verbInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                document.getElementById('submitButton').click();
-            }
-        });
+document.addEventListener("DOMContentLoaded", startTraining);
+
+document.getElementById('verbInput').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        document.getElementById('submitButton').click();
+    }
+});
     </script>
 </body>
 
