@@ -113,19 +113,47 @@
 <body>
     <div class="container">
         <span class="ellipsis">&nbsp;&#8942;&nbsp;</span>
-        <h1>entraineur de verbes telephone en cours</h1>
+        <h1>Entraineur de verbes telephone en cours</h1>
         <div id="verbContainer">
             <p id="verbQuestion"></p>
             <div class="input-container">
-                <input type="text" id="verbInput" placeholder="Enter your answer">
-                <button id="submitButton" onclick="checkAnswer()">&gt;</button>
+                <input type="text" id="verbInput" placeholder="ex.: habe/s'habiller/hat geflogt">
+    
             </div>
+<button id="combinedButton" class="action-button">Vérifier</button>
             <p id="feedback"></p>
         </div>
-        <button onclick="nextVerb()">Next Verb</button>
+        
     </div>
     <script>
-       
+     let isChecking = true;  // true = checking answer, false = ready for next verb
+
+function toggleButton() {
+    const button = document.getElementById('combinedButton');
+    if (isChecking) {
+        checkAnswer();
+        button.innerText = 'Suivant';
+        isChecking = false;
+    } else {
+        nextVerb();
+        button.innerText = 'Vérifier';
+        isChecking = true;
+    }
+}
+
+// Update the keypress event listener
+document.getElementById('verbInput').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        toggleButton();
+    }
+});
+
+// Add the button click event listener
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('combinedButton').addEventListener('click', toggleButton);
+    startTraining();
+});  
         const verbs = [
     {
         "deutsch": "beschweren",
