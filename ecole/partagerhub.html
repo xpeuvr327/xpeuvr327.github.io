@@ -53,28 +53,21 @@
             const shareButton = document.getElementById('shareButton');
             const statusElement = document.getElementById('status');
 
-            // Check if Web Share API is supported
             if (!navigator.share) {
-                statusElement.textContent = 'Web Share API is not supported in your browser';
+                statusElement.textContent = 'Impossible de partager. Cliquez sur le bouton pour copier le lien.';
                 shareButton.disabled = true;
                 return;
             }
 
             shareButton.addEventListener('click', async () => {
-                try {
                     await navigator.share({
-                        title: 'Classroom Web',
-                        text: 'Check out this classroom!',
+                        title: 'Ressources Collège',
+                        text: 'Jette un coup d&#39;oeil à ce site qui a tout pour réussir le collège',
                         url: 'http://213.55.162.9/104/'
                     });
-                    statusElement.textContent = 'Successfully shared!';
-                } catch (error) {
-                    console.error('Error sharing:', error);
-                    statusElement.textContent = 'Error sharing. Please try again.';
-                }
+                    statusElement.textContent = 'Merci d&#39;avoir partagé';
             });
 
-            // Simulate click for demo purposes
             shareButton.click();
         });
     </script>
