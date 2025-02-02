@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verb Trainer</title>
+    <title>Entraîneur de verbes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -259,7 +259,7 @@
 <body>
     <div class="container">
         <span class="ellipsis">&nbsp;&#8942;&nbsp;</span>
-        <h1>Verb Trainer</h1>
+        <h1>Entraîneur de verbes</h1>
         <div id="verbContainer">
             <p id="verbQuestion"></p>
             <div class="input-container">
@@ -275,8 +275,8 @@
         <div class="progress-container">
             <div class="progress-stats">
                 <span>Correct: <span id="correctCount">0</span></span>
-                <span>Progress: <span id="progressCount">0</span>/150</span>
-                <span>Success Rate: <span id="successRate">0</span>%</span>
+                <span>Progression: <span id="progressCount">0</span>/150</span>
+                <span>Taux de réussite: <span id="successRate">0</span>%</span>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progressFill" style="width: 0%"></div>
@@ -284,27 +284,27 @@
         </div>
         <div class="dropdown-menu" id="menuDropdown">
             <div class="menu-item" onclick="toggleSettings()">
-                <i>⚙️</i> Settings
+                <i>⚙️</i> Paramètres
             </div>
             <div class="menu-item" onclick="resetProgress()">
-                <i>🔄</i> Reset Progress
+                <i>🔄</i> Réinitialiser la progression
             </div>
             <div class="menu-item" onclick="toggleStats()">
-                <i>📊</i> Show Statistics
+                <i>📊</i> Afficher les statistiques
             </div>
             <div class="menu-item" onclick="toggleHelp()">
-                <i>❔</i> Help
+                <i>❔</i> Aide
             </div>
         </div>
         <div class="modal" id="settingsModal">
             <div class="modal-content">
                 <span class="close-modal" onclick="toggleSettings()">×</span>
-                <h2>Settings</h2>
+                <h2>Paramètres</h2>
                 <div class="settings-grid">
-                    <div class="settings-item active" onclick="toggleSetting(this, 'present')">Present Tense</div>
-                    <div class="settings-item active" onclick="toggleSetting(this, 'preterite')">Preterite</div>
-                    <div class="settings-item active" onclick="toggleSetting(this, 'perfect')">Perfect</div>
-                    <div class="settings-item active" onclick="toggleSetting(this, 'translation')">Translation</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'present')">Présent</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'preterite')">Prétérit</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'perfect')">Parfait</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'translation')">Traduction</div>
                 </div>
             </div>
         </div>
@@ -327,10 +327,11 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 verbs = await response.json();
+                loadProgress();
                 startTraining();
             } catch (error) {
                 console.error('Error loading verbs:', error);
-                document.getElementById('verbQuestion').innerText = "Error loading verbs. Please refresh the page.";
+                document.getElementById('verbQuestion').innerText = "Erreur de chargement des verbes. Veuillez actualiser la page.";
             }
         }
 
@@ -350,11 +351,10 @@
 
         function startTraining() {
             if (!verbs || verbs.length === 0) {
-                console.error('No verbs available');
+                console.error('Aucun verbe disponible');
                 return;
             }
             shuffleArray(verbs);
-            currentVerbIndex = 0;
             nextVerb();
         }
 
@@ -403,7 +403,7 @@
                     ${verb.features?.hasReflect ? '<p>Verbe réfléchi</p>' : ''}
                     ${verb.features?.hasParticle ? '<p>Verbe à particule séparable</p>' : ''}
                     ${verb.features?.aux === 'sein' ? '<p>Auxiliaire: sein</p>' : ''}
-                    ${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
+                    \\${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
                 </div>
                 <div class="conjugation-grid">
                     <table>
@@ -424,10 +424,10 @@
 
                     html += `
                         <tr>
-                            <td>${pronoun}</td>
+                            <td>\\${pronoun}</td>
                             <td>${getReflexiveForm(verb, pronoun, verb.prs[validPrsIndex])}</td>
                             <td>${getReflexiveForm(verb, pronoun, verb.prt[validPrtIndex])}</td>
-                            <td>${getReflexiveForm(verb, pronoun, perfectForm)}</td>
+                            <td>\\${getReflexiveForm(verb, pronoun, perfectForm)}</td>
                         </tr>`;
                 }
             } else {
@@ -441,10 +441,10 @@
 
                     html += `
                         <tr>
-                            <td>${pronoun}</td>
+                            <td>\\${pronoun}</td>
                             <td>${presentForm}</td>
                             <td>${preteritForm}</td>
-                            <td>${perfectForm}</td>
+                            <td>\\${perfectForm}</td>
                         </tr>`;
                 });
             }
@@ -500,6 +500,7 @@
             document.getElementById('showConjugations').innerText = 'Voir les conjugaisons';
 
             currentVerbIndex++;
+            saveProgress();
         }
 
         function checkAnswer() {
@@ -535,6 +536,7 @@
 
             updateProgress();
             document.getElementById('conjugationTable').style.display = 'block';
+            saveProgress();
         }
 
         function toggleButton() {
@@ -567,6 +569,7 @@
             document.getElementById('progressCount').textContent = totalVerbsAttempted;
             document.getElementById('successRate').textContent = successRate.toFixed(1);
             document.getElementById('progressFill').style.width = `${progressPercentage}%`;
+            saveProgress();
         }
 
         function toggleMenu() {
@@ -589,14 +592,30 @@
         }
 
         function resetProgress() {
-            if (confirm('Êtes-vous sûr(e) de vouloir réinitialiser votre progression?')) {
+            if (confirm('Êtes-vous sûr de vouloir réinitialiser votre progression ?')) {
                 correctAnswers = 0;
                 incorrectAnswers = 0;
                 totalVerbsAttempted = 0;
                 currentVerbIndex = 0;
                 updateProgress();
+                saveProgress();
                 startTraining();
             }
+        }
+
+        function saveProgress() {
+            localStorage.setItem('currentVerbIndex', currentVerbIndex);
+            localStorage.setItem('correctAnswers', correctAnswers);
+            localStorage.setItem('incorrectAnswers', incorrectAnswers);
+            localStorage.setItem('totalVerbsAttempted', totalVerbsAttempted);
+        }
+
+        function loadProgress() {
+            currentVerbIndex = parseInt(localStorage.getItem('currentVerbIndex')) || 0;
+            correctAnswers = parseInt(localStorage.getItem('correctAnswers')) || 0;
+            incorrectAnswers = parseInt(localStorage.getItem('incorrectAnswers')) || 0;
+            totalVerbsAttempted = parseInt(localStorage.getItem('totalVerbsAttempted')) || 0;
+            updateProgress();
         }
 
         document.addEventListener('DOMContentLoaded', function() {
