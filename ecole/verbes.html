@@ -384,80 +384,81 @@
             return `${baseForm} ${reflexivePronouns[pronoun]}`;
         }
 
-        function showConjugationTable() {
-            const verb = currentVerb;
-            if (!verb) return;
+       function showConjugationTable() {
+    const verb = currentVerb;
+    if (!verb) return;
 
-            const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
-            const auxiliary = verb.features?.aux === 'sein' ? 'sein' : 'haben';
-            const auxForms = {
-                'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
-                'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
-            };
+    const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+    const auxiliary = verb.features?.aux === 'sein' ? 'sein' : 'haben';
+    const auxForms = {
+        'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
+        'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
+    };
 
-            let html = `
-                <div class="verb-info" id="${verb.deutsch}">
-                    <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
-                    <p>Traduction: ${verb.frtrad}</p>
-                    ${verb.features?.isIrreg ? '<p>Verbe irrégulier</p>' : ''}
-                    ${verb.features?.hasReflect ? '<p>Verbe réfléchi</p>' : ''}
-                    ${verb.features?.hasParticle ? '<p>Verbe à particule séparable</p>' : ''}
-                    ${verb.features?.aux === 'sein' ? '<p>Auxiliaire: sein</p>' : ''}
-                    \\${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
-                </div>
-                <div class="conjugation-grid">
-                    <table>
-                        <tr>
-                            <th>Pronom</th>
-                            <th>Présent</th>
-                            <th>Prétérit</th>
-                            <th>Passé composé</th>
-                        </tr>`;
+    let html = `
+        <div class="verb-info" id="${verb.deutsch}">
+            <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
+            <p>Traduction: ${verb.frtrad}</p>
+            ${verb.features?.isIrreg ? '<p>Verbe irrégulier</p>' : ''}
+            ${verb.features?.hasReflect ? '<p>Verbe réfléchi</p>' : ''}
+            ${verb.features?.hasParticle ? '<p>Verbe à particule séparable</p>' : ''}
+            ${verb.features?.aux === 'sein' ? '<p>Auxiliaire: sein</p>' : ''}
+            ${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
+        </div>
+        <div class="conjugation-grid">
+            <table>
+                <tr>
+                    <th>Pronom</th>
+                    <th>Présent</th>
+                    <th>Prétérit</th>
+                    <th>Passé composé</th>
+                </tr>`;
 
-            if (verb.features?.isInformal === 1) {
-                const validPrsIndex = verb.prs.findIndex(form => form !== null);
-                const validPrtIndex = verb.prt.findIndex(form => form !== null);
+    if (verb.features?.isInformal === 1) {
+        const validPrsIndex = verb.prs.findIndex(form => form !== null);
+        const validPrtIndex = verb.prt.findIndex(form => form !== null);
 
-                if (validPrsIndex !== -1 && validPrtIndex !== -1) {
-                    const pronoun = pronouns[validPrsIndex];
-                    const perfectForm = `${auxForms[auxiliary][validPrsIndex]} ${verb.prk}`;
+        if (validPrsIndex !== -1 && validPrtIndex !== -1) {
+            const pronoun = pronouns[validPrsIndex];
+            const perfectForm = `${auxForms[auxiliary][validPrsIndex]} ${verb.prk}`;
 
-                    html += `
-                        <tr>
-                            <td>\\${pronoun}</td>
-                            <td>${getReflexiveForm(verb, pronoun, verb.prs[validPrsIndex])}</td>
-                            <td>${getReflexiveForm(verb, pronoun, verb.prt[validPrtIndex])}</td>
-                            <td>\\${getReflexiveForm(verb, pronoun, perfectForm)}</td>
-                        </tr>`;
-                }
-            } else {
-                pronouns.forEach((pronoun, i) => {
-                    if (verb.prs[i] === null && verb.prt[i] === null) return;
-
-                    const presentForm = verb.prs[i] ? getReflexiveForm(verb, pronoun, verb.prs[i]) : '-';
-                    const preteritForm = verb.prt[i] ? getReflexiveForm(verb, pronoun, verb.prt[i]) : '-';
-                    const perfectForm = verb.prk ?
-                        getReflexiveForm(verb, pronoun, `${auxForms[auxiliary][i]} ${verb.prk}`) : '-';
-
-                    html += `
-                        <tr>
-                            <td>\\${pronoun}</td>
-                            <td>${presentForm}</td>
-                            <td>${preteritForm}</td>
-                            <td>\\${perfectForm}</td>
-                        </tr>`;
-                });
-            }
-
-            html += '</table></div>';
-            document.getElementById('conjugationDetails').innerHTML = html;
-            document.getElementById('conjugationDetails').style.display = 'block';
-
-            const verbInfo = document.getElementById(verb.deutsch);
-            if (verbInfo) {
-                verbInfo.scrollIntoView({ behavior: 'smooth' });
-            }
+            html += `
+                <tr>
+                    <td>${pronoun}</td>
+                    <td>${getReflexiveForm(verb, pronoun, verb.prs[validPrsIndex])}</td>
+                    <td>${getReflexiveForm(verb, pronoun, verb.prt[validPrtIndex])}</td>
+                    <td>${getReflexiveForm(verb, pronoun, perfectForm)}</td>
+                </tr>`;
         }
+    } else {
+        pronouns.forEach((pronoun, i) => {
+            if (verb.prs[i] === null && verb.prt[i] === null) return;
+
+            const presentForm = verb.prs[i] ? getReflexiveForm(verb, pronoun, verb.prs[i]) : '-';
+            const preteritForm = verb.prt[i] ? getReflexiveForm(verb, pronoun, verb.prt[i]) : '-';
+            const perfectForm = verb.prk ?
+                getReflexiveForm(verb, pronoun, `${auxForms[auxiliary][i]} ${verb.prk}`) : '-';
+
+            html += `
+                <tr>
+                    <td>${pronoun}</td>
+                    <td>${presentForm}</td>
+                    <td>${preteritForm}</td>
+                    <td>${perfectForm}</td>
+                </tr>`;
+        });
+    }
+
+    html += '</table></div>';
+    document.getElementById('conjugationDetails').innerHTML = html;
+    document.getElementById('conjugationDetails').style.display = 'block';
+
+    const verbInfo = document.getElementById(verb.deutsch);
+    if (verbInfo) {
+        verbInfo.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 
         function nextVerb() {
             if (currentVerbIndex >= verbs.length) {
@@ -503,41 +504,50 @@
             saveProgress();
         }
 
-        function checkAnswer() {
-            const userAnswer = document.getElementById('verbInput').value.trim();
-            let correctAnswer;
+        function generatePerfectForm(verb, personIndex) {
+    const auxiliary = verb.features?.aux === 'sein' ? 'sein' : 'haben';
+    const auxForms = {
+        'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
+        'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
+    };
+    return `${auxForms[auxiliary][personIndex]} ${verb.prk}`;
+}
 
-            if (currentTense === 'frtrad') {
-                correctAnswer = currentVerb.deutsch;
-            } else if (currentTense === 'prk') {
-                correctAnswer = generatePerfectForm(currentVerb, currentFormIndex);
-                if (currentVerb.features && currentVerb.features.hasReflect === 1) {
-                    const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
-                    correctAnswer = correctAnswer + ' ' + reflexivePronouns[currentFormIndex];
-                }
-            } else {
-                correctAnswer = currentVerb[currentTense][currentFormIndex];
-                if (currentVerb.features && currentVerb.features.hasReflect === 1) {
-                    const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
-                    correctAnswer = correctAnswer + ' ' + reflexivePronouns[currentFormIndex];
-                }
-            }
+function checkAnswer() {
+    const userAnswer = document.getElementById('verbInput').value.trim();
+    let correctAnswer;
 
-            const feedbackElement = document.getElementById('feedback');
-            if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
-                feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
-                feedbackElement.className = 'correct';
-                correctAnswers++;
-            } else {
-                feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
-                feedbackElement.className = 'incorrect';
-                incorrectAnswers++;
-            }
-
-            updateProgress();
-            document.getElementById('conjugationTable').style.display = 'block';
-            saveProgress();
+    if (currentTense === 'frtrad') {
+        correctAnswer = currentVerb.deutsch;
+    } else if (currentTense === 'prk') {
+        correctAnswer = generatePerfectForm(currentVerb, currentFormIndex);
+        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+            const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
+            correctAnswer = correctAnswer + ' ' + reflexivePronouns[currentFormIndex];
         }
+    } else {
+        correctAnswer = currentVerb[currentTense][currentFormIndex];
+        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+            const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
+            correctAnswer = correctAnswer + ' ' + reflexivePronouns[currentFormIndex];
+        }
+    }
+
+    const feedbackElement = document.getElementById('feedback');
+    if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
+        feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
+        feedbackElement.className = 'correct';
+        correctAnswers++;
+    } else {
+        feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
+        feedbackElement.className = 'incorrect';
+        incorrectAnswers++;
+    }
+
+    updateProgress();
+    document.getElementById('conjugationTable').style.display = 'block';
+    saveProgress();
+}
 
         function toggleButton() {
             const button = document.getElementById('combinedButton');
