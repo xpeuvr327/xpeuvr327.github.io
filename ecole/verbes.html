@@ -95,6 +95,43 @@ async function fetchVerbs() {
         document.getElementById('verbQuestion').innerText = "Erreur de chargement des verbes. Veuillez actualiser la page.";
     }
 }
+          function nextVerb() {
+            if (currentVerbIndex >= verbs.length) {
+                document.getElementById('verbQuestion').innerText = "Tous les verbes sont terminés !";
+                document.getElementById('verbInput').style.display = 'none';
+                document.getElementById('combinedButton').style.display = 'none';
+                document.getElementById('feedback').innerText = '';
+                document.getElementById('conjugationTable').style.display = 'none';
+                return;
+            }
+            currentVerb = verbs[currentVerbIndex];
+            const tenseNumber = getRandomTense();
+            currentTense = TENSE_TYPES[tenseNumber];
+            currentFormIndex = getPersonIndex(currentVerb);
+            const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+            const pronoun = pronouns[currentFormIndex];
+            let questionText;
+            if (currentTense === 'frtrad') {
+                questionText = `Traduisez "${currentVerb.frtrad}" en allemand.`;
+            } else {
+                const tenseNames = {
+                    'prs': 'au présent',
+                    'prt': 'au prétérit',
+                    'prk': 'au passé composé'
+                };
+                questionText = `Conjuguez "${currentVerb.deutsch}" ${tenseNames[currentTense]} pour "${pronoun}"`;
+                if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+                    questionText += " (verbe réfléchi)";
+                }
+            }
+            document.getElementById('verbQuestion').innerText = questionText;
+            document.getElementById('verbInput').value = '';
+            document.getElementById('feedback').innerText = '';
+            document.getElementById('conjugationTable').style.display = 'none';
+            document.getElementById('conjugationDetails').style.display = 'none';
+            document.getElementById('showConjugations').innerText = 'Voir les conjugaisons';
+            currentVerbIndex++;
+        }
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
