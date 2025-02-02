@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>verbes feuillete</title>
+    <title>Verb Trainer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,7 +17,7 @@
         }
 
         .container {
-            position: relative; /* Ensure the container is positioned relative */
+            position: relative;
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -25,23 +25,23 @@
             text-align: center;
             width: 90%;
             max-width: 400px;
-            overflow: hidden; /* Hide overflow */
+            overflow: hidden;
         }
 
-       .ellipsis {
-    position: absolute; /* Position the ellipsis absolutely */
-    top: 5%; /* Adjust the top position as needed */
-    right: 5%; /* Adjust the right position as needed */
-    font-size: 24px; /* Adjust the font size as needed */
-    transition: background-color 0.3s, border-radius 0.3s; /* Smooth transition for background color and border radius */
-}
+        .ellipsis {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            font-size: 24px;
+            transition: background-color 0.3s, border-radius 0.3s;
+        }
 
-.ellipsis:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Change the background color on hover */
-    border-radius: 50%; /* Make the background rounded */
-    padding: 5px; /* Add some padding to make the hover area larger */
-    overflow:hidden;
-}
+        .ellipsis:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            padding: 5px;
+            overflow: hidden;
+        }
 
         h1 {
             color: #333;
@@ -106,301 +106,521 @@
             color: white;
             cursor: pointer;
             font-size: 1em;
-        }.conjugation-grid {
-    margin-top: 20px;
-    overflow-x: auto;
-}
+        }
 
-.conjugation-grid table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
+        .conjugation-grid {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
 
-.conjugation-grid th, .conjugation-grid td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
+        .conjugation-grid table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
 
-.conjugation-grid th {
-    background-color: #f4f4f4;
-}
+        .conjugation-grid th, .conjugation-grid td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-.secondary-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        .conjugation-grid th {
+            background-color: #f4f4f4;
+        }
 
-.secondary-button:hover {
-    background-color: #e0e0e0;
-}
+        .secondary-button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .secondary-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .progress-bar {
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 3px;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            height: 20px;
+            border-radius: 8px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .menu-item i {
+            font-size: 1.2em;
+            width: 20px;
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+        }
+
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .settings-item {
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+
+        .settings-item:hover {
+            background: #e0e0e0;
+        }
+
+        .settings-item.active {
+            background: #ff9a9e;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <span class="ellipsis">&nbsp;&#8942;&nbsp;</span>
-        <h1>Entraineur de verbes</h1>
+        <h1>Verb Trainer</h1>
         <div id="verbContainer">
             <p id="verbQuestion"></p>
             <div class="input-container">
                 <input type="text" id="verbInput" placeholder="ex.: habe/s'habiller/hat geflogt">
-    
             </div>
-<button id="combinedButton" class="action-button">Vérifier</button>
+            <button id="combinedButton" class="action-button">Vérifier</button>
             <p id="feedback"></p>
-				<div id="conjugationTable" style="display: none;">
-    <button id="showConjugations" class="secondary-button">Voir les conjugaisons</button>
-    <div id="conjugationDetails" style="display: none;"></div>
-</div>
+            <div id="conjugationTable" style="display: none;">
+                <button id="showConjugations" class="secondary-button">Voir les conjugaisons</button>
+                <div id="conjugationDetails" style="display: none;"></div>
+            </div>
         </div>
-        
+        <div class="progress-container">
+            <div class="progress-stats">
+                <span>Correct: <span id="correctCount">0</span></span>
+                <span>Progress: <span id="progressCount">0</span>/150</span>
+                <span>Success Rate: <span id="successRate">0</span>%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+        </div>
+        <div class="dropdown-menu" id="menuDropdown">
+            <div class="menu-item" onclick="toggleSettings()">
+                <i>⚙️</i> Settings
+            </div>
+            <div class="menu-item" onclick="resetProgress()">
+                <i>🔄</i> Reset Progress
+            </div>
+            <div class="menu-item" onclick="toggleStats()">
+                <i>📊</i> Show Statistics
+            </div>
+            <div class="menu-item" onclick="toggleHelp()">
+                <i>❔</i> Help
+            </div>
+        </div>
+        <div class="modal" id="settingsModal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="toggleSettings()">×</span>
+                <h2>Settings</h2>
+                <div class="settings-grid">
+                    <div class="settings-item active" onclick="toggleSetting(this, 'present')">Present Tense</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'preterite')">Preterite</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'perfect')">Perfect</div>
+                    <div class="settings-item active" onclick="toggleSetting(this, 'translation')">Translation</div>
+                </div>
+            </div>
+        </div>
     </div>
     <script>
+        let verbs = [];
+        let currentVerbIndex = 0;
+        let currentVerb;
+        let currentFormIndex;
+        let currentTense;
+        let isChecking = true;
+        let totalVerbsAttempted = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
 
-async function fetchVerbs() { const response = await fetch('verbs-150.json'); verbs = await response.json();}
-let currentVerbIndex = 0;
-let currentVerb;
-let currentFormIndex;
-let currentTense;
-let isChecking = true;
-
-const TENSE_TYPES = {
-    1: 'prs',    // Present
-    2: 'prk',    // Perfect
-    3: 'prt',    // Preterite
-    4: 'frtrad'  // Translation
-};
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-}
-
-function startTraining() {
-    shuffleArray(verbs);
-    currentVerbIndex = 0;
-    nextVerb();
-}
-
-function getRandomTense() {
-    return Math.floor(Math.random() * 4) + 1;
-}
-
-function getPersonIndex(verb) {
-    if (verb.features && verb.features.isInformal === 1) {
-        return 1; // Force "du" form for informal verbs
-    }
-    return Math.floor(Math.random() * 6);
-}
-
-function getReflexiveForm(verb, pronoun, baseForm) {
-    if (!verb.features?.hasReflect) return baseForm;
-    
-    const reflexivePronouns = {
-        'ich': 'mich',
-        'du': 'dich',
-        'er/sie/es': 'sich',
-        'wir': 'uns',
-        'ihr': 'euch',
-        'Sie': 'sich'
-    };
-    
-    return `${baseForm} ${reflexivePronouns[pronoun]}`;
-}
-
-function showConjugationTable() {
-    const verb = currentVerb;
-    if (!verb) return;
-    
-    const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
-    const auxiliary = verb.features?.aux === 'sein' ? 'sein' : 'haben';
-    const auxForms = {
-        'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
-        'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
-    };
-
-    let html = `
-        <div class="verb-info" id="${verb.deutsch}">
-            <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
-            <p>Traduction: ${verb.frtrad}</p>
-            ${verb.features?.isIrreg ? '<p>Verbe irrégulier</p>' : ''}
-            ${verb.features?.hasReflect ? '<p>Verbe réfléchi</p>' : ''}
-            ${verb.features?.hasParticle ? '<p>Verbe à particule séparable</p>' : ''}
-            ${verb.features?.aux === 'sein' ? '<p>Auxiliaire: sein</p>' : ''}
-            ${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
-        </div>
-        <div class="conjugation-grid">
-            <table>
-                <tr>
-                    <th>Pronom</th>
-                    <th>Présent</th>
-                    <th>Prétérit</th>
-                    <th>Passé composé</th>
-                </tr>`;
-
-    if (verb.features?.isInformal === 1) {
-        // For informal verbs, only show the valid forms (usually "es" form)
-        const validPrsIndex = verb.prs.findIndex(form => form !== null);
-        const validPrtIndex = verb.prt.findIndex(form => form !== null);
-
-        if (validPrsIndex !== -1 && validPrtIndex !== -1) {
-            const pronoun = pronouns[validPrsIndex];
-            const perfectForm = `${auxForms[auxiliary][validPrsIndex]} ${verb.prk}`;
-            
-            html += `
-                <tr>
-                    <td>${pronoun}</td>
-                    <td>${getReflexiveForm(verb, pronoun, verb.prs[validPrsIndex])}</td>
-                    <td>${getReflexiveForm(verb, pronoun, verb.prt[validPrtIndex])}</td>
-                    <td>${getReflexiveForm(verb, pronoun, perfectForm)}</td>
-                </tr>`;
+        async function fetchVerbs() {
+            try {
+                const response = await fetch('verbs-150.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                verbs = await response.json();
+                startTraining();
+            } catch (error) {
+                console.error('Error loading verbs:', error);
+                document.getElementById('verbQuestion').innerText = "Error loading verbs. Please refresh the page.";
+            }
         }
-    } else {
-        // For regular verbs, show all forms
-        pronouns.forEach((pronoun, i) => {
-            if (verb.prs[i] === null && verb.prt[i] === null) return;
 
-            const presentForm = verb.prs[i] ? getReflexiveForm(verb, pronoun, verb.prs[i]) : '-';
-            const preteritForm = verb.prt[i] ? getReflexiveForm(verb, pronoun, verb.prt[i]) : '-';
-            const perfectForm = verb.prk ? 
-                getReflexiveForm(verb, pronoun, `${auxForms[auxiliary][i]} ${verb.prk}`) : '-';
-
-            html += `
-                <tr>
-                    <td>${pronoun}</td>
-                    <td>${presentForm}</td>
-                    <td>${preteritForm}</td>
-                    <td>${perfectForm}</td>
-                </tr>`;
-        });
-    }
-
-    html += '</table></div>';
-    document.getElementById('conjugationDetails').innerHTML = html;
-    document.getElementById('conjugationDetails').style.display = 'block';
-    
-    const verbInfo = document.getElementById(verb.deutsch);
-    if (verbInfo) {
-        verbInfo.scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
-function nextVerb() {
-    if (currentVerbIndex >= verbs.length) {
-        document.getElementById('verbQuestion').innerText = "Tous les verbes sont terminés !";
-        document.getElementById('verbInput').style.display = 'none';
-        document.getElementById('combinedButton').style.display = 'none';
-        document.getElementById('feedback').innerText = '';
-        document.getElementById('conjugationTable').style.display = 'none';
-        return;
-    }
-
-    currentVerb = verbs[currentVerbIndex];
-    const tenseNumber = getRandomTense();
-    currentTense = TENSE_TYPES[tenseNumber];
-    currentFormIndex = getPersonIndex(currentVerb);
-
-    const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
-    const pronoun = pronouns[currentFormIndex];
-
-    let questionText;
-    if (currentTense === 'frtrad') {
-        questionText = `Traduisez "${currentVerb.frtrad}" en allemand.`;
-    } else {
-        const tenseNames = {
-            'prs': 'au présent',
-            'prt': 'au prétérit',
-            'prk': 'au passé composé'
+        const TENSE_TYPES = {
+            1: 'prs',
+            2: 'prk',
+            3: 'prt',
+            4: 'frtrad'
         };
-        questionText = `Conjuguez "${currentVerb.deutsch}" ${tenseNames[currentTense]} pour "${pronoun}"`;
-        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
-            questionText += " (verbe réfléchi)";
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
         }
-    }
 
-    document.getElementById('verbQuestion').innerText = questionText;
-    document.getElementById('verbInput').value = '';
-    document.getElementById('feedback').innerText = '';
-    document.getElementById('conjugationTable').style.display = 'none';
-    document.getElementById('conjugationDetails').style.display = 'none';
-    document.getElementById('showConjugations').innerText = 'Voir les conjugaisons';
-    
-    currentVerbIndex++;
-}
-
-function checkAnswer() {
-    const userAnswer = document.getElementById('verbInput').value.trim();
-    let correctAnswer;
-
-    if (currentTense === 'frtrad') {
-        correctAnswer = currentVerb.deutsch;
-    } else if (currentTense === 'prk') {
-        correctAnswer = generatePerfectForm(currentVerb, currentFormIndex);
-        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
-            const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
-            correctAnswer = correctAnswer + ' ' +reflexivePronouns[currentFormIndex];
+        function startTraining() {
+            if (!verbs || verbs.length === 0) {
+                console.error('No verbs available');
+                return;
+            }
+            shuffleArray(verbs);
+            currentVerbIndex = 0;
+            nextVerb();
         }
-    } else {
-        correctAnswer = currentVerb[currentTense][currentFormIndex];
-        if (currentVerb.features && currentVerb.features.hasReflect === 1) {
-            const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
-            correctAnswer = correctAnswer + ' '+reflexivePronouns[currentFormIndex] ;
+
+        function getRandomTense() {
+            return Math.floor(Math.random() * 4) + 1;
         }
-    }
 
-    const feedbackElement = document.getElementById('feedback');
-    if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
-        feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
-        feedbackElement.className = 'correct';
-    } else {
-        feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
-        feedbackElement.className = 'incorrect';
-    }
-    
-    document.getElementById('conjugationTable').style.display = 'block';
-}
-
-function toggleButton() {
-    const button = document.getElementById('combinedButton');
-    if (isChecking) {
-        checkAnswer();
-        button.innerText = 'Suivant';
-        isChecking = false;
-    } else {
-        nextVerb();
-        button.innerText = 'Vérifier';
-        isChecking = true;
-    }
-}
-
-function normalizeString(str) {
-    return str
-        .toLowerCase()
-        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        .replace(/[()]/g, "")
-        .trim();
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('combinedButton').addEventListener('click', toggleButton);
-    document.getElementById('showConjugations').addEventListener('click', showConjugationTable);
-    document.getElementById('verbInput').addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            toggleButton();
+        function getPersonIndex(verb) {
+            if (verb.features && verb.features.isInformal === 1) {
+                return 1;
+            }
+            return Math.floor(Math.random() * 6);
         }
-    });
-    startTraining();
-});
-fetchVerbs();    </script>
+
+        function getReflexiveForm(verb, pronoun, baseForm) {
+            if (!verb.features?.hasReflect) return baseForm;
+
+            const reflexivePronouns = {
+                'ich': 'mich',
+                'du': 'dich',
+                'er/sie/es': 'sich',
+                'wir': 'uns',
+                'ihr': 'euch',
+                'Sie': 'sich'
+            };
+
+            return `${baseForm} ${reflexivePronouns[pronoun]}`;
+        }
+
+        function showConjugationTable() {
+            const verb = currentVerb;
+            if (!verb) return;
+
+            const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+            const auxiliary = verb.features?.aux === 'sein' ? 'sein' : 'haben';
+            const auxForms = {
+                'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
+                'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
+            };
+
+            let html = `
+                <div class="verb-info" id="${verb.deutsch}">
+                    <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
+                    <p>Traduction: ${verb.frtrad}</p>
+                    ${verb.features?.isIrreg ? '<p>Verbe irrégulier</p>' : ''}
+                    ${verb.features?.hasReflect ? '<p>Verbe réfléchi</p>' : ''}
+                    ${verb.features?.hasParticle ? '<p>Verbe à particule séparable</p>' : ''}
+                    ${verb.features?.aux === 'sein' ? '<p>Auxiliaire: sein</p>' : ''}
+                    ${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
+                </div>
+                <div class="conjugation-grid">
+                    <table>
+                        <tr>
+                            <th>Pronom</th>
+                            <th>Présent</th>
+                            <th>Prétérit</th>
+                            <th>Passé composé</th>
+                        </tr>`;
+
+            if (verb.features?.isInformal === 1) {
+                const validPrsIndex = verb.prs.findIndex(form => form !== null);
+                const validPrtIndex = verb.prt.findIndex(form => form !== null);
+
+                if (validPrsIndex !== -1 && validPrtIndex !== -1) {
+                    const pronoun = pronouns[validPrsIndex];
+                    const perfectForm = `${auxForms[auxiliary][validPrsIndex]} ${verb.prk}`;
+
+                    html += `
+                        <tr>
+                            <td>${pronoun}</td>
+                            <td>${getReflexiveForm(verb, pronoun, verb.prs[validPrsIndex])}</td>
+                            <td>${getReflexiveForm(verb, pronoun, verb.prt[validPrtIndex])}</td>
+                            <td>${getReflexiveForm(verb, pronoun, perfectForm)}</td>
+                        </tr>`;
+                }
+            } else {
+                pronouns.forEach((pronoun, i) => {
+                    if (verb.prs[i] === null && verb.prt[i] === null) return;
+
+                    const presentForm = verb.prs[i] ? getReflexiveForm(verb, pronoun, verb.prs[i]) : '-';
+                    const preteritForm = verb.prt[i] ? getReflexiveForm(verb, pronoun, verb.prt[i]) : '-';
+                    const perfectForm = verb.prk ?
+                        getReflexiveForm(verb, pronoun, `${auxForms[auxiliary][i]} ${verb.prk}`) : '-';
+
+                    html += `
+                        <tr>
+                            <td>${pronoun}</td>
+                            <td>${presentForm}</td>
+                            <td>${preteritForm}</td>
+                            <td>${perfectForm}</td>
+                        </tr>`;
+                });
+            }
+
+            html += '</table></div>';
+            document.getElementById('conjugationDetails').innerHTML = html;
+            document.getElementById('conjugationDetails').style.display = 'block';
+
+            const verbInfo = document.getElementById(verb.deutsch);
+            if (verbInfo) {
+                verbInfo.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function nextVerb() {
+            if (currentVerbIndex >= verbs.length) {
+                document.getElementById('verbQuestion').innerText = "Tous les verbes sont terminés !";
+                document.getElementById('verbInput').style.display = 'none';
+                document.getElementById('combinedButton').style.display = 'none';
+                document.getElementById('feedback').innerText = '';
+                document.getElementById('conjugationTable').style.display = 'none';
+                return;
+            }
+
+            currentVerb = verbs[currentVerbIndex];
+            const tenseNumber = getRandomTense();
+            currentTense = TENSE_TYPES[tenseNumber];
+            currentFormIndex = getPersonIndex(currentVerb);
+
+            const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+            const pronoun = pronouns[currentFormIndex];
+
+            let questionText;
+            if (currentTense === 'frtrad') {
+                questionText = `Traduisez "${currentVerb.frtrad}" en allemand.`;
+            } else {
+                const tenseNames = {
+                    'prs': 'au présent',
+                    'prt': 'au prétérit',
+                    'prk': 'au passé composé'
+                };
+                questionText = `Conjuguez "${currentVerb.deutsch}" ${tenseNames[currentTense]} pour "${pronoun}"`;
+                if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+                    questionText += " (verbe réfléchi)";
+                }
+            }
+
+            document.getElementById('verbQuestion').innerText = questionText;
+            document.getElementById('verbInput').value = '';
+            document.getElementById('feedback').innerText = '';
+            document.getElementById('conjugationTable').style.display = 'none';
+            document.getElementById('conjugationDetails').style.display = 'none';
+            document.getElementById('showConjugations').innerText = 'Voir les conjugaisons';
+
+            currentVerbIndex++;
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('verbInput').value.trim();
+            let correctAnswer;
+
+            if (currentTense === 'frtrad') {
+                correctAnswer = currentVerb.deutsch;
+            } else if (currentTense === 'prk') {
+                correctAnswer = generatePerfectForm(currentVerb, currentFormIndex);
+                if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+                    const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
+                    correctAnswer = correctAnswer + ' ' + reflexivePronouns[currentFormIndex];
+                }
+            } else {
+                correctAnswer = currentVerb[currentTense][currentFormIndex];
+                if (currentVerb.features && currentVerb.features.hasReflect === 1) {
+                    const reflexivePronouns = ['mich', 'dich', 'sich', 'uns', 'euch', 'sich'];
+                    correctAnswer = correctAnswer + ' ' + reflexivePronouns[currentFormIndex];
+                }
+            }
+
+            const feedbackElement = document.getElementById('feedback');
+            if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
+                feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
+                feedbackElement.className = 'correct';
+                correctAnswers++;
+            } else {
+                feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
+                feedbackElement.className = 'incorrect';
+                incorrectAnswers++;
+            }
+
+            updateProgress();
+            document.getElementById('conjugationTable').style.display = 'block';
+        }
+
+        function toggleButton() {
+            const button = document.getElementById('combinedButton');
+            if (isChecking) {
+                checkAnswer();
+                button.innerText = 'Suivant';
+                isChecking = false;
+            } else {
+                nextVerb();
+                button.innerText = 'Vérifier';
+                isChecking = true;
+            }
+        }
+
+        function normalizeString(str) {
+            return str
+                .toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/[()]/g, "")
+                .trim();
+        }
+
+        function updateProgress() {
+            totalVerbsAttempted = correctAnswers + incorrectAnswers;
+            const progressPercentage = (totalVerbsAttempted / verbs.length) * 100;
+            const successRate = totalVerbsAttempted > 0 ? (correctAnswers / totalVerbsAttempted) * 100 : 0;
+
+            document.getElementById('correctCount').textContent = correctAnswers;
+            document.getElementById('progressCount').textContent = totalVerbsAttempted;
+            document.getElementById('successRate').textContent = successRate.toFixed(1);
+            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
+        }
+
+        function toggleMenu() {
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function toggleSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleSetting(element, setting) {
+            element.classList.toggle('active');
+            updateAvailableTenses();
+        }
+
+        function updateAvailableTenses() {
+            const activeSettings = document.querySelectorAll('.settings-item.active');
+        }
+
+        function resetProgress() {
+            if (confirm('Êtes-vous sûr(e) de vouloir réinitialiser votre progression?')) {
+                correctAnswers = 0;
+                incorrectAnswers = 0;
+                totalVerbsAttempted = 0;
+                currentVerbIndex = 0;
+                updateProgress();
+                startTraining();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('combinedButton').addEventListener('click', toggleButton);
+            document.getElementById('showConjugations').addEventListener('click', showConjugationTable);
+            document.getElementById('verbInput').addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    toggleButton();
+                }
+            });
+            document.querySelector('.ellipsis').addEventListener('click', toggleMenu);
+            document.addEventListener('click', function(event) {
+                const dropdown = document.getElementById('menuDropdown');
+                const ellipsis = document.querySelector('.ellipsis');
+                if (!dropdown.contains(event.target) && !ellipsis.contains(event.target)) {
+                    dropdown.classList.remove('show');
+                }
+            });
+            startTraining();
+        });
+
+        fetchVerbs();
+    </script>
 </body>
 
-</html>	
+</html>
