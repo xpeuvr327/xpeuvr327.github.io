@@ -89,7 +89,12 @@ async function fetchVerbs() {
         document.getElementById('verbQuestion').innerText = "Erreur de chargement des verbes. Veuillez actualiser la page.";
     }
 }
-
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 function getRandomTense() {
     return Math.floor(Math.random() * 4) + 1;
 }
