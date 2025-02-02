@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partage le site</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .share-container {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        #status {
+            margin-top: 1rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="share-container">
+        <h1>Partager le lien</h1>
+<p>http://lesitedela104.webredirect.org/104/<p>
+        <button id="shareButton">Share Link</button>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shareButton = document.getElementById('shareButton');
+            const statusElement = document.getElementById('status');
+
+            // Check if Web Share API is supported
+            if (!navigator.share) {
+                statusElement.textContent = 'Web Share API is not supported in your browser';
+                shareButton.disabled = true;
+                return;
+            }
+
+            shareButton.addEventListener('click', async () => {
+                try {
+                    await navigator.share({
+                        title: 'Classroom Web',
+                        text: 'Check out this classroom!',
+                        url: 'http://213.55.162.9/104/'
+                    });
+                    statusElement.textContent = 'Successfully shared!';
+                } catch (error) {
+                    console.error('Error sharing:', error);
+                    statusElement.textContent = 'Error sharing. Please try again.';
+                }
+            });
+
+            // Simulate click for demo purposes
+            shareButton.click();
+        });
+    </script>
+</body>
+</html>
