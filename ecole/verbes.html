@@ -74,7 +74,13 @@ let correctAnswers = 0;
 let incorrectAnswers = 0;
 let currentLevel = 1;
 const LEVEL_THRESHOLD = 3; // Number of forms to consider a verb as completed
-
+        function toggleButton() {
+@@ -567,6 +569,7 @@ <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
+            document.getElementById('progressCount').textContent = totalVerbsAttempted;
+            document.getElementById('successRate').textContent = successRate.toFixed(1);
+            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
+            saveProgress();
+        }
 async function fetchVerbs() {
     try {
         const response = await fetch('verbs-150.json');
