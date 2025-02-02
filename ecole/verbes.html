@@ -75,11 +75,16 @@ let incorrectAnswers = 0;
 let currentLevel = 1;
 const LEVEL_THRESHOLD = 3; // Number of forms to consider a verb as completed
         function toggleButton() {
-            <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
-            document.getElementById('progressCount').textContent = totalVerbsAttempted;
-            document.getElementById('successRate').textContent = successRate.toFixed(1);
-            document.getElementById('progressFill').style.width = `${progressPercentage}%`;
-            saveProgress();
+            const button = document.getElementById('combinedButton');
+            if (isChecking) {
+                checkAnswer();
+                button.innerText = 'Suivant';
+                isChecking = false;
+            } else {
+                nextVerb();
+                button.innerText = 'Vérifier';
+                isChecking = true;
+            }
         }
 async function fetchVerbs() {
     try {
