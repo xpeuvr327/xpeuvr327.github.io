@@ -109,7 +109,16 @@ function generatePerfectForm(verb, personIndex) {
     };
     return `${auxForms[auxiliary][personIndex]} ${verb.prk}`;
 }
-
+function startTraining() {
+    if (!verbs || verbs.length === 0) {
+        console.error('No verbs available');
+        console.error('Aucun verbe disponible');
+        return;
+    }
+    shuffleArray(verbs);
+    currentVerbIndex = 0;
+    nextVerb();
+}
 function checkAnswer() {
     const userAnswer = document.getElementById('verbInput').value.trim();
     let correctAnswer;
