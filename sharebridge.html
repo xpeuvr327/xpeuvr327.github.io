@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail de partage</title>
+</head>
+<body>
+    <h1>Partage // add the ?title here</h1>
+    <button id="shareButton">Share</button>
+    <div id="errorMessage" style="color: red;"></div>
+
+    <script>
+        const whitelist = ['http://lehostmaison.mywire.org', 'lesitedela104.webredirect.org','213.55.162.9'];
+
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                url: params.get('url'),
+                title: params.get('title'),
+                content: params.get('content')
+            };
+        }
+
+        function isReferrerAllowed() {
+            const referrer = document.referrer;
+            if (!referrer) return false;
+            const referrerOrigin = new URL(referrer).origin;
+            return whitelist.includes(referrerOrigin);
+        }
+
+        function initializeShareButton() {
+            const { url, title, content } = getQueryParams();
+            const shareButton = document.getElementById('shareButton');
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (!isReferrerAllowed()) {
+                shareButton.disabled = true;
+                errorMessage.textContent = 'erreur inconnue';
+                return;
+            }
+            if (navigator.share) {
+                shareButton.addEventListener('click', async () => {
+                    try {
+                        await navigator.share({
+                            title: title,
+                            text: content,
+                            url: url
+                        });
+                        console.log('Shared successfully');
+                    } catch (error) {
+                        console.error('Error sharing:', error);
+                    }
+                });
+            } else {
+                shareButton.disabled = true;
+                shareButton.textContent = 'erreur: appareil peut-être trop ancien';
+            }
+        }
+        window.onload = initializeShareButton;
+    </script>
+</body>
+</html>
