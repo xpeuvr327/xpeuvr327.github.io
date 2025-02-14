@@ -6,12 +6,13 @@
     <title>Portail de partage</title>
 </head>
 <body>
-    <h1>Partage // add the ?title here</h1>
-    <button id="shareButton">Share</button>
+    <h1>Partage!</h1>
+  <p>Vous &ecirc;tes sur cette page car il vous a été demandé de partager un site ou um projet.</p>
+    <button id="shareButton">Partager!</button>
     <div id="errorMessage" style="color: red;"></div>
 
     <script>
-        const whitelist = ['http://lehostmaison.mywire.org', 'lesitedela104.webredirect.org','213.55.162.9'];
+        const whitelist = ['https://xpeuvr327.github.io','http://lehostmaison.mywire.org', 'http://lesitedela104.webredirect.org','http://213.55.162.9', 'http://192.168.1.77'];
 
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
@@ -24,7 +25,8 @@
 
         function isReferrerAllowed() {
             const referrer = document.referrer;
-            if (!referrer) return false;
+            if (!referrer) return true;
+            if(referrer==undefined) return true;
             const referrerOrigin = new URL(referrer).origin;
             return whitelist.includes(referrerOrigin);
         }
@@ -36,7 +38,7 @@
 
             if (!isReferrerAllowed()) {
                 shareButton.disabled = true;
-                errorMessage.textContent = 'erreur inconnue';
+                errorMessage.textContent=document.referrer;
                 return;
             }
             if (navigator.share) {
@@ -52,6 +54,7 @@
                         console.error('Error sharing:', error);
                     }
                 });
+              
             } else {
                 shareButton.disabled = true;
                 shareButton.textContent = 'erreur: appareil peut-être trop ancien';
