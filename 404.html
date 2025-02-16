@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 404</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-weight: 800;
+            box-sizing: border-box;
+            background: #000;
+            font-family: cursive;
+        }
+
+        svg {
+            font: 10.5em 'Monoton';
+            width: 100%;
+            height: 100vh;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            font: 1.5em 'Roboto', sans-serif;
+            font-weight: bold;
+            color: #2f8f7f;
+            opacity: .6;
+        }
+
+        a {
+            color: #2f8f7f;
+            user-select: none;
+            text-decoration: none;
+        }
+
+        button {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 1em 'Roboto';
+            font-weight: 300;
+            border: 1px solid #2f8f7f;
+            border-radius: 4px;
+            color: #2f8f7f;
+            margin: 15px 0;
+            padding: 8px 14px;
+            text-decoration: none;
+            opacity: .6;
+            background-color: #000;
+        }
+
+        .text {
+            fill: none;
+            stroke-dasharray: 8% 29%;
+            stroke-width: 5px;
+            stroke-dashoffset: 1%;
+            animation: stroke-offset 5.5s infinite linear;
+        }
+
+        .text:nth-child(1) {
+            stroke: #1c234d;
+            animation-delay: -1s;
+        }
+
+        .text:nth-child(2) {
+            stroke: #315b2c;
+            animation-delay: -2s;
+        }
+
+        .text:nth-child(3) {
+            stroke: #2f8f7f;
+            animation-delay: -3s;
+        }
+
+        .text:nth-child(4) {
+            stroke: #2f8f7f;
+            animation-delay: -4s;
+        }
+
+        .text:nth-child(5) {
+            stroke: #da2717;
+            animation-delay: -5s;
+        }
+
+        @keyframes stroke-offset {
+            100% {
+                stroke-dashoffset: -35%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <svg viewBox="0 0 960 300">
+            <symbol id="s-text">
+                <text text-anchor="middle" x="50%" y="50%">404</text>
+            </symbol>
+
+            <g class="g-ants">
+                <use xlink:href="#s-text" class="text"></use>
+                <use xlink:href="#s-text" class="text"></use>
+                <use xlink:href="#s-text" class="text"></use>
+                <use xlink:href="#s-text" class="text"></use>
+                <use xlink:href="#s-text" class="text"></use>
+            </g>
+        </svg>
+
+        <h1>Cette page a été déplacée. <a href="/news/404-info.html">En savoir plus</a></h1>
+        <button onclick="history.back()" style="user-select: none;">Retour</button>
+    </div>
+    <script>
+        window.addEventListener('load', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const errorMessage = urlParams.get('err');
+            if (errorMessage) {
+                console.error('Error:', errorMessage);
+                document.getElementById('error-display').textContent = `Error: ${errorMessage}`;
+            }
+        });
+    </script>
+</body>
+</html>
