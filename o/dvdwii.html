@@ -21,14 +21,17 @@
       position: absolute;
     }
 
-    #imageInput, #animationContainer {
+    #imageInput, #animationContainer, .hideAnimation {
       display: none;
     }
   </style>
 </head>
 <body>
-  <button id="wiiButton">Wii</button>
-  <button id="dvdButton">DVD</button>
+  <span id="hideAnimation">
+    <button id="wiiButton">Wii</button>
+    <button id="dvdButton">DVD</button>
+    <button id="gif">Bouncing itself</button>
+  </span>
   <div id="animationContainer"></div>
 
   <script>
@@ -39,21 +42,26 @@
     document.getElementById('dvdButton').addEventListener('click', function() {
       loadImage('dvd.jpg');
     });
+    document.getElementById('gif').addEventListener('click', function() {
+      loadImage('dvd.gif');
+    });
+
 
     function loadImage(imageUrl) {
       const animationContainer = document.getElementById('animationContainer');
-
-      // Create image element
+      const hideAfter = document.getElementById('hideAnimation');
+      hideAfter.classList.add("hideAnimation");
+      
       const image = new Image();
       image.src = imageUrl;
       image.id = 'bouncingImage';
       animationContainer.innerHTML = '';
       animationContainer.appendChild(image);
 
-      // Show the animation container
+      
       animationContainer.style.display = 'block';
 
-      // Start bouncing animation
+      
       bounceImage();
     }
 

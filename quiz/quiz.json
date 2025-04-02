@@ -1,0 +1,20 @@
+{
+  "name": "Page d'acceuil des Quiz",
+  "description": "API gratuite de quiz",
+  "questions": [
+    {
+      "question": "Découvre:",
+      "answers": [
+        "<a href=\"quiz.html?quiz=1\">Notre Quiz du jour</a>",
+        "<a href=\"quiz.html?quiz=test\">Le quiz de culture générale</a> (test)",
+        "La liste complète <a href=\".\">des fichiers Quiz</a>",
+        "<a href=\"create.html\">Notre Créateur de Quiz</a>",
+        "<a href=\"../news.html\">L'article sur le quiz</a>",
+        "4e option"
+      ],
+      "correctAnswer": 4,
+      "explanation": "Haha stylé l'Easter Egg"
+    }
+    
+  ]
+}

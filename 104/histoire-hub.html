@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+    <title>Epreuve d'histoire</title>
+  </head>
+  <style>
+    .lexend-deca-body {
+      font-family: "Lexend Deca", serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+    }
+    .hero {
+      background-color: #f3f4f6;
+      padding: 5rem 2rem;
+      text-align: center;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #3b82f6;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 0.375rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .cta-button:hover {
+      background-color: #2563eb;
+    }
+    .promoted-links {
+      margin-top: 2rem;
+    }
+    .promoted-links a {
+      display: block;
+      margin: 1rem 0;
+      color: #3b82f6;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .promoted-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body class="p-4">
+    <div class="hero">
+      <h1 class="lexend-deca-body text-[40px] sm:text-[45px] md:text-[50px] lg:text-[55px] font-semibold leading-tight">Epreuve d'histoire</h1>
+      <p class="lexend-deca-body text-[20px] sm:text-[22px] md:text-[24px] mt-4">Découvrez les ressources et créez votre fiche d'histoire.</p>
+      <a class="cta-button mt-6" href="histoire-fiche-boostee.html">Commencer</a>
+      <a class="inline-block bg-blue-300 text-blue-800 py-4 px-8 rounded-md font-bold transition-colors duration-300 hover:bg-blue-400 mt-4" href="#exemple">Voir un exemple</a>
+    </div>
+
+    <div class="promoted-links">
+      <a href="#104">Où puis-je trouver d'autres ressources pour le collège?</a>
+      <a href="#scans">Scans avec les ressources</a>
+      <a href="histoire-fiche-boostee.html">Créer ma fiche</a>
+      <a href="#exemple">Exemple de fiche</a>
+      <a href="#champ">Champ de l'épreuve</a>
+      <a href="#faq">FAQ</a>
+    </div>
+
+    <div class="mt-12" id="104">
+        <h2 class="lexend-deca-body text-[30px] font-semibold">Aides à la révision durant le collège</h2>
+        <p>voici plein d'autres choses que tu peux trouver utiles durant ton parcours scolaire au collège. que du concret.</p>
+        <a href="/104/index.html" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">la page</a>
+        <p>n'hésite pas à partager ça fait plaisir</p>
+    </div>
+
+    <div id="scans" class="mt-12">
+      <h2 class="lexend-deca-body text-[30px] font-semibold">Tout pour réviser</h2>
+      <p>Le scan de toutes les fiches utilisées en classe.</p>
+      <a href="/pdf/reforme_humanisme_ocred.pdf"class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Réforme et humanisme</a><p>avec tout commenté et mise en évidence des points importants</p>
+      <a href="https://whimsical.com/humanismeet-reforme-bWAESxKCZK9fFiDGFcozG"class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Diagramme Ligne du temps</a>
+    </div>
+
+    <div id="create-fiche" class="mt-12">
+      <h2 class="lexend-deca-body text-[30px] font-semibold">Créer ma fiche</h2>
+      <p>Appuyez sur les boutons et faites votre choix pour avoir une feuille personnalisée. c'est normal si ça prend 6s à charger</p>
+    </div>
+    
+    <div class="mt-12" id="exemple">
+        <h2 class="lexend-deca-body text-[30px] font-semibold">Exemple</h2>
+        <p><strong>CECI EST UN EXEMPLE. UTILISEZ L'OUTIL EN HAUT.</strong>
+          <iframe id="dynamicIframe" src="/o/table-screen5464.html" frameborder="0"style="width:91vw;"></iframe>
+          plus après (peut-être)
+        </p>
+    </div>
+
+
+    <div id="champ" class="mt-12">
+      <h2 class="lexend-deca-body text-[30px] font-semibold">Champ</h2>
+      <p>Humanisme et réforme.</p>
+    </div>
+    <div id="faq" class="mt-12">
+        <h2 class="lexend-deca-body text-[30px] font-semibold">FAQ</h2>
+<ul>
+    <li>À quand le résumé Amerigo? </li>
+        <li>-vacances de février</li>
+        <li>et quoi si c'est faux?</li>
+        <li>
+            -aucune garantie
+        </li>
+</ul>
+      </div>
+    <script>
+      document.querySelector('.cta-button').addEventListener('click', function() {
+        document.querySelector('#create-fiche').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      document.querySelector('a[href="#champ"]').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.querySelector('#champ').scrollIntoView({ behavior: 'smooth' });
+      });
+    </script>
+  </body>
+</html>

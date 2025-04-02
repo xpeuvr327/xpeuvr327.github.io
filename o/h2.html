@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter</title>
+</head>
+<body>
+    <h1 id="counter">0</h1>
+    <button onclick="increment()">Increment</button>
+    <button onclick="decrement()">Decrement</button>
+    <button onclick="checkValue()">Check Value</button>
+    <h2 id="result"></h2>
+
+    <script>
+        function increment() {
+            var counter = document.getElementById('counter');
+            var count = parseInt(counter.innerText) || 0;
+            counter.innerText = count + 1;
+        }
+
+        function decrement() {
+            var counter = document.getElementById('counter');
+            var count = parseInt(counter.innerText) || 0;
+            counter.innerText = count - 1;
+        }
+
+        function checkValue() {
+            var counter = document.getElementById('counter');
+            var count = parseInt(counter.innerText) || 0;
+            var result = document.getElementById('result');
+            if (count > 0) {
+                result.innerText = 'The value is positive.';
+            } else if (count < 0) {
+                result.innerText = 'The value is negative.';
+            } else {
+                result.innerText = 'The value is zero.';
+            }
+        }
+    </script>
+</body>
+</html>
+

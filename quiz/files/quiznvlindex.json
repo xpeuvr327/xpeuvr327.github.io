@@ -1,0 +1,23 @@
+{
+  "name": "Page d'acceuil des Quiz spéciaux nouvelles orientales",
+  "description": "Complément aux <a href=\"../rf\">résumés</a>. Ne clique pas sur les liens en bas, vraiment. Après ça va te faire bug et tu devras soit aller en navigation privée, soit clear ton cache. Et t'as la flemme.",
+  "questions": [
+    {
+      "question": "Découvre:",
+      "answers": [
+		"<a href=\"quiz.html?quiz=nvlindex\">Liste des quiz spéciaux Nouvelles Orientales</a>",
+		"<a href=\"quiz.html?quiz=nouvellesorientaleswf\">Comment WF Fut sauvé</a>",
+		"<a href=\"quiz.html?quiz=nouvellesorientaleswf0\">Comment WF Fut sauvé(lien spécial Yanis)</a>",
+		"<a href=\"quiz.html?quiz=nouvellesorientalessm\">Le sourire de Marko</a>",
+		"<a href=\"quiz.html?quiz=nouvellesorientalesldm\">Le lait de la mort</a>",
+		"<a href=\"quiz.html?quiz=nouvellesorientalesldrnamr\">Le dernier amour du prince Genghi</a>",
+		"<a href=\"quiz.html?quiz=nouvellesorientaleslhqn\">L'homme qui a aimé les Néréides</a>",
+		"<a href=\"quiz.html?quiz=animaux\">Notre Quiz du jour</a>"
+
+      ],
+      "correctAnswer": "3",
+      "explanation": "oeuf de paques"
+    }
+    
+  ]
+}

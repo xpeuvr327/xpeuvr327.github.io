@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Multiple Pages</title>
+</head>
+<body>
+    <a href="#" id="viewPages">View Pages</a>
+
+    <script>
+        document.getElementById('viewPages').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Open the first page in a new tab
+            window.open('https://example.com/get_started.html', '_blank');
+
+            // Open the second page in a new tab
+            window.open('https://example.com/onboard.html', '_blank');
+        });
+    </script>
+</body>
+</html>

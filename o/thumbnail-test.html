@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File List with Thumbnails</title>
+  <style>
+    /* Basic styling for the file list and thumbnails */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    #files-container {
+      display: grid;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .file-item {
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .file-item:hover {
+      transform: scale(1.05);
+    }
+
+    .grid-file-thumbnail {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .grid-file-name {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>File List with Thumbnails</h1>
+  
+  <div id="files-container"></div>
+
+  <script>
+    // JavaScript Code
+    const SMALL_UI_MAX_SCREEN_SIZE = 500;
+    let files = [
+      { name: 'image1.jpg', directory: false, modified: Date.now(), length: 1024, type: 'image/jpeg' },
+      { name: 'video1.mp4', directory: false, modified: Date.now(), length: 2048, type: 'video/mp4' },
+      { name: 'document.pdf', directory: false, modified: Date.now(), length: 4096, type: 'application/pdf' },
+      { name: 'folder1', directory: true, modified: Date.now(), length: 0, type: 'folder' },
+    ];
+    
+    const currentPath = '/path/to/files/';
+
+    function renderFileList() {
+      const container = document.getElementById("files-container");
+      container.innerHTML = "";
+
+      let itemsPerRow = 1;
+      const availableWidth = window.innerWidth - 20; // subtract page padding
+      const itemsMargin = 5;
+      const minItemSize = 140; // Minimum item size for the grid
+
+      itemsPerRow = Math.floor(availableWidth / minItemSize);
+      if (itemsPerRow == 0) itemsPerRow = 1;
+
+      const itemWidth = (availableWidth - (itemsMargin * (itemsPerRow - 1))) / itemsPerRow;
+      let itemsInRow = 0;
+
+      let columnsTemplate = "";
+      for (let i = 0; i < itemsPerRow; i++) {
+        columnsTemplate += "1fr ";
+      }
+
+      container.style.gridTemplateColumns = columnsTemplate;
+
+      files.forEach((file) => {
+        const a = document.createElement("a");
+        a.dataset.directory = file.directory;
+        const path = currentPath + (currentPath.endsWith("/") ? "" : "/") + file.name;
+        a.setAttribute("href", encodeURI(path));
+        a.classList.add("file-item");
+
+        const div = document.createElement("div");
+        if (file.directory) div.classList.add("folder");
+
+        a.style.textDecoration = "none";
+        div.style.height = "100%";
+
+        if (file.directory) {
+          div.innerText = file.name;
+        } else {
+          div.style.display = "flex";
+          div.style.flexDirection = "column";
+
+          let needThumbnail = false;
+          const fileExt = file.name.includes(".") ? file.name.split('.').pop().toLowerCase() : "";
+          if (["jpg", "jpeg", "png", "gif", "bmp", "tga", "avi", "mp4", "3gp"].includes(fileExt)) {
+            needThumbnail = true;
+          }
+
+          try {
+            const f = new File(file.name);
+            if (f.type.startsWith("image/") || f.type.startsWith("video/")) {
+              needThumbnail = true;
+            }
+          } catch (error) {}
+
+          if (needThumbnail) {
+            const thumbnail = document.createElement("img");
+            thumbnail.src = "/api/file/thumbnail?path=" + encodeURIComponent(path);
+            thumbnail.classList.add("grid-file-thumbnail");
+            div.appendChild(thumbnail);
+          } else {
+            const fileEXTDiv = document.createElement("div");
+            fileEXTDiv.innerText = fileExt;
+            div.appendChild(fileEXTDiv);
+          }
+
+          const fileNameDiv = document.createElement("div");
+          fileNameDiv.innerText = file.name;
+          fileNameDiv.classList.add("grid-file-name");
+          div.appendChild(fileNameDiv);
+        }
+
+        a.appendChild(div);
+        container.appendChild(a);
+
+        itemsInRow++;
+        if (itemsInRow >= itemsPerRow) {
+          itemsInRow = 0;
+        }
+      });
+    }
+
+    // Initially render the file list
+    renderFileList();
+
+    // Adjust UI on page resize
+    window.onresize = function () {
+      renderFileList();
+    };
+  </script>
+</body>
+</html>

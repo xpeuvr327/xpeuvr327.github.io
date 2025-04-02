@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Redirect</title>
+    <script>
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        function redirectToMailto() {
+            const email = getQueryParam('email');
+            const subject = getQueryParam('subject') || '';
+            const body = getQueryParam('body') || '';
+
+            if (email) {
+                const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                window.location.href = mailtoLink;
+            } else {
+                alert('No email parameter found in the URL.');
+            }
+        }
+
+        window.onload = redirectToMailto;
+    </script>
+</head>
+<body>
+    <p>If you are not redirected automatically, please ensure the URL contains an 'email' query parameter.</p>
+</body>
+</html>

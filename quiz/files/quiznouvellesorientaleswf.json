@@ -1,0 +1,80 @@
+{
+  "name": "Vérifie tes connaissances du livre Nouvelles orientales",
+  "description": "Tu ne sais pas ce que c'est? <a href=\"../rf\">Clique ici de suite</a>. Ce QCM te permettra de tester tes connaissances générales du livre. Pour un entrainement plus réel, ne t'aide pas de ton livre. N'oublie pas de cliquer sur confirmer tes réponses. Si tu penses qu'aucune des propositions ne convient, choisis celle qui convient le mieux. Les réponses données ici ne sont pas l'exacte vérité et n'hésite pas à me contacter pour des précisions ou des corrections. Bonne révision!",
+  "questions": [
+    {
+      "question": "Comment et pourquoi la femme de Ling est elle morte?",
+      "answers": [
+        "WF l'a peint et elle est morte dès qu'il a fini la peinture",
+        "WF l'a peint dans les nuages, et c'est un présage de mort. Ce présage se confirme car elle est retrouvée pendue",
+        "Ling préférait les peintures de WF à sa propre femme, ce qui l'a fait pleurer et elle s'est pendue",
+        "Ling a tout simplement tué sa femme"
+      ],
+      "correctAnswer": 1,
+      "explanation": "page 16 nouvelles orientales, \"Wang-Fô la peignit [...] parmi les nuages [...] c'était un présage de mort. [...] On la retrouva pendue.\", ou <a href=\"../resumefrancais/cmtwgfutsauv.html\">extrait du résumé</a>."
+    },
+    {
+      "question": "Ling vend ses biens pour acheter de l'alcool et de la drogue à WF",
+      "answers": [
+        "Vrai",
+        "Faux"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Il lui achète de l'encre d'occident, p16"
+    },
+    {
+      "question": "Pourquoi Ling accepte t-il d'acceuillir WF dans sa vie?",
+      "answers": [
+        "Il est généreux et est hospitalier",
+        "Il peint bien, et Ling aime l'art",
+        "WF lui a ouvert les yeux (sans mauvais jeux de mots)",
+        "WF est drôle"
+      ],
+      "correctAnswer": 2,
+      "explanation": "p.15 \"Wang-Fô venait de lui faire cadeau d'une âme et d'une perception neuves\""
+    },
+    {
+      "question": "Pourquoi décident ils de parcourir la province de Han?",
+      "answers": [
+        "WF a déjà peint tout ce qu'il y avait à peindre dans le village d'origine de Ling",
+        "Ils sont connus, et on les invite",
+        "Ils ont tout vendu, mais Ling reste Nostalgique"
+      ],
+      "correctAnswer": 0,
+      "explanation": "p.16, \"Ling ferma derrière lui la porte de son passé. WF était las d'une ville où les visages n'avaient plus à lui apprendre aucun secret de laideur ou de beauté, et le maître et le disciple vagabondèrent ensemble sur les routes du royaume de Han."
+    },
+    {
+      "question": "Pourquoi Ling et WF se font arrêter lorsqu'ils atteignent les faubourgs de la ville impériale?",
+      "answers": [
+        "Il avait volé le repas de la veille",
+        "L'Empereur est déçu que la réalité n'est pas la même que les peintures de WF, et il se considère trahi",
+        "WF avait fait une caricature de l'Empereur",
+        "Ling ne sait pas et réveille WF pour demander quoi faire"
+      ],
+      "correctAnswer": 1,
+      "explanation": "p20 Milieu-fin à p21. <a href=\"../resumefrancais/cmtwgfutsauv.html\">ou ici</a>."
+    },
+    {
+      "question": "Pourquoi Ling se fait-il décapiter?",
+      "answers": [
+        "Il a dégainé un couteau et s'est fait prendre la main dans la poche, et des gardes l'ont saisi et décapité",
+        "Un des conseillers de l'Empereur lui a proposé cette peine, car il ne leur était plus utile",
+        "Ling s'est suicidé, car il ne voulait pas voir WF tant souffrir",
+        "Ling ne se fait pas encore décapiter, mais si WF décide de ne pas peindre, il n'aura plus de tête"
+      ],
+      "correctAnswer": 0,
+      "explanation": "p.23"
+    },
+    {
+      "question": "Quelle est la principale raison qui pousse WF à finir sa peinture?",
+      "answers": [
+        "La menace que Ling se fasse décapiter",
+        "Si il ne finit pas la peinture, il va mourir avec une mauvaise conscience, car il a toujours achevé ce qu'il a fait",
+        "S'il ne finit pas sa peinture, toutes ses œuvres seront brûlées devant lui, avant qu'il ne se fasse aveugler",
+        "On ne peut pas savoir"
+      ],
+      "correctAnswer": 3,
+      "explanation": "En réalité, ce n'est pas dit ce que pense Wang-Fô. D'ailleurs, il ne parle que très peu, ce qui ne laisse pas transparaître son opinion. Mais on peut imaginer que la réponse 4 est la bonne."
+    }
+  ]
+}

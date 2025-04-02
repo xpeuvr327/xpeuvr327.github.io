@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="fr">
+    <title>Résolution d'une inégalité</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/latex.js/dist/latex.js"></script>
+    <style>
+        body {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 800px;
+            text-align: justify;
+        }
+
+        .end {
+            display: block;
+        }
+        .pdf-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <p>Le tableau de signes<br>Il n'est pas nécessaire pour les équations de degré un. Il sert à résoudre une inéquation lorsqu'elle est </p>
+    <div class="content" id="latex-content">
+        <!-- LaTeX output will be appended here -->
+    </div>
+    <script>
+        var quadraticFactorization = `
+
+  \\documentclass{article}
+  \\begin{document}
+  \\textbf{Résolution de l'inégalité :} \\
+  Soit l'inégalité :
+  \\[
+    -2(1 - 2x)(x - 3)^2 \\geq 0
+  \\]
+  \\end{document}
+        `;
+
+        var generator = new latexjs.HtmlGenerator({ hyphenate: false });
+        generator = latexjs.parse(quadraticFactorization, { generator: generator });
+
+        document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"));
+
+        var latexContent = document.getElementById('latex-content');
+        latexContent.appendChild(generator.domFragment());
+
+        var pdfLink = document.createElement('a');
+        pdfLink.textContent = 'Télécharger le PDF de la résolution';
+        pdfLink.classList.add("pdf-link");
+        pdfLink.href = 'tableau_de_signes.pdf';
+        pdfLink.target = '_blank'; 
+        latexContent.appendChild(pdfLink);
+
+        var elem = document.createElement('a');
+        elem.textContent = 'Retour à l\'acceuil';
+        elem.classList.add("end");
+        elem.href="index.html";
+        latexContent.appendChild(elem);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="fr">
+    <title>Factorisation d'une équation quadratique</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/latex.js/dist/latex.js"></script>
+    <style>
+        body {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .content {
+            width: 100%;
+            max-width: 800px;
+            text-align: justify;
+        }
+
+        .end {
+            display: block;
+            
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <div class="content" id="latex-content">
+        <!-- LaTeX output will be appended here -->
+    </div>
+    <script>
+        var quadraticFactorization = `
+        \\documentclass[11pt]{article}
+        \\title{Factorisation d'une équation quadratique grâce au poto Viète}
+        \\author{}
+        \\date{\\vspace{-5ex}}
+        \\begin{document}
+        \\maketitle
+
+        Soit une équation quadratique sous la forme standard :
+        \\[
+        ax^2 + bx + c = 0
+        \\]
+
+        où \\(a\\), \\(b\\) et \\(c\\) sont des coefficients réels et \\(a\\) ≠ \\(0\\).
+
+        \\section*{Factorisation}
+        On peut factoriser l'équation quadratique en utilisant les solutions \\(x_1\\) et \\(x_2\\) de l'équation. Les solutions sont données par les formules :
+        \\[
+        x_1 = \\frac{-b + \\sqrt{\\Delta}}{2a}
+        \\]
+        \\[
+        x_2 = \\frac{-b - \\sqrt{\\Delta}}{2a}
+        \\]
+
+        où \\(\\Delta = b^2 - 4ac\\) est le discriminant de l'équation.
+
+        La factorisation de l'équation quadratique est donnée par :
+        \\[
+        a(x - x_1)(x - x_2) = 0
+        \\]
+
+        Cette factorisation est utile car elle permet de résoudre l'équation plus facilement en utilisant les propriétés des produits de facteurs.
+
+        \\section*{Exemple}
+        Considérons l'équation quadratique \\(x^2 - 5x + 6 = 0\\). On peut factoriser cette équation en utilisant les solutions \\(x_1 = 2\\) et \\(x_2 = 3\\) :
+        \\[
+        x^2 - 5x + 6 = (x - 2)(x - 3)
+        \\]
+
+        \\section*{Résumé}
+        Pour factoriser une équation quadratique :
+        \\begin{enumerate}
+            \\item Trouvez les solutions \\(x_1\\) et \\(x_2\\) de l'équation en utilisant les formules des solutions.
+            \\item Utilisez les solutions pour factoriser l'équation sous la forme \\(a(x - x_1)(x - x_2)\\).
+        \\end{enumerate}
+
+        \\end{document}
+        `;
+
+        var generator = new latexjs.HtmlGenerator({ hyphenate: false });
+        generator = latexjs.parse(quadraticFactorization, { generator: generator });
+
+        document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"));
+
+        var latexContent = document.getElementById('latex-content');
+        latexContent.appendChild(generator.domFragment());
+
+        var elem = document.createElement('a');
+        elem.textContent = 'Retour à l\'acceuil';
+        elem.classList.add("end");
+        elem.href="index.html";
+        latexContent.appendChild(elem);
+    </script>
+</body>
+
+</html>

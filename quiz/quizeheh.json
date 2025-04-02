@@ -1,0 +1,15 @@
+{
+  "name": "pile ou face",
+  "description": "choisis un côté de la pièce",
+  "questions": [
+    {
+      "question": "pile ou face.",
+      "answers": [
+        "pile",
+        "face"
+      ],
+      "correctAnswer": 0,
+      "explanation": "pas de chance 🤷"
+    }
+  ]
+}

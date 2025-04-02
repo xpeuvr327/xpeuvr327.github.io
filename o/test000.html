@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Directory Listing</title>
+    <style>
+        .directory-listing { font-family: Arial, sans-serif; }
+        .directory-listing ul { list-style-type: none; padding: 0; }
+        .directory-listing li { margin: 5px 0; }
+        .directory-listing a { text-decoration: none; color: #007BFF; cursor: pointer; }
+        .directory-listing a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="directory-listing">
+        <h1>Directory Listing</h1>
+        <ul id="directory-contents"></ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to fetch directory listing
+            function fetchDirectoryListing(path) {
+                $.ajax({
+                    url: `/api/file/list?path=${encodeURIComponent(path)}`,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        displayDirectoryListing(data, path);
+                    },
+                    error: function(error) {
+                        console.error('Error fetching directory listing:', error);
+                    }
+                });
+            }
+
+            // Function to display directory listing
+            function displayDirectoryListing(data, currentPath) {
+                const $directoryContents = $('#directory-contents');
+                $directoryContents.empty();
+
+                if (currentPath !== '/') {
+                    const parentLink = $('<li><a>..</a></li>');
+                    parentLink.find('a').on('click', function(event) {
+                        event.preventDefault();
+                        const newPath = currentPath.split('/').slice(0, -2).join('/') + '/';
+                        history.pushState(null, null, `/o/test.html?path=${encodeURIComponent(newPath)}`);
+                        fetchDirectoryListing(newPath);
+                    });
+                    $directoryContents.append(parentLink);
+                }
+
+                data.forEach(item => {
+                    const listItem = $('<li></li>');
+                    const link = $('<a></a>');
+
+                    link.text(item.name);
+                    link.on('click', function(event) {
+                        event.preventDefault();
+                        const newPath = item.directory ? `${currentPath}${item.name}/` : `${currentPath}${item.name}`;
+                        history.pushState(null, null, `/o/test.html?path=${encodeURIComponent(newPath)}`);
+                        fetchDirectoryListing(newPath);
+                    });
+
+                    if (item.directory) {
+                        link.append('<span>/</span>');
+                    } else {
+                        link.append(` <span>(${item.length})</span>`);
+                    }
+
+                    listItem.append(link);
+                    $directoryContents.append(listItem);
+                });
+            }
+
+            // Get the current virtual path from the URL query parameter
+            function getCurrentPath() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('path') || '/';
+            }
+
+            // Handle browser back and forward buttons
+            window.addEventListener('popstate', function(event) {
+                const currentPath = getCurrentPath();
+                fetchDirectoryListing(currentPath);
+            });
+
+            // Initial fetch based on the current virtual path
+            const initialPath = getCurrentPath();
+            fetchDirectoryListing(initialPath);
+        });
+    </script>
+</body>
+</html>

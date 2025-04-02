@@ -1,6 +1,4 @@
-User-agent : *
-Disallow: /fakecreds.html
-Disallow: /defi
-Disallow: /m
+User-agent: *
 Disallow: /o
-Disallow: /
+Allow: /104
+Allow: /resumes/francais/le-roman-de-renart

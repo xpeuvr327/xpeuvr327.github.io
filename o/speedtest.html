@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Test</title>
+</head>
+<body>
+    <h1>Speed Test (relative to this server)</h1>
+<p>the test downloads a 10mb file on this server.</p>
+    <button id="startTest">Start Test</button>
+    <div id="results"></div>
+
+    <script>
+document.getElementById('startTest').addEventListener('click', startSpeedTest);
+
+function startSpeedTest() {
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = 'Testing download speed...';
+
+    // Measure download speed
+    const downloadSize = 10 * 1024 * 1024; // 10 MB in bytes
+    const downloadUrl = '/o/10MB.bin'; // Replace with your 10 MB file URL
+
+    const startTime = performance.now();
+    fetch(downloadUrl)
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const endTime = performance.now();
+            const duration = (endTime - startTime) / 1000; // Convert to seconds
+            const downloadSpeed = (downloadSize * 8) / duration; // Convert bytes to bits and calculate speed in bits per second
+            resultsDiv.innerHTML = `Download Speed: ${(downloadSpeed / 1000 / 1000).toFixed(2)} Mbps`;
+        })
+        .catch(error => {
+            resultsDiv.innerHTML = 'Download test failed.';
+            console.error('Download test failed:', error);
+        });
+}
+
+
+</script>
+</body>
+</html>
+

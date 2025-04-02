@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Directory Listing</title>
+    <style>
+        .directory-listing { font-family: Arial, sans-serif; }
+        .directory-listing table { width: 100%; border-collapse: collapse; }
+        .directory-listing th, .directory-listing td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .directory-listing th { background-color: #f2f2f2; }
+        .directory-listing a { text-decoration: none; color: #007BFF; cursor: pointer; }
+        .directory-listing a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="directory-listing">
+        <h1>Directory Listing</h1>
+        <table id="directory-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Last Modified</th>
+                    <th>Size</th>
+                </tr>
+            </thead>
+            <tbody id="directory-contents">
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to fetch directory listing
+            function fetchDirectoryListing(path) {
+                $.ajax({
+                    url: `/api/file/list?path=${encodeURIComponent(path)}`,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        displayDirectoryListing(data, path);
+                    },
+                    error: function(error) {
+                        console.error('Error fetching directory listing:', error);
+                    }
+                });
+            }
+
+            // Function to display directory listing
+            function displayDirectoryListing(data, currentPath) {
+                const $directoryContents = $('#directory-contents');
+                $directoryContents.empty();
+
+                if (currentPath !== '/') {
+                    const parentRow = $('<tr></tr>');
+                    const parentLink = $('<td><a>..</a></td>');
+                    parentLink.find('a').on('click', function(event) {
+                        event.preventDefault();
+                        const newPath = currentPath.split('/').slice(0, -2).join('/') + '/';
+                        history.pushState(null, null, `/o/test.html?path=${encodeURIComponent(newPath)}`);
+                        fetchDirectoryListing(newPath);
+                    });
+                    parentRow.append(parentLink).append('<td></td><td></td>');
+                    $directoryContents.append(parentRow);
+                }
+
+                data.forEach(item => {
+                    const row = $('<tr></tr>');
+                    const nameCell = $('<td></td>');
+                    const link = $('<a></a>');
+
+                    link.text(item.name);
+                    link.on('click', function(event) {
+                        event.preventDefault();
+                        const newPath = item.directory ? `${currentPath}${item.name}/` : `${currentPath}${item.name}`;
+                        history.pushState(null, null, `/o/test.html?path=${encodeURIComponent(newPath)}`);
+                        fetchDirectoryListing(newPath);
+                    });
+
+                    if (item.directory) {
+                        link.append('<span>/</span>');
+                    }
+
+                    nameCell.append(link);
+                    row.append(nameCell);
+                    row.append(`<td>${item.lastModified || ''}</td>`);
+                    row.append(`<td>${item.directory ? '' : item.length}</td>`);
+
+                    $directoryContents.append(row);
+                });
+            }
+
+            // Get the current virtual path from the URL query parameter
+            function getCurrentPath() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('path') || '/';
+            }
+
+            // Handle browser back and forward buttons
+            window.addEventListener('popstate', function(event) {
+                const currentPath = getCurrentPath();
+                fetchDirectoryListing(currentPath);
+            });
+
+            // Initial fetch based on the current virtual path
+            const initialPath = getCurrentPath();
+            fetchDirectoryListing(initialPath);
+        });
+    </script>
+</body>
+</html>
+    

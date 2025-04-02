@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Division</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+        }
+        textarea {
+            width: 150px;
+            height: 225px; /* 15 lines * 15px per line */
+            resize: none;
+            margin: 5px;
+        }
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"><input id="roundto" type="number" placeholder="Keep # decimals" value=3 max=100></div><br>
+    <div class="container">
+        <textarea id="input1" placeholder="Enter numbers separated by newline"></textarea>
+        <textarea id="input2" placeholder="Enter divisor"></textarea>
+        <button onclick="calculate()">Calculate</button>
+        <textarea id="result" placeholder="Result" readonly></textarea>
+    </div>
+
+    <script>
+        function roundTo(number, decimals) {
+            const factor = Math.pow(10, decimals);
+            return Math.round(number * factor) / factor;
+        }
+
+        function calculate() {
+            const input1 = document.getElementById('input1').value.trim().split('\n');
+            const input2 = document.getElementById('input2').value.trim();
+            const resultTextarea = document.getElementById('result');
+            const keepVirg = parseInt(document.getElementById('roundto').value, 10);
+
+            if (input1.length === 0 || input2 === '') {
+                alert('Please enter valid inputs.');
+                return;
+            }
+
+            const divisor = parseFloat(input2.replace(',', '.')); // Ensure proper decimal parsing
+            if (isNaN(divisor)) {
+                alert('Please enter a valid number for the divisor.');
+                return;
+            }
+
+            const results = input1.map(num => {
+                const cleanNum = num.trim().replace(',', '.'); // Replace commas with dots
+                const number = parseFloat(cleanNum);
+                if (isNaN(number)) {
+                    return 'Invalid';
+                }
+                return roundTo(number / divisor, keepVirg);
+            }).filter(result => result !== 'Invalid' && result !== ''); // Filter out invalid results
+
+            resultTextarea.value = results.join('\n');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<title>Analyses Le Roman de Renart</title>
+<meta name="description" content="Analyses complémentaires à la lecture, pour confirmer la compréhension du Roman de Renart">
+<style>
+  .chapters-select-list {
+    display: block;
+    padding: 14px 16px;
+    margin: 10px 0;
+    background-color: white;
+    border: 2px solid #1abc9c;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #1abc9c;
+    transition: all 0.3s ease;
+  }
+
+  .chapters-select-list:hover {
+    background-color: #1abc9c;
+    color: white;
+  }
+
+  .toc li {
+    margin: 8px 0;
+  }
+
+  .toc a {
+    text-decoration: none;
+    color: #1abc9c;
+    transition: color 0.3s ease;
+  }
+
+  .toc a:hover {
+    color: #16a085;
+    text-decoration: underline;
+  }
+
+  .section-header {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    border-bottom: 2px solid #1abc9c;
+    padding-bottom: 5px;
+  }
+
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: #2c3e50;
+  }
+</style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+  <div style="padding: 20px;">
+    <h2>Analyse: le roman de renart</h2>
+    <h3>Portail des ressources</h3>
+    <main>
+      <p>Ici, des ressources seront ajoutées au fur et à mesure que nous avançons sur le livre. Cet espace est excellent pour réviser. Puisque le champ portait sur les </p>
+    </main>
+    <p>Chevalerie: Podcasts classroom, Comiques: page disponible sur la page des scans, Satires aussi dans les scans (à la demande). <br>ALLEZ CHECK LES <a href="scans.html">SCANS</a> où il y a tous les documetns papiers.</p>
+<p id="prediction26">Puisque tous le champ tourne autour de l'amour courtois et de la chevalerie, concentrez vous sur ça. <br>J'ai réecrit tous les résumés afin de couvrir plus spécifiquement ces sujets.</p>
+
+  <div id="toc-container">
+    <h3>Analyses</h3>
+    <ul id="toc" class="toc"></ul>
+  </div>
+
+  <div id="chapter-list"></div>
+</div>
+  <script src="header.js"></script>
+  <script src="/consent.js"></script>
+  <script>
+    function createTOC() {
+      const tocList = document.getElementById('toc');
+      const chapterList = document.getElementById('chapter-list');
+
+      
+      const analysesNav = navigationItems.find(item => item.href === "analyses.html");
+
+      
+      analysesNav.chapters.forEach(chapter => {
+        const chapterLink = document.createElement('a');
+        chapterLink.href = chapter.href;
+        chapterLink.className = 'chapters-select-list';
+        chapterLink.textContent = chapter.text;
+        chapterList.appendChild(chapterLink);
+      });
+    }
+
+    
+    document.addEventListener('DOMContentLoaded', createTOC);
+  </script>
+</body>
+</html>

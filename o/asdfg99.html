@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage Check</title>
+    <script type="text/javascript">
+        function testLocalStorage() {
+          
+            localStorage.setItem('test', 'test');
+            // Check if the item was successfully set
+            if (localStorage.getItem('test') === 'test') {
+                document.getElementById('result').innerText = 'LocalStorage is available.';
+            } else {
+                document.getElementById('result').innerText = 'LocalStorage is not available.';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>LocalStorage Availability Check</h1>
+    <button onclick="testLocalStorage()">Check LocalStorage</button>
+    <p>Status: <span id="result">Not checked yet!</span></p>
+</body>
+</html>

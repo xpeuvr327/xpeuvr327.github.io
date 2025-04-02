@@ -1,0 +1,10 @@
+{
+    "name": "Epreuves Regroupees - L'app",
+    "short_name": "L'appli ultime pr les épr. rgp.",
+    "start_url": "/epreuvesregroupees/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "description": "A Progressive Web App for Epreuves Regroupees"
+}
+  

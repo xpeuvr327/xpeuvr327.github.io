@@ -1,0 +1,60 @@
+{
+  "name": "Suite Quiz Nouvelles orientales",
+  "description": "Suite du quiz sur la nouvelle \"<a href=\"../resumefrancais/lsr2mrko.html\">Le sourire de marko</a>\", tirée du livre <em>Nouvelles orientales</em>. Fais le <a href=\"?quiz=nouvellesorientaleswf0\">Quiz précédent</a> d'abord. ",
+  "questions": [
+    {
+      "question": "Comment appelle t-on un récit dans un récit?",
+      "answers": [
+        "Un récit intriqué",
+        "Un récit enchâssé",
+        "Il n'y a pas de nom particulier"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Nan jrigole cette question sert à rien"
+    },
+    {
+      "question": "Qui perçoit l'histoire, dans le sens qui est réellement le narrateur de \"Le sourire de Marko\"?",
+      "answers": [
+        "Focalisation Zéro",
+        "Focalisation Interne",
+        "Focalisation Externe",
+        "Variation des points de vue"
+      ],
+      "correctAnswer": 0,
+      "explanation": "p.37, fin, \"l'épaisseur de sa poitrine empêchait qu'on entendit son cœur.\". J'ai perdu cette feuille? <a href=\"../n/p/d/f/29102401.PDF\">c'est ton jour de chance.</a>"
+    },
+    {
+      "question": "Comment Marko se fait t-il finalement arrêter?",
+      "answers": [
+        "La veuve noue un lasso, et ils l'atteignent",
+        "Une des flèches des soldats l'atteint finalement, et il est blessé et fatigué",
+        "Il fait le mort, et se laisse emporter par le courant",
+        "Il trouve un autre cadavre qu'il balance sur le rivage"
+      ],
+      "correctAnswer": 0,
+      "explanation": "p.37, milieu: \"la veuve noua solidement son écharpe à la longue ceinture souple d'un Albanais; un habile pêcheur de thons réussit à emprisonner Marko\""
+    },
+    {
+      "question": "Lorsque les notables du village constatent qu'ils ont essayé de crucifier un mort, quel moyen trouvent ils pour laver leurs pêchés?",
+      "answers": [
+        "Ils s'excusent auprès d'Allah et tuent la veuve",
+        "Ils décident de le torturer à l'aide de charbons",
+        "Ils le mettent dans un sac rempli de pierres, et le jettent dans la mer",
+        "Ils attachent une grosse pierre autour de son cou et le jettent dans la mer"
+      ],
+      "correctAnswer": 3,
+      "explanation": "p.38, \"Qu'Allah nous pardonne d'avoir essayé de crucifier un mort! Attachons une grosse pierre autour de au cou de cadavre, [...] et que la mer ne nous le ramène pas\" (ils sous-entendent qu'ils vont le jeter)"
+    },
+    {
+      "question": "Marko sourit lors du dernier supplice, ce qui donne le nom à la nouvelle, mais qu'est qui fait que les villageois ne s'en aperçoivent pas?",
+      "answers": [
+        "Haisché s'approche de Marko, qui redevient sérieux, et elle convainc tout le monde qu'il est bel et bien mort",
+        "C'est le crépuscule, et les gens s'ennuient et ne prêtent pas attention à Marko",
+        "C'est le crépuscule, il fait sombre, et Haisché finit par déposer son mouchoir rouge sur son visage",
+        "Je ne sais pas, ce n'est pas dit dans ton résumé"
+      ],
+      "correctAnswer": 2,
+      "explanation": "p.40 \"Elle laissa tomber son mouchoir rouge pour couvrir ce sourire\""
+    }
+  ]
+}

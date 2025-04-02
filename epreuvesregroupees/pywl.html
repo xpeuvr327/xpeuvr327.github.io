@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Wait...</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .paywall-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .subscribe-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 16px
+        }
+
+        .subscribe-button:hover {
+            background-color: #0056b3
+        }
+
+        .tier-box {
+            border: 2px solid var(--foreground);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left
+        }
+
+        .best-offer {
+            border-color: #007bff;
+            background-color: #23394e
+        }
+
+        .credit-card-form {
+            margin-top: 20px
+        }
+
+        .credit-card-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid var(--foreground);
+            border-radius: 5px
+        }
+
+        .credit-card-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer
+        }
+
+        .credit-card-form button:hover {
+            background-color: #0056b3
+        }
+    </style>
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>function gtag() { dataLayer.push(arguments) } window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "G-YQNZ0VLGHJ")</script>
+
+<body>
+    <div class="paywall-container">
+        <h1>Contenu restreint</h1>
+        <div class="tier-box">
+            <h2>Offre Gratuite</h2>
+            <p>GRATUIT</p>
+            <p>Pub sur chaque lien, mais c'est gratuit</p><a href="index.html" class="subscribe-button">Y aller
+                direct</a>
+        </div>
+        <div class="tier-box best-offer">
+            <h2>Offre Pythagore</h2>
+            <p>GRATUIT*</p>
+            <p>Accès au contenu étudiant</p><a href="https://sites.google.com/eduge.ch/epreuvesregroupees2024/"
+                class="subscribe-button">Se connecter avec le compte eduge</a>
+        </div>
+        <div class="credit-card-form" id="pay">
+            <p>Pour accéder aux révisions des épreuves regroupées, veuillez acheter l'un des abonnements ci dessous:</p>
+            <h2>Procéder au paiement</h2>
+            <form id="paymentForm"><input type="number" id="cardNumber" placeholder="Numéro de carte"> <input
+                    type="text" id="expirationDate" placeholder="Date d'expiration (MM/AA)"> <input type="number"
+                    id="cvv" placeholder="CVC"> <input type="text" id="cardholderName"
+                    placeholder="Titulaire de la carte"> <button type="submit">Payer</button><br></form><a
+                class="a-deco">Tu paies en tickets-resto?</a>
+        </div>
+        <p>* Offre étudiante: gratuite pendant 3 mois.<br><a href="fkgdpr.html">Déclaration de confidentialité</a></p>
+    </div>
+    <script>
+        const currentPassword = "jesucejoao";//oui bah gg si t'as fait ctrl + u ou inspecté ou je ne sais quoi mdrr, ct juste pr la blague. trv mon e-mail! il est sur le site.. (non enft...)
+
+        function setCookie(e, t, n) {
+            var i = "";
+            if (n) {
+                var a = new Date;
+                a.setTime(a.getTime() + 864e5 * n),
+                    i = "; expires=" + a.toUTCString()
+            }
+            document.cookie = e + "=" + (t || "") + i + "; path=."
+        }
+
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let e = document.getElementById("paymentForm"),
+                t = document.getElementById("cardNumber"),
+                n = document.getElementById("expirationDate"),
+                i = document.getElementById("cvv"),
+                a = document.getElementById("cardholderName");
+
+            t.addEventListener("input", function () {
+                this.value = this.value.replace(/\D/g, "")
+            });
+
+            i.addEventListener("input", function () {
+                this.value = this.value.replace(/\D/g, "");
+                this.value.length > 4 && (this.value = this.value.slice(0, 4))
+            });
+
+            n.addEventListener("input", function () {
+                let e = this.value.replace(/\D/g, "");
+                e.length > 2 && (e = e.slice(0, 2) + "/" + e.slice(2));
+                this.value = e
+            });
+
+            e.addEventListener("submit", function (e) {
+                e.preventDefault();
+                let r = t.value,
+                    s = n.value,
+                    u = i.value,
+                    l = a.value;
+
+                if (l === currentPassword) {
+                    if (isIOS()) {
+                        localStorage.setItem("access", "true");
+                        localStorage.setItem("password", currentPassword);
+                    } else {
+                        setCookie("access", "true", 3);
+                        setCookie("password", currentPassword, 3);
+                    }
+                    window.location.href = "adls.html";
+                    return;
+                }
+
+                if (!/^\d{16}$/.test(r)) {
+                    alert("Invalid card number. It must be a 16-digit number.");
+                    return;
+                }
+
+                if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(s)) {
+                    alert("Invalid expiration date. It must be in the format MM/YY.");
+                    return;
+                }
+
+                if (!/^\d{3,4}$/.test(u)) {
+                    alert("Invalid CVV. It must be a 3 or 4 digit number.");
+                    return;
+                }
+
+                window.location.href = "adls.html";
+            });
+        });</script>
+</body>
+
+</html>

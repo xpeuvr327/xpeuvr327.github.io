@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Material Design RTF Editor</title>
+   <meta charset="UTF-8">
+	      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="importmap">
+        {
+            "imports": {
+                "@material/web/": "https://esm.run/@material/web/"
+            }
+        }
+    </script>
+    <script type="module">
+        import '@material/web/all.js';
+        import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+        document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Material Design 3 color tokens */
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005E;
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-on-surface-variant: #49454F;
+            --md-sys-color-outline: #79747E;
+
+            /* Material Design 3 elevation tokens */
+            --md-sys-elevation-level1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            margin: 24px;
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px;
+            border-radius: 28px;
+            background: var(--md-sys-color-surface);
+            box-shadow: var(--md-sys-elevation-level1);
+        }
+
+        h1 {
+            margin: 0 0 24px 0;
+            color: var(--md-sys-color-on-surface);
+            font-family: var(--md-sys-typescale-headline-large-font);
+            font-size: var(--md-sys-typescale-headline-large-size);
+            line-height: var(--md-sys-typescale-headline-large-line-height);
+            font-weight: var(--md-sys-typescale-headline-large-weight);
+        }
+
+        .controls {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .formatting-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+            padding: 16px;
+            border-radius: 16px;
+            background: var(--md-sys-color-surface-variant);
+        }
+
+        .color-controls {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding: 16px;
+            border-radius: 16px;
+            background: var(--md-sys-color-surface-variant);
+        }
+
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slider-group label {
+            font-family: var(--md-sys-typescale-label-large-font);
+            font-size: var(--md-sys-typescale-label-large-size);
+            line-height: var(--md-sys-typescale-label-large-line-height);
+            font-weight: var(--md-sys-typescale-label-large-weight);
+            min-width: 60px;
+        }
+
+        .preview {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 16px;
+            margin-bottom: 16px;
+        }
+
+        .color-slider {
+            flex-grow: 1;
+            height: 40px;
+            appearance: none;
+            -webkit-appearance: none;
+            background: var(--md-sys-color-surface);
+            border-radius: 20px;
+            outline: none;
+            box-shadow: var(--md-sys-elevation-level1);
+        }
+
+        .color-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: var(--md-sys-elevation-level2);
+        }
+
+        #red::-webkit-slider-thumb { background: #DC362E; }
+        #green::-webkit-slider-thumb { background: #2E7D32; }
+        #blue::-webkit-slider-thumb { background: #1976D2; }
+
+        .output-area {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 16px;
+            padding: 16px;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 16px;
+            resize: vertical;
+            font-family: var(--md-sys-typescale-body-large-font);
+            font-size: var(--md-sys-typescale-body-large-size);
+            line-height: var(--md-sys-typescale-body-large-line-height);
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        md-filled-text-field {
+            width: 100%;
+            --md-filled-text-field-container-color: var(--md-sys-color-surface);
+        }
+
+        md-filled-select {
+            width: 100%;
+            --md-filled-select-container-color: var(--md-sys-color-surface);
+        }
+    </style>
+</head>
+<body>
+    
+        <h1 class="md-typescale-headline-large">Material Design RTF Editor</h1>
+        
+        <div class="controls">
+            <md-filled-text-field
+                label="Enter text here"
+                id="input"
+                type="text">
+            </md-filled-text-field>
+
+            <div class="formatting-options">
+                <md-filter-chip 
+                    id="bold-chip"
+                    label="Bold"
+                    selected></md-filter-chip>
+                <md-filter-chip 
+                    id="italic-chip"
+                    label="Italic"
+                    selected></md-filter-chip>
+                <md-filter-chip 
+                    id="underline-chip"
+                    label="Underline"
+                    selected></md-filter-chip>
+                <md-filter-chip 
+                    id="strike-chip"
+                    label="Strike"
+                    selected></md-filter-chip>
+            </div>
+
+            <md-filled-select id="fontFamily" label="Font">
+                <md-select-option value="Arial" selected>
+                    <div slot="headline">Arial</div>
+                </md-select-option>
+                <md-select-option value="Courier New">
+                    <div slot="headline">Courier New</div>
+                </md-select-option>
+                <md-select-option value="Times New Roman">
+                    <div slot="headline">Times New Roman</div>
+                </md-select-option>
+                <md-select-option value="Verdana">
+                    <div slot="headline">Verdana</div>
+                </md-select-option>
+            </md-filled-select>
+
+            <div class="color-controls">
+                <div class="slider-group">
+                    <label class="md-typescale-label-large">Red</label>
+                    <input type="range" id="red" class="color-slider" min="0" max="255" value="0">
+                    <md-filled-text-field
+                        type="number"
+                        id="redValue"
+                        value="0"
+                        style="width: 100px"
+                        readonly></md-filled-text-field>
+                </div>
+                <div class="slider-group">
+                    <label class="md-typescale-label-large">Green</label>
+                    <input type="range" id="green" class="color-slider" min="0" max="255" value="0">
+                    <md-filled-text-field
+                        type="number"
+                        id="greenValue"
+                        value="0"
+                        style="width: 100px"
+                        readonly></md-filled-text-field>
+                </div>
+                <div class="slider-group">
+                    <label class="md-typescale-label-large">Blue</label>
+                    <input type="range" id="blue" class="color-slider" min="0" max="255" value="0">
+                    <md-filled-text-field
+                        type="number"
+                        id="blueValue"
+                        value="0"
+                        style="width: 100px"
+                        readonly></md-filled-text-field>
+                </div>
+            </div>
+
+            <div class="preview" id="preview"></div>
+            
+            <textarea id="output" class="output-area" readonly></textarea>
+            
+            <div class="actions">
+                <md-filled-button id="copy">
+                    <md-icon slot="icon">content_copy</md-icon>
+                    Copy
+                </md-filled-button>
+                <md-filled-button id="refresh">
+                    <md-icon slot="icon">refresh</md-icon>
+                    Refresh
+                </md-filled-button>
+            </div>
+        </div>
+    
+
+    <script>
+        function applyRGB() {
+            const red = document.getElementById('red').value;
+            const green = document.getElementById('green').value;
+            const blue = document.getElementById('blue').value;
+            
+            document.getElementById('redValue').value = red;
+            document.getElementById('greenValue').value = green;
+            document.getElementById('blueValue').value = blue;
+            
+            const color = `rgb(${red},${green},${blue})`;
+            document.getElementById('preview').style.backgroundColor = color;
+            applyStyles();
+        }
+
+        function applyStyles() {
+            const input = document.getElementById('input').value;
+            const bold = document.getElementById('bold-chip').selected;
+            const italic = document.getElementById('italic-chip').selected;
+            const underline = document.getElementById('underline-chip').selected;
+            const strike = document.getElementById('strike-chip').selected;
+            const font = document.getElementById('fontFamily').value;
+            
+            const red = document.getElementById('red').value;
+            const green = document.getElementById('green').value;
+            const blue = document.getElementById('blue').value;
+            
+            let output = input;
+            
+            if (bold) output = `<b>${output}</b>`;
+            if (italic) output = `<i>${output}</i>`;
+            if (underline) output = `<u>${output}</u>`;
+            if (strike) output = `<s>${output}</s>`;
+            if (font) output = `<font face="${font}">${output}</font>`;
+            
+            const color = `rgb(${red},${green},${blue})`;
+            output = `<font color="${color}">${output}</font>`;
+            
+            document.getElementById('output').value = output;
+        }
+
+        function copyText() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+        }
+
+        // Set up event listeners
+        document.getElementById('input').addEventListener('input', applyStyles);
+        document.getElementById('copy').addEventListener('click', copyText);
+        document.getElementById('refresh').addEventListener('click', applyStyles);
+        
+        // Initialize color preview
+        applyRGB();
+    </script>
+</body>
+</html>

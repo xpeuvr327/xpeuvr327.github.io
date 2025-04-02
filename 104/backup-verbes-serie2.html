@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>verbes feuillete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #verbContainer {
+            margin-bottom: 20px;
+        }
+
+        #verbQuestion {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        #verbInput {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #fad0c4 0%, #ff9a9e 100%);
+        }
+
+        #feedback {
+            font-size: 1em;
+            margin-top: 10px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>entraineur de verbes telephone en cours</h1>
+        <div id="verbContainer">
+            <p id="verbQuestion"></p>
+            <input type="text" id="verbInput" placeholder="Enter your answer">
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="feedback"></p>
+        </div>
+        <button onclick="nextVerb()">Next Verb</button>
+    </div>
+    <script>
+const verbs = [
+    {
+        "deutsch": "beschweren",
+        "prs": [
+            "beschwere",
+            "beschwerst",
+            "beschwert",
+            "beschweren",
+            "beschwert",
+            "beschweren"
+        ],
+        "prt": [
+            "beschwerte",
+            "beschwertest",
+            "beschwerte",
+            "beschwerten",
+            "beschwertet",
+            "beschwerten"
+        ],
+        "prk": "beschwert",
+        "frtrad": "se plaindre",
+        "features": {
+            "isReflect": 1
+        }
+    },
+    {
+        "deutsch": "danken",
+        "prs": [
+            "danke",
+            "dankst",
+            "dankt",
+            "danken",
+            "dankt",
+            "danken"
+        ],
+        "prt": [
+            "dankte",
+            "danktest",
+            "dankte",
+            "dankten",
+            "danktet",
+            "dankten"
+        ],
+        "prk": "gedankt",
+        "frtrad": "remercier"
+    },
+    {
+        "deutsch": "dauern",
+        "prs": [
+            "dauere",
+            "dauerst",
+            "dauert",
+            "dauern",
+            "dauert",
+            "dauern"
+        ],
+        "prt": [
+            "dauerte",
+            "dauertest",
+            "dauerte",
+            "dauerten",
+            "dauertet",
+            "dauerten"
+        ],
+        "prk": "gedauert",
+        "frtrad": "durer"
+    },
+    {
+        "deutsch": "erkl\u00e4ren",
+        "prs": [
+            "erkl\u00e4re",
+            "erkl\u00e4rst",
+            "erkl\u00e4rt",
+            "erkl\u00e4ren",
+            "erkl\u00e4rt",
+            "erkl\u00e4ren"
+        ],
+        "prt": [
+            "erkl\u00e4rte",
+            "erkl\u00e4rtest",
+            "erkl\u00e4rte",
+            "erkl\u00e4rten",
+            "erkl\u00e4rtet",
+            "erkl\u00e4rten"
+        ],
+        "prk": "erkl\u00e4rt",
+        "frtrad": "expliquer"
+    },
+    {
+        "deutsch": "erlauben",
+        "prs": [
+            "erlaube",
+            "erlaubst",
+            "erlaubt",
+            "erlauben",
+            "erlaubt",
+            "erlauben"
+        ],
+        "prt": [
+            "erlaubte",
+            "erlaubtest",
+            "erlaubte",
+            "erlaubten",
+            "erlaubtet",
+            "erlaubten"
+        ],
+        "prk": "erlaubt",
+        "frtrad": "permettre"
+    },
+    {
+        "deutsch": "fehlen",
+        "prs": [
+            "fehle",
+            "fehlst",
+            "fehlt",
+            "fehlen",
+            "fehlt",
+            "fehlen"
+        ],
+        "prt": [
+            "fehlte",
+            "fehltest",
+            "fehlte",
+            "fehlten",
+            "fehltet",
+            "fehlten"
+        ],
+        "prk": "gefehlt",
+        "frtrad": "manquer, \u00eatre absent"
+    },
+    {
+        "deutsch": "freuen",
+        "prs": [
+            "freue",
+            "freust",
+            "freut",
+            "freuen",
+            "freut",
+            "freuen"
+        ],
+        "prt": [
+            "freute",
+            "freutest",
+            "freute",
+            "freuten",
+            "freutet",
+            "freuten"
+        ],
+        "prk": "gefreut",
+        "frtrad": "\u00eatre content de, se r\u00e9jouir de",
+        "features": {
+            "isReflect": 1
+        }
+    },
+    {
+        "deutsch": "f\u00fchlen",
+        "prs": [
+            "f\u00fchle",
+            "f\u00fchlst",
+            "f\u00fchlt",
+            "f\u00fchlen",
+            "f\u00fchlt",
+            "f\u00fchlen"
+        ],
+        "prt": [
+            "f\u00fchlte",
+            "f\u00fchltest",
+            "f\u00fchlte",
+            "f\u00fchlten",
+            "f\u00fchltet",
+            "f\u00fchlten"
+        ],
+        "prk": "gef\u00fchlt",
+        "frtrad": "sentir, ressentir, se sentir"
+    },
+    {
+        "deutsch": "geh\u00f6ren",
+        "prs": [
+            "geh\u00f6re",
+            "geh\u00f6rst",
+            "geh\u00f6rt",
+            "geh\u00f6ren",
+            "geh\u00f6rt",
+            "geh\u00f6ren"
+        ],
+        "prt": [
+            "geh\u00f6rte",
+            "geh\u00f6rtest",
+            "geh\u00f6rte",
+            "geh\u00f6rten",
+            "geh\u00f6rtet",
+            "geh\u00f6rten"
+        ],
+        "prk": "geh\u00f6rt",
+        "frtrad": "appartenir, faire partie de"
+    },
+    {
+        "deutsch": "hoffen",
+        "prs": [
+            "hoffe",
+            "hoffst",
+            "hofft",
+            "hoffen",
+            "hofft",
+            "hoffen"
+        ],
+        "prt": [
+            "hoffte",
+            "hofftest",
+            "hoffte",
+            "hofften",
+            "hofftet",
+            "hofften"
+        ],
+        "prk": "gehofft",
+        "frtrad": "esp\u00e9rer"
+    },
+    {
+        "deutsch": "interessieren",
+        "prs": [
+            "interessiere",
+            "interessierst",
+            "interessiert",
+            "interessieren",
+            "interessiert",
+            "interessieren"
+        ],
+        "prt": [
+            "interessierte",
+            "interessiertest",
+            "interessierte",
+            "interessierten",
+            "interessiertet",
+            "interessierten"
+        ],
+        "prk": "interessiert",
+        "frtrad": "s'int\u00e9resser \u00e0"
+    },
+    {
+        "deutsch": "lieben",
+        "prs": [
+            "liebe",
+            "liebst",
+            "liebt",
+            "lieben",
+            "liebt",
+            "lieben"
+        ],
+        "prt": [
+            "liebte",
+            "liebtest",
+            "liebte",
+            "liebten",
+            "liebtet",
+            "liebten"
+        ],
+        "prk": "geliebt",
+        "frtrad": "aimer"
+    },
+    {
+        "deutsch": "meinen",
+        "prs": [
+            "meine",
+            "meinst",
+            "meint",
+            "meinen",
+            "meint",
+            "meinen"
+        ],
+        "prt": [
+            "meinte",
+            "meintest",
+            "meinte",
+            "meinten",
+            "meintet",
+            "meinten"
+        ],
+        "prk": "gemeint",
+        "frtrad": "penser, \u00eatre d'avis"
+    },
+    {
+        "deutsch": "putzen",
+        "prs": [
+            "putze",
+            "putzt",
+            "putzt",
+            "putzen",
+            "putzt",
+            "putzen"
+        ],
+        "prt": [
+            "putzte",
+            "putztest",
+            "putzte",
+            "putzten",
+            "putztet",
+            "putzten"
+        ],
+        "prk": "geputzt",
+        "frtrad": "nettoyer"
+    },
+    {
+        "deutsch": "rechnen",
+        "prs": [
+            "rechne",
+            "rechnest",
+            "rechnet",
+            "rechnen",
+            "rechnet",
+            "rechnen"
+        ],
+        "prt": [
+            "rechnete",
+            "rechnetest",
+            "rechnete",
+            "rechneten",
+            "rechnetet",
+            "rechneten"
+        ],
+        "prk": "gerechnet",
+        "frtrad": "calculer"
+    },
+    {
+        "deutsch": "schneien",
+        "prs": [
+            null,
+            null,
+            "schneit",
+            null,
+            null,
+            null
+        ],
+        "prt": [
+            null,
+            null,
+            "schneite",
+            null,
+            null,
+            null
+        ],
+        "prk": "",
+        "frtrad": "neiger"
+    },
+    {
+        "deutsch": "st\u00f6ren",
+        "prs": [
+            "st\u00f6re",
+            "st\u00f6rst",
+            "st\u00f6rt",
+            "st\u00f6ren",
+            "st\u00f6rt",
+            "st\u00f6ren"
+        ],
+        "prt": [
+            "st\u00f6rte",
+            "st\u00f6rtest",
+            "st\u00f6rte",
+            "st\u00f6rten",
+            "st\u00f6rtet",
+            "st\u00f6rten"
+        ],
+        "prk": "gest\u00f6rt",
+        "frtrad": "d\u00e9ranger"
+    },
+    {
+        "deutsch": "studieren",
+        "prs": [
+            "studiere",
+            "studierst",
+            "studiert",
+            "studieren",
+            "studiert",
+            "studieren"
+        ],
+        "prt": [
+            "studierte",
+            "studiertest",
+            "studierte",
+            "studierten",
+            "studiertet",
+            "studierten"
+        ],
+        "prk": "studiert",
+        "frtrad": "\u00e9tudier"
+    },
+    {
+        "deutsch": "tanken",
+        "prs": [
+            "tanke",
+            "tankst",
+            "tankt",
+            "tanken",
+            "tankt",
+            "tanken"
+        ],
+        "prt": [
+            "tankte",
+            "tanktest",
+            "tankte",
+            "tankten",
+            "tanktet",
+            "tankten"
+        ],
+        "prk": "getankt",
+        "frtrad": "prendre de l'essence"
+    },
+    {
+        "deutsch": "telefonieren",
+        "prs": [
+            "telefoniere",
+            "telefonierst",
+            "telefoniert",
+            "telefonieren",
+            "telefoniert",
+            "telefonieren"
+        ],
+        "prt": [
+            "telefonierte",
+            "telefoniertest",
+            "telefonierte",
+            "telefonierten",
+            "telefoniertet",
+            "telefonierten"
+        ],
+        "prk": "telefoniert",
+        "frtrad": "t\u00e9l\u00e9phoner"
+    },
+    {
+        "deutsch": "verlangen",
+        "prs": [
+            "verlange",
+            "verlangst",
+            "verlangt",
+            "verlangen",
+            "verlangt",
+            "verlangen"
+        ],
+        "prt": [
+            "verlangte",
+            "verlangtest",
+            "verlangte",
+            "verlangten",
+            "verlangtet",
+            "verlangten"
+        ],
+        "prk": "verlangt",
+        "frtrad": "exiger"
+    },
+    {
+        "deutsch": "versuchen",
+        "prs": [
+            "versuche",
+            "versuchst",
+            "versucht",
+            "versuchen",
+            "versucht",
+            "versuchen"
+        ],
+        "prt": [
+            "versuchte",
+            "versuchtest",
+            "versuchte",
+            "versuchten",
+            "versuchtet",
+            "versuchten"
+        ],
+        "prk": "versucht",
+        "frtrad": "essayer"
+    },
+    {
+        "deutsch": "wecken",
+        "prs": [
+            "wecke",
+            "weckst",
+            "weckt",
+            "wecken",
+            "weckt",
+            "wecken"
+        ],
+        "prt": [
+            "weckte",
+            "wecktest",
+            "weckte",
+            "weckten",
+            "wecktet",
+            "weckten"
+        ],
+        "prk": "geweckt",
+        "frtrad": "r\u00e9veiller"
+    },
+    {
+        "deutsch": "wechseln",
+        "prs": [
+            "wechsle",
+            "wechselst",
+            "wechselt",
+            "wechseln",
+            "wechselt",
+            "wechseln"
+        ],
+        "prt": [
+            "wechselte",
+            "wechseltest",
+            "wechselte",
+            "wechselten",
+            "wechseltet",
+            "wechselten"
+        ],
+        "prk": "gewechselt",
+        "frtrad": "changer, \u00e9changer"
+    },
+    {
+        "deutsch": "w\u00fcnschen",
+        "prs": [
+            "w\u00fcnsche",
+            "w\u00fcnschst",
+            "w\u00fcnscht",
+            "w\u00fcnschen",
+            "w\u00fcnscht",
+            "w\u00fcnschen"
+        ],
+        "prt": [
+            "w\u00fcnschte",
+            "w\u00fcnschtest",
+            "w\u00fcnschte",
+            "w\u00fcnschten",
+            "w\u00fcnschtet",
+            "w\u00fcnschten"
+        ],
+        "prk": "gew\u00fcnscht",
+        "frtrad": "d\u00e9sirer, souhaiter"
+    },
+    {
+        "deutsch": "zeigen",
+        "prs": [
+            "zeige",
+            "zeigst",
+            "zeigt",
+            "zeigen",
+            "zeigt",
+            "zeigen"
+        ],
+        "prt": [
+            "zeigte",
+            "zeigtest",
+            "zeigte",
+            "zeigten",
+            "zeigtet",
+            "zeigten"
+        ],
+        "prk": "gezeigt",
+        "frtrad": "montrer"
+    },
+    {
+        "deutsch": "anmachen",
+        "prs": [
+            "mache an",
+            "machst an",
+            "macht an",
+            "machen an",
+            "macht an",
+            "machen an"
+        ],
+        "prt": [
+            "machte an",
+            "machtest an",
+            "machte an",
+            "machten an",
+            "machtet an",
+            "machten an"
+        ],
+        "prk": "gemacht",
+        "frtrad": "allumer",
+        "features":{"hasParticle":1}
+    },
+    {
+        "deutsch": "aufh\u00f6ren",
+        "prs": [
+            "h\u00f6re auf",
+            "h\u00f6rst auf",
+            "h\u00f6rt auf",
+            "h\u00f6ren auf",
+            "h\u00f6rt auf",
+            "h\u00f6ren auf"
+        ],
+        "prt": [
+            "h\u00f6rte",
+            "h\u00f6rtest",
+            "h\u00f6rte",
+            "h\u00f6rten",
+            "h\u00f6rtet",
+            "h\u00f6rten"
+        ],
+        "prk": "geh\u00f6rt",
+        "frtrad": "cesser",
+        "features":{"hasParticle":1}
+    },
+    {
+        "deutsch": "ausmachen",
+        "prs": [
+            "mache aus",
+            "machst aus",
+            "macht aus",
+            "machen aus",
+            "macht",
+            "machen aus"
+        ],
+        "prt": [
+            "machte aus",
+            "machtest aus",
+            "machte aus",
+            "machten aus",
+            "machtet aus",
+            "machten aus"
+        ],
+        "prk": "gemacht",
+        "frtrad": "\u00e9teindre",
+        "features":{"hasParticle":1}
+    },
+    {
+        "deutsch": "ausruhen",
+        "prs": [
+            "ruhe aus",
+            "ruhst aus",
+            "ruht aus",
+            "ruhen aus",
+            "ruht aus",
+            "ruhen aus"
+        ],
+        "prt": [
+            "ruhte aus",
+            "ruhtest aus",
+            "ruhte aus",
+            "ruhten aus",
+            "ruhtet aus",
+            "ruhten aus"
+        ],
+        "prk": "geruht",
+        "frtrad": "se reposer",
+        "features": {
+            "isReflect": 1
+        }
+    },
+    {
+        "deutsch": "kennenlernen",
+        "prs": [
+            "lerne kennen",
+            "lernst kennen",
+            "lernt kennen",
+            "lernen kennen",
+            "lernt kennen",
+            "lernen kennen"
+        ],
+        "prt": [
+            "lernte kennen",
+            "lerntest kennen",
+            "lernte kennen",
+            "lernten kennen",
+            "lerntet kennen",
+            "lernten kennen"
+        ],
+        "prk": "gelernt",
+        "frtrad": "faire la connaissance"
+    },
+    {"deutsch":"besitzen","prs":["besitze","besitzt","besitzt","besitzen","besitzt","besitzen"],"prt":["besa\u00df","besa\u00dfest","besa\u00df","besa\u00dfen","besa\u00dft","besa\u00dfen"],"prk":"besessen","frtrad":"poss\u00e9der","features":{"isIrreg":1}},{"deutsch":"bitten","prs":["bitte","bittest","bittet","bitten","bittet","bitten"],"prt":["bat","batest","bat","baten","batet","baten"],"prk":"gebeten","frtrad":"f","features":{"isIrreg":1}},{'deutsch': 'fallen', 'prs': ['falle', 'fällst', 'fällt', 'fallen', 'fallt', 'fallen'], 'prt': ['fiel', 'fielst', 'fiel', 'fielen', 'fielt', 'fielen'], 'prk': 'gefallen', 'frtrad': 'tomber', 'features': {'auxSein': 1, 'isIrreg': 0, 'isReflect': 1, 'hasParticle': 0}}
+    ,{"deutsch":"leiden","prs":["leide","leidest","leidet","leiden","leidet","leiden"],"prt":["litt","littest","litt","litten","littet","litten"],"prk":"gelitten","frtrad":"souffrir","features":{"isReflect":1,"isIrreg":1}},{"deutsch":"rufen","prs":["rufe","rufst","ruft","rufen","ruft","rufen"],"prt":["rief","riefst","rief","riefen","rieft","riefen"],"prk":"gerufen","frtrad":"appeler","features":{"isReflect":1,"isIrreg":1}}
+    ,{"deutsch":"schlagen","prs":["schlage","schl\u00e4gst","schl\u00e4gt","schlagen","schlagt","schlagen"],"prt":["schlug","schlugst","schlug","schlugen","schlugt","schlugen"],"prk":"geschlagen","frtrad":"battre, frapper","features":{"isIrreg":1,"isReflect":1}},{"deutsch":"singen","prs":["singe","singst","singt","singen","singt","singen"],"prt":["sang","sangst","sang","sangen","sangt","sangen"],"prk":"gesungen","frtrad":"chanter","features":{"isIrreg":1,"isReflect":1}},{"deutsch":"sterben","prs":["sterbe","stirbst","stirbt","sterben","sterbt","sterben"],"prt":["starb","starbst","starb","starben","starbt","starben"],"prk":"gestorben","frtrad":"mourir","features":{"auxSein":1,"isIrreg":1,"isReflect":1}},{"deutsch":"streiten","prs":["streite","streitest","streitet","streiten","streitet","streiten"],"prt":["stritt","strittest","stritt","stritten","strittet","stritten"],"prk":"gestritten","frtrad":"se disputer","features":{"isIrreg":1,"isReflect":1}},{"deutsch":"unterhalten","prs":["unterhalte","unterh\u00e4ltst","unterh\u00e4lt","unterhalten","unterhaltet","unterhalten"],"prt":["unterhielt","unterhieltst","unterhielt","unterhielten","unterhieltet","unterhielten"],"prk":"unterhalten","frtrad":"s'entretenir","features":{"isIrreg":1,"isReflect":1}},{"deutsch":"werden","prs":["werde","wirst","wird","werden","werdet","werden"],"prt":["wurde","wurdest","wurde","wurden","wurdet","wurden"],"prk":"geworden","frtrad":"devenir","features":{"auxSein":1,"isIrreg":1,"isReflect":1}},{"deutsch":"werfen","prs":["werfe","wirfst","wirft","werfen","werft","werfen"],"prt":["warf","warfst","warf","warfen","warft","warfen"],"prk":"geworfen","frtrad":"jeter, lancert","features":{"isIrreg":1,"isReflect":1}}
+    ,{"deutsch":"gebenaus","prs":["gebe aus","gibst aus","gibt aus","geben aus","gebt aus","geben aus"],"prt":["gab aus","gabst aus","gab aus","gaben aus","gabt aus","gaben aus"],"prk":"ausgegeben","frtrad":"d\u00e9penser","features":{"isIrreg":1,"isReflect":1,"hasParticle":1}},{"deutsch":"schlafenein","prs":["schlafe ein","schl\u00e4fst ein","schl\u00e4ft ein","schlafen ein","schlaft ein","schlafen ein"],"prt":["schlief ein","schliefst ein","schlief ein","schliefen ein","schlieft ein","schliefen ein"],"prk":"eingeschlafen","frtrad":"s'endormir","features":{"isIrreg":1,"isReflect":1,"hasParticle":1}},{"deutsch":"sehenfern","prs":["sehe fern","siehst fern","sieht fern","sehen fern","seht fern","sehen fern"],"prt":["sah fern","sahst fern","sah fern","sahen fern","saht fern","sahen fern"],"prk":"ferngesehen","frtrad":"regarder la t\u00e9l\u00e9vision","features":{"isIrreg":1,"isReflect":1,"hasParticle":1}},{"deutsch":"schlagenvor","prs":["schlage vor","schl\u00e4gst vor","schl\u00e4gt vor","schlagen vor","schlagt vor","schlagen vor"],"prt":["schlug vor","schlugst vor","schlug vor","schlugen vor","schlugt vor","schlugen vor"],"prk":"vorgeschlagen","frtrad":"proposer","features":{"isIrreg":1,"isReflect":1,"hasParticle":1}}
+    , {'deutsch': 'denken', 'prs': ['denke', 'denkst', 'denkt', 'denken', 'denkt', 'denken'], 'prt': ['dachte', 'dachtest', 'dachte', 'dachten', 'dachtet', 'dachten'], 'prk': 'gedacht', 'frtrad': 'penser à', 'features': {'auxSein': 0, 'isIrreg': 1, 'isReflect': 1, 'hasParticle': 0, 'isInformal': 0}}, {'deutsch': 'kennen', 'prs': ['kenne', 'kennst', 'kennt', 'kennen', 'kennt', 'kennen'], 'prt': ['kannte', 'kanntest', 'kannte', 'kannten', 'kanntet', 'kannten'], 'prk': 'gekannt', 'frtrad': 'connaître', 'features': {'auxSein': 0, 'isIrreg': 1, 'isReflect': 1, 'hasParticle': 0, 'isInformal': 0}}
+];
+
+
+
+    let currentVerbIndex = 0;
+    let currentVerb;
+    let currentFormIndex;
+    let currentTense = 'prs'; // Default to present tense
+
+    function startTraining() {
+        currentVerbIndex = 0;
+        nextVerb();
+    }
+
+    function nextVerb() {
+        if (currentVerbIndex >= verbs.length) {
+            document.getElementById('verbQuestion').innerText = "Tous les verbes sont terminés !";
+            document.getElementById('verbInput').style.display = 'none';
+            document.getElementById('feedback').innerText = '';
+            return;
+        }
+
+        currentVerb = verbs[currentVerbIndex];
+        currentFormIndex = Math.floor(Math.random() * currentVerb.prs.length);
+        currentTense = ['prs', 'prt', 'prk', 'frtrad'][Math.floor(Math.random() * 4)];
+
+        let questionText;
+        if (currentTense === 'frtrad') {
+            questionText = `Traduisez "${currentVerb.frtrad}" en allemand.`;
+        } else {
+            const tenseNames = {
+                'prs': 'au présent',
+                'prt': 'au prétérit',
+                'prk': 'au passé composé'
+            };
+            questionText = `Conjuguez "${currentVerb.deutsch}" ${tenseNames[currentTense]} pour "${pronouns[currentFormIndex]}"`;
+        }
+
+        document.getElementById('verbQuestion').innerText = questionText;
+        document.getElementById('verbInput').value = '';
+        document.getElementById('feedback').innerText = '';
+        currentVerbIndex++;
+    }
+
+    function checkAnswer() {
+        const userAnswer = document.getElementById('verbInput').value.trim();
+        let correctAnswer;
+
+        if (currentTense === 'frtrad') {
+            correctAnswer = currentVerb.deutsch;
+        } else {
+            correctAnswer = currentVerb[currentTense][currentFormIndex];
+        }
+
+        const feedbackElement = document.getElementById('feedback');
+
+        if (normalizeString(userAnswer) === normalizeString(correctAnswer)) {
+            feedbackElement.innerText = `Correct ! La réponse est "${correctAnswer}".`;
+            feedbackElement.className = 'correct';
+        } else {
+            feedbackElement.innerText = `Incorrect. La réponse correcte est "${correctAnswer}".`;
+            feedbackElement.className = 'incorrect';
+        }
+    }
+
+    function normalizeString(str) {
+    if (str === undefined) return '';
+    return str
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/ß/g, "ss") 
+        .replace(/[()]/g, "")
+        .trim();
+    }
+
+
+    const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+
+    document.addEventListener("DOMContentLoaded", startTraining);
+</script>
+</body>
+</html>

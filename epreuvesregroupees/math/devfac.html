@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="fr">
+    <title>Factorisation d'une équation quadratique</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.ico" />
+    <script src="https://cdn.jsdelivr.net/npm/latex.js/dist/latex.js"></script>
+    <style>
+        body {
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .content {
+            width: 100%;
+            max-width: 800px;
+            text-align: justify;
+        }
+        .end {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <div class="content" id="latex-content" style="display: inline-block;">
+        <!-- LaTeX output will be appended here -->
+    </div>
+    <p>Ca a été créé par ChatGPT et j'en suis désolé</p>
+    <a onclick="history.back()">Retour</a>
+    <script>
+        var quadraticFactorization = `
+    \\documentclass[1pt]{article}
+    \\title{Développement et réduction d'une expression algébrique}
+    \\author{}
+    \\date{\\vspace{-5ex}}
+    \\begin{document}
+    \\maketitle
+
+    Soit l'expression suivante :
+    \\[ 3x(1 - 2x) - (2x - 1)^2 \\]
+    \\[Nous\\, allons\\, la\\, développer\\, et\\, la \\,réduire \\,étape\\, par \\,étape.\\]
+
+
+    \\section*{Développement}
+    \\begin{enumerate}
+    \\item Développement\\,du\\,premier\\,terme\\,: \\( 3x(1 - 2x) \\)
+        En appliquant la propriété distributive \\( a(b + c) = ab + ac \\), on développe le premier terme :
+        \\[
+        3x(1 - 2x) = 3x \\times 1 - 3x \\times 2x = 3x - 6x^2
+        \\]
+
+    \\item Développement du second terme : \\( (2x - 1)^2 \\)
+        Pour développer \\( (2x - 1)^2 \\), on applique la \\texttt{deuxième identité remarquable} d'un binôme \\( (a - b)^2 = a^2 - 2ab + b^2 \\). Ici, \\( a = 2x \\) et \\( b = 1 \\), donc :
+        \\[
+        (2x - 1)^2 = (2x)^2 - 2 \\times (2x) \\times 1 + 1^2 = 4x^2 - 4x + 1
+        \\]
+    \\end{enumerate}
+    \\section*{Réduction}
+
+    Maintenant que nous avons développé chaque terme, nous pouvons combiner les résultats obtenus.
+
+    L'expression devient :
+    \\[ 3x - 6x^2 - (4x^2 - 4x + 1) \\]
+
+    En distribuant le signe négatif, nous obtenons :
+    \\[ 3x - 6x^2 - 4x^2 + 4x - 1 \\]
+
+    Ensuite, nous combinons les termes similaires :
+    - Les termes en \\( x^2 \\) : \\( -6x^2 - 4x^2 = -10x^2 \\)
+    - Les termes en \\( x \\) : \\( 3x + 4x = 7x \\)
+    - Le terme constant : \\( -1 \\)
+
+    Donc, l'expression réduite est :
+    \\[ -10x^2 + 7x - 1 \\]
+
+    \\section*{Résumé}
+
+    Pour développer et réduire l'expression \\( 3x(1 - 2x) - (2x - 1)^2 \\) :
+    \\begin{enumerate}
+        \\item Développez chaque terme en utilisant les propriétés de la distributivité et les formules de développement.
+        \\item Réduisez l'expression en combinant les termes similaires.
+    \\end{enumerate}
+
+    \\end{document}
+`;
+
+        var generator = new latexjs.HtmlGenerator({ hyphenate: false });
+        generator = latexjs.parse(quadraticFactorization, { generator: generator });
+
+        document.head.appendChild(generator.stylesAndScripts("https://cdn.jsdelivr.net/npm/latex.js@0.12.4/dist/"));
+
+        var latexContent = document.getElementById('latex-content');
+        latexContent.appendChild(generator.domFragment());
+    </script>
+</body>
+</html>

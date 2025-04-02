@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Minifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML Minifier</h1>
+    <textarea id="inputHtml" placeholder="Paste your HTML here..."></textarea>
+    <br>
+    <button onclick="minifyHtml()">Minify HTML</button>
+    <h2>Minified HTML:</h2>
+    <textarea id="outputHtml" placeholder="Minified HTML will appear here..." readonly></textarea>
+<p>Original Size: <span id="originalSize">0 KB</span></p>
+<p>Minified Size: <span id="minifiedSize">0 KB</span></p>
+
+    <script>
+       function minifyHtml() {
+    const inputHtml = document.getElementById('inputHtml').value;
+    const minifiedHtml = inputHtml
+        .replace(/\s+/g, ' ')
+        .replace(/>\s+</g, '><')
+        .replace(/<!--.*?-->/g, '')
+        .replace(/\s*{\s*/g, '{')
+        .replace(/\s*}\s*/g, '}')
+        .replace(/\s*;\s*/g, ';')
+        .replace(/\s*:\s*/g, ':')
+        .replace(/\s*,\s*/g, ',');
+
+    // Calculate sizes in KB
+    const originalSizeKB = (new Blob([inputHtml]).size / 1024).toFixed(2);
+    const minifiedSizeKB = (new Blob([minifiedHtml]).size / 1024).toFixed(2);
+
+    // Display sizes
+    document.getElementById('originalSize').textContent = `${originalSizeKB} KB`;
+    document.getElementById('minifiedSize').textContent = `${minifiedSizeKB} KB`;
+
+    document.getElementById('outputHtml').value = minifiedHtml;
+}
+
+    </script>
+</body>
+</html>

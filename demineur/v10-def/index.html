@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Démineur</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/x-icon" href="icon.png">
+</head>
+<body>
+    <h1>Démineur by IA</h1>
+    <div onclick="this.style.display = 'none'">
+démineur en javascript  fait en majorité par l'ia. le numéro aléatoire entre parenthèses est pour indiquer qu'une nouvelle grille a été générée. fais moi savoir si des erreurs graphiques sont à signaler. contrôles : clic gauche sur une cellule->révéler, clic droit->poser un drapeau, clic droit sur un drapeau->?. clic droit sur un ? pour retransformer en cellule non révélée. tu es coincé? conseil: clique (gauche) sur la case en haut à gauche. clique ce texte pour le cacher.<br>
+    </div>
+    <label for="mines">Nombre de mines:</label>
+    <select id="mines" onchange="changeMines()">
+        <option value="10" selected>10x10, 15 mines</option>
+        <option value="20">15x15, 30 mines</option>
+        <option value="30">20x20, 50 mines</option>
+        <option value="40">25x25, 70 mines</option>
+    </select>
+    <button id="restart" onclick="createBoard()">Recommencer</button>
+    <button id="toggleDarkMode" onclick="toggleDarkMode();this.textContent = this.textContent === 'Thème clair' ? 'Thème sombre' : 'Thème clair'">Thème sombre</button>
+    <p id="message"></p>
+    <p id="timer">Temps: 0 secondes</p>
+    <div id="board"></div>
+    <script src="game.js"></script>
+</body>
+</html>
+
+

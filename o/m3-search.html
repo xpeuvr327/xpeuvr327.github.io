@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi Restaurant Search</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <script type="module" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+        #searchInput {
+            flex: 1;
+        }
+        #resultsContainer {
+            width: 100%;
+            max-width: 600px;
+        }
+        .result-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        #fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <md-outlined-text-field label="Search for sushi or restaurants..." id="searchInput">
+            <md-icon slot="leading-icon">search</md-icon>
+        </md-outlined-text-field>
+    </div>
+    <div id="resultsContainer"></div>
+    <md-fab icon="add" id="fab"></md-fab>
+
+    <script type="module">
+        import {TextField} from 'https://unpkg.com/material-components-web@latest/dist/material-components-web.js';
+        import {ChipSet, Chip} from 'https://unpkg.com/material-components-web@latest/dist/material-components-web.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.querySelector('#searchInput md-outlined-text-field');
+            const resultsContainer = document.getElementById('resultsContainer');
+
+            const sampleData = [
+                { name: 'Sushi Roll', type: 'sushi', description: 'Delicious sushi rolls with fresh ingredients.' },
+                { name: 'Sashimi Platter', type: 'sushi', description: 'Assorted sashimi with soy sauce.' },
+                { name: 'Ramen House', type: 'restaurant', description: 'Authentic ramen noodles with various toppings.' },
+                { name: 'Tempura Palace', type: 'restaurant', description: 'Crispy tempura with a selection of seafood and vegetables.' },
+            ];
+
+            searchInput.addEventListener('input', (event) => {
+                performSearch(event.target.value.toLowerCase());
+            });
+
+            function performSearch(query) {
+                resultsContainer.innerHTML = '';
+                const filteredResults = sampleData.filter(item =>
+                    item.name.toLowerCase().includes(query) || item.type.includes(query)
+                );
+
+                const chipSet = document.createElement('md-chip-set');
+                filteredResults.forEach(item => {
+                    const chip = document.createElement('md-chip');
+                    chip.textContent = item.name;
+                    chip.setAttribute('label', item.name);
+                    chip.setAttribute('trailingicon', 'close');
+                    chip.addEventListener('MDChip:removal', () => {
+                        chipSet.removeChild(chip);
+                    });
+                    chipSet.appendChild(chip);
+                });
+                resultsContainer.appendChild(chipSet);
+            }
+        });
+    </script>
+</body>
+</html>

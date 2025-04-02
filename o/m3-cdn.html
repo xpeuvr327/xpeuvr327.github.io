@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+  </script>
+  <script type="module">
+    import '@material/web/all.js';
+    import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+
+    document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+  </script>
+  <style>
+    body { padding: 20px; }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="md-typescale-display-medium">Hello Material!</h1>
+  <md-chip-set>
+    <md-suggestion-chip label="All" id="chipAll"></md-suggestion-chip>
+    <md-filter-chip label="Verbes 1-100" id="chip1"></md-filter-chip>
+    <md-filter-chip label="Verbes 101-150" id="chip2"></md-filter-chip>
+  </md-chip-set>
+  <form>
+    <p class="md-typescale-body-medium">Check out these controls in a form!</p>
+    <div>
+      <label><md-radio name="group"></md-radio> I am a student</label>
+      <br><br>
+      <label><md-radio name="group"></md-radio> I am a teacher</label>
+      <br><br>
+      <label><md-radio name="group"></md-radio> I prefer not to say</label>
+    </div>
+    <label><md-checkbox></md-checkbox> Confirm</label>
+    <md-outlined-text-field label="Name" value="John Doe"></md-outlined-text-field>
+    <md-outlined-button type="submit">Submit</md-outlined-button>
+  </form>
+  <md-dialog id="filterDialog">
+    <div slot="headline">Selected Filters</div>
+    <form slot="content" id="form-id" method="dialog">
+      <div id="selectedFilters"></div>
+    </form>
+    <div slot="actions">
+      <md-text-button form="form-id">Ok</md-text-button>
+    </div>
+  </md-dialog>
+  <md-filled-button id="showFiltersButton">Show Selected Filters</md-filled-button>
+
+  <script type="module">
+    const dialog = document.querySelector('#filterDialog');
+    const showFiltersButton = document.querySelector('#showFiltersButton');
+    const selectedFilters = document.querySelector('#selectedFilters');
+    const chips = document.querySelectorAll('md-filter-chip');
+    const allChip = document.querySelector('#chipAll');
+
+    allChip.addEventListener('click', () => {
+      const isAllSelected = !allChip.selected;
+      chips.forEach(chip => {
+        chip.selected = isAllSelected;
+      });
+      allChip.selected = isAllSelected;
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const allSelected = Array.from(chips).every(chip => chip.selected);
+        allChip.selected = allSelected;
+      });
+    });
+
+    showFiltersButton.addEventListener('click', () => {
+      const selectedChips = Array.from(chips).filter(chip => chip.selected).map(chip => chip.label);
+      selectedFilters.textContent = selectedChips.length > 0 ? selectedChips.join(', ') : 'No filters selected';
+      console.log('Selected Filters:', selectedChips); // Log selected filters to the console
+      dialog.show();
+    });
+
+    document.querySelector('md-text-button').addEventListener('click', async () => {
+      await dialog.close();
+    });
+  </script>
+</body>
+</html>

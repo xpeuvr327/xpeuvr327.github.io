@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL Grid with Spacetime Deformation</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <script>
+        const canvas = document.getElementById("webgl-canvas");
+        const gl = canvas.getContext("webgl");
+
+        let mouseX = 0, mouseY = 0;
+
+        // Update canvas size and WebGL viewport on resize
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            gl.viewport(0, 0, canvas.width, canvas.height);  // Adjust WebGL viewport
+            gl.clear(gl.COLOR_BUFFER_BIT);  // Clear the canvas after resizing
+        }
+
+        // Initialize canvas size and viewport
+        resizeCanvas();
+
+        // Set the clear color (black)
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+        // Vertex shader (for positions)
+        const vsSource = `
+            attribute vec2 a_position;
+            uniform vec2 u_mouse; // Mouse position uniform
+            void main() {
+                // Calculate the distance from the grid point to the mouse
+                vec2 dist = a_position - u_mouse;
+                float distLength = length(dist);
+
+                // Apply a "gravity" distortion based on inverse distance, similar to spacetime curvature
+                float deformation = 1.0 / (distLength * distLength + 0.1); // Inverse square law
+                
+                // Apply the deformation (more dramatic near the mouse)
+                vec2 displacement = dist * deformation * 0.1; // Adjust the multiplier for the effect
+                gl_Position = vec4(a_position + displacement, 0.0, 1.0);
+            }
+        `;
+
+        // Fragment shader (for color)
+        const fsSource = `
+            precision mediump float;
+            void main() {
+                gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);  // White color for grid
+            }
+        `;
+
+        // Compile shader function
+        function compileShader(source, type) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error("ERROR compiling shader:", gl.getShaderInfoLog(shader));
+            }
+            return shader;
+        }
+
+        // Compile shaders
+        const vertexShader = compileShader(vsSource, gl.VERTEX_SHADER);
+        const fragmentShader = compileShader(fsSource, gl.FRAGMENT_SHADER);
+
+        // Create and link the shader program
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            console.error("ERROR linking program:", gl.getProgramInfoLog(program));
+        }
+
+        gl.useProgram(program);
+
+        // Define grid lines (positions from -1 to 1)
+        const gridSize = 1;  // Grid range from -1 to +1
+        const lineCount = 30; // Number of lines per axis
+        const positions = [];
+
+        // Create grid lines: horizontal and vertical
+        for (let i = -lineCount; i <= lineCount; i++) {
+            positions.push(-gridSize, i * gridSize / lineCount);
+            positions.push(gridSize, i * gridSize / lineCount);  // Horizontal line
+
+            positions.push(i * gridSize / lineCount, -gridSize);
+            positions.push(i * gridSize / lineCount, gridSize);  // Vertical line
+        }
+
+        // Create a buffer for positions
+        const positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+
+        // Link buffer data to the shader
+        const positionLocation = gl.getAttribLocation(program, "a_position");
+        gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(positionLocation);
+
+        // Get mouse position and update the distortion uniform
+        const mouseLocation = gl.getUniformLocation(program, "u_mouse");
+
+        function updateMousePosition(event) {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = (event.clientX - rect.left) / rect.width * 2 - 1; // Normalize to [-1, 1]
+            mouseY = (event.clientY - rect.top) / rect.height * 2 - 1; // Normalize to [-1, 1]
+        }
+
+        // Event listener for mouse movement
+        canvas.addEventListener("mousemove", updateMousePosition);
+
+        // Event listener for window resize
+        window.addEventListener("resize", resizeCanvas);
+
+        // Animation loop to redraw the grid
+        function draw() {
+            gl.clear(gl.COLOR_BUFFER_BIT);  // Clear the canvas before drawing
+
+            // Update the mouse uniform (for deformation)
+            gl.uniform2f(mouseLocation, mouseX, mouseY);
+
+            // Draw the grid
+            gl.drawArrays(gl.LINES, 0, positions.length / 2); // Draw lines
+
+            // Continue the animation
+            requestAnimationFrame(draw);
+        }
+
+        // Start the animation loop
+        draw();
+    </script>
+</body>
+</html>

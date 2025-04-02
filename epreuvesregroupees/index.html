@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Semestrielles 2025</title>
+    <meta charset="utf-8" data-next-head="" />
+    <meta name="viewport" content="width=device-width" data-next-head="" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="manifest" href="/epreuvesregroupees/manifest.json">
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <div>
+        <h1>Semestrielles 2024</h1>
+        <p>Bienvenue sur le site des Semestrielles 2025. Les tests commencent la semaine prochaine, un par jour à partir de lundi. Le site est désormais terminé, sous réserve de corrections.</p>
+        <p>Pour accéder aux ressources, après avoir cliqué sur l'une des matières, il faut copier l'adresse puis accéder à l'url.</p>
+        <a href="/104/index.html">Page du Collège, général.</a>
+        <a href="math.html">Mathématiques</a>
+        <a href="histoire.html">Histoire</a>
+        <a href="francais.html">Français</a>
+        <a href="informatique.html">Informatique</a>
+        <a href="chimie.html">Chimie</a>
+        <a href="droit.html">Droit</a>
+        <a href="about.html">À propos</a>
+    </div>
+
+    <script>
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function checkCookie() {
+    let access = getCookie('access');
+    if (isIOS()) {
+        access = localStorage.getItem('access');
+    }
+    if (access === 'true') {
+        window.location.href = 'adls.html';
+    }
+}
+
+checkCookie();
+
+function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+    </script>
+<script src="copy.js"></script>
+<script type="text/javascript">
+	var id_user = 868613;
+	var domains_include = ['lesitedela104.webredirect.org', '213.55.162.9'];
+</script>
+<script type="text/javascript" src="/resumes/francais/le-roman-de-renart/adfocus.js"></script>
+</body>
+
+</html>

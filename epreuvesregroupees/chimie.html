@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Épreuve regroupée de chimie</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" />
+    <meta name="description" content="révise la chimie.">
+    <style>
+        ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 1rem;
+            line-height: 1.6;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        #imageToCompress {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Épreuve regroupée de chimie</h1>
+    <a href="chimie/corrige_chimie.pdf">(DOC) pdf de corrigé de chimie</a>
+    <a href="chimie/champ_off.pdf"id="champ">(DOC officiel) champ de chimie</a>
+    <a href="chimie/revision_chimie.pdf" id="pdf">(DOC) Fiche de révision COMPLÈTE</a>
+    <h2>Sommaire de la page</h2>
+    <ul> 
+        <li><a href="#champ" class="a-deco">Champ officiel</a><br></li>
+        <li><a href="#pdf" class="a-deco">Fiche de révision</a><br></li>
+        <li><a href="#def" class="a-deco">Définitions</a></li>
+        <li><a href="#revision" class="a-deco">Révision</a></li>
+        <li><a href="#etats" class="a-deco">(Changements d') États</a></li>
+        <li><a href="#repr_char" class="a-deco">Représentation / Caractéristiques des états</a></li>
+        <li><a href="#ebulition" class="a-deco">Points d'ébullition</a></li>
+        <li><a href="#corps_purs" class="a-deco">Les corps purs</a></li>
+        <li><a href="#melanges" class="a-deco">Les mélanges</a></li>
+        <li><a href="#methodes_sep" class="a-deco">Les méthodes de séparation</a></li>
+        <li><a href="#grandeurs" class="a-deco">Les ordres de grandeur</a></li>
+        <li><a href="#atome" class="a-deco">L'atome</a></li>
+        <li><a href="#charge_elec" class="a-deco">La charge électrique</a></li>
+    </ul>
+    
+    <h2 id="champ">Champ</h2>
+    <h3>Vocabulaire</h3>
+    <ul id="def">
+        <li>Substance : Une matière identifiable par ses propriétés chimiques et physiques, comme l'eau (H₂O).</li>
+        <li>Atome : La plus petite unité d'un élément chimique, composée de protons, neutrons et électrons.</li>
+        <li>Élément Chimique : Une catégorie d'atomes ayant le même nombre de protons, comme l'oxygène (O).</li>
+        <li>Ion : Un atome ou un groupe d'atomes ayant gagné ou perdu un ou plusieurs électrons, comme Na⁺ ou Cl⁻.</li>
+        <li>Molécule : Un assemblage d'atomes liés chimiquement, comme le dioxyde de carbone (CO₂).</li>
+        <li>Corps : Une forme macroscopique de matière, pouvant être pur (fer) ou un mélange (air).</li>
+        <li>Isotope : Une version d’un atome d’un élément, différant par le nombre de neutrons, comme le carbone-14.</li>
+    </ul>
+    
+    <h3 id="revision">Réponses courtes au <a href="#champ" class="a-deco">champ</a></h3>
+    <p>Les exemples sont issus du <a href="#pdf" class="a-deco">PDF de qualité ci-haut</a>. Je ne peux que vous le recommander</p>
+    <ul>
+        <li id="etats">États physiques</li>
+        <ul>
+            <li><span class="marge"></span>Solide</li>
+            <li><span class="marge"></span>Liquide</li>
+            <li><span class="marge"></span>Gazeux</li>
+        </ul>
+        <li>Changements d'états</li>
+        <div class="image-container">
+            <img src="chimie/chgmt.png" alt="Les noms des changements d'état" class="lazy-image" />
+        </div>
+        <li id="repr_char">Représentation des trois états</li>
+        <div class="image-container">
+            <img src="chimie/repr_sld.png" alt="Représentation de l'état solide" class="lazy-image">
+        </div>
+        <br>
+        <div class="image-container">
+            <img src="chimie/repr_lqd.png" alt="Représentation de l'état liquide" class="lazy-image">
+        </div>
+        <br>
+        <div class="image-container">
+            <img src="chimie/repr_gzx.png" alt="Représentation de l'état gazeux" class="lazy-image">
+        </div>
+        <li id="ebulition">Les points d'ébulition</li>
+        <ul>
+            <li>Les points d'ébulition sont représentés par des plateaux/paliers sur le graphique de la température. <br>ATTENTION!: La température ambiante est aussi un plateau mais n'est pas un point d'ébulition.</li>
+        <ul>
+            <li><span class="marge"></span>C'est la température à laquelle une substance se met à changer d'état. <br>p.ex. l'eau à 0°C est <u><strong>à la fois solide et liquide</strong></u> et à 100°C elle est <u><strong>à la fois liquide et gazeuse</strong></u></li>
+        </ul>
+        <li id="corps_purs">Les corps purs</li>
+        <ul>
+            <li>Simples: C'est une substance composée d'atomes identiques</li>
+            <li>Composés: C'est une substance composée d'atomes différents</li>
+        </ul>
+        <li id="melanges">Les mélanges</li>
+        <ul>
+          <li>Hétérogène: On distingue au moins deux constituants à l'oeil nu ou à l'aide d'un microscrope si on ne voit pas à travers. Exemple: Eau/huile</li>
+          <li>Homogène: On ne peut pas distinguer les constituants d'un mélange même avec un microscope puissant ou si on voit à travers. Exemple: Eau/Alcool</li>
+          <li>Si on dissout du sel dans de l'eau, le sel est le <strong>le soluté</strong> et l'eau le <strong>solvant</strong>.</li>
+          <li>Un mélange gazeux est toujours homogène !</li>
+          <li>Alliage homogène: métaux qui sont miscibles entre eux, en les chauffant (bronze, fonte, acier, laiton, ...)</li>
+        </ul>
+        <li id="methodes_sep">Méthodes de séparation</li>
+            <ul>
+                <li>Décantation</li>
+                <p>Matériel : Ampoule à décanter<br>Principe: la substance descend. <br> Pour: L-L ou S-L <br>Exemple: Argile et eau salée.</p>
+            </ul>
+            <ul>
+                <li>Filtration</li>
+                <p>Matériel : Papier filtre<br>Principe: La différence de solubilité<br>Pour: S-L<br>Exemple: Argile et eau salée<br></p>
+            </ul>
+            <ul>
+                <li>Centrifugation</li>
+                <p>Matériel: Centrifugeuse, Récipients <br>Principe: tourner à grande vitesse <br>Pour: S-L <br>Exemple: Argile et eau</p>
+            </ul>
+            <ul>
+                <li>Évaporation et vaporisation</li>
+                <p>Matériel: Bec Bunsen <br>Principe: On chauffe <br>Pour: S-L <br>Exemple : Eau et sel</p>
+            </ul>
+            <ul>
+                <li>Distillation</li>
+                <p>Matériel: Ballon, colonne de distillation <br>Principe: La différence des points d'ébullition<br>Pour: L-L ou S-L <br>Exemple: Vin</p>
+            </ul>
+            <ul>
+                <li>Chromatographie</li>
+                <p>Pour: les couleurs , S-L</p>
+            </ul>
+        <li id="grandeurs">Ordres de grandeur</li>
+        <p>Décroissant, du plus grand au plus petit</p>
+        <ul>
+            <li>Puce</li>
+            <li>Paramécie</li>
+            <li>Cellule</li>
+            <li>Bactérie</li>
+            <li>Virus</li>
+            <li>Macromolécules</li>
+            <li>Molécules</li>
+            <li>Atomes</li>
+        </ul>
+        <li id="atome">L'atome est composé de :</li>
+        <ul id="charge_elec">
+            
+            <li>protons, chargés positivement</li>
+            <li>neutrons, neutres</li>
+            <li>électrons, chargés négativement</li>
+       <li>Le nombre de protons = Le nombre de neutrons, car l'atome est électriquement neutre.</li> 
+       <li></li> 
+        </ul>
+    </ul>
+    <a href="/epreuvesregroupees">Retour à l'accueil</a>
+    
+</body>
+
+</html>

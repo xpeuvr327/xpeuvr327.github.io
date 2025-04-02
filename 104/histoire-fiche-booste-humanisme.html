@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <title>Humanisme: créateur de fiche</title>
+  </head>
+  <style>
+    .lexend-deca-body {
+      font-family: "Lexend Deca", serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+    }
+  </style>
+  <body class="flex justify-center items-center flex-col min-h-screen p-4">
+    <div class="step" id="step-1">
+      <h1 class="lexend-deca-body text-[35px] sm:text-[40px] md:[text-[45px]] lg:text-[50px] xl:text-62px font-semibold text-left leading-[50px] sm:leading-[55px] md:leading-[60px] lg:leading-[72px]">Humanisme</h1>
+      <p>cette page est seulement pour créer une fiche Humanisme - pas fini, my bad</p>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="0" data-rela="sigma">Humanisme</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="1">Humanisme</button>
+      <a href="histoire-hub.html"class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="2">Voir le reste</a>
+    </div>
+
+    <div class="step hidden" id="step-2">
+      <p>Question 2: Where is the place?</p>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="0">Park</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="1">Beach</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="2">City</button>
+    </div>
+
+    <div class="step hidden" id="step-3">
+      <p>Question 3: What is the action?</p>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="0">Walking</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="1">Running</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="2">Sitting</button>
+    </div>
+
+    <div class="step hidden" id="step-4">
+      <p>Question 4: What is the object?</p>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="0">Book</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="1">Ball</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="2">Phone</button>
+    </div>
+
+    <div class="step hidden" id="step-5">
+      <p>Question 5: What is the emotion?</p>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="0">Happy</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="1">Sad</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="2">Excited</button>
+    </div>
+
+    <div class="step hidden" id="step-6">
+      <p>Question 6: What is the time of day?</p>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="0">Morning</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="1">Afternoon</button>
+      <button class="option-button bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" data-index="2">Evening</button>
+    </div>
+
+    <div class="step hidden" id="final-step">
+      <p id="final-text"></p>
+    </div>
+
+    <div class="mt-4">
+      <button id="previous-button" class="bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded hidden">Previous</button>
+    </div>
+
+    <div id="current-text" class="mt-4 p-4 border rounded shadow">
+      <p>le texte généré apparaitra ici</p>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const steps = document.querySelectorAll('.step');
+        const previousButton = document.getElementById('previous-button');
+        const currentTextDiv = document.getElementById('current-text');
+        const finalTextDiv = document.getElementById('final-text');
+        let currentStep = 0;
+        const userSelections = {};
+      
+        function updateCurrentText() {
+    let narrative = '';
+    for (let i = 1; i <= currentStep; i++) {
+        const step = document.getElementById(`step-${i}`);
+        if (step) {
+            const question = step.querySelector('p').textContent;
+            const selectedOption = step.querySelector(`.option-button[data-index="${userSelections[i]}"]`);
+            if (selectedOption) {
+                const relaValue = selectedOption.getAttribute('data-rela');
+                narrative += `${relaValue}<br>`;
+            }
+        }
+    }
+    currentTextDiv.innerHTML = narrative;
+}
+
+      
+        function showStep(stepIndex) {
+          steps.forEach((step, index) => {
+            step.classList.toggle('hidden', index !== stepIndex);
+          });
+          previousButton.classList.toggle('hidden', stepIndex === 0);
+        }
+      
+        function handleOptionClick(event) {
+          const selectedIndex = event.target.getAttribute('data-index');
+          userSelections[currentStep + 1] = selectedIndex;
+          currentStep++;
+          updateCurrentText();
+          if (currentStep < steps.length - 1) {
+            showStep(currentStep);
+          } else {
+            finalTextDiv.textContent = 'Thank you for building your narrative!';
+            document.getElementById('final-step').classList.remove('hidden');
+            previousButton.classList.add('hidden');
+            $("body").find("div:not('#current-text'), span").hide();
+          }
+        }
+      
+        function handlePreviousClick() {
+          currentStep--;
+          showStep(currentStep);
+          updateCurrentText();
+        }
+      
+        document.querySelectorAll('.option-button').forEach(button => {
+          button.addEventListener('click', handleOptionClick);
+        });
+      
+        previousButton.addEventListener('click', handlePreviousClick);
+      
+        showStep(currentStep);
+      });
+      </script>
+  </body>
+</html>

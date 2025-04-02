@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="fr"><head><title>Semestrielles Informatique 2025</title><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="La révision d'informatique (print, opérateurs, turtle, for, fonctions)"><link rel="stylesheet" href="style.css"><link rel="icon" href="favicon.ico"><link href="informatique/prism.css" rel="stylesheet"><style>h3{line-height:3.4em}table{border-collapse:collapse;border:2px solid gray}td{border:1px solid #000;width:35px;height:35px}.black{background-color:#000;color:#fff}.white{background-color:#fff;color:#000}.character{background-color:#d3d3d3;color:#000}.container{display:flex!important;align-items:flex-start!important;flex-direction:column!important;padding:20px!important}.image-text-container{display:flex!important;flex-direction:column!important;align-items:center!important;width:100%!important}.image-text-container img{max-width:100%!important;height:auto!important}.instructions{margin-top:20px!important;text-align:center!important}@media (min-width:768px){.image-text-container{flex-direction:row!important}.image-text-container img{max-width:45%!important}.container{padding:0!important}.instructions{margin-left:20px}}</style></head><script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-YQNZ0VLGHJ")</script><body><h1 class="texte-bg">Révision informatique</h1><p>Bon bah y a tout le programme d'informatique globalement, que dire de plus</p><h2>La révision d'informatique (print, opérateurs, turtle, for, fonctions)</h2><br><p>Le hashtag (#) sert à faire un commentaire: il doit être placé soit à la fin de la ligne, soit en début de ligne mais ce qui sera écrit après ne sera pas exécuté (si je fais <code class="language-py"># print("salut")</code> il ne se passera rien)</p><br><h3>Print un mot</h3><br><p>Syntaxe (comment on utilise) de print:</p><br><pre><code class="language-py">print("mot")</code></pre><p>Quand on appelle print sans argument, cela retourne \n sur l'interpréteur. En d'autres termes, quand on fait print sans rien dans les parenthèses, il y a une nouvelle ligne</p><pre><code class="language-py">print()</code></pre><p>Ces codes donneront une erreur:</p><pre><code class="language-py">print("mot)  # Il manque un guillemet
+print"mot")  # Il manque une parenthèse
+print mot	 # Il n'y a pas les parenthèses
+Print("mot") # Il ne faut pas mettre de majuscule</code></pre><br><p>On peut print plusieurs mots:</p><pre><code class="language-py">print("1","2","3")  # Résultat: 123</code></pre><p>On peut utiliser <code class="language-py">, end=""</code> pour ne pas avoir de retour à la ligne<br>Exemple:</p><pre><code class="language-py">print("1")
+print("2",end="")
+print("3")
+# Résultat :
+1
+23
+</code></pre><h3>Print un calcul</h3><p>Syntaxe</p><pre><code class="language-py">print(calcul ici)</code></pre><p>Exemples:</p><pre><code class="language-py">print(1200+19) # Résultat : 1219
+print(0.1+0.2) # Résultat : haha</code></pre><p>Voici les différents opérateurs:</p><ul><li><p>+ : Addition</p></li><li><p>- : Soustraction</p></li><li><p>* : Multiplication</p></li><li><p>/ : Division</p></li><li><p>** : Puissance</p></li><li><p>// : Résultat entier</p></li><li><p>% : Reste de la division</p></li></ul><p></p><pre><code class="language-py"># Addition
+print(12 + 8)  # Résultat : 20
+
+# Soustraction
+print(15 - 7)  # Résultat : 8
+
+# Multiplication
+print(4 * 6)   # Résultat : 24
+
+# Division
+print(16 / 4)  # Résultat : 4.0
+
+# Puissance
+print(2 ** 3)  # Résultat : 8
+
+# Résultat entier
+print(15 // 2) # Résultat : 7
+
+# Reste de la division
+print(15 % 2)  # Résultat : 1
+# D'ailleurs, on peut utiliser %2 pour savoir si un nombre est pair ou non.</code></pre><p>On peut toujours faire plusieurs calculs en même temps, et la priorité des opération vaut. Rappel: Puissance, Multiplication (et division, division entière, reste), Addition (et soustraction)</p><p>Exemple: 2 + 3<sup>3</sup></p><p>En utilisant ce que l'on a appris avant, on peut faire:</p><pre><code class="language-py">print(2+3**3) # Résultat : 29
+print(12/(2+1)) # Résultat : 4
+print("Le résultat de 100 / 50 est: ", 100/50) # Résultat : Le résultat de 100 / 50 est: 2
+print("Le résultat de 3 ** 3 est: ", 3**3) # Résultat : Le résultat de 3 ** 3 est: 27
+</code></pre><h3 id="variables">Variables</h3><p>On peut avoir une variable en Python pour stocker un nombre:</p><br><p>Syntaxe</p><pre><code class="language-py">nom_variable = valeur (chiffre)</code></pre><p>On peut mettre n'importe quel nom à gauche (sans espace et on évite les accents) et n'importe quel nombre à droite</p><pre><code class="language-py">x = 3
+print(x) # Résultat : 3</code></pre><p>On peut faire des calculs avec les variables</p><pre><code class="language-py">argent = 1000
+argent_vole = 699
+print("La quantité d'argent non-volé est: ", argent - argent_vole) # Résultat : La quantité d'argent non-volé est: 301
+</code></pre><h3>Robot / turtle</h3><p>On veut bouger l'étoile avec les instructions</p><pre><code class="language-py">haut(n)
+bas(n)
+gauche(n)
+droite(n)
+</code></pre><p>Le but est de déplacer l'étoile vers le triangle:</p><br><div class="container"><table><tr><td class="black"></td><td class="white"></td><td class="character">★</td></tr><tr><td class="black"></td><td class="white"></td><td class="black"></td></tr><tr><td class="black"></td><td class="white"></td><td class="black"></td></tr><tr><td class="black"></td><td class="white"></td><td class="black"></td></tr><tr><td class="black"></td><td class="white"></td><td class="black"></td></tr><tr><td class="white">◣</td><td class="white"></td><td class="black"></td></tr><tr><td class="black"></td><td class="black"></td><td class="black"></td></tr></table><div class="instructions"><p>Instructions:</p><pre><code class="language-py">gauche(1)
+bas(5)
+gauche(1)</code></pre></div></div><br><br><h4>Turtle:</h4><p>On va toujours commencer par faire</p><pre><code class="language-py">from turtle import *</code></pre><p>et on va finir avec <code class="language-py">done()</code>.</p><p>Avec turtle, les instructions sont un peu différentes:</p><pre><code class="language-py">forward(x)
+backward(x) </code></pre>où forward va tracer une ligne de x pixels. (on utilise très peu backwards(x))<pre><code class="language-py">left(n)
+right(n)</code></pre><p>Avec ces instructions on peut faire un carré:</p><pre><code class="language-py">from turtle import *
+
+forward(100)
+right(90)
+forward(100)
+right(90)
+forward(100)
+right(90)
+forward(100)
+
+done()
+</code></pre><p>Les instructions <code class="language-py">color("blue")</code> et <code class="language-py">width(x)</code> permettent de modifier l'apparence de la tortue.</p><br><p>Syntaxe</p><pre><code class="language-py">color("nom de la couleur en anglais")
+width(taille en pixels de la tortue)
+</code></pre><h3>La boucle for</h3><p>La boucle for est très utile; elle permet de faire automatiquement plusieurs fois la même chose sans avoir à tout réecrire.</p><p>Syntaxe</p><br><pre><code class="language-py">for &lt;on met ce que l'on veut> in range(le nombre de répétitions):
+(espace) code que l'on veut répéter
+
+# Exemple
+for _ in range(4):
+    print("salut")
+
+# Résultat:
+salut
+salut
+salut
+salut
+</code></pre><h4>Contre-exemples</h4><p></p><code class="language-py">for cotes triangle in range(3):</code> Il ne faut pas mettre d'espace à l'endroit du "_", c'est une <a href="#variables" class="a-deco">variable</a><p></p><pre><code class="language-py">for i in range(5) # il ne faut pas oublier les deux points
+    print("yo")
+# 2e contre-exemple
+for i in range(2):
+print("yo", end="") # ici il n'y a pas l'indentation (voir après)
+</code></pre><p>Il est important de noter le petit espace avant print: on appelle ça l'indentation. On met en général une tabulation, mais on peut aussi mettre 4 espaces (p.ex. si on s'entraîne sur <a href="https://www.algopython.fr/" class="a-deco">AlgoPython</a> sur téléphone), mais il faut juste toujours utiliser soit l'un soit l'autre (on ne peut pas mélanger les 2 au sein du même fichier)</p><br><p>Si un jour on est perdu, p.ex. si il y a plusieurs for l'un dans l'autre, on peut toujours développer:</p><pre><code class="language-py">for i in range(3):
+    print("salut")
+</code></pre><p>devient</p><pre><code class="language-py">print("salut")
+print("salut")
+print("salut")
+</code></pre><p>Un autre exemple:</p><pre><code class="language-py">for i in range(2):
+    print("1")
+    for i in range(3):
+        print("2")
+</code></pre><p>peut se réecrire</p><pre><code class="language-py">print("1")
+for i in range(3):
+    print("2")
+print("1")
+for i in range(3):
+    print("2")
+# Et on développe les boucles de 3
+print("1")
+print("2")
+print("2")
+print("2")
+print("1")
+print("2")
+print("2")
+print("2")
+</code></pre><p>On peut utilser la boucle for avec turtle pour faire des carrés plus facilement:</p><pre><code class="language-py">from turtle import *
+for i in range(4):
+    forward(100)
+    right(90)
+</code></pre><p>Depuis avant, on a toujours utilisé la boucle for avec <code class="language-py">for i in range(5): ...</code> mais on peut aussi faire <code class="language-py">for i in range(y, x)</code> ce qui va répéter l'action x moins y fois</p><p>Exemple</p><pre><code class="language-py">for i in range(2, 5):
+    print("salut")
+
+# Résultat:
+salut
+salut
+salut
+
+# exemple compliqué:
+for i in range(2,5):
+     print(i)
+# Résultat:
+2
+3
+4</code></pre><p>On peut reprendre l'exemple de l'étoile:</p><div class="container"><div class="image-text-container"><img src="informatique/grid1.png" alt="Un quadrillage de 7x7 avec une étoile et un triangle"><div class="instructions"><p>Instructions:</p><pre><code class="language-py">for i in range(6):
+        haut(1)
+        gauche(1)</code></pre></div></div></div><p>Un autre plus complexe:</p><div class="container"><table><tr><td class="black"></td><td class="white"></td><td class="white">◣</td><td class="white"></td><td class="white"></td><td class="white"></td><td class="white"></td></tr><tr><td class="black"></td><td class="white"></td><td class="black"></td><td class="black"></td><td class="black"></td><td class="black"></td><td class="black"></td></tr><tr><td class="black"></td><td class="white"></td><td class="black"></td><td class="white"></td><td class="white"></td><td class="white"></td><td class="black"></td></tr><tr><td class="white"></td><td class="white"></td><td class="black"></td><td class="white"></td><td class="black"></td><td class="white"></td><td class="black"></td></tr><tr><td class="white"></td><td class="black"></td><td class="white"></td><td class="white"></td><td class="black"></td><td class="white"></td><td class="white"></td></tr><tr><td class="white"></td><td class="black"></td><td class="white"></td><td class="black"></td><td class="black"></td><td class="black"></td><td class="white"></td></tr><tr><td class="white"></td><td class="white"></td><td class="white"></td><td class="black"></td><td class="white"></td><td class="black"></td><td class="white">★</td></tr></table><div class="instructions"><pre><code class="language-py">for i in range(2):
+    haut(2)
+    gauche(1)
+for i in range(2):
+    gauche(1)
+    bas(2)
+gauche(2)
+for i in range(2):
+    haut(3)
+    droite(1)</code></pre></div></div><p>merci d'avoir lu jusqu'ici :) le site est presque terminé il faut juste que j'explique bien def et apr cbn. LA CHIMIE EST DISPO!!</p><pre><code class="language-py">def nomProgramme():
+    code...
+# Exemple
+from turtle import *
+def carre():
+    for i in range(4):
+        fd(100)
+        rt(90)
+carre()
+done()
+</code></pre><a href="/epreuvesregroupees">Retour à l&#x27;accueil</a><script src="informatique/prism.js"></script></body></html>

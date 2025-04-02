@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Générateur d'intro pour commentaire composé Nouvelles orientales</title>
+  <meta name="description" content="Générateur d'intro pour commentaire composé Nouvelles orientales">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <style>
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Header Styles */
+h1 {
+  font-size: 2em;
+  text-align: center;
+  color: #333;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.1em;
+  line-height: 1.5;
+  margin: 10px 0;
+  color: #555;
+}
+
+/* Dropdown Styles */
+select {
+  padding: 10px;
+  font-size: 1em;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Layer Visibility */
+[data-layer="0"] {
+  display: block;
+}
+
+[data-layer]:not([data-layer="0"]) {
+  display: none;
+}
+
+/* Console Styles */
+.console {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 20px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.console .error {
+  color: red;
+}
+
+.console .info {
+  color: blue;
+}
+
+/* Dropdown Container Styles */
+.dropdown-container {
+  margin: 20px 0;
+}
+
+/* Final Message Section */
+#finalMessage {
+  display: none;
+  background-color: #e9f7ef;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #d0e9d3;
+}
+
+#finalText {
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .dropdown-container select {
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+  
+  p {
+    font-size: 1em;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <h1>Créateur de texte dynamique</h1>
+  <p>Extraits du jeudi 5 décembre, générateur d'intro pour commentaire composé Nouvelles orientales</p>
+  
+<!-- Layer 0: Books -->
+<div data-layer="0">
+  <select onchange="createlayer(1, this.value)">
+    <option value="">Choisis ton extrait</option>
+    <option value="book1">1. Le lait de la mort</option>
+    <option value="book2">2. L’homme qui a aimé les Néréides</option>
+    <option value="book3">3. La tristesse de Cornélius Berg</option>
+    <option value="book4">4. Le dernier amour du prince Genghi</option>
+    <option value="book5">5. Notre-Dame-des-Hirondelles</option>
+  </select>
+</div>
+
+<!-- Layer 1: Enjeux -->
+<div data-layer="1" data-value="book1">
+  <p>Extrait 1: Le lait de la mort - Choisis l'enjeu</p>
+  <select onchange="createlayer(2, this.value, 'book1')">
+    <option value="">Choisis un enjeu</option>
+    <option value="enjeu1">La mère accepte la mort</option>
+    <option value="enjeu2">La mère veut protéger son fils jusqu'au bout</option>
+  </select>
+</div>
+<div data-layer="1" data-value="book2">
+  <p>Extrait 2: L’homme qui a aimé les Néréides - Choisis l'enjeu</p>
+  <select onchange="createlayer(2, this.value, 'book2')">
+    <option value="">Choisis un enjeu</option>
+    <option value="enjeu1">La fascination et la folie</option>
+    <option value="enjeu2">La transformation et l'addiction</option>
+  </select>
+</div>
+<div data-layer="1" data-value="book3">
+  <p>Extrait 3: La tristesse de Cornélius Berg - Choisis l'enjeu</p>
+  <select onchange="createlayer(2, this.value, 'book3')">
+    <option value="">Choisis un enjeu</option>
+    <option value="enjeu1">La beauté et la souffrance</option>
+    <option value="enjeu2">La déchéance et la solitude</option>
+  </select>
+</div>
+<div data-layer="1" data-value="book4">
+  <p>Extrait 4: Le dernier amour du prince Genghi - Choisis l'enjeu</p>
+  <select onchange="createlayer(2, this.value, 'book4')">
+    <option value="">Choisis un enjeu</option>
+    <option value="enjeu1">L'amour et la vanité</option>
+    <option value="enjeu2">La transformation et la rédemption</option>
+  </select>
+</div>
+<div data-layer="1" data-value="book5">
+  <p>Extrait 5: Notre-Dame-des-Hirondelles - Choisis l'enjeu</p>
+  <select onchange="createlayer(2, this.value, 'book5')">
+    <option value="">Choisis un enjeu</option>
+    <option value="enjeu1">La lutte entre le sacré et le profane</option>
+    <option value="enjeu2">La transformation et la rédemption</option>
+  </select>
+</div>
+
+<!-- Layer 2: Axes -->
+<div data-layer="2" data-value="book1_enjeu1">
+  <p>Choisis l'axe pour l'enjeu "La mère accepte la mort" de "Le lait de la mort"</p>
+  <select onchange="createlayer(3, this.value, 'book1_enjeu1')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">Elle n'essaie pas de résister</option>
+    <option value="axe2">La construction et la destruction</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book1_enjeu2">
+  <p>Choisis l'axe pour l'enjeu "La loyauté et le sacrifice familial" de "Le lait de la mort"</p>
+  <select onchange="createlayer(3, this.value, 'book1_enjeu2')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La loyauté familiale</option>
+    <option value="axe2">Le sacrifice personnel</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book2_enjeu1">
+  <p>Choisis l'axe pour l'enjeu "La fascination et la folie" de "L’homme qui a aimé les Néréides"</p>
+  <select onchange="createlayer(3, this.value, 'book2_enjeu1')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La fascination pour l'inconnu</option>
+    <option value="axe2">La folie et la transformation</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book2_enjeu2">
+  <p>Choisis l'axe pour l'enjeu "La transformation et l'addiction" de "L’homme qui a aimé les Néréides"</p>
+  <select onchange="createlayer(3, this.value, 'book2_enjeu2')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La transformation physique</option>
+    <option value="axe2">L'addiction et la dépendance</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book3_enjeu1">
+  <p>Choisis l'axe pour l'enjeu "La beauté et la souffrance" de "La tristesse de Cornélius Berg"</p>
+  <select onchange="createlayer(3, this.value, 'book3_enjeu1')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La beauté de la nature</option>
+    <option value="axe2">La souffrance humaine</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book3_enjeu2">
+  <p>Choisis l'axe pour l'enjeu "La déchéance et la solitude" de "La tristesse de Cornélius Berg"</p>
+  <select onchange="createlayer(3, this.value, 'book3_enjeu2')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La déchéance personnelle</option>
+    <option value="axe2">La solitude et l'isolement</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book4_enjeu1">
+  <p>Choisis l'axe pour l'enjeu "L'amour et la vanité" de "Le dernier amour du prince Genghi"</p>
+  <select onchange="createlayer(3, this.value, 'book4_enjeu1')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">L'amour véritable</option>
+    <option value="axe2">La vanité et l'ego</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book4_enjeu2">
+  <p>Choisis l'axe pour l'enjeu "La transformation et la rédemption" de "Le dernier amour du prince Genghi"</p>
+  <select onchange="createlayer(3, this.value, 'book4_enjeu2')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La transformation personnelle</option>
+    <option value="axe2">La rédemption et le pardon</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book5_enjeu1">
+  <p>Choisis l'axe pour l'enjeu "La lutte entre le sacré et le profane" de "Notre-Dame-des-Hirondelles"</p>
+  <select onchange="createlayer(3, this.value, 'book5_enjeu1')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">Le sacré et le divin</option>
+    <option value="axe2">Le profane et le terrestre</option>
+  </select>
+</div>
+<div data-layer="2" data-value="book5_enjeu2">
+  <p>Choisis l'axe pour l'enjeu "La transformation et la rédemption" de "Notre-Dame-des-Hirondelles"</p>
+  <select onchange="createlayer(3, this.value, 'book5_enjeu2')">
+    <option value="">Choisis un axe</option>
+    <option value="axe1">La transformation spirituelle</option>
+    <option value="axe2">La rédemption et le pardon</option>
+  </select>
+</div>
+
+<!-- Layer 3: Procédés Littéraires -->
+<div data-layer="3" data-value="book1_enjeu1_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La moralité du sacrifice" de "Le lait de la mort"</p>
+  <select onchange="showFinalText(this.value, 'Dans cet extrait, la mère accepte son sacrifice et donc la mort. On peut voir cela au fait qu\'elle n\'essaie pas de résister. Nous le prouverons à l\'aide d\'une énumération qui indique plusieurs fois qu\'elle n\'essaie pas de résister.', 'La moralité du sacrifice')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">L'énumération</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book1_enjeu1_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La construction et la destruction" de "Le lait de la mort"</p>
+  <select onchange="showFinalText(this.value, 'Le sacrifice humain pour la construction', 'La construction et la destruction')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La gradation</option>
+    <option value="proc2">L'antithèse</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book1_enjeu2_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La loyauté familiale" de "Le lait de la mort"</p>
+  <select onchange="showFinalText(this.value, 'La loyauté et le sacrifice familial', 'La loyauté familiale')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La personnification</option>
+    <option value="proc2">L'hyperbole</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book1_enjeu2_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "Le sacrifice personnel" de "Le lait de la mort"</p>
+  <select onchange="showFinalText(this.value, 'La loyauté et le sacrifice familial', 'Le sacrifice personnel')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book2_enjeu1_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La fascination pour l'inconnu" de "L’homme qui a aimé les Néréides"</p>
+  <select onchange="showFinalText(this.value, 'La fascination et la folie', 'La fascination pour l'inconnu')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'hyperbole</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book2_enjeu1_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La folie et la transformation" de "L’homme qui a aimé les Néréides"</p>
+  <select onchange="showFinalText(this.value, 'La fascination et la folie', 'La folie et la transformation')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La gradation</option>
+    <option value="proc2">L'antithèse</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book2_enjeu2_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La transformation physique" de "L’homme qui a aimé les Néréides"</p>
+  <select onchange="showFinalText(this.value, 'La transformation et l\'addiction', 'La transformation physique')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book2_enjeu2_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "L'addiction et la dépendance" de "L’homme qui a aimé les Néréides"</p>
+  <select onchange="showFinalText(this.value, 'La transformation et l\'addiction', 'L\'addiction et la dépendance')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La personnification</option>
+    <option value="proc2">L'hyperbole</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book3_enjeu1_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La beauté de la nature" de "La tristesse de Cornélius Berg"</p>
+  <select onchange="showFinalText(this.value, 'La beauté et la souffrance', 'La beauté de la nature')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book3_enjeu1_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La souffrance humaine" de "La tristesse de Cornélius Berg"</p>
+  <select onchange="showFinalText(this.value, 'La beauté et la souffrance', 'La souffrance humaine')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La gradation</option>
+    <option value="proc2">L'antithèse</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book3_enjeu2_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La déchéance personnelle" de "La tristesse de Cornélius Berg"</p>
+  <select onchange="showFinalText(this.value, 'La déchéance et la solitude', 'La déchéance personnelle')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book3_enjeu2_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La solitude et l'isolement" de "La tristesse de Cornélius Berg"</p>
+  <select onchange="showFinalText(this.value, 'La déchéance et la solitude', 'La solitude et l'isolement')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La personnification</option>
+    <option value="proc2">L'hyperbole</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book4_enjeu1_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "L'amour véritable" de "Le dernier amour du prince Genghi"</p>
+  <select onchange="showFinalText(this.value, 'L\'amour et la vanité', 'L\'amour véritable')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book4_enjeu1_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La vanité et l'ego" de "Le dernier amour du prince Genghi"</p>
+  <select onchange="showFinalText(this.value, 'L\'amour et la vanité', 'La vanité et l'ego')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La gradation</option>
+    <option value="proc2">L'antithèse</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book4_enjeu2_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La transformation personnelle" de "Le dernier amour du prince Genghi"</p>
+  <select onchange="showFinalText(this.value, 'La transformation et la rédemption', 'La transformation personnelle')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book4_enjeu2_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La rédemption et le pardon" de "Le dernier amour du prince Genghi"</p>
+  <select onchange="showFinalText(this.value, 'La transformation et la rédemption', 'La rédemption et le pardon')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La personnification</option>
+    <option value="proc2">L'hyperbole</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book5_enjeu1_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "Le sacré et le divin" de "Notre-Dame-des-Hirondelles"</p>
+  <select onchange="showFinalText(this.value, 'La lutte entre le sacré et le profane', 'Le sacré et le divin')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book5_enjeu1_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "Le profane et le terrestre" de "Notre-Dame-des-Hirondelles"</p>
+  <select onchange="showFinalText(this.value, 'La lutte entre le sacré et le profane', 'Le profane et le terrestre')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La gradation</option>
+    <option value="proc2">L'antithèse</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book5_enjeu2_axe1">
+  <p>Choisis le procédé littéraire pour l'axe "La transformation spirituelle" de "Notre-Dame-des-Hirondelles"</p>
+  <select onchange="showFinalText(this.value, 'La transformation et la rédemption', 'La transformation spirituelle')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La métaphore</option>
+    <option value="proc2">L'anaphore</option>
+  </select>
+</div>
+<div data-layer="3" data-value="book5_enjeu2_axe2">
+  <p>Choisis le procédé littéraire pour l'axe "La rédemption et le pardon" de "Notre-Dame-des-Hirondelles"</p>
+  <select onchange="showFinalText(this.value, 'La transformation et la rédemption', 'La rédemption et le pardon')">
+    <option value="">Choisis un procédé littéraire</option>
+    <option value="proc1">La personnification</option>
+    <option value="proc2">L'hyperbole</option>
+  </select>
+</div>
+
+<!-- Final Message -->
+<div id="finalMessage" style="display: none;">
+  <p id="finalText"></p>
+</div>
+  <h1>Texte Final</h1>
+  <p id="final-message"></p>
+ 
+
+ <label style="user-select: none;">
+    <input type="checkbox" onclick="document.getElementById('fakeConsole').style.display = this.checked ? 'block' : 'none';document.getElementById('feur').style.display = this.checked ? 'block' : 'none'"style="display: none;">
+    <a>Toggle debug</a>
+  </label>
+  <button onclick="(function() { window.xf = window.xf || 0; console.error('breakpoint ' + window.xf); window.xf++; })()" id="feur" style="display: none;">breakpoint</button>
+  <div class="console" id="fakeConsole" style="display: none;"></div>
+  <script>
+    function createlayer(layer, value, parentValue) {
+      console.log(`Layer: ${layer}, Value: ${value}, Parent: ${parentValue}`);
+      // Hide all layers beyond the current layer
+      document.querySelectorAll(`[data-layer='${layer}']`).forEach(div => {
+        div.style.display = 'none';
+      });
+      
+      // Reset all subsequent layers
+      for (let i = layer + 1; document.querySelector(`[data-layer='${i}']`); i++) {
+        document.querySelectorAll(`[data-layer='${i}']`).forEach(div => {
+          div.style.display = 'none';
+        });
+      }
+      
+      // Show the corresponding layer based on the selected value
+      if (value) {
+        const combinedValue = parentValue ? `${parentValue}_${value}` : value;
+        
+        document.querySelectorAll(`[data-layer='${layer}'][data-value='${combinedValue}']`).forEach(div => {
+          div.style.display = 'block';
+          console.log(`Showing layer: ${layer}, Value: ${combinedValue}`);
+        });
+      }
+      const finalMessage = document.getElementById('final-message');
+      finalMessage.innerHTML = '';
+    }
+    
+    function showFinalText(which, text, text2) {
+      console.log(which)
+      if (which.slice(-5)=="proc1"){
+        const message = `${text}`;
+        const finalMessage = document.getElementById('final-message');
+        finalMessage.innerHTML = message;
+      }
+      else{
+        //display message two
+        const message = `${text2}`;
+        const finalMessage = document.getElementById('final-message');
+        finalMessage.innerHTML = message;
+      }
+    }
+    !function(){const o=document.getElementById("fakeConsole"),e=console.log,n=console.error;console.log=function(n){const l=document.createElement("div");l.className="info",l.textContent=n,o.appendChild(l),o.scrollTop=o.scrollHeight,e.apply(console,arguments)},console.error=function(e){const l=document.createElement("div");l.className="error",l.textContent=e,o.appendChild(l),o.scrollTop=o.scrollHeight,n.apply(console,arguments)}}();
+  </script>
+</body>
+</html>

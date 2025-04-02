@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Number Extractor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .button { margin: 10px 0; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .button:hover { background-color: #45a049; }
+        #console { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9; height: 200px; overflow-y: scroll; }
+        #links { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>WhatsApp Number Extractor</h1>
+    <input type="file" id="fileInput" class="button" accept=".txt">
+    <div id="links"></div>
+    <div id="console"></div>
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const linksDiv = document.getElementById('links');
+        const consoleDiv = document.getElementById('console');
+
+        fileInput.addEventListener('change', handleFileUpload);
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const text = e.target.result;
+                    processText(text);
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function processText(text) {
+            const phoneNumbers = extractPhoneNumbers(text);
+            const totalNumbers = phoneNumbers.length;
+            logToConsole(`Total phone numbers extracted: ${totalNumbers}`);
+            displayLinks(phoneNumbers);
+        }
+
+        function extractPhoneNumbers(text) {
+            const phonePattern = /(\+?\d{1,3}\s?\d{1,3}[\s-]?\d{1,3}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{2})/g;
+            return text.match(phonePattern) || [];
+        }
+
+        function displayLinks(phoneNumbers) {
+            linksDiv.innerHTML = '';
+            phoneNumbers.forEach((number, index) => {
+                const waLink = `https://wa.me/${formatNumber(number)}?text=salut!%20je%20pourrais%20te%20demander%20souhaiter%20un%20joyeux%20anniv%20à%20bryan%20stp?%20si%20tu%20veux%20pas%20le%20faire%2C%20ne%20reponds%20pas%20au%20message.%20ecris%20juste%20%22joyeux%20anniv%20bryan%22%20avec%20un%20emoji%20si%20tu%20le%20veux%2C%20et%20je%20prendrai%20un%20screen.%20note%2C%20que%20ce%20msg%20sera%20supprimé%20pour%20moi.%20je%20peux%20t%27envoyer%20une%20copie%20du%20screen%20et%20tu%20peux%20choisir%20si%20ton%20numéro%20sera%20flouté%20(il%20apparaitra%20moins%20d%27%26frac15%3B%20de%20seconde%20sur%20la%20video).`;
+                linksDiv.innerHTML += `<div>
+                    <a href="${waLink}" target="_blank">${waLink}</a>
+                    <button class="button" onclick="nextNumber(${index})">Send "Joyeux Anniversaire" to ${number}</button>
+                </div>`;
+            });
+        }
+
+        function formatNumber(number) {
+            return number.replace(/\D/g, '');
+        }
+
+        function logToConsole(message) {
+            consoleDiv.innerHTML += `<p>${message}</p>`;
+        }
+
+        function nextNumber(currentIndex) {
+            const buttons = linksDiv.querySelectorAll('button');
+            if (currentIndex < buttons.length - 1) {
+                buttons[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>

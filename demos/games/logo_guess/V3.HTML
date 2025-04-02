@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devine le Logo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #game-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        #brandImage {
+            max-width: 300px;
+            max-height: 200px;
+            margin: 20px auto;
+            display: block;
+        }
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .key {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            font-weight: bold;
+            min-width: 20px;
+            transition: all 0.2s;
+        }
+        .key:hover {
+            background-color: #e9ecef;
+            transform: scale(1.05);
+        }
+        .key.used {
+            opacity: 0.5;
+            background-color: #dee2e6;
+            cursor: not-allowed;
+        }
+        .key.incorrect {
+            background-color: #ffcccc;
+            border-color: #e74c3c;
+        }
+        .letter-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+        }
+        .letter-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: white;
+            cursor: pointer;
+        }
+        .letter-box.filled {
+            background-color: #eaf7ff;
+        }
+        .letter-box.error {
+            animation: flash 0.5s;
+            border-color: #e74c3c;
+        }
+        @keyframes flash {
+            0% { background-color: white; }
+            50% { background-color: #ffcccc; }
+            100% { background-color: white; }
+        }
+        #feedback {
+            height: 30px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #letterCount {
+            margin: 10px 0;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button#resetBtn {
+            background-color: #e74c3c;
+        }
+        button#resetBtn:hover {
+            background-color: #c0392b;
+        }
+        .hidden {
+            display: none;
+        }
+        #scoreDisplay {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+        #timer {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+        #loadingIndicator {
+            margin: 20px 0;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+        .success-animation {
+            animation: success-pulse 1s;
+        }
+        @keyframes success-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Devine le Logo!</h1>
+    
+    <div>
+        <label for="difficulty-select">Sélectionnez une difficulté:</label>
+        <select name="difficulty" id="difficulty-select">
+            <option value="easy">Facile</option>
+            <option value="medium">Normal</option>
+            <option value="hard">Difficile</option>
+            <option value="impossible">Sans aide</option>
+        </select>
+    </div>
+    
+    <div id="scoreDisplay">Score: 0</div>
+    <div id="timer">Temps: 0s</div>
+    <div id="loadingIndicator">Chargement des logos...</div>
+    
+    <div id="game-container" class="hidden">
+        <img id="brandImage" src="/placeholder.svg" alt="Brand Logo">
+        
+        <div id="letterCount"></div>
+        
+        <div id="letterBoxes" class="letter-boxes"></div>
+        
+        <div id="keyboard" class="keyboard"></div>
+        
+        <div id="feedback"></div>
+        
+        <div id="freeform-input" class="hidden">
+            <input type="text" id="freeGuess" placeholder="Entrez votre réponse">
+            <button id="submitFreeGuess">Valider</button>
+        </div>
+        
+    <div class="controls">
+        <button id="clearBtn">Effacer</button>
+        <button id="nextBtn" class="hidden">Logo Suivant</button>
+        <button id="resetBtn">Recommencer</button>
+        <button id="giveUpBtn">Je ne sais pas</button>
+    </div> 
+    </div>
+
+    <script>
+        // Game elements
+        const brandImage = document.getElementById("brandImage");
+        const keyboard = document.getElementById("keyboard");
+        const letterBoxes = document.getElementById("letterBoxes");
+        const feedback = document.getElementById("feedback");
+        const letterCount = document.getElementById("letterCount");
+        const difficultySelect = document.getElementById("difficulty-select");
+        const clearBtn = document.getElementById("clearBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const scoreDisplay = document.getElementById("scoreDisplay");
+        const timerElement = document.getElementById("timer");
+        const freeformInput = document.getElementById("freeform-input");
+        const freeGuess = document.getElementById("freeGuess");
+        const submitFreeGuess = document.getElementById("submitFreeGuess");
+        const gameContainer = document.getElementById("game-container");
+        const loadingIndicator = document.getElementById("loadingIndicator");
+        document.getElementById("giveUpBtn").addEventListener('click', giveUp);
+        // Game state
+        let brandName = "";
+        let currentGuess = [];
+        let score = 0;
+        let startTime = 0;
+        let timerInterval;
+        let allBrands = [];
+        let usedBrands = [];
+        let logoCache = new Map(); // Cache for SVG data
+        let boxes = [];
+        let keyMap = new Map(); // Map to track which key corresponds to which letter box
+        let boxKeyMap = new Map(); // Map to track which box corresponds to which key
+        
+        // JSZip is needed to extract the ZIP file
+        const scriptJSZip = document.createElement('script');
+        scriptJSZip.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        document.head.appendChild(scriptJSZip);
+        
+        scriptJSZip.onload = function() {
+            window.onload = initializeGame;
+        };
+        
+        // Function to initialize the game
+        function initializeGame() {
+            // Check if we have cached logos in localStorage
+            const cachedLogos = localStorage.getItem('logoCache');
+            if (cachedLogos) {
+                try {
+                    const parsedCache = JSON.parse(cachedLogos);
+                    for (const [key, value] of Object.entries(parsedCache)) {
+                        logoCache.set(key, value);
+                    }
+                    allBrands = Object.keys(parsedCache).map(name => ({
+                        name: name,
+                        content: parsedCache[name]
+                    }));
+                    
+                    loadingIndicator.classList.add('hidden');
+                    gameContainer.classList.remove('hidden');
+                    initGame();
+                } catch (error) {
+                    console.error("Error loading cached logos:", error);
+                    fetchAndExtractLogos();
+                }
+            } else {
+                fetchAndExtractLogos();
+            }
+            
+            // Add keyboard event listener
+            document.addEventListener('keydown', handleKeyboardInput);
+        }
+        
+        // Function to handle keyboard input
+                // Modify the handleKeyboardInput function
+        function handleKeyboardInput(event) {
+            // If next button is visible, pressing Enter or Space should go to next round
+            if (!nextBtn.classList.contains('hidden') && (event.key === 'Enter' || event.key === ' ')) {
+                setupNewRound();
+                return;
+            }
+            
+            // If we're in freeform mode, don't handle keyboard input specially
+            if (difficultySelect.value === 'impossible') {
+                // Except for Enter key to submit
+                if (event.key === 'Enter' || event.key === ' ') {
+                    submitFreeGuess.click();
+                }
+                return;
+            }
+            
+            // Handle spacebar to submit current guess
+            if (event.key === ' ') {
+                // Check if we have a complete guess
+                if (!currentGuess.includes(null)) {
+                    // Check if the guess is correct
+                    const guessWord = currentGuess.join('').toLowerCase();
+                    if (guessWord === brandName.toLowerCase()) {
+                        handleCorrectGuess();
+                    } else {
+                        // Shake the boxes to indicate incorrect guess
+                        letterBoxes.classList.add('shake');
+                        setTimeout(() => {
+                            letterBoxes.classList.remove('shake');
+                        }, 500);
+                    }
+                }
+                // Prevent page scrolling
+                event.preventDefault();
+                return;
+            }
+            
+            // Handle letter keys
+            if (/^[a-zA-Z]$/.test(event.key)) {
+                const letter = event.key.toLowerCase();
+                // Find the corresponding key in the keyboard
+                const keys = document.querySelectorAll('.key');
+                for (const key of keys) {
+                    if (key.textContent.toLowerCase() === letter && !key.classList.contains('used')) {
+                        // Simulate a click on this key
+                        key.click();
+                        return;
+                    }
+                }
+            }
+            
+            // Handle backspace to remove the last letter
+            if (event.key === 'Backspace') {
+                removeLastLetter();
+            }
+            
+            // Handle Escape to clear all
+            if (event.key === 'Escape') {
+                clearGuess();
+            }
+        }
+        
+        // Function to remove the last letter
+        function removeLastLetter() {
+            // Find the last filled box
+            for (let i = boxes.length - 1; i >= 0; i--) {
+                if (boxes[i].classList.contains('filled')) {
+                    // Get the key associated with this box
+                    const key = boxKeyMap.get(boxes[i]);
+                    if (key) {
+                        // Remove the 'used' class from the key
+                        key.classList.remove('used', 'incorrect');
+                        // Clear the box
+                        boxes[i].textContent = '';
+                        boxes[i].classList.remove('filled', 'error');
+                        // Remove the mapping
+                        boxKeyMap.delete(boxes[i]);
+                        // Update the current guess
+                        currentGuess[i] = null;
+                    }
+                    break;
+                }
+            }
+        }
+        
+        // Function to fetch and extract logos from ZIP file
+        function fetchAndExtractLogos() {
+            const zipUrl = "/demos/games/logo_guess/logos/icons.zip";
+            
+            fetch(zipUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.arrayBuffer();
+                })
+                .then(data => {
+                    return JSZip.loadAsync(data);
+                })
+                .then(zip => {
+                    const extractionPromises = [];
+                    
+                    // Process each file in the ZIP
+                    zip.forEach((relativePath, zipEntry) => {
+                        if (relativePath.endsWith('.svg')) {
+                            // Only process SVG files
+                            const promise = zipEntry.async('text').then(content => {
+                                const brandName = relativePath.split('/').pop().replace('.svg', '').toLowerCase();
+                                logoCache.set(brandName, content);
+                                return {
+                                    name: brandName,
+                                    content: content
+                                };
+                            });
+                            extractionPromises.push(promise);
+                        }
+                    });
+                    
+                    return Promise.all(extractionPromises);
+                })
+                .then(logoEntries => {
+                    allBrands = logoEntries;
+                    
+                    if (allBrands.length === 0) {
+                        throw new Error('No SVG files found in the ZIP archive');
+                    }
+                    
+                    // Cache the logos in localStorage
+                    const cacheObject = {};
+                    logoCache.forEach((value, key) => {
+                        cacheObject[key] = value;
+                    });
+                    try {
+                        localStorage.setItem('logoCache', JSON.stringify(cacheObject));
+                    } catch (error) {
+                        console.error("Error caching logos:", error);
+                    }
+                    
+                    // Initialize the game with the extracted logos
+                    loadingIndicator.classList.add('hidden');
+                    gameContainer.classList.remove('hidden');
+                    initGame();
+                })
+                .catch(error => {
+                    loadingIndicator.textContent = `Error loading logos: ${error.message}`;
+                    loadingIndicator.style.color = "#e74c3c";
+                });
+        }
+        
+        function giveUp() {
+            // Stop timer
+            clearInterval(timerInterval);
+            
+            // Deduct 50 points
+            score -= 50;
+            if (score < 0) score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            
+            // Reveal the correct answer
+            clearGuess();
+            
+            // Fill in the boxes with the correct letters
+            for (let i = 0; i < brandName.length; i++) {
+                boxes[i].textContent = brandName[i];
+                boxes[i].classList.add('filled');
+                boxes[i].style.borderColor = "#e74c3c"; // Red border to indicate it was revealed
+            }
+            
+            // Show feedback
+            feedback.textContent = `La réponse était: ${brandName}. -50 points`;
+            feedback.style.color = "#e74c3c";
+            
+            // Show next button for new round
+            clearBtn.classList.add('hidden');
+            nextBtn.classList.remove('hidden');
+            freeformInput.classList.add('hidden');
+        }
+        function initGame() {
+            // Reset game state
+            currentGuess = [];
+            feedback.textContent = "";
+            letterBoxes.innerHTML = "";
+            usedBrands = [];
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            
+            // Setup event listeners
+            difficultySelect.addEventListener('change', setupNewRound);
+            clearBtn.addEventListener('click', clearGuess);
+            nextBtn.addEventListener('click', setupNewRound);
+            resetBtn.addEventListener('click', resetGame);
+            submitFreeGuess.addEventListener('click', checkFreeformGuess);
+            
+            // Start first round
+            setupNewRound();
+        }
+        
+        function setupNewRound() {
+            // Clear previous state
+            currentGuess = [];
+            letterBoxes.innerHTML = "";
+            feedback.textContent = "";
+            freeGuess.value = "";
+            nextBtn.classList.add('hidden');
+            clearBtn.classList.remove('hidden');
+            keyMap.clear();
+            boxKeyMap.clear();
+            
+            // Check if we've used all brands
+            if (usedBrands.length >= allBrands.length) {
+                feedback.textContent = "Vous avez deviné tous les logos! Jeu terminé!";
+                return;
+            }
+            
+            // Select a random brand that hasn't been used yet
+            let availableBrands = allBrands.filter(brand => 
+                !usedBrands.includes(brand.name)
+            );
+            const randomBrandIndex = Math.floor(Math.random() * availableBrands.length);
+            const randomBrand = availableBrands[randomBrandIndex];
+            
+            // Extract brand name
+            brandName = randomBrand.name.toLowerCase();
+            usedBrands.push(randomBrand.name);
+            
+            // Display the SVG image from cache
+            const svgContent = logoCache.get(brandName);
+            brandImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgContent)}`;
+            
+            // Start timer
+            startTime = Date.now();
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            // Create letter boxes
+            createLetterBoxes(brandName.length);
+            
+            // Initialize current guess array with nulls
+            currentGuess = Array(brandName.length).fill(null);
+            
+            // Set up the interface based on difficulty
+            const difficulty = difficultySelect.value;
+            
+            if (difficulty === 'impossible') {
+                // Free form guessing - no keyboard
+                keyboard.innerHTML = '';
+                letterCount.textContent = `Ce logo contient ${brandName.length} lettres`;
+                freeformInput.classList.remove('hidden');
+                clearBtn.classList.add('hidden');
+                letterBoxes.classList.add('hidden');
+                freeformInput.focus();
+            } else {
+                // Keyboard-based guessing
+                freeformInput.classList.add('hidden');
+                letterBoxes.classList.remove('hidden');
+                
+                // Generate additional random letters based on difficulty
+                let additionalLetters = '';
+                switch(difficulty) {
+                    case 'easy':
+                        additionalLetters = generateRandomLetters(3);
+                        break;
+                    case 'medium':
+                        additionalLetters = generateRandomLetters(5);
+                        break;
+                    case 'hard':
+                        additionalLetters = generateRandomLetters(7);
+                        break;
+                }
+                
+                // Create keyboard with scrambled letters
+                const scrambledLetters = scrambleLetters(brandName + additionalLetters);
+                createKeyboard(scrambledLetters);
+                letterCount.textContent = ''; // No letter count hint for keyboard mode
+            }
+        }
+        
+        function createLetterBoxes(count) {
+            letterBoxes.innerHTML = '';
+            boxes = [];
+            
+            for (let i = 0; i < count; i++) {
+                const box = document.createElement('div');
+                box.classList.add('letter-box');
+                box.dataset.index = i;
+                
+                // Add click event to remove letter
+                box.addEventListener('click', function() {
+                    if (this.classList.contains('filled')) {
+                        // Get the key associated with this box
+                        const key = boxKeyMap.get(this);
+                        if (key) {
+                            // Remove the 'used' class from the key
+                            key.classList.remove('used', 'incorrect');
+                            // Clear the box
+                            this.textContent = '';
+                            this.classList.remove('filled', 'error');
+                            // Remove the mapping
+                            boxKeyMap.delete(this);
+                            // Update the current guess
+                            currentGuess[i] = null;
+                        }
+                    }
+                });
+                
+                letterBoxes.appendChild(box);
+                boxes.push(box);
+            }
+        }
+        
+        function generateRandomLetters(count) {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            let result = '';
+            for (let i = 0; i < count; i++) {
+                result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            }
+            return result;
+        }
+        
+        function scrambleLetters(word) {
+            return word.split('').sort(() => Math.random() - 0.5).join('');
+        }
+        
+        function createKeyboard(letters) {
+            keyboard.innerHTML = '';
+            for (let letter of letters) {
+                const key = document.createElement('div');
+                key.classList.add('key');
+                key.textContent = letter;
+                key.addEventListener('click', () => {
+                    if (!key.classList.contains('used')) {
+                        addLetterToGuess(letter, key);
+                    }
+                });
+                keyboard.appendChild(key);
+            }
+        }
+        
+                function addLetterToGuess(letter, keyElement) {
+            // Find the first empty box
+            let emptyBoxIndex = -1;
+            for (let i = 0; i < boxes.length; i++) {
+                if (!boxes[i].classList.contains('filled')) {
+                    emptyBoxIndex = i;
+                    break;
+                }
+            }
+            
+            if (emptyBoxIndex === -1) {
+                return; // All boxes are filled
+            }
+            
+            // Add letter to the current box
+            boxes[emptyBoxIndex].textContent = letter;
+            boxes[emptyBoxIndex].classList.add('filled');
+            
+            // Mark the key as used
+            keyElement.classList.add('used');
+            
+            // Store the mapping between box and key
+            boxKeyMap.set(boxes[emptyBoxIndex], keyElement);
+            
+            // Update current guess
+            currentGuess[emptyBoxIndex] = letter.toLowerCase();
+            
+            // Check if the letter is correct at this position
+            if (letter.toLowerCase() !== brandName[emptyBoxIndex].toLowerCase()) {
+                // Incorrect letter - show feedback
+                keyElement.classList.add('incorrect');
+                boxes[emptyBoxIndex].classList.add('error');
+                
+                // CHANGE: Don't allow removing incorrect letters
+                // Remove the click event from this box
+                boxes[emptyBoxIndex].style.cursor = 'not-allowed';
+                boxes[emptyBoxIndex].onclick = null;
+            }
+            
+            // Check if all boxes are filled
+            if (!currentGuess.includes(null)) {
+                // Check if the guess is correct
+                const guessWord = currentGuess.join('').toLowerCase();
+                if (guessWord === brandName.toLowerCase()) {
+                    handleCorrectGuess();
+                } else {
+                    // Shake the boxes to indicate incorrect guess
+                    letterBoxes.classList.add('shake');
+                    setTimeout(() => {
+                        letterBoxes.classList.remove('shake');
+                    }, 500);
+                }
+            }
+        }
+        
+        function clearGuess() {
+            currentGuess = Array(brandName.length).fill(null);
+            
+            // Clear all boxes
+            boxes.forEach(box => {
+                box.textContent = '';
+                box.classList.remove('filled', 'error');
+            });
+            
+            // Reset all keys
+            const keys = document.querySelectorAll('.key');
+            keys.forEach(key => key.classList.remove('used', 'incorrect'));
+            
+            // Clear the mappings
+            keyMap.clear();
+            boxKeyMap.clear();
+        }
+        
+        function checkFreeformGuess() {
+            const guess = freeGuess.value.toLowerCase().trim();
+            if (guess === brandName.toLowerCase()) {
+                handleCorrectGuess();
+            } else {
+                feedback.textContent = "Incorrect! Essayez encore.";
+                freeGuess.value = "";
+            }
+        }
+        
+        function handleCorrectGuess() {
+            // Stop timer
+            clearInterval(timerInterval);
+            
+            // Calculate time bonus
+            const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+            let timeBonus = 0;
+            if (timeElapsed < 10) timeBonus = 50;
+            else if (timeElapsed < 20) timeBonus = 30;
+            else if (timeElapsed < 30) timeBonus = 10;
+            
+            // Calculate difficulty bonus
+            let difficultyBonus = 0;
+            switch(difficultySelect.value) {
+                case 'easy': difficultyBonus = 10; break;
+                case 'medium': difficultyBonus = 20; break;
+                case 'hard': difficultyBonus = 30; break;
+                case 'impossible': difficultyBonus = 50; break;
+            }
+            
+            // Update score
+            const roundScore = 100 + timeBonus + difficultyBonus;
+            score += roundScore;
+            
+            // Animate letter boxes for success
+            boxes.forEach(box => {
+                box.style.borderColor = "#27ae60";
+                box.classList.add('success-animation');
+            });
+            
+            // Show feedback
+            feedback.textContent = `Correct! +${roundScore} points (${timeBonus} time bonus, ${difficultyBonus} difficulty bonus)`;
+            feedback.style.color = "#27ae60";
+            scoreDisplay.textContent = `Score: ${score}`;
+            
+            // Show next button for new round
+            clearBtn.classList.add('hidden');
+            nextBtn.classList.remove('hidden');
+            freeformInput.classList.add('hidden');
+        }
+        
+        function updateTimer() {
+            const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+            timerElement.textContent = `Temps: ${timeElapsed}s`;
+        }
+        
+        function resetGame() {
+            clearInterval(timerInterval);
+            usedBrands = [];
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            feedback.textContent = "";
+            feedback.style.color = "#e74c3c";
+            setupNewRound();
+        }
+    </script>
+</body>
+</html>

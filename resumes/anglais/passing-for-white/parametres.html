@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Choisissez votre thème de couleur">
+    <title>Paramètres</title>
+    <style>
+        .color-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-option.selected {
+            border-color: #000;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 20px;
+        }
+        .fade-out {
+            opacity: 1;
+            transition: opacity 3s ease-out;
+        }
+
+        .fade-out.hidden {
+            opacity: 0;
+        }
+        .label {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  margin-left: 8px;
+}
+    </style>
+    <style>span {font-family: "Lexend Deca", serif !important;font-optical-sizing: auto;font-weight: 400;font-style: normal;}</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <h1 class="text-3xl p-4">Paramètres</h1>
+    <p class="p-4">c'est pas vraiment des paramètres mais plutôt des préférences graphiques</p>
+    <h2 class="text-xl p-4">Choisissez votre thème de couleur</h2>
+    <div class="color-options p-4">
+        <div class="color-option" data-theme="noir" style="background-color: #000;" tabindex="0"></div>
+        <div class="color-option" data-theme="violet" style="background-color: #6A0DAD;" tabindex="0"></div>
+        <div class="color-option" data-theme="marine" style="background-color: #4A90E2;" tabindex="0"></div>
+    </div>
+    <!-- <div id="cbn-tkt"></div>
+    <h2 class="text-2xl p-4">Police d'écriture</h2>
+    <p class="p-4">non-implémenté (cv dire que ça marche pas, concrètement <a href="https://fr.wikipedia.org/wiki/Mise_en_%C5%93uvre">"mise en oeuvre" sur wikipedia</a>)</p>
+    <div class="font-options p-4">
+        <label class="label">
+            <input type="radio" name="font-radio" value="Lexend Deca" checked>
+            <p class="text">Lexend Deca</p>
+        </label>
+        <label class="label">
+            <input type="radio" name="font-radio" value="Arial">
+            <p class="text">Arial</p>
+        </label>
+    </div>
+    <h2 class="text-3xl p-4">Parles-tu anglais?</h2>
+    <p class="p-4">Cette question ne sert qu'à des fins de personnalisation, aucune donnée n'est envoyée sur le serveur. Liste des modifications: voc (affiché seulement si non anglophone), traductions (IDEM), etc.</p>
+    <div class="p-4">
+        <label class="label">
+          <input
+            type="radio"
+            id="value-1"
+            checked=""
+            name="value-radio"
+            value="value-1"
+          />
+          <p class="text">oui</p>
+        </label>
+        <label class="label">
+          <input type="radio" id="value-2" name="value-radio" value="value-2" />
+          <p class="text">non</p>
+        </label>
+      </div>
+      <div id="feedback" class="p-4"></div>
+      <h2 class="text-3xl p-4">Comment aimerais tu que les chapitres soient découpés?</h2>
+    <p class="p-4">à noter que cette fonctionnalité n'est pas encore disponible et qu'elle risque de ne jamais l'être</p>
+      <div class="p-4">
+        <label class="label">
+          <input type="radio" checked="" name="value-radio">
+          <p class="text">par chapitre</p>
+        </label>
+        <label class="label">
+            <input type="radio"" name="value-radio">
+            <p class="text">par ville</p>
+          </label>
+        <label class="label">
+          <input type="radio" name="value-radio" value="value-2">
+          <p class="text">par narrateur</p>
+        </label>
+      </div>      --> <button onclick="localStorage.removeItem('GlowCookies');window.location.reload()"class="bg-red-600 text-white font-bold text-base leading-6 rounded-md py-2.5 shadow-sm transition-shadow duration-300 overflow-hidden hover:cursor-pointer m-4 p-4">Réinitialiser les préférences des cookies</button>
+      <br>
+    <script src="header.js"></script>
+    <script src="/404.js"></script>
+    <script src="/consent.js"></script>
+    <script>
+        function saveTheme(theme) {
+            localStorage.setItem('selectedTheme', theme);
+            location.href = location.href;
+        }
+
+        function loadTheme() {
+            const selectedTheme = localStorage.getItem('selectedTheme');
+            if (selectedTheme) {
+                document.documentElement.setAttribute('data-theme', selectedTheme);
+                // Highlight the selected color option
+                const selectedOption = document.querySelector(`.color-option[data-theme="${selectedTheme}"]`);
+                if (selectedOption) {
+                    selectedOption.classList.add('selected');
+                }
+            }
+        }
+
+        function handleKeydown(event) {
+            const options = document.querySelectorAll('.color-option');
+            const currentIndex = Array.from(options).indexOf(document.activeElement);
+            let newIndex = currentIndex;
+
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                newIndex = (currentIndex - 1 + options.length) % options.length;
+            } else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                newIndex = (currentIndex + 1) % options.length;
+            } else if (event.key === 'Enter') {
+                options[currentIndex].click();
+                return;
+            }
+
+            options[newIndex].focus();
+        }
+
+        function saveLanguagePreference() {
+            const selectedValue = document.querySelector('input[name="value-radio"]:checked').value;
+            localStorage.setItem('languagePreference', selectedValue);
+            const feedbackElement = document.createElement("p");
+            feedbackElement.className = "text-green-500 p-4 fade-out";
+            feedbackElement.textContent = "Préférence de langue sauvegardée!";
+            document.getElementById("feedback").appendChild(feedbackElement);
+            setTimeout(() => {
+                feedbackElement.classList.add('hidden');
+            }, 1500);
+        }
+
+        // Add event listeners to color options
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove 'selected' class from all options
+                document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                // Add 'selected' class to the clicked option
+                this.classList.add('selected');
+                // Save the selected theme
+                saveTheme(this.getAttribute('data-theme'));
+            });
+
+            option.addEventListener('keydown', handleKeydown);
+        });
+
+        // Load the saved theme on page load
+        loadTheme();
+
+        // Add event listener for radio buttons
+        document.querySelectorAll('input[name="value-radio"]').forEach(radio => {
+            radio.addEventListener('change', saveLanguagePreference);
+        });
+        function saveFontChoice() {
+        const selectedFont = document.querySelector('input[name="font-radio"]:checked').value;
+        localStorage.setItem('selectedFont', selectedFont);
+        const feedbackElement = document.createElement("p");
+        feedbackElement.className = "text-green-500 p-4 fade-out";
+        feedbackElement.textContent = "Préférence de police sauvegardée!";
+        document.getElementById("feedback").appendChild(feedbackElement);
+        setTimeout(() => {
+            feedbackElement.classList.add('hidden');
+        }, 1500);
+    }
+
+    // Add event listener for font radio buttons
+    document.querySelectorAll('input[name="font-radio"]').forEach(radio => {
+        radio.addEventListener('change', saveFontChoice);
+    });
+
+    </script>
+</body>
+</html>

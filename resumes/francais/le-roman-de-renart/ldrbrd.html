@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Trending Now! Recently Updated</title>
+    <style>
+        #loading,
+        body {
+            text-align: center
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333
+        }
+
+        h1 {
+            color: #ff4500;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, .2)
+        }
+
+        .recently-updated {
+            margin-bottom: 20px
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px auto;
+            width: 90%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+            transition: transform .2s
+        }
+
+        .file-item:hover {
+            transform: scale(1.05);
+            background-color: #ffebcd
+        }
+
+        .file-name a {
+            text-decoration: none;
+            font-weight: 700;
+            color: #ff4500;
+            font-size: 18px
+        }
+
+        .file-time {
+            color: #888;
+            font-size: 14px
+        }
+
+        @keyframes climbAndShake {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0)
+            }
+
+            25%,
+            75% {
+                transform: translateY(-10px) rotate(-2deg)
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(2deg)
+            }
+        }
+
+        .climb-and-shake {
+            animation: 1s ease-in-out climbAndShake
+        }
+
+        #refresh-button {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff4500;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color .3s
+        }
+
+        #refresh-button:hover {
+            background-color: #e53e00
+        }
+
+        #loading {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 20px;
+            animation: 1.5s infinite loadingAnimation
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src=
+"https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body><button id="refresh-button">RAFRAICHIR</button>
+    <h1>🔥 Tendance Maintenant! Mis à jour récemment</h1>
+    <div id="recently-updated-container"></div>
+    <script>
+        const loadingMessage = document.createElement("div");
+        loadingMessage.id = "loading";
+        loadingMessage.textContent = "Loading";
+        
+        let clickCounter = 0;
+        const maxClickCount = Math.floor(4 * Math.random()) + 3;
+        const refreshButton = document.getElementById("refresh-button");
+        let loadingAnimationInterval = null;
+        
+        // List of files to exclude from the leaderboard
+        const excludedFiles = ["ldrbrd.html", "header.js", "crawlindex.html", "combine.py"];
+        
+        async function fetchRecentlyUpdatedFiles() {
+            const [mainFilesResponse, scansFilesResponse] = await Promise.all([
+                fetch("/api/file/list?path=/resumes/francais/le-roman-de-renart&sort=modified&sort-reversed=true"),
+                fetch("/api/file/list?path=/resumes/francais/le-roman-de-renart/scans&sort=modified&sort-reversed=true")
+            ]);
+        
+            const mainFiles = await mainFilesResponse.json();
+            const scansFiles = await scansFilesResponse.json();
+        
+            // Mark files from the scans directory and store them separately
+            const scansFilesMarked = scansFiles.map(file => ({ ...file, isScan: true }));
+            const allFiles = [...mainFiles, ...scansFilesMarked].filter(file => !file.directory);
+        
+            // Filter out excluded files
+            const filteredFiles = allFiles.filter(file => !excludedFiles.includes(file.name));
+        
+            filteredFiles.sort((a, b) => b.modified - a.modified);
+            const recentFiles = filteredFiles.slice(0, 6);
+        
+            const fileDetails = await Promise.all(recentFiles.map(async file => {
+                const filePath = file.isScan ? `scans/${file.name}` : file.name;
+                const fileResponse = await fetch(filePath);
+        
+                if (!fileResponse.ok) {
+                    return {
+                        name: filePath,
+                        title: file.name,
+                        initialTimeAgo: calculateTimeAgo(file.modified)
+                    };
+                }
+        
+                const fileContent = await fileResponse.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(fileContent, "text/html");
+                const title = doc.querySelector("title")?.textContent || file.name;
+                const timeAgo = calculateTimeAgo(file.modified);
+        
+                return {
+                    name: filePath,
+                    title: title,
+                    initialTimeAgo: timeAgo
+                };
+            }));
+        
+            const validFiles = fileDetails.filter(file => file !== null);
+            validFiles.forEach(file => {
+                const fileElement = document.createElement("div");
+                fileElement.classList.add("file-item");
+                fileElement.setAttribute("data-initial-time", file.initialTimeAgo);
+                fileElement.innerHTML = `<span class="emoji">📄</span><span class="file-name"><a href="${file.name}" target="_blank">${file.title}</a></span><span class="file-time">UPDATED - ${file.initialTimeAgo}s ago</span>`;
+                container.appendChild(fileElement);
+            });
+        
+            updateElapsedTime();
+            document.querySelectorAll(".file-item").forEach((element, index) => {
+                setTimeout(() => {
+                    setInterval(updateElapsedTime, 1000);
+                }, 2000 * Math.random());
+            });
+        
+            setTimeout(() => {
+                if (!sessionStorage.getItem("fakeItemShown")) {
+                    // Select a random file from the filtered list of files
+                    const randomFile = filteredFiles[Math.floor(Math.random() * filteredFiles.length)];
+        
+                    // Ensure the selected file is not a directory
+                    if (!randomFile.directory) {
+                        const fakeFileElement = document.createElement("div");
+                        fakeFileElement.classList.add("file-item", "climb-and-shake");
+                        fakeFileElement.setAttribute("data-initial-time", "0");
+                        fakeFileElement.innerHTML = `<span class="emoji">📄</span><span class="file-name"><a href="${randomFile.isScan ? `scans/${randomFile.name}` : randomFile.name}" target="_blank">${randomFile.title || randomFile.name}</a></span><span class="file-time">UPDATED - 0s ago</span>`;
+                        container.insertBefore(fakeFileElement, container.firstChild);
+                        sessionStorage.setItem("fakeItemShown", "true");
+                    }
+                }
+            }, 2000);
+        }
+        
+        function calculateTimeAgo(timestamp) {
+            const currentTime = new Date().getTime();
+            return Math.floor((currentTime - timestamp) / 1000);
+        }
+        
+        function updateElapsedTime() {
+            const currentTime = new Date().getTime();
+            const elapsedTime = currentTime - startTime;
+        
+            document.querySelectorAll(".file-item").forEach(element => {
+                const initialTime = parseInt(element.getAttribute("data-initial-time"), 10);
+                const totalSeconds = initialTime + Math.floor(elapsedTime / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                let emoji = element.getAttribute("data-emoji");
+        
+                if (!emoji) {
+                    emoji = hours < 1 && minutes < 3 && Math.random() < 0.5 ? "🔥" :
+                            hours < 1 && minutes < 1 ? "☀️" :
+                            hours < 1 && minutes < 10 ? "⏰" :
+                            hours < 1 && minutes < 30 ? "🚀" :
+                            Math.random() < 0.5 ? "❄️" : "🥶";
+                    element.setAttribute("data-emoji", emoji);
+                }
+        
+                const timeElement = element.querySelector(".file-time");
+                if (hours > 3) {
+                    timeElement.textContent = `${emoji} - il y a ${hours}h ${minutes}min ${seconds}s`;
+                } else {
+                    timeElement.textContent = `${emoji} MIS À JOUR il y a ${minutes}m ${seconds}s`;
+                }
+            });
+        }
+        
+        const startTime = new Date().getTime();
+        const container = document.getElementById("recently-updated-container");
+        
+        fetchRecentlyUpdatedFiles();
+        refreshButton.addEventListener("click", () => {
+            if (refreshButton.disabled) return;
+        
+            clickCounter++;
+            refreshButton.disabled = true;
+            document.querySelectorAll(".file-item").forEach(element => element.style.display = "none");
+            container.appendChild(loadingMessage);
+        
+            let dotsCount = 0;
+            loadingAnimationInterval = setInterval(() => {
+                dotsCount = (dotsCount % 3) + 1;
+                loadingMessage.textContent = "Loading" + ".".repeat(dotsCount);
+            }, 300);
+        
+            setTimeout(() => {
+                if (loadingAnimationInterval) {
+                    clearInterval(loadingAnimationInterval);
+                    loadingAnimationInterval = null;
+                }
+                loadingMessage.textContent = "Loading";
+                loadingMessage.remove();
+                document.querySelectorAll(".file-item").forEach(element => element.style.display = "flex");
+        
+                if (clickCounter >= maxClickCount && !sessionStorage.getItem("itemMoved")) {
+                    const lastItem = container.lastElementChild;
+                    if (lastItem) {
+                        container.insertBefore(lastItem, container.firstChild);
+                        lastItem.setAttribute("data-initial-time", "0");
+                        lastItem.querySelector(".file-time").textContent = "🥵 RECENTLY UPDATED - 0s ago";
+                        sessionStorage.setItem("itemMoved", "true");
+                    }
+                }
+        
+                refreshButton.disabled = false;
+            }, 2000);
+        });
+        </script>
+        
+</body>
+
+</html>

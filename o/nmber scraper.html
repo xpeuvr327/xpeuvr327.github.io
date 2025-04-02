@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Number Extractor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script>
+        let phoneNumberOccurrences = {};
+
+        function extractPhoneNumbers(text) {
+            // Updated regex with specific formats:
+            // - French mobile: +33 6/7 XX XX XX XX
+            // - Swiss mobile: +41 76/77/78/79 XXX XX XX
+            // - Belgian: +32 4XX XX XX XX (mobile)
+            const phoneRegex = /\+(?:33\s?[67]\s?\d{2}\s?\d{2}\s?\d{2}\s?\d{2}|41\s?[7][6-9]\s?\d{3}\s?\d{2}\s?\d{2}|32\s?4\d{2}\s?\d{2}\s?\d{2}\s?\d{2})/g;
+            
+            const lines = text.split('\n');
+            const phoneNumbers = [];
+            
+            lines.forEach(line => {
+                const matches = line.match(phoneRegex);
+                if (matches) {
+                    // Filter out incomplete matches
+                    const validMatches = matches.filter(match => {
+                        const digits = match.replace(/\D/g, '');
+                        // Ensure proper length based on country code
+                        if (match.startsWith('+32')) return digits.length === 11; // Belgian
+                        if (match.startsWith('+33')) return digits.length === 11; // French
+                        if (match.startsWith('+41')) return digits.length === 11; // Swiss
+                        return false; // Reject other formats for now
+                    });
+                    phoneNumbers.push(...validMatches);
+                }
+            });
+            
+            return [...new Set(phoneNumbers)];
+        }
+
+        function normalizePhoneNumber(number) {
+            // Remove all non-digits except the plus sign
+            return number.replace(/[^\d+]/g, '');
+        }
+
+        function formatPhoneNumber(number) {
+            // Standardize spacing based on country code
+            const normalized = normalizePhoneNumber(number);
+            const countryCode = normalized.match(/\+(\d+)/)[1];
+            const rest = normalized.slice(countryCode.length + 1);
+            
+            switch(countryCode) {
+                case '32': // Belgian
+                    return `+${countryCode} ${rest.slice(0,3)} ${rest.slice(3,5)} ${rest.slice(5,7)} ${rest.slice(7)}`;
+                case '33': // French
+                    return `+${countryCode} ${rest.slice(0,1)} ${rest.slice(1,3)} ${rest.slice(3,5)} ${rest.slice(5,7)} ${rest.slice(7)}`;
+                case '41': // Swiss
+                    return `+${countryCode} ${rest.slice(0,2)} ${rest.slice(2,5)} ${rest.slice(5,7)} ${rest.slice(7)}`;
+                default:
+                    return number;
+            }
+        }
+
+        async function handleFileUpload(event) {
+            const files = event.target.files;
+            const resultDiv = document.getElementById('results');
+            
+            phoneNumberOccurrences = {};
+            let filesProcessed = 0;
+            let totalFilesToProcess = files.length;
+
+            const processAllFiles = () => {
+                const consolidatedNumbers = Object.keys(phoneNumberOccurrences).map(number => {
+                    return {
+                        original: formatPhoneNumber(number), // Format numbers consistently
+                        normalized: normalizePhoneNumber(number),
+                        count: phoneNumberOccurrences[number]
+                    };
+                });
+
+                // Sort by country code first, then by number
+                consolidatedNumbers.sort((a, b) => {
+                    const aCountryCode = a.normalized.match(/\+(\d+)/)[1];
+                    const bCountryCode = b.normalized.match(/\+(\d+)/)[1];
+                    
+                    if (aCountryCode !== bCountryCode) {
+                        return aCountryCode - bCountryCode;
+                    }
+                    
+                    return a.normalized.slice(aCountryCode.length + 1) - 
+                           b.normalized.slice(bCountryCode.length + 1);
+                });
+
+                const showOccurrences = document.getElementById('showOccurrences').checked;
+                resultDiv.innerHTML = consolidatedNumbers.length > 0 
+                    ? `<h3>Found ${consolidatedNumbers.length} Unique Phone Numbers:</h3>
+                       <ul>${consolidatedNumbers.map(item => 
+                           `<li>
+                               ${item.original}
+                               ${(showOccurrences && item.count > 1) ? `<span class="occurrence">(${item.count})</span>` : ''}
+                           </li>`
+                       ).join('')}</ul>`
+                    : '<p>No phone numbers found.</p>';
+            };
+
+            const processFile = async (file) => {
+                try {
+                    if (file.name.toLowerCase().endsWith('.zip')) {
+                        const zip = await JSZip.loadAsync(file);
+                        
+                        const textFiles = Object.values(zip.files).filter(f => 
+                            !f.dir && f.name.toLowerCase().endsWith('.txt')
+                        );
+
+                        await Promise.all(textFiles.map(async (textFile) => {
+                            const content = await textFile.async('text');
+                            const phoneNumbers = extractPhoneNumbers(content);
+                            
+                            phoneNumbers.forEach(number => {
+                                phoneNumberOccurrences[number] = 
+                                    (phoneNumberOccurrences[number] || 0) + 1;
+                            });
+                        }));
+
+                        filesProcessed++;
+                    } else if (file.name.toLowerCase().endsWith('.txt')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const text = e.target.result;
+                            const phoneNumbers = extractPhoneNumbers(text);
+                            
+                            phoneNumbers.forEach(number => {
+                                phoneNumberOccurrences[number] = 
+                                    (phoneNumberOccurrences[number] || 0) + 1;
+                            });
+
+                            filesProcessed++;
+                        };
+                        reader.readAsText(file);
+                    } else {
+                        filesProcessed++;
+                        console.warn(`Unsupported file type: ${file.name}`);
+                    }
+
+                    if (filesProcessed === totalFilesToProcess) {
+                        processAllFiles();
+                    }
+                } catch (error) {
+                    console.error('Error processing file:', error);
+                    filesProcessed++;
+                }
+            };
+
+            Array.from(files).forEach(processFile);
+        }
+
+        function toggleOccurrences() {
+            const resultDiv = document.getElementById('results');
+            const showOccurrences = document.getElementById('showOccurrences').checked;
+            const phoneNumberElements = resultDiv.querySelectorAll('li');
+
+            phoneNumberElements.forEach(element => {
+                const occurrenceSpan = element.querySelector('.occurrence');
+                if (occurrenceSpan) {
+                    occurrenceSpan.style.display = showOccurrences ? 'inline' : 'none';
+                }
+            });
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #results {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .occurrence {
+            color: #666;
+            margin-left: 5px;
+            font-size: 0.8em;
+        }
+        .controls {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Phone Number Extractor</h1>
+    <div class="controls">
+        <input type="file" id="fileInput" multiple accept=".txt,.zip" onchange="handleFileUpload(event)">
+        <label>
+            <input type="checkbox" id="showOccurrences" onchange="toggleOccurrences()"> 
+            Show Number of Occurrences
+        </label>
+    </div>
+    <div id="results"></div>
+</body>
+</html>

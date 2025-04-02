@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Photos histoire</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .image-container {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-container img {
+            display: none;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <h1>Compilation des fiches que le Y nous a concoctés</h1>
+    <p>Liste des fiches que Yanis a faites pour réviser l'histoire. Appuyez sur les boutons pour afficher et cacher les pages.<br>
+        Ne faites surtout pas de screen pour ensuite envoyer les images: on perd de la qualité <br> N'hésitez pas à copier le lien et à le partager </p>
+
+    <div>
+        <a href="#" data-src="resume1.jpg" class="image-toggle" id="button1">Afficher la page 1</a>
+        <div class="image-container" id="image-container1"></div>
+    </div>
+    <div>
+        <a href="#" data-src="resume2.jpg" class="image-toggle" id="button2">Afficher la page 2</a>
+        <div class="image-container" id="image-container2"></div>
+    </div>
+    <div>
+        <a href="#" data-src="resume3.jpg" class="image-toggle" id="button3">Afficher la page 3</a>
+        <div class="image-container" id="image-container3"></div>
+    </div>
+    <div>
+        <a href="#" data-src="resume4.jpg" class="image-toggle" id="button4">Afficher la page 4</a>
+        <div class="image-container" id="image-container4"></div>
+    </div>
+    <div>
+        <a href="#" data-src="resume5.jpg" class="image-toggle" id="button5">Afficher la page 5</a>
+        <div class="image-container" id="image-container5"></div>
+    </div>
+    <div>
+        <a href="#" data-src="resume6.jpg" class="image-toggle" id="button6">Afficher la page 6</a>
+        <div class="image-container" id="image-container6"></div>
+    </div>
+    <div>
+        <a href="#" data-src="resume7.jpg" class="image-toggle" id="button7">Afficher la page 7</a>
+        <div class="image-container" id="image-container7"></div>
+    </div>
+    <a href="../histoire.html">Retour à l&#x27;accueil</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageToggles = document.querySelectorAll('.image-toggle');
+
+            imageToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    const src = this.getAttribute('data-src');
+                    const buttonId = this.id;
+                    const containerId = `image-container${buttonId.slice(-1)}`;
+                    const imageContainer = document.getElementById(containerId);
+                    let imgElement = imageContainer.querySelector(`img[src="${src}"]`);
+
+                    if (!imgElement) {
+                        imgElement = document.createElement('img');
+                        imgElement.src = src;
+                        imageContainer.appendChild(imgElement);
+                    }
+
+                    imgElement.style.display = imgElement.style.display === 'flex' ? 'none' : 'flex';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devine le Logo</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        #game-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        #brandImage {
+            max-width: 300px;
+            max-height: 200px;
+            margin: 20px auto;
+            display: block;
+        }
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .key {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            font-weight: bold;
+            min-width: 20px;
+            transition: all 0.2s;
+        }
+        .key:hover {
+            background-color: #e9ecef;
+            transform: scale(1.05);
+        }
+        .key.used {
+            opacity: 0.5;
+            background-color: #dee2e6;
+            cursor: not-allowed;
+        }
+        #guessDisplay {
+            min-height: 50px;
+            font-size: 24px;
+            margin: 20px 0;
+            letter-spacing: 5px;
+        }
+        #feedback {
+            height: 30px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        #letterCount {
+            margin: 10px 0;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button#resetBtn {
+            background-color: #e74c3c;
+        }
+        button#resetBtn:hover {
+            background-color: #c0392b;
+        }
+        .hidden {
+            display: none;
+        }
+        #scoreDisplay {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #2c3e50;
+        }
+        #timer {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Devine le Logo!</h1>
+    
+    <div>
+        <label for="difficulty-select">Sélectionnez une difficulté:</label>
+        <select name="difficulty" id="difficulty-select">
+            <option value="easy">Facile</option>
+            <option value="medium">Normal</option>
+            <option value="hard">Difficile</option>
+            <option value="impossible">Sans aide</option>
+        </select>
+    </div>
+    
+    <div id="scoreDisplay">Score: 0</div>
+    <div id="timer">Temps: 0s</div>
+    
+    <div id="game-container">
+        <img id="brandImage" src="" alt="Brand Logo">
+        
+        <div id="letterCount"></div>
+        
+        <div id="guessDisplay"></div>
+        
+        <div id="keyboard" class="keyboard"></div>
+        
+        <div id="feedback"></div>
+        
+        <div id="freeform-input" class="hidden">
+            <input type="text" id="freeGuess" placeholder="Entrez votre réponse">
+            <button id="submitFreeGuess">Valider</button>
+        </div>
+        
+        <div class="controls">
+            <button id="submitBtn">Valider</button>
+            <button id="clearBtn">Effacer</button>
+            <button id="nextBtn" class="hidden">Logo Suivant</button>
+            <button id="resetBtn">Recommencer</button>
+        </div>
+    </div>
+
+    <script>
+        // Game elements
+        const brandImage = document.getElementById("brandImage");
+        const keyboard = document.getElementById("keyboard");
+        const guessDisplay = document.getElementById("guessDisplay");
+        const feedback = document.getElementById("feedback");
+        const letterCount = document.getElementById("letterCount");
+        const difficultySelect = document.getElementById("difficulty-select");
+        const submitBtn = document.getElementById("submitBtn");
+        const clearBtn = document.getElementById("clearBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const scoreDisplay = document.getElementById("scoreDisplay");
+        const timerElement = document.getElementById("timer");
+        const freeformInput = document.getElementById("freeform-input");
+        const freeGuess = document.getElementById("freeGuess");
+        const submitFreeGuess = document.getElementById("submitFreeGuess");
+        
+        // Game state
+        let brandName = "";
+        let currentGuess = "";
+        let score = 0;
+        let startTime = 0;
+        let timerInterval;
+        let allBrands = [];
+        let usedBrands = [];
+        
+        window.onload = (event) => {
+            // Reset game state for initial load
+            allBrands = [];
+            
+            var req = new XMLHttpRequest();
+            req.overrideMimeType("application/json");
+            req.open('GET', "/api/file/list?path=/demos/games/logo_guess/logos");
+            req.onload = function() {
+                if (req.status === 200) {
+                    // Parse the file list response
+                    const files = JSON.parse(req.responseText);
+                    // Filter for PNG files that aren't directories
+                    allBrands = files.filter(file => file.name.endsWith('.png') && !file.directory);
+                    
+                    if (allBrands.length === 0) {
+                        feedback.textContent = "No brand images found.";
+                        return;
+                    }
+                    
+                    // Initialize the game with the fetched brands
+                    initGame();
+                } else {
+                    feedback.textContent = "Error loading brand images: " + req.status;
+                }
+            };
+            req.onerror = function() {
+                feedback.textContent = "Network error occurred when trying to fetch brand images.";
+            };
+            req.send();
+        };
+        
+        function initGame() {
+            // Reset game state
+            currentGuess = "";
+            feedback.textContent = "";
+            guessDisplay.textContent = "";
+            usedBrands = [];
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            
+            // Setup event listeners
+            difficultySelect.addEventListener('change', setupNewRound);
+            submitBtn.addEventListener('click', checkGuess);
+            clearBtn.addEventListener('click', clearGuess);
+            nextBtn.addEventListener('click', setupNewRound);
+            resetBtn.addEventListener('click', resetGame);
+            submitFreeGuess.addEventListener('click', checkFreeformGuess);
+            
+            // Start first round
+            setupNewRound();
+        }
+        
+        function setupNewRound() {
+            // Clear previous state
+            currentGuess = "";
+            guessDisplay.textContent = "";
+            feedback.textContent = "";
+            nextBtn.classList.add('hidden');
+            submitBtn.classList.remove('hidden');
+            clearBtn.classList.remove('hidden');
+            
+            // Check if we've used all brands
+            if (usedBrands.length >= allBrands.length) {
+                feedback.textContent = "Vous avez deviné tous les logos! Jeu terminé!";
+                return;
+            }
+            
+            // Select a random brand that hasn't been used yet
+            let availableBrands = allBrands.filter(brand => 
+                !usedBrands.includes(brand.name)
+            );
+            const randomBrand = availableBrands[Math.floor(Math.random() * availableBrands.length)];
+            
+            // Extract brand name without extension
+            brandName = randomBrand.name.replace('.png', '').toLowerCase();
+            usedBrands.push(randomBrand.name);
+            
+            // Display the image
+            brandImage.src = `/demos/games/logo_guess/logos/${randomBrand.name}`;
+            
+            // Start timer
+            startTime = Date.now();
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            // Set up the interface based on difficulty
+            const difficulty = difficultySelect.value;
+            
+            if (difficulty === 'impossible') {
+                // Free form guessing - no keyboard
+                keyboard.innerHTML = '';
+                letterCount.textContent = `Ce logo contient ${brandName.length} lettres`;
+                freeformInput.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+                clearBtn.classList.add('hidden');
+            } else {
+                // Keyboard-based guessing
+                freeformInput.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+                clearBtn.classList.remove('hidden');
+                
+                // Generate additional random letters based on difficulty
+                let additionalLetters = '';
+                switch(difficulty) {
+                    case 'easy':
+                        additionalLetters = generateRandomLetters(3);
+                        break;
+                    case 'medium':
+                        additionalLetters = generateRandomLetters(5);
+                        break;
+                    case 'hard':
+                        additionalLetters = generateRandomLetters(7);
+                        break;
+                }
+                
+                // Create keyboard with scrambled letters
+                const scrambledLetters = scrambleLetters(brandName + additionalLetters);
+                createKeyboard(scrambledLetters);
+                letterCount.textContent = ''; // No letter count hint for keyboard mode
+            }
+        }
+        
+        function generateRandomLetters(count) {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            let result = '';
+            for (let i = 0; i < count; i++) {
+                result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            }
+            return result;
+        }
+        
+        function scrambleLetters(word) {
+            return word.split('').sort(() => Math.random() - 0.5).join('');
+        }
+        
+        function createKeyboard(letters) {
+            keyboard.innerHTML = '';
+            for (let letter of letters) {
+                const key = document.createElement('div');
+                key.classList.add('key');
+                key.textContent = letter;
+                key.addEventListener('click', () => {
+                    if (!key.classList.contains('used')) {
+                        addLetterToGuess(letter);
+                        key.classList.add('used');
+                    }
+                });
+                keyboard.appendChild(key);
+            }
+        }
+        
+        function addLetterToGuess(letter) {
+            currentGuess += letter;
+            guessDisplay.textContent = currentGuess;
+        }
+        
+        function clearGuess() {
+            currentGuess = "";
+            guessDisplay.textContent = "";
+            
+            // Reset all keys
+            const keys = document.querySelectorAll('.key');
+            keys.forEach(key => key.classList.remove('used'));
+        }
+        
+        function checkGuess() {
+            if (currentGuess.toLowerCase() === brandName.toLowerCase()) {
+                handleCorrectGuess();
+            } else {
+                feedback.textContent = "Incorrect! Essayez encore.";
+                
+                // Apply shake animation to the guess display
+                guessDisplay.classList.add('shake');
+                setTimeout(() => guessDisplay.classList.remove('shake'), 500);
+            }
+        }
+        
+        function checkFreeformGuess() {
+            const guess = freeGuess.value.toLowerCase().trim();
+            if (guess === brandName.toLowerCase()) {
+                handleCorrectGuess();
+            } else {
+                feedback.textContent = "Incorrect! Essayez encore.";
+                freeGuess.value = "";
+            }
+        }
+        
+        function handleCorrectGuess() {
+            // Stop timer
+            clearInterval(timerInterval);
+            
+            // Calculate time bonus
+            const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+            let timeBonus = 0;
+            if (timeElapsed < 10) timeBonus = 50;
+            else if (timeElapsed < 20) timeBonus = 30;
+            else if (timeElapsed < 30) timeBonus = 10;
+            
+            // Calculate difficulty bonus
+            let difficultyBonus = 0;
+            switch(difficultySelect.value) {
+                case 'easy': difficultyBonus = 10; break;
+                case 'medium': difficultyBonus = 20; break;
+                case 'hard': difficultyBonus = 30; break;
+                case 'impossible': difficultyBonus = 50; break;
+            }
+            
+            // Update score
+            const roundScore = 100 + timeBonus + difficultyBonus;
+            score += roundScore;
+            
+            // Show feedback
+            feedback.textContent = `Correct! +${roundScore} points (${timeBonus} time bonus, ${difficultyBonus} difficulty bonus)`;
+            feedback.style.color = "#27ae60";
+            scoreDisplay.textContent = `Score: ${score}`;
+            
+            // Show next button for new round
+            submitBtn.classList.add('hidden');
+            clearBtn.classList.add('hidden');
+            nextBtn.classList.remove('hidden');
+            freeformInput.classList.add('hidden');
+        }
+        
+        function updateTimer() {
+            const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+            timerElement.textContent = `Temps: ${timeElapsed}s`;
+        }
+        
+        function resetGame() {
+            clearInterval(timerInterval);
+            usedBrands = [];
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            feedback.textContent = "";
+            feedback.style.color = "#e74c3c";
+            setupNewRound();
+        }
+    </script>
+</body>
+</html>

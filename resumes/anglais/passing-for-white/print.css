@@ -1,0 +1,43 @@
+@media print{
+
+
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.custom-nav, .mobile-header, .menu-icon, .nav-list, .dropdown, #hideButton, #chapNavPrev,#chapNavNext {
+    display: none !important;
+}
+
+
+#content {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+h2, h3, h4, p, div {
+    background-color: transparent !important;
+    border: none !important;
+    color: black !important;
+}
+
+
+a {
+    color: black !important;
+    text-decoration: underline !important;
+}
+
+
+.highlight-pink{
+    background-color: transparent !important;
+    color: inherit !important;
+}
+button{display:none;}
+}

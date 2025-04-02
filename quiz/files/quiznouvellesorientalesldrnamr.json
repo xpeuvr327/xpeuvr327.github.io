@@ -1,0 +1,47 @@
+{
+  "name": "Quiz Le dernier amour du Prince Genghi",
+  "description": "Suite du quiz sur le recueil <em>Nouvelles orientales</em>. <a href=\"?quiz=nvlindex\">Voir tous les quiz</a>. Ce quiz porte sur <a href=\"../resumefrancais/ldrnamr.html\">le prince Genghi</a>. bonne chance",
+  "questions": [
+    {
+      "question": "Que décide Genghi à 50 ans?",
+      "answers": [
+        "Il organise une grande fête",
+        "Il tient à rencontrer toutes ses amantes",
+        "Il vend tout, et s'installe dans la montagne",
+        "Il commence la méditation"
+      ],
+      "correctAnswer": 2,
+      "explanation": "regarde le résumé tout en haut"
+    },
+    {
+      "question": "Quel sentiment est le pire pour Genghi?",
+      "answers": [
+        "Être ignoré",
+        "Inspirer la pitié"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Il ne veut pas inspirer la pitié et préfère l'oubli"
+    },
+    {
+      "question": "Parmi les rares femmes qui lui envoient encore des lettres, quel est le nom de celle qui décide de le voir personnellement?",
+      "answers": [
+        "La Dame-du-Village-d'en-Haut",
+        "La Dame-du-Village-des-Fleurs-qui-Tombent",
+        "La Dame-du-Vent-d'Ouest",
+        "La Dame-aux-Mille-Serpents"
+      ],
+      "correctAnswer": 1,
+      "explanation": "les autres n'existent pas. et j'ai mentionné 1000 fois \"DVFT\""
+    },
+    {
+      "question": "Quelle est la première erreur de cette Dame lorsqu'elle va rencontrer le prince Genghi?",
+      "answers": [
+        "Elle est accompagnée de trop de personnes",
+        "Elle est trop bien habillée, et Genghi ne l'a pas reconnue",
+        "Elle mentionne le prince Genghi, qui était le symbole de son ancienne vie, et Genghi ne veut plus en entendre parler"
+      ],
+      "correctAnswer": 2,
+      "explanation": " <a href=\"../rf/\">rgd le résumé</a>"
+    }
+  ]
+}

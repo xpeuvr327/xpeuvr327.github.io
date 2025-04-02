@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Conjugueur Allemand</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1)
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px
+        }
+
+        .verb-button {
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left
+        }
+
+        .verb-button:hover {
+            background: #e9ecef
+        }
+
+        .conjugation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px
+        }
+
+        .conjugation-table td,
+        .conjugation-table th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left
+        }
+
+        .conjugation-table th {
+            background: #f8f9fa
+        }
+
+        .conjugation-table tr:nth-child(even) {
+            background: #f8f9fa
+        }
+
+        .verb-info {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 20px
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px
+        }
+
+        .no-results {
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            grid-column: 1/-1
+        }
+
+        @media screen and (max-width:600px) {
+            #pc-tip {
+                display: none
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container"><main>
+        <h1>Conjugueur Allemand</h1>
+        <p>Le meilleur conjugueur pour les verbes du feuilleté de grammaire. Contient les verbes de 125 à 150. Parfait
+            avec <a href="https://xpeuvr327.github.io/ecole/verbes.html">L'entraîneur de verbes</a><br><span
+                id="pc-tip">Astuce: utilise <code>Ctrl</code> + <code>F</code> pour chercher plus vite (sur mac c'est
+                aussi Ctrl et non Cmd)</span></p><input type="text" class="search-box" id="searchInput"placeholder="Rechercher un verbe en DE/FR...">
+        <div class="results" id="searchResults"></div>
+        <div id="conjugationOutput"></div></main>
+    </div>
+    <script>let verbs = [];
+        async function fetchVerbs() { const response = await fetch('verbs-150.json'); verbs = await response.json(); displaySearchResults(''); }
+        function displaySearchResults(searchTerm) {
+            const results = verbs.filter(verb => verb.deutsch.toLowerCase().includes(searchTerm.toLowerCase()) || verb.frtrad.toLowerCase().includes(searchTerm.toLowerCase()));
+
+            const resultsDiv = document.getElementById('searchResults');
+
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div class="no-results">Aucun verbe trouvé</div>';
+                return;
+            }
+
+            resultsDiv.innerHTML = results
+                .map(verb => `
+                    <button class="verb-button" onclick="showConjugation('${verb.deutsch}')">
+                        ${verb.deutsch}<br>
+                        <small>${verb.frtrad}</small>
+                    </button>
+                `)
+                .join('');
+
+            document.getElementById('searchInput').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && results.length === 1) {
+                    const verbButton = resultsDiv.querySelector('.verb-button');
+                    if (verbButton) {
+                        verbButton.click();
+                    }
+                }
+            });
+        }
+
+        function getReflexiveForm(verb, pronoun, verbForm) {
+            const reflexivePronouns = {
+                'ich': 'mich',
+                'du': 'dich',
+                'er/sie/es': 'sich',
+                'wir': 'uns',
+                'ihr': 'euch',
+                'Sie': 'sich'
+            };
+
+            if (verb.features?.isReflect === 1) {
+                const reflexive = reflexivePronouns[pronoun];
+                const words = verbForm.split(' ');
+
+                if (words.length === 1) {
+                    return words[0] + ' ' + reflexive;
+                } else {
+                    return words[0] + ' ' + reflexive + ' ' + words.slice(1).join(' ');
+                }
+            }
+            return verbForm;
+        }
+        function showConjugation(verbInfinitive) {
+            const verb = verbs.find(v => v.deutsch === verbInfinitive);
+            if (!verb) return;
+
+            const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
+            const auxiliary = verb.features?.auxSein === 1 ? 'sein' : 'haben';
+            const auxForms = {
+                'sein': ['bin', 'bist', 'ist', 'sind', 'seid', 'sind'],
+                'haben': ['habe', 'hast', 'hat', 'haben', 'habt', 'haben']
+            };
+
+            let html = `
+        <div class="verb-info" id="${verb.deutsch}">
+            <h2>${verb.deutsch}${verb.comment ? ` (${verb.comment})` : ''}</h2>
+            <p>Traduction: ${verb.frtrad}</p>
+            ${verb.features?.isIrreg ? '<p>Verbe irrégulier</p>' : ''}
+            ${verb.features?.isReflect ? '<p>Verbe réfléchi</p>' : ''}
+            ${verb.features?.isParticle ? '<p>Verbe à particule séparable</p>' : ''}
+            ${verb.features?.auxSein === 1 ? '<p>Auxiliaire être</p>' : ''}
+            ${verb.features?.isInformal === 1 ? '<p>Verbe impersonnel</p>' : ''}
+        </div>
+        <table class="conjugation-table">
+            <tr>
+                <th>Pronom</th>
+                <th>Présent</th>
+                <th>Prétérit</th>
+                <th>Passé composé</th>
+            </tr>
+    `;
+
+            if (verb.features?.isInformal === 1) {
+                const validPrsIndex = verb.prs.findIndex(form => form !== null);
+                const validPrtIndex = verb.prt.findIndex(form => form !== null);
+
+                if (validPrsIndex !== -1 && validPrtIndex !== -1) {
+                    const pronoun = "es";
+                    html += `
+                <tr>
+                    <td>${pronoun}</td>
+                    <td>${verb.prs[validPrsIndex]}</td>
+                    <td>${verb.prt[validPrtIndex]}</td>
+                    <td>${auxForms[auxiliary][validPrsIndex]} ${verb.prk}</td>
+                </tr>
+            `;
+                }
+            } else {
+                pronouns.forEach((pronoun, i) => {
+                    if (verb.prs[i] === null && verb.prt[i] === null) {
+                        return;
+                    }
+
+                    let presentForm = verb.prs[i] ? getReflexiveForm(verb, pronoun, verb.prs[i]) : '-';
+                    let preteritForm = verb.prt[i] ? getReflexiveForm(verb, pronoun, verb.prt[i]) : '-';
+                    let perfectForm = verb.prk ? getReflexiveForm(verb, pronoun,
+                        `${auxForms[auxiliary][i]} ${verb.prk}`) : '-';
+
+                    html += `
+                <tr>
+                    <td>${pronoun}</td>
+                    <td>${presentForm}</td>
+                    <td>${preteritForm}</td>
+                    <td>${perfectForm}</td>
+                </tr>
+            `;
+                });
+            }
+
+            html += '</table>';
+            document.getElementById('conjugationOutput').innerHTML = html;
+            const verbInfo = document.getElementById(verb.deutsch);
+            if (verbInfo) {
+                verbInfo.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            displaySearchResults(e.target.value);
+        });
+
+        
+        window.addEventListener("keydown", function (e) {
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                const searchInput = document.getElementById('searchInput');
+                searchInput.select();
+                searchInput.focus();
+            }
+        });
+
+        document.getElementById('searchInput').addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.blur();
+            }
+        });
+
+        fetchVerbs();</script>
+</body>
+
+</html>

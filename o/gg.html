@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verb Conjugations</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #verb-input, #french-translation, #comment {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #buttons button {
+            margin: 5px;
+            padding: 10px;
+        }
+        #output {
+            margin-top: 20px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verb Conjugations</h1>
+    <input type="text" id="verb-input" placeholder="Enter a German verb">
+    <input type="text" id="french-translation" placeholder="Enter French translation">
+    <input type="text" id="comment" placeholder="Enter comment">
+    <div id="buttons">
+        <button onclick="getConjugations()">Get Conjugations</button>
+        <button onclick="toggleIrregular()">Toggle Irreg</button>
+        <button onclick="compile()">Compile</button>
+    </div>
+    <div id="output"></div>
+<script>
+let conjugationsList = [];
+let lastVerb = null;
+let toggleIrregularState = 0;
+
+function getConjugations() {
+    const verb = $('#verb-input').val();
+    const frenchTranslation = $('#french-translation').val();
+    const comment = $('#comment').val();
+
+    if (!verb) {
+        alert('No verb specified.');
+        return;
+    }
+
+    $.ajax({
+        url: `https://de.pons.com/verbtabellen/deutsch/${verb}`,
+        success: function(data) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            const conjugations = extractConjugations(doc, verb, frenchTranslation, comment);
+            conjugations["features"]["isIrreg"] = toggleIrregularState;
+            conjugationsList.push(conjugations);
+            lastVerb = conjugations;
+            $('#output').append(JSON.stringify(conjugations, null, 2) + '\n');
+        },
+        error: function() {
+            alert(`Failed to retrieve the page for verb: ${verb}`);
+        }
+    });
+}
+
+function extractConjugations(doc, verb, frenchTranslation, comment) {
+    const conjugations = {
+        "deutsch": verb,
+        "prs": [],
+        "prt": [],
+        "prk": "",
+        "frtrad": frenchTranslation || "aucune traduction, ceci n'est pas normal.",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": comment || ""
+    };
+
+    const prsMapping = {
+        "INDIKATIV_PRAESENS_1S": 0,
+        "INDIKATIV_PRAESENS_2S": 1,
+        "INDIKATIV_PRAESENS_3S": 2,
+        "INDIKATIV_PRAESENS_1P": 3,
+        "INDIKATIV_PRAESENS_2P": 4,
+        "INDIKATIV_PRAESENS_3P": 5
+    };
+
+    const prtMapping = {
+        "INDIKATIV_PRAETERITUM_1S": 0,
+        "INDIKATIV_PRAETERITUM_2S": 1,
+        "INDIKATIV_PRAETERITUM_3S": 2,
+        "INDIKATIV_PRAETERITUM_1P": 3,
+        "INDIKATIV_PRAETERITUM_2P": 4,
+        "INDIKATIV_PRAETERITUM_3P": 5
+    };
+
+    conjugations["prs"] = [null, null, null, null, null, null];
+    conjugations["prt"] = [null, null, null, null, null, null];
+
+    const spans = doc.querySelectorAll('span.flected_form');
+    spans.forEach(span => {
+        const flectionId = span.getAttribute('data-pons-flection-id');
+        const text = span.textContent;
+
+        if (prsMapping[flectionId] !== undefined) {
+            conjugations["prs"][prsMapping[flectionId]] = text;
+        } else if (prtMapping[flectionId] !== undefined) {
+            conjugations["prt"][prtMapping[flectionId]] = text;
+        } else if (flectionId === "INDIKATIV_PERFEKT_3S") {
+            conjugations["prk"] = text;
+        }
+    });
+
+    const allText = Array.from(doc.querySelectorAll('*')).map(el => el.textContent).join(' ');
+    if (allText.includes("seid") && allText.includes("sind")) {
+        conjugations["features"]["auxSein"] = 1;
+    }
+
+    if (conjugations["prs"].filter(form => form !== null).length === 1 && conjugations["prs"][2] !== null) {
+        conjugations["features"]["isInformal"] = 1;
+    }
+
+    try {
+        const reflectElementCheck = doc.querySelector("#flection_table > div > section:nth-child(2) > div:nth-child(3) > div > div:nth-child(1) > div > table > tbody > tr:nth-child(1) > td:nth-child(3) > span");
+        if (reflectElementCheck) {
+            conjugations["features"]["isReflect"] = 1;
+        }
+    } catch (error) {
+        conjugations["features"]["isReflect"] = 0;
+    }
+
+    return conjugations;
+}
+
+function toggleIrregular() {
+    toggleIrregularState = 1 - toggleIrregularState;
+    alert(`Irregular state toggled to: ${toggleIrregularState}`);
+}
+
+function addParticleToConjugations(conjugations, particle) {
+    conjugations["deutsch"] = conjugations["deutsch"] + particle;
+    conjugations["prs"] = conjugations["prs"].map(form => form ? form + " " + particle : form);
+    conjugations["prt"] = conjugations["prt"].map(form => form ? form + " " + particle : form);
+    conjugations["prk"] = particle + conjugations["prk"];
+    conjugations["features"]["isParticle"] = 1;
+    return conjugations;
+}
+
+function compile() {
+    const minifiedJson = minifyJson(conjugationsList);
+    const jsonString = JSON.stringify(minifiedJson, null, 2);
+    $('#output').text(jsonString);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'conjugations.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function minifyJson(jsonList) {
+    return jsonList.map(item => {
+        const minifiedItem = Object.keys(item).reduce((acc, key) => {
+            if (item[key] !== null && item[key] !== "" && item[key] !== []) {
+                acc[key] = item[key];
+            }
+            return acc;
+        }, {});
+
+        const features = Object.keys(minifiedItem.features || {}).reduce((acc, key) => {
+            if (minifiedItem.features[key] !== 0) {
+                acc[key] = minifiedItem.features[key];
+            }
+            return acc;
+        }, {});
+
+        if (Object.keys(features).length > 0) {
+            minifiedItem.features = features;
+        }
+
+        return minifiedItem;
+    });
+}
+</script>
+
+</body>
+</html>

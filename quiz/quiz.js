@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const questions = data.questions;
 
         document.getElementById('quiz-name').textContent = quizName;
-        document.getElementById('description').textContent = description;
+        document.getElementById('description').innerHTML = description;
 
         const quizContainer = document.getElementById('quiz-container');
         quizContainer.innerHTML = '';
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     } else {
                         selectedAnswer.parentElement.classList.add('incorrect');
                         explanationElement.style.display = 'block';
-                        explanationElement.textContent = question.explanation;
+                        explanationElement.innerHTML = question.explanation;
                     }
                     document.querySelector(`label[for="question${index}_answer${question.correctAnswer}"]`).classList.add('correct');
                 }

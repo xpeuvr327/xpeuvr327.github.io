@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Brand</title>
+    <style>
+        #answer {
+            white-space: pre-wrap;
+        }
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .key {
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+	<h1>devine le logo!!</h1>
+	<label for="difficulty-select">Sélectionnez une difficulté</label>
+	<select name="difficulty" id="difficulty-select">
+		<option value="easy">Facile</option>
+		<option value="medium">Normal</option>
+		<option value="hard">Difficile</option>
+		<option value="impossible">sans aide</option>
+	</select>
+	<img id="brandImage" src="" alt="Brand Logo" style="display:none;">
+    <div id="keyboard" class="keyboard"></div>
+    <textarea name="main-game" id="mainGame"placeholder="ta supposition"></textarea>
+
+    <script>
+        
+        const brandImage = document.getElementById("brandImage");
+        const keyboard = document.getElementById("keyboard");
+        const mainGame = document.getElementById("mainGame");
+
+        window.onload = (event) => {
+            var req = new XMLHttpRequest();
+            req.overrideMimeType("application/json");
+            req.open('GET', "/api/file/list?path=/demos/games/logo_guess/logos");
+            req.onload = function() {
+				const files = JSON.parse(req.responseText);
+				startGame(files);
+            };
+            req.onerror = function() {
+                answerSpace.textContent = "Network error occurred.";
+            };
+            req.send();
+        };
+
+        function startGame(files) {
+            const brandFiles = files.filter(file => file.name.endsWith('.png') && !file.directory);
+            if (brandFiles.length === 0) {
+                answerSpace.textContent = "No brand images found.";
+                return;
+            }
+
+            const randomBrand = brandFiles[Math.floor(Math.random() * brandFiles.length)];
+            const brandName = randomBrand.name.replace('.png', '');
+            
+            const difficultySelect = document.getElementById('difficulty-select');
+            let additionalLetters = difficultySelect.value;
+            
+            difficultySelect.addEventListener('change', function() {
+                additionalLetters = difficultySelect.value;
+            });
+
+            switch (difficultySelect) {
+                case 'easy':
+                    additionalLetters = generateRandomLetters(3);
+                    break;
+                case 'medium':
+                    additionalLetters = generateRandomLetters(4);
+                    break;
+                case 'hard':
+                    additionalLetters = generateRandomLetters(7);
+                    break;
+                case 'impossible':
+                    //dont display any letters and instead use a free form (but indicate the number of letters), break and dont forget to submit
+            }
+
+            const scrambledLetters = scrambleLetters(brandName + additionalLetters);
+            displayImage(randomBrand.name);
+            createKeyboard(scrambledLetters);
+        }
+
+        function generateRandomLetters(count) {
+            const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+            let result = '';
+            for (let i = 0; i < count; i++) {
+                result += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            }
+            return result;
+        }
+
+        function scrambleLetters(word) {
+            return word.split('').sort(() => Math.random() - 0.5).join('');
+        }
+
+        function displayImage(imageName) {
+            brandImage.src = `/demos/games/logo_guess/logos/${imageName}`;
+            brandImage.style.display = 'block';
+        }
+
+        function createKeyboard(letters) {
+            keyboard.innerHTML = '';
+            for (let letter of letters) {
+                const key = document.createElement('div');
+                key.classList.add('key');
+                key.textContent = letter;
+                key.addEventListener('click', () => {
+                    // Handle letter click (e.g., check if it's part of the brand name)
+                    console.log(`Letter clicked: ${letter}`);
+                    mainGame.textContent+=letter;
+                });
+                keyboard.appendChild(key);
+            }
+        }
+    </script>
+</body>
+</html>

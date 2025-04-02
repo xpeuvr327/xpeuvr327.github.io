@@ -1,0 +1,56 @@
+{
+  "name": "Suite Quiz Nouvelles orientales",
+  "description": "Suite (partie 3) du quiz sur la nouvelle <a href=\"../resumefrancais/lldlm.html\">Le lait de la mort</a>\", tirée du livre <em>Nouvelles orientales</em>. Fais le <a href=\"?quiz=nouvellesorientalessm\">Quiz précédent</a> d'abord.",
+  "questions": [
+    {
+      "question": "Philip Mild et l'ingénieur français sont ...",
+      "answers": [
+        "En croisière, sur le pont",
+        "Dans un bar allemand",
+        "En voyages d'affaires",
+        "En train de se raconter des histoires"
+      ],
+      "correctAnswer": 3,
+      "explanation": "p.46, et toute la nouvelle en fait. C'est l'ingénieur qui raconte des histoires à son compagnon de cabine, Philip Mild."
+    },
+    {
+      "question": "L'un des trois frères va devoir sacrifier sa femme... Quelle est(sont) la(les) particularité(s) de l'aîné?",
+      "answers": [
+        "Il n'aime pas sa femme",
+        "Il trompe sa femme",
+        "Il tient ses serments",
+        "C'est lui qui a proposé de sacrifier une de leurs femmes",
+        "Il compte prévenir sa femme du danger",
+        "Il n'a pas d'enfants"
+      ],
+      "correctAnswer": "0",
+      "explanation": "La réponse 4 est également valide."
+    },
+	 {
+      "question": "L'un des trois frères va devoir sacrifier sa femme... Quelle est(sont) la(les) particularité(s) de l'enfant du milieu?",
+      "answers": [
+        "Il n'aime pas sa femme",
+        "Il trompe sa femme",
+        "Il tient ses serments",
+        "C'est lui qui a proposé de sacrifier une de leurs femmes",
+        "Il compte prévenir sa femme du danger",
+        "Il n'a pas d'enfants"
+      ],
+      "correctAnswer": 4,
+      "explanation": "p.50, vers la fin, quand il parle, et lui dit d'aller faire la lessive demain"
+    },
+	    {
+      "question": "L'un des trois frères va devoir sacrifier sa femme... Quelle est(sont) la(les) particularité(s) du cadet?",
+      "answers": [
+        "Il n'aime pas sa femme",
+        "Il trompe sa femme",
+        "Il tient ses serments",
+        "C'est lui qui a proposé de sacrifier une de leurs femmes",
+        "Il compte prévenir sa femme du danger",
+        "Il n'a pas d'enfants"
+      ],
+      "correctAnswer": 2,
+      "explanation": "p.50 ligne 6"
+    }
+  ]
+}

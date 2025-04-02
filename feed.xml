@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0">
+  <channel>
+    <title>Mises à jour du site</title>
+    <link>http://example.com</link>
+    <description>This is an example RSS feed</description>
+    <language>en-us</language>
+    <pubDate>Mon, 31 Mar 2025 12:00:00 GMT</pubDate>
+
+    <item>
+      <title>First Item</title>
+      <link>http://example.com/first-item</link>
+      <description>This is the description of the first item.</description>
+      <pubDate>Mon, 31 Mar 2025 12:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Second Item</title>
+      <link>http://example.com/second-item</link>
+      <description>This is the description of the second item.</description>
+      <pubDate>Mon, 31 Mar 2025 12:00:00 GMT</pubDate>
+    </item>
+  <item><title>Comment Ã§a marche?</title><description>c'est surtout un test pour voir que tout est bien mis en place. il y a sÃ»rement une option pour masquer les articles dÃ©jÃ  lus, parfois appelÃ©s archive ou "dÃ©jÃ  lus". merci d'utiliser le flux rss!</description><link>http://lesitedela104.webredirect.org/news/2025/what-is-rss-and-how-to-use-it.html#allok</link><guid>53ebdad7-a08a-4971-9916-12b11e5fc3ac</guid><pubDate>Mon, 31 Mar 2025 21:55:16 +0100</pubDate><language>fr-ch</language><ttl>45</ttl><category>test</category><category>rss</category><category>meta</category></item><item><title>olli aus ossiland</title><description>description</description><link>http://lesitedela104.webredirect.org/104</link><guid>fafd99bb-b289-4bc0-9560-4dc4039f2af0</guid><pubDate>Mon, 31 Mar 2025 21:56:46 +0000</pubDate><language>fr-ch</language><ttl>45</ttl><category>cat</category><category>f</category></item></channel>
+</rss>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Semestrielles 2025</title>
+    <link rel="icon" href="favicon.ico" />
+    <meta charset="utf-8" data-next-head="">
+    <meta name="viewport" content="width=device-width" data-next-head="">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/epreuvesregroupees/manifest.json">
+</head>
+
+<body>
+    <div>
+        <h1>Semestrielles 2025</h1>
+        <p>Bienvenue sur le site des Semestrielles 2025. Les tests commencent la semaine prochaine, un par jour à partir
+            de lundi. Le site pour les bg. Site sans traqueurs ni pub</p>
+            <a href="math.html">Mathématiques</a>
+            <a href="histoire.html">Histoire</a>
+            <a href="francais.html">Français</a>
+            <a href="informatique.html">Informatique</a>
+            <a href="chimie.html">Chimie</a>
+            <a href="droit.html">Droit</a>
+            <a href="/epreuvesregroupees/about.html">À propos</a>
+    </div>
+    <script>const currentPassword = "jesucejoao";
+
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+
+        function checkPassword() {
+            let storedPassword = getCookie('password');
+            if (isIOS()) {
+                storedPassword = localStorage.getItem('password');
+            }
+            if (storedPassword !== currentPassword) {
+                window.location.href = 'pywl.html';
+            }
+        }
+
+        function checkCookie() {
+            let access = getCookie('access');
+            if (isIOS()) {
+                access = localStorage.getItem('access');
+            }
+            if (access !== 'true') {
+                window.location.href = 'pywl.html';
+            }
+        }
+
+        checkCookie();
+        checkPassword();</script>
+</body>
+
+</html>

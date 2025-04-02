@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Pourcentage</title>
+</head>
+<body>
+    <h1>Calculateur de Pourcentage d'écriture humaine</h1>
+    <label for="total">Nombre total de mots :</label>
+    <input type="number" id="total" name="total" required value="4153">
+    <br><br>
+    <label for="selected">Nombre de mots écrits par IA :</label>
+    <input type="number" id="selected" name="selected" required value="183">
+    <br><br>
+    <button onclick="calc()">Calculer</button>
+    <br><br>
+    <div id="res"></div>
+
+    <script>
+		function calc() {
+            // Récupérer les valeurs des inputs
+            var total = document.getElementById('total').value;
+            var selected = document.getElementById('selected').value;
+
+            // Vérifier que les valeurs sont des nombres
+            if (isNaN(total) || isNaN(selected)) {
+                document.getElementById('res').innerText = "Veuillez entrer des nombres valides.";
+                return;
+            }
+
+            // Convertir les valeurs en nombres
+            total = parseFloat(total);
+            selected = parseFloat(selected);
+
+            // Calculer le pourcentage
+            var percentage = (selected / total) * 100;
+
+            // Afficher le résultat
+            document.getElementById('res').innerText = "Pourcentage de mots écrits par IA : " + percentage.toFixed(2) + "% (";
+            document.getElementById('res').innerText += 100 - percentage.toFixed(2) + ")";
+        }
+    </script>
+</body>
+</html>

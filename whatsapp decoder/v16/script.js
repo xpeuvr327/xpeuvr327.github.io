@@ -160,19 +160,6 @@ function updateGraphicsUI(onlineStatusData) {
     };
 
     console.log('Chart Data:', chartData);
-
-    // Create or update the chart
-    const ctx = canvasElement.getContext('2d');
-    new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        options: {
-            scales: {
-                x: { stacked: true },
-                y: { stacked: true }
-            }
-        }
-    });
 }
 
 // Function to extract lifetime messages data
@@ -208,7 +195,7 @@ function updateLifetimeMessagesChart(lifetimeMessagesData) {
     // Create or update a div element to display lifetime messages chart
     let lifetimeMessagesChartDiv = lifetimeMessagesSection.querySelector('#lifetimeMessagesChart');
     if (!lifetimeMessagesChartDiv) {
-        lifetimeMessagesChartDiv = document.createElement('div');
+        lifetimeMessagesChartDiv = document.createElement('canvas');
         lifetimeMessagesChartDiv.id = 'lifetimeMessagesChart';
         lifetimeMessagesSection.appendChild(lifetimeMessagesChartDiv);
     }
