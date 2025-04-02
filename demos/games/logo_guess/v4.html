@@ -71,6 +71,7 @@
             justify-content: center;
             gap: 8px;
             margin: 20px 0;
+            flex-wrap: wrap; /* Add this to allow boxes to wrap on small screens */
         }
         .letter-box {
             width: 40px;
@@ -166,6 +167,29 @@
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
+        #gameStats {
+            font-size: 16px;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        #mobileKeyboardInput {
+            margin-top: 15px;
+            display: none;
+        }
+        #mobileKeyboardInput input {
+            padding: 10px;
+            border: 2px solid #3498db;
+            border-radius: 4px;
+            font-size: 18px;
+            width: 80%;
+            max-width: 300px;
+        }
+        /* Only show mobile keyboard on small screens */
+        @media (max-width: 768px) {
+            #mobileKeyboardInput {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -181,8 +205,17 @@
         </select>
     </div>
     
+    <div>
+        <label for="logo-pack-select">Pack de logos:</label>
+        <select name="logo-pack" id="logo-pack-select">
+            <option value="logos/icons.zip">Logos standard</option>
+            <option value="logos/icons_color.zip">Logos en couleur</option>
+        </select>
+    </div>
+    
     <div id="scoreDisplay">Score: 0</div>
     <div id="timer">Temps: 0s</div>
+    <div id="gameStats">Logos: 0 complétés / 0 total (0 passés)</div>
     <div id="loadingIndicator">Chargement des logos...</div>
     
     <div id="game-container" class="hidden">
@@ -191,6 +224,11 @@
         <div id="letterCount"></div>
         
         <div id="letterBoxes" class="letter-boxes"></div>
+        
+        <!-- Mobile keyboard input method -->
+        <div id="mobileKeyboardInput">
+            <input type="text" id="mobileLetter" placeholder="Tapez une lettre" maxlength="1">
+        </div>
         
         <div id="keyboard" class="keyboard"></div>
         
@@ -204,8 +242,8 @@
     <div class="controls">
         <button id="clearBtn">Effacer</button>
         <button id="nextBtn" class="hidden">Logo Suivant</button>
-        <button id="resetBtn">Recommencer</button>
         <button id="giveUpBtn">Je ne sais pas</button>
+        <button id="resetBtn">Recommencer</button>
     </div> 
     </div>
 
@@ -217,6 +255,7 @@
         const feedback = document.getElementById("feedback");
         const letterCount = document.getElementById("letterCount");
         const difficultySelect = document.getElementById("difficulty-select");
+        const logoPack = document.getElementById("logo-pack-select");
         const clearBtn = document.getElementById("clearBtn");
         const nextBtn = document.getElementById("nextBtn");
         const resetBtn = document.getElementById("resetBtn");
@@ -227,6 +266,8 @@
         const submitFreeGuess = document.getElementById("submitFreeGuess");
         const gameContainer = document.getElementById("game-container");
         const loadingIndicator = document.getElementById("loadingIndicator");
+        const gameStats = document.getElementById("gameStats");
+        const mobileLetter = document.getElementById("mobileLetter");
         document.getElementById("giveUpBtn").addEventListener('click', giveUp);
         
         let brandName = "";
@@ -236,11 +277,12 @@
         let timerInterval;
         let allBrands = [];
         let usedBrands = [];
+        let skippedBrands = [];
         let logoCache = new Map(); 
         let boxes = [];
         let keyMap = new Map(); 
         let boxKeyMap = new Map(); 
-        
+        let completedCount = 0;
         
         const scriptJSZip = document.createElement('script');
         scriptJSZip.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
@@ -252,34 +294,39 @@
         
         
         function initializeGame() {
+            // Add event listener for logo pack change
+            logoPack.addEventListener('change', function() {
+                clearLogoCache();
+                usedBrands = [];
+                skippedBrands = [];
+                completedCount = 0;
+                updateGameStats();
+                loadingIndicator.classList.remove('hidden');
+                gameContainer.classList.add('hidden');
+                fetchAndExtractLogos(this.value);
+            });
             
-            const cachedLogos = localStorage.getItem('logoCache');
-            if (cachedLogos) {
-                try {
-                    const parsedCache = JSON.parse(cachedLogos);
-                    for (const [key, value] of Object.entries(parsedCache)) {
-                        logoCache.set(key, value);
-                    }
-                    allBrands = Object.keys(parsedCache).map(name => ({
-                        name: name,
-                        content: parsedCache[name]
-                    }));
-                    
-                    loadingIndicator.classList.add('hidden');
-                    gameContainer.classList.remove('hidden');
-                    initGame();
-                } catch (error) {
-                    console.error("Error loading cached logos:", error);
-                    fetchAndExtractLogos();
-                }
-            } else {
-                fetchAndExtractLogos();
-            }
-            
+            fetchAndExtractLogos(logoPack.value);
             
             document.addEventListener('keydown', handleKeyboardInput);
+            
+            // Set up mobile keyboard input
+            mobileLetter.addEventListener('input', function(e) {
+                const letter = e.target.value.toLowerCase();
+                if (/^[a-z]$/.test(letter)) {
+                    // Find the corresponding key in the keyboard
+                    const keys = document.querySelectorAll('.key');
+                    for (const key of keys) {
+                        if (key.textContent.toLowerCase() === letter && !key.classList.contains('used')) {
+                            key.click();
+                            break;
+                        }
+                    }
+                }
+                // Clear the input field for the next letter
+                e.target.value = '';
+            });
         }
-        
         
                 
         function handleKeyboardInput(event) {
@@ -300,7 +347,13 @@
             
             
             if (event.key === ' ') {
+                // If the guess is empty, treat space as "I don't know"
+                if (currentGuess.every(val => val === null)) {
+                    giveUp();
+                    return;
+                }
                 
+                // Otherwise check if the guess is complete and correct
                 if (!currentGuess.includes(null)) {
                     
                     const guessWord = currentGuess.join('').toLowerCase();
@@ -368,10 +421,10 @@
         }
         
         
-        function fetchAndExtractLogos() {
-            const zipUrl = "/demos/games/logo_guess/logos/icons.zip";
+        function fetchAndExtractLogos(zipPath = "/demos/games/logo_guess/logos/icons.zip") {
+            logoCache.clear(); // Clear the cache before loading new logos
             
-            fetch(zipUrl)
+            fetch(zipPath)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -416,6 +469,7 @@
                     });
                     try {
                         localStorage.setItem('logoCache', JSON.stringify(cacheObject));
+                        localStorage.setItem('currentLogoPack', zipPath);
                     } catch (error) {
                         console.error("Error caching logos:", error);
                     }
@@ -435,7 +489,11 @@
             
             clearInterval(timerInterval);
             
+            // Add to skipped brands list
+            skippedBrands.push(brandName);
+            updateGameStats();
             
+            // Apply point penalty
             score -= 50;
             if (score < 0) score = 0;
             scoreDisplay.textContent = `Score: ${score}`;
@@ -459,14 +517,24 @@
             nextBtn.classList.remove('hidden');
             freeformInput.classList.add('hidden');
         }
+        
+        function clearLogoCache() {
+            localStorage.removeItem('logoCache');
+            localStorage.removeItem('currentLogoPack');
+            logoCache.clear();
+        }
+        
         function initGame() {
             
             currentGuess = [];
             feedback.textContent = "";
             letterBoxes.innerHTML = "";
             usedBrands = [];
+            skippedBrands = [];
+            completedCount = 0;
             score = 0;
             scoreDisplay.textContent = `Score: ${score}`;
+            updateGameStats();
             
             
             difficultySelect.addEventListener('change', setupNewRound);
@@ -477,6 +545,10 @@
             
             
             setupNewRound();
+        }
+        
+        function updateGameStats() {
+            gameStats.textContent = `Logos: ${completedCount} complétés / ${allBrands.length} total (${skippedBrands.length} passés)`;
         }
         
         function setupNewRound() {
@@ -511,6 +583,7 @@
             const svgContent = logoCache.get(brandName);
             brandImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgContent)}`;
             
+            updateGameStats();
             
             startTime = Date.now();
             if (timerInterval) clearInterval(timerInterval);
@@ -566,7 +639,7 @@
             for (let i = 0; i < count; i++) {
                 const box = document.createElement('div');
                 box.classList.add('letter-box');
-                box.dataset.index = i;
+                box.dataset. index = i;
                 
                 
                 box.addEventListener('click', function() {
@@ -704,6 +777,9 @@
         }
         
         function handleCorrectGuess() {
+            // Increment completed count
+            completedCount++;
+            updateGameStats();
             
             clearInterval(timerInterval);
             
@@ -752,11 +828,21 @@
         function resetGame() {
             clearInterval(timerInterval);
             usedBrands = [];
+            skippedBrands = [];
+            completedCount = 0;
             score = 0;
             scoreDisplay.textContent = `Score: ${score}`;
             feedback.textContent = "";
             feedback.style.color = "#e74c3c";
-            setupNewRound();
+            updateGameStats();
+            
+            // Clear logo cache
+            clearLogoCache();
+            
+            // Reload the game with the current logo pack
+            loadingIndicator.classList.remove('hidden');
+            gameContainer.classList.add('hidden');
+            fetchAndExtractLogos(logoPack.value);
         }
     </script>
 </body>
