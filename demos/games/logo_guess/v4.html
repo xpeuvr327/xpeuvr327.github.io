@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -168,33 +167,6 @@
             100% { transform: scale(1); }
         }
     </style>
-
-<style>
-  #keyboard {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .keyboard-button {
-    flex: 1 1 calc(25% - 20px); /* Adjust the width as needed */
-    box-sizing: border-box;
-    padding: 10px;
-    margin: 5px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #fff;
-  }
-
-  @media (max-width: 600px) {
-    .keyboard-button {
-      flex: 1 1 calc(33.33% - 20px); /* Adjust the width for smaller screens */
-    }
-  }
-</style>
-
 </head>
 <body>
     <h1>Devine le Logo!</h1>
@@ -238,7 +210,7 @@
     </div>
 
     <script>
-        // Game elements
+        
         const brandImage = document.getElementById("brandImage");
         const keyboard = document.getElementById("keyboard");
         const letterBoxes = document.getElementById("letterBoxes");
@@ -256,7 +228,7 @@
         const gameContainer = document.getElementById("game-container");
         const loadingIndicator = document.getElementById("loadingIndicator");
         document.getElementById("giveUpBtn").addEventListener('click', giveUp);
-        // Game state
+        
         let brandName = "";
         let currentGuess = [];
         let score = 0;
@@ -264,12 +236,12 @@
         let timerInterval;
         let allBrands = [];
         let usedBrands = [];
-        let logoCache = new Map(); // Cache for SVG data
+        let logoCache = new Map(); 
         let boxes = [];
-        let keyMap = new Map(); // Map to track which key corresponds to which letter box
-        let boxKeyMap = new Map(); // Map to track which box corresponds to which key
+        let keyMap = new Map(); 
+        let boxKeyMap = new Map(); 
         
-        // JSZip is needed to extract the ZIP file
+        
         const scriptJSZip = document.createElement('script');
         scriptJSZip.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
         document.head.appendChild(scriptJSZip);
@@ -278,9 +250,9 @@
             window.onload = initializeGame;
         };
         
-        // Function to initialize the game
+        
         function initializeGame() {
-            // Check if we have cached logos in localStorage
+            
             const cachedLogos = localStorage.getItem('logoCache');
             if (cachedLogos) {
                 try {
@@ -304,90 +276,90 @@
                 fetchAndExtractLogos();
             }
             
-            // Add keyboard event listener
+            
             document.addEventListener('keydown', handleKeyboardInput);
         }
         
-        // Function to handle keyboard input
-                // Modify the handleKeyboardInput function
+        
+                
         function handleKeyboardInput(event) {
-            // If next button is visible, pressing Enter or Space should go to next round
+            
             if (!nextBtn.classList.contains('hidden') && (event.key === 'Enter' || event.key === ' ')) {
                 setupNewRound();
                 return;
             }
             
-            // If we're in freeform mode, don't handle keyboard input specially
+            
             if (difficultySelect.value === 'impossible') {
-                // Except for Enter key to submit
+                
                 if (event.key === 'Enter' || event.key === ' ') {
                     submitFreeGuess.click();
                 }
                 return;
             }
             
-            // Handle spacebar to submit current guess
+            
             if (event.key === ' ') {
-                // Check if we have a complete guess
+                
                 if (!currentGuess.includes(null)) {
-                    // Check if the guess is correct
+                    
                     const guessWord = currentGuess.join('').toLowerCase();
                     if (guessWord === brandName.toLowerCase()) {
                         handleCorrectGuess();
                     } else {
-                        // Shake the boxes to indicate incorrect guess
+                        
                         letterBoxes.classList.add('shake');
                         setTimeout(() => {
                             letterBoxes.classList.remove('shake');
                         }, 500);
                     }
                 }
-                // Prevent page scrolling
+                
                 event.preventDefault();
                 return;
             }
             
-            // Handle letter keys
+            
             if (/^[a-zA-Z]$/.test(event.key)) {
                 const letter = event.key.toLowerCase();
-                // Find the corresponding key in the keyboard
+                
                 const keys = document.querySelectorAll('.key');
                 for (const key of keys) {
                     if (key.textContent.toLowerCase() === letter && !key.classList.contains('used')) {
-                        // Simulate a click on this key
+                        
                         key.click();
                         return;
                     }
                 }
             }
             
-            // Handle backspace to remove the last letter
+            
             if (event.key === 'Backspace') {
                 removeLastLetter();
             }
             
-            // Handle Escape to clear all
+            
             if (event.key === 'Escape') {
                 clearGuess();
             }
         }
         
-        // Function to remove the last letter
+        
         function removeLastLetter() {
-            // Find the last filled box
+            
             for (let i = boxes.length - 1; i >= 0; i--) {
                 if (boxes[i].classList.contains('filled')) {
-                    // Get the key associated with this box
+                    
                     const key = boxKeyMap.get(boxes[i]);
                     if (key) {
-                        // Remove the 'used' class from the key
+                        
                         key.classList.remove('used', 'incorrect');
-                        // Clear the box
+                        
                         boxes[i].textContent = '';
                         boxes[i].classList.remove('filled', 'error');
-                        // Remove the mapping
+                        
                         boxKeyMap.delete(boxes[i]);
-                        // Update the current guess
+                        
                         currentGuess[i] = null;
                     }
                     break;
@@ -395,7 +367,7 @@
             }
         }
         
-        // Function to fetch and extract logos from ZIP file
+        
         function fetchAndExtractLogos() {
             const zipUrl = "/demos/games/logo_guess/logos/icons.zip";
             
@@ -412,10 +384,10 @@
                 .then(zip => {
                     const extractionPromises = [];
                     
-                    // Process each file in the ZIP
+                    
                     zip.forEach((relativePath, zipEntry) => {
                         if (relativePath.endsWith('.svg')) {
-                            // Only process SVG files
+                            
                             const promise = zipEntry.async('text').then(content => {
                                 const brandName = relativePath.split('/').pop().replace('.svg', '').toLowerCase();
                                 logoCache.set(brandName, content);
@@ -437,7 +409,7 @@
                         throw new Error('No SVG files found in the ZIP archive');
                     }
                     
-                    // Cache the logos in localStorage
+                    
                     const cacheObject = {};
                     logoCache.forEach((value, key) => {
                         cacheObject[key] = value;
@@ -448,7 +420,7 @@
                         console.error("Error caching logos:", error);
                     }
                     
-                    // Initialize the game with the extracted logos
+                    
                     loadingIndicator.classList.add('hidden');
                     gameContainer.classList.remove('hidden');
                     initGame();
@@ -460,35 +432,35 @@
         }
         
         function giveUp() {
-            // Stop timer
+            
             clearInterval(timerInterval);
             
-            // Deduct 50 points
+            
             score -= 50;
             if (score < 0) score = 0;
             scoreDisplay.textContent = `Score: ${score}`;
             
-            // Reveal the correct answer
+            
             clearGuess();
             
-            // Fill in the boxes with the correct letters
+            
             for (let i = 0; i < brandName.length; i++) {
                 boxes[i].textContent = brandName[i];
                 boxes[i].classList.add('filled');
-                boxes[i].style.borderColor = "#e74c3c"; // Red border to indicate it was revealed
+                boxes[i].style.borderColor = "#e74c3c"; 
             }
             
-            // Show feedback
+            
             feedback.textContent = `La réponse était: ${brandName}. -50 points`;
             feedback.style.color = "#e74c3c";
             
-            // Show next button for new round
+            
             clearBtn.classList.add('hidden');
             nextBtn.classList.remove('hidden');
             freeformInput.classList.add('hidden');
         }
         function initGame() {
-            // Reset game state
+            
             currentGuess = [];
             feedback.textContent = "";
             letterBoxes.innerHTML = "";
@@ -496,19 +468,19 @@
             score = 0;
             scoreDisplay.textContent = `Score: ${score}`;
             
-            // Setup event listeners
+            
             difficultySelect.addEventListener('change', setupNewRound);
             clearBtn.addEventListener('click', clearGuess);
             nextBtn.addEventListener('click', setupNewRound);
             resetBtn.addEventListener('click', resetGame);
             submitFreeGuess.addEventListener('click', checkFreeformGuess);
             
-            // Start first round
+            
             setupNewRound();
         }
         
         function setupNewRound() {
-            // Clear previous state
+            
             currentGuess = [];
             letterBoxes.innerHTML = "";
             feedback.textContent = "";
@@ -518,43 +490,43 @@
             keyMap.clear();
             boxKeyMap.clear();
             
-            // Check if we've used all brands
+            
             if (usedBrands.length >= allBrands.length) {
                 feedback.textContent = "Vous avez deviné tous les logos! Jeu terminé!";
                 return;
             }
             
-            // Select a random brand that hasn't been used yet
+            
             let availableBrands = allBrands.filter(brand => 
                 !usedBrands.includes(brand.name)
             );
             const randomBrandIndex = Math.floor(Math.random() * availableBrands.length);
             const randomBrand = availableBrands[randomBrandIndex];
             
-            // Extract brand name
+            
             brandName = randomBrand.name.toLowerCase();
             usedBrands.push(randomBrand.name);
             
-            // Display the SVG image from cache
+            
             const svgContent = logoCache.get(brandName);
             brandImage.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgContent)}`;
             
-            // Start timer
+            
             startTime = Date.now();
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(updateTimer, 1000);
             
-            // Create letter boxes
+            
             createLetterBoxes(brandName.length);
             
-            // Initialize current guess array with nulls
+            
             currentGuess = Array(brandName.length).fill(null);
             
-            // Set up the interface based on difficulty
+            
             const difficulty = difficultySelect.value;
             
             if (difficulty === 'impossible') {
-                // Free form guessing - no keyboard
+                
                 keyboard.innerHTML = '';
                 letterCount.textContent = `Ce logo contient ${brandName.length} lettres`;
                 freeformInput.classList.remove('hidden');
@@ -562,11 +534,11 @@
                 letterBoxes.classList.add('hidden');
                 freeformInput.focus();
             } else {
-                // Keyboard-based guessing
+                
                 freeformInput.classList.add('hidden');
                 letterBoxes.classList.remove('hidden');
                 
-                // Generate additional random letters based on difficulty
+                
                 let additionalLetters = '';
                 switch(difficulty) {
                     case 'easy':
@@ -580,10 +552,10 @@
                         break;
                 }
                 
-                // Create keyboard with scrambled letters
+                
                 const scrambledLetters = scrambleLetters(brandName + additionalLetters);
                 createKeyboard(scrambledLetters);
-                letterCount.textContent = ''; // No letter count hint for keyboard mode
+                letterCount.textContent = ''; 
             }
         }
         
@@ -596,20 +568,20 @@
                 box.classList.add('letter-box');
                 box.dataset.index = i;
                 
-                // Add click event to remove letter
+                
                 box.addEventListener('click', function() {
                     if (this.classList.contains('filled')) {
-                        // Get the key associated with this box
+                        
                         const key = boxKeyMap.get(this);
                         if (key) {
-                            // Remove the 'used' class from the key
+                            
                             key.classList.remove('used', 'incorrect');
-                            // Clear the box
+                            
                             this.textContent = '';
                             this.classList.remove('filled', 'error');
-                            // Remove the mapping
+                            
                             boxKeyMap.delete(this);
-                            // Update the current guess
+                            
                             currentGuess[i] = null;
                         }
                     }
@@ -649,7 +621,7 @@
         }
         
                 function addLetterToGuess(letter, keyElement) {
-            // Find the first empty box
+            
             let emptyBoxIndex = -1;
             for (let i = 0; i < boxes.length; i++) {
                 if (!boxes[i].classList.contains('filled')) {
@@ -659,42 +631,42 @@
             }
             
             if (emptyBoxIndex === -1) {
-                return; // All boxes are filled
+                return; 
             }
             
-            // Add letter to the current box
+            
             boxes[emptyBoxIndex].textContent = letter;
             boxes[emptyBoxIndex].classList.add('filled');
             
-            // Mark the key as used
+            
             keyElement.classList.add('used');
             
-            // Store the mapping between box and key
+            
             boxKeyMap.set(boxes[emptyBoxIndex], keyElement);
             
-            // Update current guess
+            
             currentGuess[emptyBoxIndex] = letter.toLowerCase();
             
-            // Check if the letter is correct at this position
+            
             if (letter.toLowerCase() !== brandName[emptyBoxIndex].toLowerCase()) {
-                // Incorrect letter - show feedback
+                
                 keyElement.classList.add('incorrect');
                 boxes[emptyBoxIndex].classList.add('error');
                 
-                // CHANGE: Don't allow removing incorrect letters
-                // Remove the click event from this box
+                
+                
                 boxes[emptyBoxIndex].style.cursor = 'not-allowed';
                 boxes[emptyBoxIndex].onclick = null;
             }
             
-            // Check if all boxes are filled
+            
             if (!currentGuess.includes(null)) {
-                // Check if the guess is correct
+                
                 const guessWord = currentGuess.join('').toLowerCase();
                 if (guessWord === brandName.toLowerCase()) {
                     handleCorrectGuess();
                 } else {
-                    // Shake the boxes to indicate incorrect guess
+                    
                     letterBoxes.classList.add('shake');
                     setTimeout(() => {
                         letterBoxes.classList.remove('shake');
@@ -706,17 +678,17 @@
         function clearGuess() {
             currentGuess = Array(brandName.length).fill(null);
             
-            // Clear all boxes
+            
             boxes.forEach(box => {
                 box.textContent = '';
                 box.classList.remove('filled', 'error');
             });
             
-            // Reset all keys
+            
             const keys = document.querySelectorAll('.key');
             keys.forEach(key => key.classList.remove('used', 'incorrect'));
             
-            // Clear the mappings
+            
             keyMap.clear();
             boxKeyMap.clear();
         }
@@ -732,17 +704,17 @@
         }
         
         function handleCorrectGuess() {
-            // Stop timer
+            
             clearInterval(timerInterval);
             
-            // Calculate time bonus
+            
             const timeElapsed = Math.floor((Date.now() - startTime) / 1000);
             let timeBonus = 0;
             if (timeElapsed < 10) timeBonus = 50;
             else if (timeElapsed < 20) timeBonus = 30;
             else if (timeElapsed < 30) timeBonus = 10;
             
-            // Calculate difficulty bonus
+            
             let difficultyBonus = 0;
             switch(difficultySelect.value) {
                 case 'easy': difficultyBonus = 10; break;
@@ -751,22 +723,22 @@
                 case 'impossible': difficultyBonus = 50; break;
             }
             
-            // Update score
+            
             const roundScore = 100 + timeBonus + difficultyBonus;
             score += roundScore;
             
-            // Animate letter boxes for success
+            
             boxes.forEach(box => {
                 box.style.borderColor = "#27ae60";
                 box.classList.add('success-animation');
             });
             
-            // Show feedback
+            
             feedback.textContent = `Correct! +${roundScore} points (${timeBonus} time bonus, ${difficultyBonus} difficulty bonus)`;
             feedback.style.color = "#27ae60";
             scoreDisplay.textContent = `Score: ${score}`;
             
-            // Show next button for new round
+            
             clearBtn.classList.add('hidden');
             nextBtn.classList.remove('hidden');
             freeformInput.classList.add('hidden');
@@ -787,36 +759,5 @@
             setupNewRound();
         }
     </script>
-
-<script>
-  function createKeyboard() {
-    const keyboardContainer = document.getElementById('keyboard');
-    const keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    
-    // Clear any existing buttons
-    keyboardContainer.innerHTML = '';
-    
-    // Sort keys alphabetically (if needed, already sorted in this case)
-    keys.sort();
-    
-    // Create buttons for each key
-    keys.forEach(key => {
-      const button = document.createElement('button');
-      button.className = 'keyboard-button';
-      button.textContent = key;
-      button.onclick = () => handleKeyPress(key);
-      keyboardContainer.appendChild(button);
-    });
-  }
-
-  function handleKeyPress(key) {
-    console.log('Key pressed:', key);
-    // Add your key press handling logic here
-  }
-
-  // Initialize the keyboard on page load
-  window.onload = createKeyboard;
-</script>
-
 </body>
 </html>
