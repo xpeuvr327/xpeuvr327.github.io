@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,8 +38,9 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git add .
-        git commit -m "Update directory listing"
+        git commit -m "Update directory listing" || echo "No changes to commit"
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
