@@ -1,38 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<title>Résumé Amerigo</title>
-<meta charset="UTF-8">
-<meta name="description"content="Résumés du livre d'histoire Amerigo">
-<link rel="icon"src="/favicon.ico">
-<link rel="canonical" href="https://xpeuvr327.github.io/resumes/histroire/amerigo"
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Résumé Amerigo</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Résumés du livre d'histoire Amerigo">
+    <link rel="icon" src="/favicon.ico">
+    <link rel="canonical" href="https://xpeuvr327.github.io/resumes/histroire/amerigo">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-  <!-- Google tag (gtag.js) -->
-  <script async src=
-  "https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YQNZ0VLGHJ');
-  </script>
-  <body>
-	<div style="padding: 20px;"id="content">
-	<h1>Résumés de Amerigo</h1>
-	<h2>Intro</h2>
-	<p>Le plus demandé, c'est sans doute trop tard mais il est là. Comme d'habitude, ces documents sont fournis sans aucune forme
-	de garantie, ni de disponibilité, ni de faits exacts. Aucun droit ne résulte de la consultation de ces documents. Tout retour est bienvenu. 
-	Le but de ce résumé? Permettre le répondre au plus de questions possibles tout en étant concis.</p>
-	<h2>Le résumé en lui même</h2>
-	<p>le livre s'intéresse à pourquoi l'Amérique s'appelle Amérique. pages 5-9: intro. pages 10 à 96:
-il raconte sa vie le stefan zweig
-
-			résumé des pages 97 à 120:<pre>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-YQNZ0VLGHJ');
+</script>
+<body>
+    <div style="padding: 20px;" id="content">
+        <h1>Résumés de Amerigo</h1>
+        <h2>Intro</h2>
+        <p>Le plus demandé, c'est sans doute trop tard mais il est là. Comme d'habitude, ces documents sont fournis sans aucune forme
+        de garantie, ni de disponibilité, ni de faits exacts. Aucun droit ne résulte de la consultation de ces documents. Tout retour est bienvenu.
+        Le but de ce résumé? Permettre le répondre au plus de questions possibles tout en étant concis.</p>
+        <h2>Le résumé en lui même</h2>
+        <p>Le livre s'intéresse à pourquoi l'Amérique s'appelle Amérique. pages 5-9: intro. <br>pages 10 à 96: c'est pas très intéressant, 0/10, ne l'achetez pas.
+        résumé des pages 97 à 120:<pre>
+<textarea id="password" placeholder="Entrez le code"></textarea>
+<button id="checkPassword">Vérifier le code</button>
+<p id="protected">Texte encrypté sera affiché ici</p>
 </pre>
-	</p>
-	<div>
-  <script src="/consent.js"></script>
+        </p>
+    </div>
+    <script src="/consent.js"></script>
+    <script>
+        // The correct password hash (SHA-256)
+        const correctPasswordHash = '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8';
+
+        // The encrypted content (Base64 encoded)
+        const encryptedContent = 'U2FsdGVkX1+ZPvIgZRbRITW2+ZbRITW2+ZbRITW2+ZbRITW2+ZbRITW2+ZbRITW2+Q==';
+
+        // The IV used for encryption (Base64 encoded)
+        const iv = 'U2FsdGVkX1+ZPvIgZRbRITW2+ZbRITW2+ZbRITW2+ZbR';
+
+        async function checkPassword() {
+            const password = document.getElementById('password').value;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            if (hashHex === correctPasswordHash) {
+                decryptContent(password);
+            } else {
+                alert('Mot de passe incorrect');
+            }
+        }
+
+        async function decryptContent(password) {
+            const encoder = new TextEncoder();
+            const keyMaterial = encoder.encode(password);
+            const key = await crypto.subtle.importKey(
+                'raw',
+                keyMaterial,
+                { name: 'AES-GCM' },
+                false,
+                ['decrypt']
+            );
+
+            const encryptedData = Uint8Array.from(atob(encryptedContent), c => c.charCodeAt(0));
+            const ivData = Uint8Array.from(atob(iv), c => c.charCodeAt(0));
+
+            try {
+                const decryptedData = await crypto.subtle.decrypt(
+                    {
+                        name: 'AES-GCM',
+                        iv: ivData
+                    },
+                    key,
+                    encryptedData
+                );
+
+                const decoder = new TextDecoder();
+                const decryptedText = decoder.decode(decryptedData);
+                document.getElementById('protected').textContent = decryptedText;
+            } catch (error) {
+                alert('Erreur lors du décryptage');
+            }
+        }
+
+        document.getElementById('checkPassword').addEventListener('click', checkPassword);
+    </script>
 </body>
 </html>
