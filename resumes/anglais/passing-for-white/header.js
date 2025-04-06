@@ -29,6 +29,8 @@ const navigationItems = [
             { href: "#", text: "--Charleston--" },
             { href: "chapter-7-part-2-pages-39-50.html", text: "Chapitre 7: 39-50" },
             { href: "chapter-8-part-2-pages-50-62.html", text: "Chapitre 8: 50-62" },
+			{href: "#", text:"--Baltimore--"},
+			{ href: "chapter-9-part-2-pages-63-75.html", text: "Chapitre 9: 63-75"}
 
         ]
     },
