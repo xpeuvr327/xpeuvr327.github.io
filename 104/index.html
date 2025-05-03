@@ -1,17 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="og:description" content="Le site que tout le monde devrait connaître.">
-    <link rel="icon" href="104-icon.png"type="image/x-icon">
+    <link rel="icon" href="104-icon.png" type="image/x-icon">
     <meta property="og:image" content="https://t4.ftcdn.net/jpg/02/89/97/13/360_F_289971339_vnDBGK764TvPTjcmESaO5AArZBnkvMqg.jpg">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="360">
-<meta property="og:image:height" content="360">
-<meta property="og:title" content="Ressources Collège">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="360">
+    <meta property="og:image:height" content="360">
+    <meta property="og:title" content="Ressources Collège">
     <title>Ressources Collège</title>
-<style>.box,.nav-tab{color:#fff;text-decoration:none;transition:.3s}.nav-tab,footer,h1{text-align:center}body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#7d84b2,#8e9dcc);background-size:500% 500%;animation:3s infinite gradientAnimation;margin:0;min-height:100vh;padding:20px}@keyframes gradientAnimation{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}h1{color:#fff;margin-bottom:30px}.container{max-width:1400px;margin:0 auto;padding:0 20px}.grid{display:grid;gap:20px;margin-bottom:40px}@media (max-width:768px){.grid{grid-template-columns:1fr}}@media (min-width:769px) and (max-width:1024px){.grid{grid-template-columns:repeat(2,1fr)}}@media (min-width:1025px){.grid{grid-template-columns:repeat(3,1fr)}}@media (min-width:1400px){.grid{grid-template-columns:repeat(4,1fr)}}.box{background:linear-gradient(135deg,#5da9e9,#003f91);border-radius:15px;padding:25px;display:flex;flex-direction:column;height:100%;box-shadow:0 4px 8px rgba(0,0,0,.1)}.box:hover{transform:translateY(-5px);box-shadow:0 8px 16px rgba(0,0,0,.2)}.box h2{margin:0 0 15px;font-size:1.5em;color:#fff}.box p{margin:0;color:rgba(255,255,255,.9);flex-grow:1}.section-divider{border-top:2px solid rgba(255,255,255,.2);margin:4em 0;width:100%}footer{color:rgba(255,255,255,.7);margin-top:40px;font-size:.9em}.nav-tabs{display:flex;justify-content:center;gap:20px;margin-bottom:30px;flex-wrap:wrap}.nav-tab{padding:10px 20px;background:rgba(255,255,255,.1);border-radius:20px;min-width:100px}.nav-tab:hover{background:rgba(255,255,255,.3);font-weight:700}@media (max-width:768px){.nav-tab{padding:10px 15px;font-size:.9em}}</style>
+    <style>
+        .box, .nav-tab { color: #fff; text-decoration: none; transition: .3s }
+        .nav-tab, footer, h1 { text-align: center }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #7d84b2, #8e9dcc); background-size: 500% 500%; animation: 3s infinite gradientAnimation; margin: 0; min-height: 100vh; padding: 20px }
+        @keyframes gradientAnimation { 0%, 100% { background-position: 0 50% } 50% { background-position: 100% 50% } }
+        h1 { color: #fff; margin-bottom: 30px }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px }
+        .grid { display: grid; gap: 20px; margin-bottom: 40px }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr } }
+        @media (min-width: 769px) and (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr) } }
+        @media (min-width: 1025px) { .grid { grid-template-columns: repeat(3, 1fr) } }
+        @media (min-width: 1400px) { .grid { grid-template-columns: repeat(4, 1fr) } }
+        .box { background: linear-gradient(135deg, #5da9e9, #003f91); border-radius: 15px; padding: 25px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 4px 8px rgba(0, 0, 0, .1) }
+        .box:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0, 0, 0, .2) }
+        .box h2 { margin: 0 0 15px; font-size: 1.5em; color: #fff }
+        .box p { margin: 0; color: rgba(255, 255, 255, .9); flex-grow: 1 }
+        .section-divider { border-top: 2px solid rgba(255, 255, 255, .2); margin: 4em 0; width: 100% }
+        footer { color: rgba(255, 255, 255, .7); margin-top: 40px; font-size: .9em }
+        .nav-tabs { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap }
+        .nav-tab { padding: 10px 20px; background: rgba(255, 255, 255, .1); border-radius: 20px; min-width: 100px }
+        .nav-tab:hover { background: rgba(255, 255, 255, .3); font-weight: 700 }
+        @media (max-width: 768px) { .nav-tab { padding: 10px 15px; font-size: .9em } }
+        .search-container { margin-bottom: 30px; text-align: center; }
+        .search-container input { padding: 10px; width: 300px; border-radius: 20px; border: none; }
+    </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
@@ -25,7 +50,11 @@
 <body>
     <div class="container">
         <h1>Ressources Collège</h1>
-        
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher...">
+        </div>
+
         <nav class="nav-tabs">
             <a href="#current" class="nav-tab">À l'affiche</a>
             <a href="#resumes" class="nav-tab">Résumés de&nbsp;livres</a>
@@ -35,10 +64,9 @@
             <a href="#anglais" class="nav-tab">Anglais</a>
             <a href="#histoire" class="nav-tab">Histoire</a>
             <a href="#epreuvesregroupees" class="nav-tab">Épreuves&nbsp;Regroupées</a>
-            <a href="#bientot" class="nav-tab">Bientôt...</a>
             <a href="#archive" class="nav-tab">Archives</a>
         </nav>
-        
+
         <section id="current">
             <h1>À l'affiche</h1>
             <div class="grid" style="justify-content: center;align-items: center;">
@@ -53,39 +81,36 @@
             </div>
         </section>
         <div class="section-divider"></div>
-                <section id="resumes">
-                    <h1>Résumés de livres</h1>
-                   <div class="grid">
-                    <a href="/resumes/anglais/passing-for-white/" class="box">
-                        <h2>Passing For white</h2>
-                        <p>Résumés, traduction, voc et semestrielles. Tout pour le comprendre.</p>
-                    </a>
-                    <a href="/resumes/francais/le-roman-de-renart/index.html" class="box">
-                        <h2>Le roman de Renart</h2>
-                        <p>Les résumés pour le Roman de Renart, par branche.</p>
-                    </a>
-                    <a href="/resumes/allemand/olli-aus-ossiland.html" class="box">
-                        <h2>Olli aus Ossiland</h2>
-                        <p>Résumés et traductions</p>
-                    </a>
-                    <a href="/rf" class="box">
-                        <h2>Nouvelles orientales</h2>
-                        <p>Les résumés de Nouvelles orientales, par nouvelle.</p>
-                    </a>
-                    <a href="/resumes/francais/marius/index.html" class="box">
-                        <h2>Marius</h2>
-                        <p>La pièce de théâtre de Marius, avec les personnages, et les résumés, en une page. Comprend actuellement l'acte 2.</p>
-                    </a>
-                   <a href="/resumes/histoire/amerigo/index.html" class="box">
-                        <h2>Amerigo</h2>
-                        <p>Le résumé de Amerigo, tout le livre. Encore en cours.</p>
-					</a>
-
-                </div>
-                </section>
-
+        <section id="resumes">
+            <h1>Résumés de livres</h1>
+            <div class="grid">
+                <a href="/resumes/anglais/passing-for-white/" class="box">
+                    <h2>Passing For white</h2>
+                    <p>Résumés, traduction, voc et semestrielles. Tout pour le comprendre.</p>
+                </a>
+                <a href="/resumes/francais/le-roman-de-renart/index.html" class="box">
+                    <h2>Le roman de Renart</h2>
+                    <p>Les résumés pour le Roman de Renart, par branche.</p>
+                </a>
+                <a href="/resumes/allemand/olli-aus-ossiland.html" class="box">
+                    <h2>Olli aus Ossiland</h2>
+                    <p>Résumés et traductions</p>
+                </a>
+                <a href="/rf" class="box">
+                    <h2>Nouvelles orientales</h2>
+                    <p>Les résumés de Nouvelles orientales, par nouvelle.</p>
+                </a>
+                <a href="/resumes/francais/marius/index.html" class="box">
+                    <h2>Marius</h2>
+                    <p>La pièce de théâtre de Marius, avec les personnages, et les résumés, en une page. Comprend actuellement l'acte 2.</p>
+                </a>
+                <a href="/resumes/histoire/amerigo/index.html" class="box">
+                    <h2>Amerigo</h2>
+                    <p>Le résumé de Amerigo, tout le livre. Encore en cours.</p>
+                </a>
+            </div>
+        </section>
         <div class="section-divider"></div>
-
         <section id="deutsch">
             <h1>Allemand</h1>
             <div class="grid">
@@ -104,36 +129,33 @@
             </div>
         </section>
         <div class="section-divider"></div>
-
         <section id="math">
             <h1>Math</h1>
-           <div class="grid">
+            <div class="grid">
                 <a href="https://www.overleaf.com/read/sxspxbwytspc#0596ca" class="box">
                     <h2>Toute la théorie de math</h2>
                     <p>La théorie de math en LaTeX sur overleaf. Lien Externe.</p>
                 </a>
             </div>
         </section>
-
-
         <div class="section-divider"></div>
         <section id="quizlet">
             <h1>Quizlet</h1>
-           <div class="grid">
-            <a href="https://quizlet.com/user/asodintsov/" class="box">
-                <h2>asodintsov</h2>
-                <p>tout: willheim tell, insight (ttes les unités), im juli, verbes allemand, et plein d'autres</p>
-            </a>
-        </div>
+            <div class="grid">
+                <a href="https://quizlet.com/user/asodintsov/" class="box">
+                    <h2>asodintsov</h2>
+                    <p>tout: willheim tell, insight (ttes les unités), im juli, verbes allemand, et plein d'autres</p>
+                </a>
+            </div>
         </section>
         <div class="section-divider"></div>
         <section id="anglais">
             <h1>Anglais</h1>
             <div class="grid">
-            <a href="/resumes/anglais/passing-for-white/index.html" class="box">
-                <h2>Passing For white</h2>
-                <p>Résumés, traduction, voc et semestrielles. Tout pour le comprendre.</p>
-            </a>
+                <a href="/resumes/anglais/passing-for-white/index.html" class="box">
+                    <h2>Passing For white</h2>
+                    <p>Résumés, traduction, voc et semestrielles. Tout pour le comprendre.</p>
+                </a>
             </div>
         </section>
         <div class="section-divider"></div>
@@ -144,35 +166,23 @@
                     <h2>Ligne du temps</h2>
                     <p>Timeline de ce qu'il se passe des périodes du point de vue de l'europe</p>
                 </a>
-				<a href="/resumes/histoire/amerigo/index.html" class="box">
-                        <h2>Amerigo</h2>
-                        <p>Le résumé de Amerigo, tout le livre. Encore en cours.</p>
-				</a>
+                <a href="/resumes/histoire/amerigo/index.html" class="box">
+                    <h2>Amerigo</h2>
+                    <p>Le résumé de Amerigo, tout le livre. Encore en cours. </p>
+                </a>
             </div>
         </section>
-
         <div class="section-divider"></div>
         <section id="epreuvesregroupees">
             <h1>Épreuves regroupées</h1>
-            <div class="grid"><a href="/epreuvesregroupees/pywl.html" class="box">
-                <h1>Épreuves Regroupées (2024)</h1>
-                <p>Pour le 1er semestre, décembre. Couvre principalement les sujets des 1ères années.</p>
-            </a>
-        </div>
+            <div class="grid">
+                <a href="/epreuvesregroupees/pywl.html" class="box">
+                    <h1>Épreuves Regroupées (2024)</h1>
+                    <p>Pour le 1er semestre, décembre. Couvre principalement les sujets des 1ères années.</p>
+                </a>
+            </div>
         </section>
         <div class="section-divider"></div>
-        <section id="bientot">
-            <h1>Bientôt...</h1>
-<div style="color: #FFF;"><ul>
-    <li>
-        <p>Épreuves Regroupées 2025</p>
-    </li>
-</ul>
-</div>
-        </section>
-        <div class="section-divider"></div>
-
-
         <section id="archive">
             <h1>Archives</h1>
             <div class="grid">
@@ -207,62 +217,154 @@
             </div>
         </section>
         <div class="section-divider"></div>
-
         <br>
+        <div id="no-results-message" style="display: none; text-align: center; margin-top: 20px;">
+            <p>Aucun résultat trouvé.</p>
+            <button id="clear-search-button">Effacer la recherche</button>
+        </div>
+
         <footer>
             <p>This website uses Google Analytics.</p>
         </footer>
     </div>
-    <script src="/404.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Function to handle smooth scrolling
-            function smoothScroll(tab, targetId) {
-                tab.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetElement = document.querySelector(targetId);
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const startTime = performance.now();
-    
-                    function animateScroll(currentTime) {
-                        const elapsedTime = currentTime - startTime;
-                        const scrollPosition = easeInOutQuad(elapsedTime, startPosition, distance, duration);
-                        window.scrollTo(0, scrollPosition);
-                        if (elapsedTime < duration) {
-                            requestAnimationFrame(animateScroll);
-                        }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to handle smooth scrolling
+        function smoothScroll(tab, targetId) {
+            tab.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const startTime = performance.now();
+
+                function animateScroll(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    const scrollPosition = easeInOutQuad(elapsedTime, startPosition, distance, duration);
+                    window.scrollTo(0, scrollPosition);
+                    if (elapsedTime < duration) {
+                        requestAnimationFrame(animateScroll);
                     }
-    
-                    function easeInOutQuad(t, b, c, d) {
-                        t /= d / 2;
-                        if (t < 1) return c / 2 * t * t + b;
-                        t--;
-                        return -c / 2 * (t * (t - 2) - 1) + b;
-                    }
-    
-                    const startPosition = window.pageYOffset;
-                    const distance = targetPosition - startPosition;
-                    const duration = 800; // Duration of the scroll animation in milliseconds
-    
-                    requestAnimationFrame(animateScroll);
-                });
+                }
+
+                function easeInOutQuad(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t + b;
+                    t--;
+                    return -c / 2 * (t * (t - 2) - 1) + b;
+                }
+
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 800; // Duration of the scroll animation in milliseconds
+
+                requestAnimationFrame(animateScroll);
+            });
+        }
+
+        // Select all navigation tabs
+        const navTabs = document.querySelectorAll('.nav-tab');
+
+        // Iterate over each navigation tab
+        navTabs.forEach(tab => {
+            const href = tab.getAttribute('href');
+            const targetId = href.substring(1); // Remove the '#' from the href
+            const targetSection = document.querySelector(`#${targetId}`);
+
+            if (targetSection) {
+                smoothScroll(tab, `#${targetId}`);
             }
-    
-            // Select all navigation tabs
-            const navTabs = document.querySelectorAll('.nav-tab');
-    
-            // Iterate over each navigation tab
-            navTabs.forEach(tab => {
-                const href = tab.getAttribute('href');
-                const targetId = href.substring(1); // Remove the '#' from the href
-                const targetSection = document.querySelector(`#${targetId}`);
-    
-                if (targetSection) {
-                    smoothScroll(tab, `#${targetId}`);
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const noResultsMessage = document.getElementById('no-results-message');
+        const clearSearchButton = document.getElementById('clear-search-button');
+        const navContainer = document.querySelector('.nav-tabs');
+        const sectionDividers = document.querySelectorAll('.section-divider');
+
+        searchInput.addEventListener('input', function() {
+            // Normalize the query to remove accents
+            let query = searchInput.value.toLowerCase();
+            query = query.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+            const sections = document.querySelectorAll('section');
+            let anySectionVisible = false;
+
+            sections.forEach(section => {
+                const boxes = section.querySelectorAll('.box');
+                let shouldShowSection = false;
+
+                if (boxes.length > 0) {
+                    boxes.forEach(box => {
+                        const titleElement = box.querySelector('h2');
+                        const descElement = box.querySelector('p');
+
+                        // Properly normalize both title and description
+                        let title = titleElement ?
+                            titleElement.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                        let description = descElement ?
+                            descElement.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+
+                        // Also check the section ID for matches (for "resumes" vs "résumés")
+                        let sectionId = section.id.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+                        if (title.includes(query) || description.includes(query) || sectionId.includes(query)) {
+                            box.style.display = 'flex';
+                            shouldShowSection = true;
+                        } else {
+                            box.style.display = 'none';
+                        }
+                    });
+                } else {
+                    // For sections without boxes, normalize the section text
+                    const sectionText = section.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                    shouldShowSection = sectionText.includes(query);
+                }
+
+                section.style.display = shouldShowSection ? 'block' : 'none';
+                if (shouldShowSection) {
+                    anySectionVisible = true;
                 }
             });
+
+            // Update navigation tabs visibility
+            navTabs.forEach(tab => {
+                const href = tab.getAttribute('href');
+                const targetId = href.substring(1);
+                const targetSection = document.querySelector(`#${targetId}`);
+
+                if (targetSection && targetSection.style.display === 'none') {
+                    tab.style.display = 'none';
+                } else {
+                    tab.style.display = 'inline-block';
+                }
+            });
+
+            // Update section dividers visibility
+            sectionDividers.forEach(divider => {
+                const previousElement = divider.previousElementSibling;
+                const nextElement = divider.nextElementSibling;
+
+                if ((previousElement && previousElement.style.display === 'none') ||
+                    (nextElement && nextElement.style.display === 'none')) {
+                    divider.style.display = 'none';
+                } else {
+                    divider.style.display = 'block';
+                }
+            });
+
+            // Show/hide navigation container and no results message
+            navContainer.style.display = anySectionVisible ? 'flex' : 'none';
+            noResultsMessage.style.display = anySectionVisible ? 'none' : 'block';
         });
-    </script>
+
+        // Clear the search input when the clear button is clicked
+        clearSearchButton.addEventListener('click', function() {
+            searchInput.value = '';
+            searchInput.dispatchEvent(new Event('input'));
+        });
+    });
+</script>
     <script src="/404.js"></script>
 </body>
 </html>
