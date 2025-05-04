@@ -36,6 +36,30 @@
         @media (max-width: 768px) { .nav-tab { padding: 10px 15px; font-size: .9em } }
         .search-container { margin-bottom: 30px; text-align: center; }
         .search-container input { padding: 10px; width: 300px; border-radius: 20px; border: none; }
+        
+.clear-search-btn {
+  background: linear-gradient(135deg, #5da9e9, #003f91);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: .3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .1);
+  margin-top: 10px;
+}
+
+.clear-search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .2);
+  background: linear-gradient(135deg, #4a96d6, #00347d);
+}
+
+.clear-search-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
     </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -220,7 +244,7 @@
         <br>
         <div id="no-results-message" style="display: none; text-align: center; margin-top: 20px;">
             <p>Aucun résultat trouvé.</p>
-            <button id="clear-search-button">Effacer la recherche</button>
+            <button id="clear-search-button" class="clear-search-btn">Effacer la recherche</button>
         </div>
 
         <footer>
