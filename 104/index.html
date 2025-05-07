@@ -256,152 +256,211 @@
         </footer>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Function to handle smooth scrolling
-        function smoothScroll(tab, targetId) {
-            tab.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const startTime = performance.now();
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to handle smooth scrolling
+    function smoothScroll(tab, targetId) {
+        tab.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const startTime = performance.now();
 
-                function animateScroll(currentTime) {
-                    const elapsedTime = currentTime - startTime;
-                    const scrollPosition = easeInOutQuad(elapsedTime, startPosition, distance, duration);
-                    window.scrollTo(0, scrollPosition);
-                    if (elapsedTime < duration) {
-                        requestAnimationFrame(animateScroll);
+            function animateScroll(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const scrollPosition = easeInOutQuad(elapsedTime, startPosition, distance, duration);
+                window.scrollTo(0, scrollPosition);
+                if (elapsedTime < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            }
+
+            function easeInOutQuad(t, b, c, d) {
+                t /= d / 2;
+                if (t < 1) return c / 2 * t * t + b;
+                t--;
+                return -c / 2 * (t * (t - 2) - 1) + b;
+            }
+
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 800; // Duration of the scroll animation in milliseconds
+
+            requestAnimationFrame(animateScroll);
+        });
+    }
+
+    // Select all navigation tabs
+    const navTabs = document.querySelectorAll('.nav-tab');
+
+    // Iterate over each navigation tab
+    navTabs.forEach(tab => {
+        const href = tab.getAttribute('href');
+        const targetId = href.substring(1); // Remove the '#' from the href
+        const targetSection = document.querySelector(`#${targetId}`);
+
+        if (targetSection) {
+            smoothScroll(tab, `#${targetId}`);
+        }
+    });
+
+    // Create a map of sections and their keywords
+    const sectionKeywords = {
+        'current': ['affiche', 'featured', 'nouveauté', 'nouveau', 'récent'],
+        'resumes': ['résumé', 'resume', 'livre', 'book', 'lecture', 'roman', 'récit', 'littérature'],
+        'deutsch': ['allemand', 'german', 'deutsche', 'verbes', 'voc', 'vocabulaire', 'langue'],
+        'math': ['mathématiques', 'maths', 'equations', 'calcul', 'algèbre', 'geometry', 'géométrie'],
+        'informatique': ['info', 'computer', 'programming', 'programmation', 'code', 'coding', 'python', 'turtle', 'variable', 'boucle', 'script', 'adresse', 'ip'],
+        'quizlet': ['flashcard', 'carte', 'mémorisation', 'etude', 'study', 'révision', 'voc'],
+        'anglais': ['english', 'langue', 'language', 'voc', 'vocabulaire'],
+        'chimie': ['chemistry', 'science', 'molecule', 'élément', 'periodic', 'tableau'],
+        'histoire': ['history', 'historique', 'dates', 'événements', 'timeline', 'chronologie'],
+        'epreuvesregroupees': ['examen', 'épreuve', 'test', 'eval', 'évaluation', 'contrôle', 'semestre'],
+        'archive': ['archives', 'ancien', 'old', 'previous']
+    };
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const noResultsMessage = document.getElementById('no-results-message');
+    const clearSearchButton = document.getElementById('clear-search-button');
+    const navContainer = document.querySelector('.nav-tabs');
+    const sectionDividers = document.querySelectorAll('.section-divider');
+    const hideText = document.getElementById("hide-welcome");
+
+    // Function to create section dividers for search results
+    function createResultsDivider() {
+        const divider = document.createElement('div');
+        divider.className = 'section-divider search-result-divider';
+        return divider;
+    }
+
+    // Function to remove all result dividers
+    function removeResultDividers() {
+        const resultDividers = document.querySelectorAll('.search-result-divider');
+        resultDividers.forEach(divider => divider.remove());
+    }
+
+    searchInput.addEventListener('input', function() {
+        // Remove any previously added result dividers
+        removeResultDividers();
+
+        // Normalize the query to remove accents
+        let query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        const sections = document.querySelectorAll('section');
+        let visibleSections = [];
+        let anySectionVisible = false;
+
+        sections.forEach(section => {
+            const sectionId = section.getAttribute('id');
+            const boxes = section.querySelectorAll('.box');
+            let shouldShowSection = false;
+
+            // Check if the query matches the section keywords
+            if (sectionId && sectionKeywords[sectionId]) {
+                const keywords = sectionKeywords[sectionId];
+                for (let keyword of keywords) {
+                    if (keyword.includes(query)) {
+                        shouldShowSection = true;
+                        break;
                     }
                 }
+            }
 
-                function easeInOutQuad(t, b, c, d) {
-                    t /= d / 2;
-                    if (t < 1) return c / 2 * t * t + b;
-                    t--;
-                    return -c / 2 * (t * (t - 2) - 1) + b;
+            // If section title matches, show all boxes in that section
+            const sectionTitle = section.querySelector('h1');
+            if (sectionTitle) {
+                const titleText = sectionTitle.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                if (titleText.includes(query)) {
+                    shouldShowSection = true;
                 }
+            }
 
-                const startPosition = window.pageYOffset;
-                const distance = targetPosition - startPosition;
-                const duration = 800; // Duration of the scroll animation in milliseconds
+            // Check individual boxes
+            if (boxes.length > 0) {
+                boxes.forEach(box => {
+                    const titleElement = box.querySelector('h2');
+                    const descElement = box.querySelector('p');
 
-                requestAnimationFrame(animateScroll);
-            });
-        }
+                    // Properly normalize both title and description
+                    let title = titleElement ?
+                        titleElement.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                    let description = descElement ?
+                        descElement.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
 
-        // Select all navigation tabs
-        const navTabs = document.querySelectorAll('.nav-tab');
+                    if (title.includes(query) || description.includes(query)) {
+                        box.style.display = 'flex';
+                        shouldShowSection = true;
+                    } else if (!shouldShowSection) {
+                        box.style.display = 'none';
+                    } else {
+                        // Show all boxes if the section itself matches
+                        box.style.display = 'flex';
+                    }
+                });
+            }
 
-        // Iterate over each navigation tab
-        navTabs.forEach(tab => {
-            const href = tab.getAttribute('href');
-            const targetId = href.substring(1); // Remove the '#' from the href
-            const targetSection = document.querySelector(`#${targetId}`);
-
-            if (targetSection) {
-                smoothScroll(tab, `#${targetId}`);
+            section.style.display = shouldShowSection ? 'block' : 'none';
+            
+            if (shouldShowSection) {
+                anySectionVisible = true;
+                visibleSections.push(section);
             }
         });
 
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
-        const noResultsMessage = document.getElementById('no-results-message');
-        const clearSearchButton = document.getElementById('clear-search-button');
-        const navContainer = document.querySelector('.nav-tabs');
-        const sectionDividers = document.querySelectorAll('.section-divider');
-        const hideText = document.getElementById("hide-welcome");
+        // Update navigation tabs visibility
+        navTabs.forEach(tab => {
+            const href = tab.getAttribute('href');
+            const targetId = href.substring(1);
+            const targetSection = document.querySelector(`#${targetId}`);
 
-        searchInput.addEventListener('input', function() {
-            // Normalize the query to remove accents
-            let query = searchInput.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (targetSection && targetSection.style.display === 'none') {
+                tab.style.display = 'none';
+            } else {
+                tab.style.display = 'inline-block';
+            }
+        });
 
-            const sections = document.querySelectorAll('section');
-            let anySectionVisible = false;
+        // Hide all original section dividers
+        sectionDividers.forEach(divider => {
+            divider.style.display = 'none';
+        });
 
-            sections.forEach(section => {
-                const boxes = section.querySelectorAll('.box');
-                let shouldShowSection = false;
-
-                if (boxes.length > 0) {
-                    boxes.forEach(box => {
-                        const titleElement = box.querySelector('h2');
-                        const descElement = box.querySelector('p');
-
-                        // Properly normalize both title and description
-                        let title = titleElement ?
-                            titleElement.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
-                        let description = descElement ?
-                            descElement.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
-
-                        if (title.includes(query) || description.includes(query)) {
-                            box.style.display = 'flex';
-                            shouldShowSection = true;
-                        } else {
-                            box.style.display = 'none';
-                        }
-                    });
-                } else {
-                    // For sections without boxes, normalize the section text
-                    const sectionText = section.textContent.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-                    shouldShowSection = sectionText.includes(query);
-                }
-
-                section.style.display = shouldShowSection ? 'block' : 'none';
-                if (shouldShowSection) {
-                    anySectionVisible = true;
-                }
-            });
-
-            // Update navigation tabs visibility
-            navTabs.forEach(tab => {
-                const href = tab.getAttribute('href');
-                const targetId = href.substring(1);
-                const targetSection = document.querySelector(`#${targetId}`);
-
-                if (targetSection && targetSection.style.display === 'none') {
-                    tab.style.display = 'none';
-                } else {
-                    tab.style.display = 'inline-block';
-                }
-            });
-
-            // Update section dividers visibility
+        // Add new dividers between visible sections
+        if (query.length > 0 && visibleSections.length > 0) {
+            for (let i = 0; i < visibleSections.length - 1; i++) {
+                const divider = createResultsDivider();
+                visibleSections[i].after(divider);
+            }
+        } else if (query.length === 0) {
+            // Show original dividers when search is empty
             sectionDividers.forEach(divider => {
-                const previousElement = divider.previousElementSibling;
-                const nextElement = divider.nextElementSibling;
-
-                if ((previousElement && previousElement.style.display === 'none') ||
-                    (nextElement && nextElement.style.display === 'none')) {
-                    divider.style.display = 'none';
-                } else {
-                    divider.style.display = 'block';
-                }
+                divider.style.display = 'block';
             });
-
-            // Show/hide navigation container and no results message
-            navContainer.style.display = anySectionVisible ? 'flex' : 'none';
-            noResultsMessage.style.display = anySectionVisible ? 'none' : 'block';
-            //hide welcome banner on search
-            document.getElementById("welcome-text").style.display = 'none';
-        });
-
-        // Clear the search input when the clear button is clicked
-        clearSearchButton.addEventListener('click', function() {
-            searchInput.value = '';
-            searchInput.dispatchEvent(new Event('input'));
-        });
-        
-        //hide the banner if text is the same
-        hideText.addEventListener('click', function(){
-            localStorage.setItem("welcome-hide",document.getElementById("welcome-text").textContent);
-            document.getElementById("welcome-text").style.display = 'none';
-        })
-
-        if (localStorage.getItem("welcome-hide")==document.getElementById("welcome-text").textContent){
-            document.getElementById("welcome-text").style.display = 'none';
         }
+
+        // Show/hide navigation container and no results message
+        navContainer.style.display = anySectionVisible ? 'flex' : 'none';
+        noResultsMessage.style.display = anySectionVisible ? 'none' : 'block';
+        //hide welcome banner on search
+        document.getElementById("welcome-text").style.display = 'none';
+    });
+
+    // Clear the search input when the clear button is clicked
+    clearSearchButton.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
     });
     
+    //hide the banner if text is the same
+    hideText.addEventListener('click', function(){
+        localStorage.setItem("welcome-hide",document.getElementById("welcome-text").textContent);
+        document.getElementById("welcome-text").style.display = 'none';
+    });
+
+    if (localStorage.getItem("welcome-hide")==document.getElementById("welcome-text").textContent){
+        document.getElementById("welcome-text").style.display = 'none';
+    }
+});
     </script>
     <script src="/404.js"></script>
 </body>
