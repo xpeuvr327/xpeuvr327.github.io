@@ -391,14 +391,13 @@
             searchInput.dispatchEvent(new Event('input'));
         });
         
-        //hide the banner permanently
+        //hide the banner if text is the same
         hideText.addEventListener('click', function(){
-            localStorage.setItem("welcome-hide",true);
+            localStorage.setItem("welcome-hide",document.getElementById("welcome-text").textContent);
             document.getElementById("welcome-text").style.display = 'none';
         })
-        shouldHideWelcome = localStorage.getItem("welcome-hide");
 
-        if (shouldHideWelcome){
+        if (localStorage.getItem("welcome-hide")==document.getElementById("welcome-text").textContent){
             document.getElementById("welcome-text").style.display = 'none';
         }
     });
