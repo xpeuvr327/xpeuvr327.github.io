@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="">
+    <title>vérificateur d'allemand</title>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>  window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-YQNZ0VLGHJ');</script>
+
+<body>
+    <h1>Vérificateur d'allemand</h1>
+    <p>content</p>
+    <textarea name="main" id="entree" cols="50"></textarea>
+    <div id="messages">
+    </div>
+
+    <h2>mots détectés</h2>
+    <div id="mots">
+    </div>
+
+    <script>
+        const entree = document.getElementById("entree");
+        const messagesDaron = document.getElementById("messages");
+        const mots = document.getElementById("mots");
+
+        function checkWord(word, rule) {
+            if (!entree.value.includes(word)) {
+                return;
+            }
+            let nouvelleAlerte = document.createElement("p");
+            const messageToShow = document.createTextNode(rule);
+            nouvelleAlerte.appendChild(messageToShow);
+            messagesDaron.appendChild(nouvelleAlerte);
+
+            let checkbox = document.createElement("input"); // add a checkbox with the word as a label
+            checkbox.setAttribute("type", "checkbox"); // Corrected line
+            checkbox.setAttribute("checked", "");
+
+            let label = document.createElement("label");
+            label.appendChild(document.createTextNode(word));
+            label.prepend(checkbox);
+
+            mots.appendChild(label);
+        }
+
+        entree.oninput = function() {
+            messagesDaron.innerHTML = "";
+            mots.innerHTML = "";
+            checkWord("weil", "inversion sujet verbe");
+            checkWord("aber", "règle de aber");
+
+            //check if we should display text, only if the section it qualifies applies (is showed)
+        }
+    </script>
+</body>
+
+</body>
+
+
+
+
+</html>
