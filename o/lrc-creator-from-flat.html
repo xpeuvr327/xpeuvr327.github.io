@@ -1,66 +1,426 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Converts a static lyric file to a LRC file">
-<title>TXT to LRC Converter lyrics synced</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Convert a static lyric file to a time-synced LRC file">
+    <title>TXT to LRC Converter - Lyrics Sync Tool</title>
+    <style>
+        :root {
+            --primary: #4169e1;
+            --primary-dark: #3559c7;
+            --light-bg: #f9f9f9;
+            --border-color: #ddd;
+            --text-color: #333;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--light-bg);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .container > div {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .controls {
+            grid-column: 1 / -1;
+        }
+        
+        .audio-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .file-input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        
+        .file-input-label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .file-input {
+            margin-bottom: 10px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+        
+        .current-line {
+            background-color: #ffffdd;
+            padding: 10px;
+            border-left: 4px solid var(--primary);
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .status {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .instructions {
+            background-color: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        .copy-download {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .timestamp-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YQNZ0VLGHJ');
-</script>
 <body>
-<p>real stuff. usage: import a song, import a file / type text, play the song, and press the button at each timestamp. the current timing of the song will be appended to the newline of the lyrics. example flow: import Never Gonna Give You Up, and these lyrics; We're no strangers to love
-You know the rules and so do I
-A full commitment's what I'm thinkin' of
-You wouldn't get this from any other guy
-I just wanna tell you how I'm feeling
-Gotta make you understand
-Never gonna give you up, never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry, never gonna say goodbye
-Never gonna tell a lie and hurt you
-We've known each other for so long
-Your heart's been aching, but you're too shy to say it
-Inside, we both know what's been going on
-We know the game and we're gonna play it
-And if you ask me how I'm feeling
-Don't tell me you're too blind to see
-Never gonna give you up, never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry, never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up, never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry, never gonna say goodbye
-Never gonna tell a lie and hurt you
-We've known each other for so long
-Your heart's been aching, but you're too shy to say it
-Inside, we both know what's been going on
-We know the game and we're gonna play it
-I just wanna tell you how I'm feeling
-Gotta make you understand
-Never gonna give you up, never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry, never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up, never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry, never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up, never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry, never gonna say goodbye
-Never gonna tell a lie and hurt you, each time you press on the button, the timestamp is added at the current line, so it gives something like this [00:19.61]We're no strangers to love</p>
-<input type="file" name="entry-song" id="entrySong" accept="audio/*">
-<input type="file" accept=".txt, .vtt">
-<script src="/404.js"></script>
-<script src="/consent.js"></script>
+    <h1>TXT to LRC Converter</h1>
+    
+    <div class="instructions">
+        <h3>How to use:</h3>
+        <ol>
+            <li>Import an audio file (mp3, wav, etc.)</li>
+            <li>Import a lyrics text file or type/paste lyrics in the input box</li>
+            <li>Play the audio and press the "Add timestamp" button at the beginning of each line</li>
+            <li>When finished, copy the LRC content or download it as a file</li>
+        </ol>
+    </div>
+    
+    <div class="container">
+        <div class="controls">
+            <div class="audio-container">
+                <div class="file-input-group">
+                    <label class="file-input-label" for="audioFile">Import Audio File:</label>
+                    <input type="file" id="audioFile" class="file-input" accept="audio/*">
+                </div>
+                <audio id="audioPlayer" controls></audio>
+            </div>
+            
+            <div class="timestamp-info">
+                <div>
+                    <strong>Current Time:</strong> <span id="currentTime">0:00.00</span>
+                </div>
+                <div>
+                    <strong>Lines Timestamped:</strong> <span id="linesCount">0</span>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button id="addTimestampBtn" class="button" disabled>Add Timestamp</button>
+                <button id="undoBtn" class="button" disabled>Undo Last</button>
+                <button id="resetBtn" class="button">Reset All</button>
+            </div>
+        </div>
+        
+        <div>
+            <div class="file-input-group">
+                <label class="file-input-label" for="lyricsFile">Import Lyrics File:</label>
+                <input type="file" id="lyricsFile" class="file-input" accept=".txt,.lrc,.vtt">
+            </div>
+            <label class="file-input-label" for="inputLyrics">Input Lyrics:</label>
+            <textarea id="inputLyrics" placeholder="Enter or paste your lyrics here...
+Each line will receive a timestamp.
+Empty lines will be skipped."></textarea>
+        </div>
+        
+        <div>
+            <div class="current-line">
+                Current line: <span id="currentLineDisplay">N/A</span>
+            </div>
+            <label class="file-input-label" for="outputLrc">LRC Output:</label>
+            <textarea id="outputLrc" readonly></textarea>
+            <div class="copy-download">
+                <button id="copyBtn" class="button">Copy to Clipboard</button>
+                <button id="downloadBtn" class="button">Download LRC</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const audioFile = document.getElementById('audioFile');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const lyricsFile = document.getElementById('lyricsFile');
+            const inputLyrics = document.getElementById('inputLyrics');
+            const outputLrc = document.getElementById('outputLrc');
+            const addTimestampBtn = document.getElementById('addTimestampBtn');
+            const undoBtn = document.getElementById('undoBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const copyBtn = document.getElementById('copyBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const currentTimeDisplay = document.getElementById('currentTime');
+            const linesCountDisplay = document.getElementById('linesCount');
+            const currentLineDisplay = document.getElementById('currentLineDisplay');
+            
+            // Global variables
+            let lyrics = [];
+            let currentIndex = 0;
+            let timestampedLyrics = [];
+            
+            // Function to format time as MM:SS.XX
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                const millisecs = Math.floor((seconds % 1) * 100);
+                
+                return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}.${String(millisecs).padStart(2, '0')}`;
+            }
+            
+            // Update current time display
+            audioPlayer.addEventListener('timeupdate', function() {
+                currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+            });
+            
+            // Handle audio file selection
+            audioFile.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    const url = URL.createObjectURL(file);
+                    audioPlayer.src = url;
+                    
+                    // Enable add timestamp button if lyrics are loaded
+                    checkEnableButtons();
+                }
+            });
+            
+            // Handle lyrics file selection
+            lyricsFile.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) {
+                    const file = this.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        inputLyrics.value = e.target.result;
+                        processLyrics();
+                    };
+                    
+                    reader.readAsText(file);
+                }
+            });
+            
+            // Process input lyrics when textarea changes
+            inputLyrics.addEventListener('input', processLyrics);
+            
+            function processLyrics() {
+                // Get lyrics text and split by newline
+                const text = inputLyrics.value;
+                lyrics = text.split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0); // Remove empty lines
+                
+                // Reset current state
+                currentIndex = 0;
+                timestampedLyrics = Array(lyrics.length).fill(null);
+                
+                // Update display
+                updateDisplay();
+                checkEnableButtons();
+            }
+            
+            // Add timestamp to current line
+            addTimestampBtn.addEventListener('click', function() {
+                if (currentIndex < lyrics.length) {
+                    const time = formatTime(audioPlayer.currentTime);
+                    timestampedLyrics[currentIndex] = `[${time}]${lyrics[currentIndex]}`;
+                    currentIndex++;
+                    updateDisplay();
+                    checkEnableButtons();
+                }
+            });
+            
+            // Undo last timestamp
+            undoBtn.addEventListener('click', function() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    timestampedLyrics[currentIndex] = null;
+                    updateDisplay();
+                    checkEnableButtons();
+                }
+            });
+            
+            // Reset everything
+            resetBtn.addEventListener('click', function() {
+                if (confirm('Reset all timestamps? This cannot be undone.')) {
+                    currentIndex = 0;
+                    timestampedLyrics = Array(lyrics.length).fill(null);
+                    updateDisplay();
+                    checkEnableButtons();
+                }
+            });
+            
+            // Copy LRC to clipboard
+            copyBtn.addEventListener('click', function() {
+                outputLrc.select();
+                document.execCommand('copy');
+                alert('LRC content copied to clipboard!');
+            });
+            
+            // Download LRC file
+            downloadBtn.addEventListener('click', function() {
+                if (timestampedLyrics.some(line => line !== null)) {
+                    const blob = new Blob([outputLrc.value], {type: 'text/plain'});
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    
+                    // Get audio file name or use default
+                    let fileName = 'lyrics.lrc';
+                    if (audioFile.files && audioFile.files[0]) {
+                        const audioFileName = audioFile.files[0].name.replace(/\.[^/.]+$/, "");
+                        fileName = `${audioFileName}.lrc`;
+                    }
+                    
+                    a.download = fileName;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                } else {
+                    alert('No timestamped lyrics to download.');
+                }
+            });
+            
+            // Check if buttons should be enabled
+            function checkEnableButtons() {
+                const hasAudio = audioPlayer.src !== '';
+                const hasLyrics = lyrics.length > 0;
+                
+                addTimestampBtn.disabled = !(hasAudio && hasLyrics && currentIndex < lyrics.length);
+                undoBtn.disabled = !(currentIndex > 0);
+                
+                // Update the lines count
+                linesCountDisplay.textContent = `${currentIndex}/${lyrics.length}`;
+            }
+            
+            // Update display
+            function updateDisplay() {
+                // Update LRC output
+                const lrcContent = timestampedLyrics
+                    .filter(line => line !== null)
+                    .join('\n');
+                
+                outputLrc.value = lrcContent;
+                
+                // Update current line display
+                if (currentIndex < lyrics.length) {
+                    currentLineDisplay.textContent = lyrics[currentIndex];
+                } else {
+                    currentLineDisplay.textContent = 'All lines completed!';
+                }
+                
+                // Update lines count
+                linesCountDisplay.textContent = `${currentIndex}/${lyrics.length}`;
+            }
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Space bar to play/pause
+                if (e.key === ' ' && e.target !== inputLyrics && e.target !== outputLrc) {
+                    e.preventDefault();
+                    if (audioPlayer.paused) {
+                        audioPlayer.play();
+                    } else {
+                        audioPlayer.pause();
+                    }
+                }
+                
+                // Enter to add timestamp
+                if (e.key === 'Enter' && !addTimestampBtn.disabled) {
+                    e.preventDefault();
+                    addTimestampBtn.click();
+                }
+                
+                // Backspace to undo
+                if (e.key === 'Backspace' && !undoBtn.disabled) {
+                    e.preventDefault();
+                    undoBtn.click();
+                }
+            });
+            
+            // Initial check
+            checkEnableButtons();
+        });
+    </script>
 </body>
 </html>
