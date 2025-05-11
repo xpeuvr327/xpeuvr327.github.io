@@ -5,8 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="">
+        content="vérifie les règles de grammaire, comme une checklist">
     <title>vérificateur d'allemand</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+    #mots {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+    </style>
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
@@ -14,12 +22,13 @@
 
 <body>
     <h1>Vérificateur d'allemand</h1>
-    <p>content</p>
+    <p>qu'est-ce? il vous rappelle les règles quand vous écrivez une phrase</p>
+    <button onclick="lolz()">appuyez ici pour tout voir, chaos à venir.</button><br><br>
     <textarea name="main" id="entree" cols="50"></textarea>
     <div id="messages">
     </div>
 
-    <h2>mots détectés</h2>
+    <h2 id="motsTitle" style="display: none;">choses à vérifier</h2>
     <div id="mots">
     </div>
 
@@ -27,8 +36,10 @@
         const entree = document.getElementById("entree");
         const messagesDaron = document.getElementById("messages");
         const mots = document.getElementById("mots");
+        const exemples = document.getElementById("exemples");
+        const checklist = document.getElementById("checklist");
 
-        function checkWord(word, rule) {
+        function checkWord(word, rule, ...stuffToChange) {
             if (!entree.value.includes(word)) {
                 return;
             }
@@ -37,28 +48,92 @@
             nouvelleAlerte.appendChild(messageToShow);
             messagesDaron.appendChild(nouvelleAlerte);
 
-            let checkbox = document.createElement("input"); // add a checkbox with the word as a label
-            checkbox.setAttribute("type", "checkbox"); // Corrected line
-            checkbox.setAttribute("checked", "");
+            for (let i = 0; i < stuffToChange.length; i++) {
+                let element = stuffToChange[i];
 
-            let label = document.createElement("label");
-            label.appendChild(document.createTextNode(word));
-            label.prepend(checkbox);
+                // Check if the element is already present in the mots container
+                let isPresent = false;
+                const labels = mots.getElementsByTagName("label");
+                for (let j = 0; j < labels.length; j++) {
+                    if (labels[j].textContent === element) {
+                        isPresent = true;
+                        break;
+                    }
+                }
 
-            mots.appendChild(label);
+                if (!isPresent) {
+                    let checkbox = document.createElement("i"); // add a checkbox with the word as a label
+                    checkbox.classList.add("fa-solid");
+                    checkbox.classList.add("fa-circle-check");
+
+                    let label = document.createElement("label"); //add a label with the word
+                    label.appendChild(document.createTextNode(element));
+                    label.prepend(checkbox);
+
+                    mots.appendChild(label);
+                }
+            }
+            console.log(stuffToChange);
+
+        }
+
+        function lolz(){
+            entree.value="aber denn und oder sondern sowohl wer wen wem weil dass als wenn damit um zuerst dann deshalb"
         }
 
         entree.oninput = function() {
             messagesDaron.innerHTML = "";
             mots.innerHTML = "";
-            checkWord("weil", "inversion sujet verbe");
-            checkWord("aber", "règle de aber");
 
+            //main
+            // Coordinating conjunctions (don't change word order)
+            checkWord("aber", "aber signifie 'mais', pour indiquer un contraste. p200 du DUDEN. Exemple d'usage: Ich fahre nach Deutschland, aber ich besuche dort keinen Sprachkurs.", "virgule avant aber");
+
+            checkWord("denn", "denn signifie 'car/parce que' et nécessite une virgule avant. Le verbe garde sa position normale (2e position) après denn.", "virgule avant denn");
+
+            checkWord("und", "und (et) ne requiert pas de virgule avant. Le verbe garde sa position normale (2e position) dans la nouvelle proposition.");
+
+            checkWord("oder", "oder (ou) ne nécessite pas de virgule avant. Le verbe garde sa position normale (2e position) dans la nouvelle proposition.");
+
+            checkWord("sondern", "sondern (mais plutôt) s'utilise après une négation et ne nécessite pas de virgule avant. Le verbe garde sa position normale (2e position) dans la nouvelle proposition.");
+
+            checkWord("sowohl", "sowohl...als auch (aussi bien...que) ne nécessite pas de virgule avant. Le verbe garde sa position normale (2e position) dans la nouvelle proposition.");
+
+            // Pronouns (don't affect verb position directly)
+            checkWord("wer", "wer est un pronom interrogatif/relatif. Dans une question directe, le verbe suit immédiatement. Dans une relative, le verbe va à la fin.", "verbe en 2e position dans questions", "verbe à la fin dans relatives");
+
+            checkWord("wen", "wen est un pronom interrogatif/relatif à l'accusatif. Dans une question directe, le verbe suit immédiatement. Dans une relative, le verbe va à la fin.", "verbe en 2e position dans questions", "verbe à la fin dans relatives");
+
+            checkWord("wem", "wem est un pronom interrogatif/relatif au datif. Dans une question directe, le verbe suit immédiatement. Dans une relative, le verbe va à la fin.", "verbe en 2e position dans questions", "verbe à la fin dans relatives");
+
+            // Subordinating conjunctions (verb at the end)
+            checkWord("weil", "weil (parce que) nécessite une virgule avant et place le verbe à la fin de la proposition subordonnée.", "virgule avant weil", "verbe à la fin");
+
+            checkWord("dass", "dass (que) nécessite une virgule avant et place le verbe à la fin de la proposition subordonnée.", "virgule avant dass", "verbe à la fin");
+
+            checkWord("als", "als (quand/lorsque, pour événement ponctuel passé) nécessite une virgule avant et place le verbe à la fin de la proposition subordonnée.", "virgule avant als", "verbe à la fin");
+
+            checkWord("wenn", "wenn (quand/si) nécessite une virgule avant et place le verbe à la fin de la proposition subordonnée.", "virgule avant wenn", "verbe à la fin");
+
+            checkWord("damit", "damit (afin que/pour que) nécessite une virgule avant et place le verbe à la fin de la proposition subordonnée.", "virgule avant damit", "verbe à la fin");
+
+            checkWord("um", "um...zu (pour/afin de) nécessite une virgule avant et infinitif + zu à la fin.", "virgule avant um", "infinitif + zu à la fin");
+
+            // Adverbs and adverbial expressions (verb in 2nd position)
+            checkWord("zuerst", "zuerst (d'abord) peut commencer une phrase. Si c'est le cas, le verbe doit être en 2e position, directement après zuerst.", "verbe en 2e position");
+
+            checkWord("dann", "dann (ensuite/puis) peut commencer une phrase. Si c'est le cas, le verbe doit être en 2e position, directement après dann.", "verbe en 2e position");
+
+            checkWord("deshalb", "deshalb (c'est pourquoi/donc) peut commencer une phrase. Si c'est le cas, le verbe doit être en 2e position, directement après deshalb.", "verbe en 2e position");
+            
             //check if we should display text, only if the section it qualifies applies (is showed)
+            if (mots.hasChildNodes()){
+                document.getElementById("motsTitle").style.display="block";
+            } else {
+                document.getElementById("motsTitle").style.display="none";
+            }
         }
     </script>
-</body>
-
 </body>
 
 
