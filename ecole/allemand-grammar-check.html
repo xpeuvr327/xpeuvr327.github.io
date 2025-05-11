@@ -40,9 +40,11 @@
         const checklist = document.getElementById("checklist");
 
         function checkWord(word, rule, ...stuffToChange) {
-            if (!entree.value.includes(word)) {
+            const regex = new RegExp(`\\b${word}\\b`, "i");
+            if (!regex.test(entree.value)) {
                 return;
             }
+
             let nouvelleAlerte = document.createElement("p");
             const messageToShow = document.createTextNode(rule);
             nouvelleAlerte.appendChild(messageToShow);
@@ -78,14 +80,20 @@
         }
 
         function lolz(){
-            entree.value="aber denn und oder sondern sowohl wer wen wem weil dass als wenn damit um zuerst dann deshalb"
+            entree.value="aber denn und oder sondern sowohl wer wen wem weil dass als wenn damit um zuerst dann deshalb ob";
+            app();
         }
 
         entree.oninput = function() {
+            app();
+        }
+        
+        function app(){
             messagesDaron.innerHTML = "";
             mots.innerHTML = "";
 
             //main
+
             // Coordinating conjunctions (don't change word order)
             checkWord("aber", "aber signifie 'mais', pour indiquer un contraste. p200 du DUDEN. Exemple d'usage: Ich fahre nach Deutschland, aber ich besuche dort keinen Sprachkurs.", "virgule avant aber");
 
@@ -126,6 +134,12 @@
 
             checkWord("deshalb", "deshalb (c'est pourquoi/donc) peut commencer une phrase. Si c'est le cas, le verbe doit être en 2e position, directement après deshalb.", "verbe en 2e position");
             
+            
+
+            //ob
+            checkWord("ob", "ob (si) sert à indiquer la phrase indirecte. Le verbe doit aller à la fin. Exemple: Ich habe ihn gefragt, ob er die Fussballmann trainieren will.", "virgule avant ob","verbe à la fin")
+
+
             //check if we should display text, only if the section it qualifies applies (is showed)
             if (mots.hasChildNodes()){
                 document.getElementById("motsTitle").style.display="block";
