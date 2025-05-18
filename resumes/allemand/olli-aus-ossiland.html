@@ -303,11 +303,82 @@
     </section>
     <section>
       <h2 id="motivations">Mes Motivations</h2>
-            <p>Plusieurs personnes m'ont demandé <i>pourquoi</i> je créais ces ressources et, plus généralement, ces sites. La raison est simple : je considère que si je consacre du temps à élaborer ces aides, il est préférable qu'elles profitent au plus grand nombre. Je ne monétise pas ce travail (ma demande de partenariat a été refusée, donc tout est gratuit), je ne revends aucune donnée personnelle (je ne saurais d'ailleurs pas comment m'y prendre), et il n'y a aucun virus (cela dépasse également mes compétences techniques).</p>
+            <p>des personnes m'ont demandé pourquoi je faisais ça et plus généralement des sites. la raison est que je considère que puisque je passe du temps à faire ces ressources et aides, le plus de gens que ça peut aider le mieux c'est. je ne gagne pas d'argent (j'ai été refusé, du coup c'est gratuit), je ne revends pas vos données (je sais pas comment faire), il n'y a pas de virus (je sais pas non plus comment faire)</p>
   </section>
 
 <div id="messageBoxContainer"></div> <script src="/404.js"></script>
+
+<div id="messageBoxContainer"></div> <script src="/404.js"></script>
 <script src="/consent.js"></script>
+
+<script>
+    // Function to show a custom message box
+    function showCustomMessage(message, type = 'info') {
+        const container = document.getElementById('messageBoxContainer');
+        if (!container) { // Fallback to console if container not found (should not happen)
+            console.log(`Message (${type}): ${message}`);
+            return;
+        }
+
+        const messageBox = document.createElement('div');
+        messageBox.className = `custom-message-box ${type}`;
+        messageBox.textContent = message;
+        
+        container.appendChild(messageBox);
+
+        // Trigger reflow to enable CSS transition
+        void messageBox.offsetWidth; 
+
+        messageBox.classList.add('show');
+
+        setTimeout(() => {
+            messageBox.classList.remove('show');
+            // Remove the element after the transition
+            setTimeout(() => {
+                if (container.contains(messageBox)) {
+                    container.removeChild(messageBox);
+                }
+            }, 300); // Corresponds to transition duration
+        }, 3000); // Display message for 3 seconds
+    }
+
+    // Web Share API implementation
+    const shareButton = document.getElementById('webShareButton');
+    if (shareButton) {
+        shareButton.addEventListener('click', async () => {
+            const shareData = {
+                title: document.title, // Uses the current page title
+                text: 'Découvrez les résumés et traductions pour Olli aus Ossiland sur cette page.', // A descriptive text
+                url: 'https://xpeuvr327.github.io/resumes/allemand/olli-aus-ossiland.html' // The canonical URL to share
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                    showCustomMessage('Contenu partagé avec succès !', 'success');
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    if (navigator.clipboard && window.isSecureContext) {
+                         await navigator.clipboard.writeText(shareData.url);
+                         showCustomMessage('Lien copié dans le presse-papiers !', 'info');
+                    } else {
+                        showCustomMessage("Partage non supporté. Copiez le lien manuellement.", 'info');
+                    }
+                }
+            } catch (err) {
+                console.error('Erreur lors du partage:', err);
+                // Only show error to user if it's not an AbortError (user cancelled share)
+                if (err.name !== 'AbortError') {
+                    showCustomMessage('Erreur lors du partage.', 'error');
+                } else {
+                    showCustomMessage('Partage annulé.', 'info');
+                }
+            }
+        });
+    } else {
+        console.warn('Bouton de partage (webShareButton) non trouvé.');
+    }
+</script>
 
 <script>
     // Function to show a custom message box
