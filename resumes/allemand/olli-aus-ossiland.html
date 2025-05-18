@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Cette page contient les résumés et traductions de Olli aus Ossiland">
-<title>Résumés et Traductions d'Olli aus Ossiland</title>
+<meta name="description" content="Cette page contient les résumés et traductions de Olli aus Ossiland, incluant des liens de téléchargement direct et des ressources externes.">
+<title>Résumés et Traductions d'Olli aus Ossiland - Ressources et Téléchargements</title>
 <style>
   /* Base styles */
   body {
@@ -57,7 +57,7 @@
     text-decoration: underline;
   }
   
-  /* Lists */
+  /* Lists - Original, kept for any non-boxed lists if used elsewhere */
   ul {
     padding-left: 20px;
   }
@@ -66,8 +66,8 @@
     margin-bottom: 10px;
   }
   
-  /* Button styles */
-  button {
+  /* Button styles (original for 'Montrer la couverture' and new share button) */
+  button, .action-button { /* Apply base button styles to .action-button as well */
     background-color: #3498db;
     color: white;
     border: none;
@@ -75,13 +75,92 @@
     border-radius: 4px;
     cursor: pointer;
     font-family: "Lexend Deca", sans-serif;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 0.95em;
+    text-decoration: none; /* Ensure no underline for button-like elements */
   }
   
-  button:hover {
+  button:hover, .action-button:hover {
     background-color: #2980b9;
+    text-decoration: none; /* Ensure no underline on hover */
+    color: white; /* Ensure text color remains white on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+
+  /* New styles for document/link boxes and specific buttons */
+  .document-list, .useful-links-list {
+    margin-top: 20px;
+  }
+
+  .document-item, .useful-link-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+
+  .document-item {
+    background-color: #eaf4ff; /* Light blue background */
+    border-left: 5px solid #3498db; /* Accent color border */
+  }
+
+  .useful-link-item {
+    background-color: #e8f6f0; /* Light green background */
+    border-left: 5px solid #2ecc71; /* Accent color border */
+  }
+
+  .document-item h3, .useful-link-item h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+
+  .document-item p, .useful-link-item p {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+    color: #555;
   }
   
+  .action-button { /* This class is now also styled by the general 'button' styles above */
+    display: inline-block; /* Keep this for <a> styled as buttons if any remain */
+    margin-top: 5px;
+  }
+
+  .download-button, .kdrive-button {
+    background-color: #3498db; /* Primary Blue */
+  }
+  .download-button:hover, .kdrive-button:hover {
+    background-color: #2980b9; /* Darker Blue */
+  }
+
+  .share-link-button { /* This will style the new Web Share API button */
+    background-color: #2ecc71; /* Green */
+  }
+  .share-link-button:hover {
+    background-color: #27ae60; /* Darker Green */
+  }
+
+  .internal-nav-button {
+    background-color: #e67e22; /* Orange */
+  }
+  .internal-nav-button:hover {
+    background-color: #d35400; /* Darker Orange */
+  }
+  
+  /* Specific styling for inline links within useful-link-item paragraphs */
+  .useful-link-item p a {
+    color: #27ae60; /* Match the box accent color or a related one */
+    font-weight: 500;
+  }
+
+  .useful-link-item p a:hover {
+    color: #1e8449; /* Darker shade on hover */
+    text-decoration: underline;
+  }
+
   /* Image container */
   #imageContainer {
     margin-top: 15px;
@@ -104,14 +183,55 @@
       padding: 10px;
     }
     
-    section {
+    section, .document-item, .useful-link-item {
       padding: 15px;
     }
+    button, .action-button { /* Ensure responsive padding for all buttons */
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
   }
+
+  /* Message Box Style (for Web Share API feedback) */
+  .custom-message-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 25px;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1001; /* Ensure it's above other content */
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 0.95em;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out;
+    pointer-events: none; /* Don't intercept clicks when invisible */
+  }
+  .custom-message-box.show {
+    opacity: 1;
+    bottom: 30px; /* Animate upwards slightly */
+    pointer-events: auto;
+  }
+  .custom-message-box.success {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  .custom-message-box.error {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+  .custom-message-box.info {
+    background-color: #2196F3; /* Blue */
+    color: white;
+  }
+
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -121,44 +241,141 @@
   gtag('config', 'G-YQNZ0VLGHJ');
 </script>
 <body>
-  <h1>Résumés et traductions de Olli aus Ossiland</h1>
+  <h1>Résumés et Traductions de Olli aus Ossiland</h1>
 
     <section>
         <h2>Description</h2>
-        <p>Ce portail contient les documents pour les résumés avec les traductions pour Olli aus Ossiland français ainsi que leur traduction complète de Olli aus Ossiland et la traduction intégrale du livre et les traductions des chapitres en français.</p>
+        <p>Ce portail centralise les résumés, les traductions complètes et les traductions par chapitre en français du livre "Olli aus Ossiland". Trouvez ici toutes les ressources nécessaires pour accompagner votre lecture et compréhension. Bienvenue sur votre ressource principale pour les résumés et traductions en français du livre allemand "Olli aus Ossiland". Que vous soyez élève cherchant une aide scolaire, enseignant à la recherche de matériel pédagogique, ou simplement curieux de découvrir cette œuvre, vous trouverez ici des documents complets, des résumés par chapitre, et la traduction intégrale pour faciliter votre lecture et analyse. Nos ressources sont conçues pour vous aider à mieux comprendre "Olli aus Ossiland" et à exceller dans vos études de la langue allemande.</p>
     </section>
     
     <section>
-      <h2>Documents</h2>
-      <p>La dernière version du PDF avec les résumés en allemand de chaque chapitre et les traductions des résumés :</p>
-      <ul>
-          <li><a href="olli-resumes-traduits.pdf">LES RÉSUMÉS DE CHAQUE CHAPITRE</a> (en français et en allemand)</li>
-          <li><a href="https://kdrive.infomaniak.com/app/share/1427524/208c8f4c-8e23-4f45-bede-15b3e7d138a3">TOUT le livre traduit</a> en français (lien kdrive, externe, contient toujours la dernière version)</li>
-          <li><a href="/pdf/olli-aus-ossiland-trad-integrale.pdf">PDF de la traduction intégrale</a> avec tout le livre traduit en français</li>
-      </ul>
-      <p>Le texte présent dans les documents est sélectionnable.</p>
+      <h2>Documents Disponibles</h2>
+      <p>Accédez aux différentes versions des résumés et traductions. Tous les documents PDF contiennent du texte sélectionnable pour faciliter votre travail.</p>
+      <div class="document-list">
+        
+        <div class="document-item">
+          <h3>Résumés des Chapitres (Allemand & Français)</h3>
+          <p>Ce document PDF combine les résumés de chaque chapitre en allemand avec leur traduction française correspondante. Parfait pour une vue d'ensemble rapide et pour réviser les points essentiels.</p>
+          <a href="olli-resumes-traduits.pdf" class="action-button download-button" download="Olli-aus-Ossiland-Resumes-Traduits.pdf">Télécharger les résumés (PDF)</a>
+        </div>
+
+        <div class="document-item">
+          <h3>Traduction Complète du Livre (Lien Externe KDrive)</h3>
+          <p>Consultez la traduction française intégrale et continuellement mise à jour du livre "Olli aus Ossiland" via KDrive. Ce lien externe garantit l'accès à la version la plus récente du document.</p>
+          <a href="https://kdrive.infomaniak.com/app/share/1427524/208c8f4c-8e23-4f45-bede-15b3e7d138a3" class="action-button kdrive-button" target="_blank" rel="noopener noreferrer">Voir la traduction complète (KDrive)</a>
+        </div>
+
+        <div class="document-item">
+          <h3>Traduction Intégrale du Livre (PDF Local)</h3>
+          <p>Téléchargez une version PDF de la traduction française complète de "Olli aus Ossiland". Ce fichier est hébergé localement pour un accès direct.</p>
+          <a href="/pdf/olli-aus-ossiland-trad-integrale.pdf" class="action-button download-button" download="Olli-aus-Ossiland-Traduction-Integrale.pdf">Télécharger la traduction intégrale (PDF)</a>
+        </div>
+
+      </div>
+      <p style="margin-top: 20px; font-size: 0.9em; color: #555;"><strong>Note importante :</strong> Le texte à l'intérieur des documents PDF est sélectionnable, ce qui vous permet de copier-coller facilement du contenu pour vos notes ou citations.</p>
     </section>  
 
     <section>
-        <h2>Liens utiles</h2>
-        <ul>
-            <li><a href="https://chk.me/l9oimtB">Lien à partager (https://chk.me/l9oimtB)</a></li>
-            <li><a href="/104">Acceuil avec les autres aides pour le collège</a></li>
-        </ul>
+        <h2>Liens Utiles</h2>
+        <p>Quelques autres liens qui pourraient vous servir :</p>
+        <div class="useful-links-list">
+
+            <div class="useful-link-item">
+                <h3>Lien de Partage</h3>
+                <p>Partagez facilement cette page de ressources avec vos camarades ou collègues. Le lien à partager est : <a href="https://xpeuvr327.github.io/resumes/allemand/olli-aus-ossiland.html" target="_blank" rel="noopener noreferrer">xpeuvr327.github.io/resumes/allemand/olli-aus-ossiland.html</a>.</p>
+                <button id="webShareButton" class="action-button share-link-button">Partager cette page</button>
+            </div>
+
+            <div class="useful-link-item">
+                <h3>Autres Aides pour le Collège</h3>
+                <p>Explorez d'autres ressources et aides disponibles pour diverses matières du collège en visitant notre portail principal.</p>
+                <a href="/104" class="action-button internal-nav-button">Découvrir plus d'aides</a>
+            </div>
+        </div>
     </section>
 
     <section>
-        <h2>Couverture</h2>
+        <h2>Couverture du Livre</h2>
         <button onclick="this.nextElementSibling.style.display = 'block'; this.style.display = 'none';">Montrer la couverture</button>
         <div id="imageContainer" style="display: none;">
             <img id="displayedImage" src="olli-aus-ossiland-couverture.jpg" alt="Couverture de Olli aus Ossiland, une moto bleue et un panneau DDR, dans le fond une voiture en très gros plan" style="max-width:100px">
         </div>
     </section>
     <section>
-      <h2 id="motivations">Motivations</h2>
-      <p>des personnes m'ont demandé <i>pourquoi</i> je faisais ça et plus généralement des sites. la raison est que je considère que puisque je passe du temps à faire ces ressources et aides, le plus de gens que ça peut aider le mieux c'est. je ne gagne pas d'argent (j'ai été refusé, du coup c'est gratuit), je ne revends pas vos données (je sais pas comment faire), il n'y a pas de virus (je sais pas non plus comment faire)</p>
+      <h2 id="motivations">Mes Motivations</h2>
+            <p>Plusieurs personnes m'ont demandé <i>pourquoi</i> je créais ces ressources et, plus généralement, ces sites. La raison est simple : je considère que si je consacre du temps à élaborer ces aides, il est préférable qu'elles profitent au plus grand nombre. Je ne monétise pas ce travail (ma demande de partenariat a été refusée, donc tout est gratuit), je ne revends aucune donnée personnelle (je ne saurais d'ailleurs pas comment m'y prendre), et il n'y a aucun virus (cela dépasse également mes compétences techniques).</p>
   </section>
-<script src="/404.js"></script>
+
+<div id="messageBoxContainer"></div> <script src="/404.js"></script>
 <script src="/consent.js"></script>
+
+<script>
+    // Function to show a custom message box
+    function showCustomMessage(message, type = 'info') {
+        const container = document.getElementById('messageBoxContainer');
+        if (!container) { // Fallback to console if container not found (should not happen)
+            console.log(`Message (${type}): ${message}`);
+            return;
+        }
+
+        const messageBox = document.createElement('div');
+        messageBox.className = `custom-message-box ${type}`;
+        messageBox.textContent = message;
+        
+        container.appendChild(messageBox);
+
+        // Trigger reflow to enable CSS transition
+        void messageBox.offsetWidth; 
+
+        messageBox.classList.add('show');
+
+        setTimeout(() => {
+            messageBox.classList.remove('show');
+            // Remove the element after the transition
+            setTimeout(() => {
+                if (container.contains(messageBox)) {
+                    container.removeChild(messageBox);
+                }
+            }, 300); // Corresponds to transition duration
+        }, 3000); // Display message for 3 seconds
+    }
+
+    // Web Share API implementation
+    const shareButton = document.getElementById('webShareButton');
+    if (shareButton) {
+        shareButton.addEventListener('click', async () => {
+            const shareData = {
+                title: document.title, // Uses the current page title
+                text: 'Découvrez les résumés et traductions pour Olli aus Ossiland sur cette page.', // A descriptive text
+                url: 'https://xpeuvr327.github.io/resumes/allemand/olli-aus-ossiland.html' // The canonical URL to share
+            };
+
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                    showCustomMessage('Contenu partagé avec succès !', 'success');
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    if (navigator.clipboard && window.isSecureContext) {
+                         await navigator.clipboard.writeText(shareData.url);
+                         showCustomMessage('Lien copié dans le presse-papiers !', 'info');
+                    } else {
+                        showCustomMessage("Partage non supporté. Copiez le lien manuellement.", 'info');
+                    }
+                }
+            } catch (err) {
+                console.error('Erreur lors du partage:', err);
+                // Only show error to user if it's not an AbortError (user cancelled share)
+                if (err.name !== 'AbortError') {
+                    showCustomMessage('Erreur lors du partage.', 'error');
+                } else {
+                    showCustomMessage('Partage annulé.', 'info');
+                }
+            }
+        });
+    } else {
+        console.warn('Bouton de partage (webShareButton) non trouvé.');
+    }
+</script>
 </body>
 </html>

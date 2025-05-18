@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Semestrielles Informatique 2025</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description"
+        content="La révision du deuxième semestre d'informatique (variables, types, input, fonctions avec/sans paramètres, while)">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <link href="informatique/prism.css" rel="stylesheet">
+    <style>
+        h3 {
+            line-height: 3.4em
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px solid gray
+        }
+
+        td {
+            border: 1px solid #000;
+            width: 35px;
+            height: 35px
+        }
+
+        .black {
+            background-color: #000;
+            color: #fff
+        }
+
+        .white {
+            background-color: #fff;
+            color: #000
+        }
+
+        .character {
+            background-color: #d3d3d3;
+            color: #000
+        }
+
+        .container {
+            display: flex !important;
+            align-items: flex-start !important;
+            flex-direction: column !important;
+            padding: 20px !important
+        }
+
+        .image-text-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            width: 100% !important
+        }
+
+        .image-text-container img {
+            max-width: 100% !important;
+            height: auto !important
+        }
+
+        .instructions {
+            margin-top: 20px !important;
+            text-align: center !important
+        }
+
+        /* Modified .dont class to add a red border for negative examples */
+        .dont {
+            background-color: #9c0707 !important;   
+            border: 2px solid #FF0000 !important;
+        }
+
+        @media (min-width:768px) {
+            .image-text-container {
+                flex-direction: row !important
+            }
+
+            .image-text-container img {
+                max-width: 45% !important
+            }
+
+            .container {
+                padding: 0 !important
+            }
+
+            .instructions {
+                margin-left: 20px
+            }
+        }
+    </style>
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
+<script>function gtag() { dataLayer.push(arguments) } window.dataLayer = window.dataLayer || [], gtag("js", new Date), gtag("config", "G-YQNZ0VLGHJ")</script>
+
+<body>
+    <h1 class="texte-bg">Révision informatique</h1>
+    <p>Bon bah y a tout le programme d'informatique globalement, que dire de plus. Sauf que cette fois c'est la révision des semestrielles du <strong>deuxième</strong> semestre!</p>
+    <br><h2>La révision d'informatique (variables, types, input, fonctions avec/sans paramètres, while)</h2><br>
+    <p>N'hésitez pas à aller voir <a class="a-deco" href="informatique.html">la révision du premier semestre</a> si vous ne l'avez pas encore fait, c'est mieux pour comprendre. Tout au long de cette page vous trouverez des <sup><a class="a-deco">notes comme celle-ci</a></sup> qui définissent des mots, n'hésitez pas à cliquer dessus pour voir la définition en bas de la page. Comme toujours, ce qui est dit dans cette page n'est nullement garanti d'être correct, il en est de la responsabilité du lecteur de vérifier les informations présentées.</p><br>
+    <h3>Sommaire</h3>
+    <ul>
+        <li><a href="#variables" class="a-deco">Variables</a></li>
+        <li><a href="#types" class="a-deco">Types</a></li>
+        <li><a href="#input" class="a-deco">Input</a></li>
+        <li><a href="#fonctions" class="a-deco">Fonctions</a></li>
+        <li><a href="#conditions" class="a-deco">Conditions</a></li>
+        <li><a href="#si" class="a-deco">Le bloc "if" (si) </a></li>
+        <li><a href="#while" class="a-deco">La boucle <code class="language-py">while</code></a></li>
+    </ul>
+    <h3 id="variables">Variables</h3><br>
+    <p>Déjà brièvement abordé dans le semestre précédent, mais n'étant pas approfondi, voici une version plus complète et qui couvre le champ.</p>
+    <p>Syntaxe <sup><a href="#def-syntaxe" class="a-deco">1</a></sup> de définition d'une variable<sup><a href="#def-definition"class="a-deco">2</a></sup> de variable :</p><br>
+    <pre><code class="language-py">nom = "valeur" # nom "égal" valeur
+nom="valeur" # on peut omettre les espaces,
+nom    =   "valeur" # aussi bien qu'on peut en mettre plein</code></pre>
+    <p>Il y a plusieurs règles concernant le nom, les règles strictes, et les conventions.</p>
+    <h4 style="padding-top: 1em; padding-bottom: 1em;">Règles strictes</h4>
+    <p>Si on ne les respecte pas, il y aura une erreur <sup><a href="#def-erreur-note" class="a-deco">3</a></sup>.</p>
+    <pre><code class="language-py">_AZaz09 = "salut" # une variable peut contenir ces caractères là, et rien d'autre (et les lettres / chiffres compris dedans, bien sûr)</code></pre>
+    <pre class="dont"><code class="language-py">2pac = "rappeur" # une variable ne peut pas commencer par un chiffre
+while = "pendant" # une variable ne peut pas être un mot réservé de Python  </code> </pre>
+<p>Une variable est sensible à la casse <sup><a href="#def-sensible-a-la-casse" class="a-deco">4</a></sup>, les deux variables qui suivent sont différentes</p>
+<pre><code class="language-py">foule = "gens"
+Foule = "personnes"</code>
+</pre>
+    <h4 style="padding-top: 1em; padding-bottom: 1em;">Conventions d'écriture</h4>
+    <p>Bon en vrai, j'ai menti, on peut mettre des accents. Mais ça ne veut pas dire qu'il faut en mettre! C'est l'une des conventions. Les règles suivantes sont données sans ordre particulier.</p>
+    <p>Il faut que le nom soit pertinnent</p>
+    <pre><code class="language-py">x = 180 # ça va si on a que une ou peu de variables, mais c'est préférable d'avoir un nom plus explicite, tel que:
+angle_triangle_bleu = 180 # c'est mieux!</code></pre>
+    <p>Dans l'exemple d'avant, on a utilisé le <strong>snake case</strong> pour délimiter plusieurs mots. Il existe d'autres manières reconnues:</p>
+<pre><code class="language-py">snake_case = "forêt" # on met des underscores entre chaque mot
+camelCase = "forêt" # On met une majucule au début de chaque mot sauf le 1er, est plus utilisé
+PascalCase = "forêt" # On met une majuscule au début de chaque mot
+</code></pre>
+<p>On ne met pas d'accents (bien que ce soit possible)</p>
+<pre class="dont"><code class="language-py">érable = "arbre" # non!</code></pre>
+    <h3 id="types">Types</h3>
+    <p>Jusque là, on n'a parlé que du nom de la variable, la partie gauche, mais ce qui est important, c'est la partie à droite. Il y a plusieurs types de choses qu'on peut mettre, et c'est le type.
+python va mettre le bon type tout seul.
+    </p>
+    <p>Exemples</p>
+    <pre><code class="language-py">nombreEntier = 1 # integer
+booleen = True # opérateur logique, sera vu plus tard avec les conditions
+booleen2 = False # l'autre opérateur logique
+chaine_de_caractere = "string" # un mot / phrase
+valeurDePi = 3.1415926 # nombre décimal (je l'ai eu de tête lol), notez qu'on utilise un point et non une virgule   
+flottant = 70 / 5 # on peut mettre un calcul, la variable aura la valeur du résultat
+# à noter que le type du résultat de la division sera toujours un float, même si le résultat donne un nombre entier. Ici, 14.0
+il_y_en_a_encore = ['d\'autres', 'mais', 'ça', 'dépasse', 'le', 'cadre de ce document'] # liste</code></pre>
+    <p>On peut aussi assigner une variable à une autre variable: </p>
+    <pre><code class="language-py">x = 1
+y = x + 1</code></pre>
+    <p>Cependant on ne peut pas assigner une variable à quelque chose qui n'existe pas encore: </p>
+    <pre class="dont"><code class="language-py">x = y # invalide
+y = y + 1 # invalide aussi</code></pre>
+<p>On peut bien sûr manipuler des variables sans les définir:</p>
+<pre><code class="language-py">x = 1
+y = 2
+print(x + y) # Résultat = 3
+</code></pre>
+<p>On peut transformer un <em>string</em> en <em>integer</em> avec <code class="language-py">int()</code>. On peut aussi transformer un float en int avec <code class="language-py">int()</code>, cela va enlever la virgule. (Il en existe d'autres, mais ce n'est pas dans le cadre de cette leçon)</p>
+<pre><code class="language-py">soixante_neuf = "69" # ici, ça représente les caractères "6" et "9", pas le nombre
+soixante_neuf = int(soixante_neuf)
+print(soixante_neuf + 1) # Résultat: 70
+nombre_a_virgule = 143.2
+print(int(nombre_a_virgule)) # Résultat: 143
+</code></pre>
+<p>On ne peut pas mélanger les types! Il faut les convertir avant.</p>
+<pre class="dont"><code class="language-py">x = 10
+y = "11"
+print(x + y) # Erreur! On aurait dû faire << y = 11 >>
+</code></pre>
+<p>La fonction <code class="language-py">int()</code> n'est pas non plus infaillible:</p>
+<pre class="dont"><code class="language-py">x = "123mot456"
+x = int(x) # Erreur! int() ne marche qu'avec des nombres.
+</code></pre>
+<h3 id="input">Input</h3>
+<p>L'utilisateur n'a pour l'instant pas la possibilité d'intéragir avec le programme. C'est là que <code class="languagepy">input()</code> intervient.</p>
+<p>Syntaxe</p>
+<pre><code class="language-py">x = input("Entrez votre nom: ")
+# Résultat, ce qui va être affiché:
+Entrez votre nom: *zone de texte*
+# x sera égal à ce que l'utilisateur a mis.</code></pre>
+<p>Notez que ce qui est affiché est exactement ce que vous avez mis dans input, donc pensez à mettre les deux points et un espace pour que ce soit plus agréable!</p>
+<p>C'est pratique pour définir des strings, mais, par défaut, le type de l'entrée d'input est le string, donc on ne pourra par exemple pas faire:</p>
+<img src="rappel-division.png" alt="une image floue indiquant le vocabulaire de la division en colonnes, avec chacun des termes dans une couleur différente.">
+<pre class="dont"><code class="language-py">x = input("Entrez un dividende: ")
+y = input("Entrez un diviseur: ")
+print(x//y) # Erreur!
+</code></pre>
+
+<h3 id="defs">Définitions</h3>
+<p>Ici vous retrouverez certaines définitions de "mots techniques"</p>
+<p id="def-syntaxe">1: comment on utilise concrètement, ça veut dire que si vous copiez collez cette partie dans votre code, ça va être valide</p>
+<p id="def-definition">2: Définir une variable ou une fonction, c'est donner un sens à un mot. Si un mot n'a pas de définition, on ne pourra pas l'utiliser, et il y aura une erreur. C'est un peu comme le français, si on utilise un mot qui n'existe pas il y a un problème.</p>
+<p id="def-erreur-note">3, note: Erreur: notez que, quand il y a une erreur de syntaxe, les couleurs ("<a href="https://www.wikiwand.com/fr/articles/Coloration_syntaxique" class="a-deco">coloration syntaxique</a>") ne sont pas ce qu'elles devraient être</p>
+<p id="def-sensible-a-la-casse">4: la casse d'un mot est le fait qu'elle soit en MAJUCULE ou en minuscules, sensible à la casse signifie que "Poire" n'est pas égal à "poire" ou encore "PoIrE".</p>
+<a href="/104">Retour à l&#x27;accueil</a>
+    <script src="informatique/prism.js"></script>
+</body>
+
+</html>
