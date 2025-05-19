@@ -65,10 +65,14 @@
             text-align: center !important
         }
 
-        /* Modified .dont class to add a red border for negative examples */
         .dont {
             background-color: #9c0707 !important;   
             border: 2px solid #FF0000 !important;
+        }
+
+        p{
+            padding-top: 1em;
+            padding-bottom: 1em;
         }
 
         @media (min-width:768px) {
@@ -97,7 +101,7 @@
     <h1 class="texte-bg">Révision informatique</h1>
     <p>Bon bah y a tout le programme d'informatique globalement, que dire de plus. Sauf que cette fois c'est la révision des semestrielles du <strong>deuxième</strong> semestre!</p>
     <br><h2>La révision d'informatique (variables, types, input, fonctions avec/sans paramètres, while)</h2><br>
-    <p>N'hésitez pas à aller voir <a class="a-deco" href="informatique.html">la révision du premier semestre</a> si vous ne l'avez pas encore fait, c'est mieux pour comprendre. Tout au long de cette page vous trouverez des <sup><a class="a-deco">notes comme celle-ci</a></sup> qui définissent des mots, n'hésitez pas à cliquer dessus pour voir la définition en bas de la page. Comme toujours, ce qui est dit dans cette page n'est nullement garanti d'être correct, il en est de la responsabilité du lecteur de vérifier les informations présentées.</p><br>
+    <p>N'hésitez pas à aller voir <a class="a-deco" href="informatique.html">la révision du premier semestre</a> si vous ne l'avez pas encore fait, c'est mieux pour comprendre. Tout au long de cette page vous trouverez des <sup><a class="a-deco">notes comme celle-ci</a></sup> qui définissent des mots, n'hésitez pas à cliquer dessus pour voir la définition en bas de la page. Comme toujours, ce qui est dit dans cette page n'est nullement garanti d'être correct, il en est de la responsabilité du lecteur de vérifier les informations présentées. Cette page est toutefois vérifiée au possible et adaptée au champ.</p><br>
     <h3>Sommaire</h3>
     <ul>
         <li><a href="#variables" class="a-deco">Variables</a></li>
@@ -105,7 +109,7 @@
         <li><a href="#input" class="a-deco">Input</a></li>
         <li><a href="#fonctions" class="a-deco">Fonctions</a></li>
         <li><a href="#conditions" class="a-deco">Conditions</a></li>
-        <li><a href="#si" class="a-deco">Le bloc "if" (si) </a></li>
+        <li><a href="#si" class="a-deco">Le bloc <code class="language-py">if</code> (si) </a></li>
         <li><a href="#while" class="a-deco">La boucle <code class="language-py">while</code></a></li>
     </ul>
     <h3 id="variables">Variables</h3><br>
@@ -115,7 +119,7 @@
 nom="valeur" # on peut omettre les espaces,
 nom    =   "valeur" # aussi bien qu'on peut en mettre plein</code></pre>
     <p>Il y a plusieurs règles concernant le nom, les règles strictes, et les conventions.</p>
-    <h4 style="padding-top: 1em; padding-bottom: 1em;">Règles strictes</h4>
+    <h4 style="padding-top: 1em; padding-bottom: 1em;"id="regles-nomenclature-variables">Règles strictes</h4>
     <p>Si on ne les respecte pas, il y aura une erreur <sup><a href="#def-erreur-note" class="a-deco">3</a></sup>.</p>
     <pre><code class="language-py">_AZaz09 = "salut" # une variable peut contenir ces caractères là, et rien d'autre (et les lettres / chiffres compris dedans, bien sûr)</code></pre>
     <pre class="dont"><code class="language-py">2pac = "rappeur" # une variable ne peut pas commencer par un chiffre
@@ -180,25 +184,200 @@ x = int(x) # Erreur! int() ne marche qu'avec des nombres.
 <p>L'utilisateur n'a pour l'instant pas la possibilité d'intéragir avec le programme. C'est là que <code class="languagepy">input()</code> intervient.</p>
 <p>Syntaxe</p>
 <pre><code class="language-py">x = input("Entrez votre nom: ")
+print(x)
 # Résultat, ce qui va être affiché:
 Entrez votre nom: *zone de texte*
-# x sera égal à ce que l'utilisateur a mis.</code></pre>
+# x sera égal à ce que l'utilisateur a mis.
+*le nom de l'utilisateur*</code></pre>
 <p>Notez que ce qui est affiché est exactement ce que vous avez mis dans input, donc pensez à mettre les deux points et un espace pour que ce soit plus agréable!</p>
+<p>Vous verrez souvent <code class="language-py">input()</code> en conjonction avec <code class="language-py">int()</code>:</p>
+<pre><code class="language-py">x = int(input("Entrez un nombre à multiplier par deux: "))
+# ou
+x = input("Entrez un nombre à multiplier par deux: ")
+x = int(x)
+
+print(x+x)
+# ou
+print(2*x)</code></pre>
 <p>C'est pratique pour définir des strings, mais, par défaut, le type de l'entrée d'input est le string, donc on ne pourra par exemple pas faire:</p>
 <img src="rappel-division.png" alt="une image floue indiquant le vocabulaire de la division en colonnes, avec chacun des termes dans une couleur différente.">
 <pre class="dont"><code class="language-py">x = input("Entrez un dividende: ")
 y = input("Entrez un diviseur: ")
 print(x//y) # Erreur!
+# une erreur peut aussi être l'inversion des deux:
+x, y = input(int()), input(int())
+</code></pre>
+<h3 id="fonctions">Fonctions</h3>
+<p>Une fonction est une "macro" ou un "raccourci" qui permet de faire une série d'opérations ou d'appels de fonctions facilement. Vous connaissez déjà des fonctions; <code class="language-py">int()</code> ou encore <code class="language-py">input()</code>, mais ici on va parler des commandes "personnalisées", avec ou sans arguments. La fonction définie par <code class="language-py">def maFonction()</code> elle-même ne fait rien, il faut également l'appeler avec <code class="language-py function token">maFonction()</code> ensuite! Les règles de nommage sont les mêmes que pour les <a href="#regles-nomenclature-variables" class="a-deco">variables</a>.</p>
+
+<p>Exemple</p>
+<pre><code class="language-py">def rectangle():
+    forward(160)
+    left(90)
+    forward(160)
+    left(90)
+    forward(160)
+    left(90)
+    forward(160)
+    left(90)
+# ou mieux
+def rectangle():
+    for i in range(4):
+        forward(160) # il faut bien indenter *DEUX* fois!
+        left(90)
+</code></pre>
+<p>Comme dit précédemment, pour l'instant, ça ne fait rien, il faut ensuite l'appeler:</p>
+<pre><code class="language-py">def rectangle(): # ce n'est que la définition
+    for i in range(4):
+        forward(50)
+        left(90)
+rectangle() # là, ça va faire un rectangle
+</code></pre>
+<p>On peut les combiner avec des boucles pour en faire beaucoup plus:</p>
+<pre><code class="language-py">def rectangle50():
+    pass # IDEM à avant, "pass" veut dire "ignorer, ne rien faire"
+def espace10():
+    forward(10)
+    left(30)
+for i in range(8):
+    rectangle50()
+    espace()</code></pre>
+<h4>Fonctions avec arguments</h4>
+<p>Une fonction avec argument est une fonction qui a quelque chose dans sa parenthèse, donc par exemple <code class="language-py">forward(n)</code> que vous connaissez déjà. La valeur que prendra "<code class="language-py">n</code>" est l'argument. On peut aussi parler de paramètre, la différence est que le paramètre est le nom de la variable qui va être utilisée dans la fonction, donc "<code class="language-py">n</code>" est le paramètre. Quand on fait <code class="language-py">forward(10)</code>, <code class="language-py">10</code> est le paramètre. En clair, un argument est une variable qui est donnée à la fonction. (Si l'explication n'est pas assez claire, vous comprendrez avec les exemples.)</p>
+<p>Exemple</p>
+<pre><code class="language-py">def carre_de_taille(cote):
+    for i in range(4):
+        forward(cote) # on utilise un argument!
+        left(90)
+carre_de_taille(100) # ne pas oublier de l'appeler!
+</code></pre>
+<img src="informatique/carre_de_taille_python_demo_turtle.png" alt="fenêtre turtle à gauche, code à droite. démo de l'énoncé précédent.">
+<p>Maintenant que notre fonction requiert un argument, si on ne passe pas d'argument, il y aura une erreur. Ainsi, dans l'exemple précédent, le code suivant entrainera une erreur:</p>
+<pre class="dont"><code class="language-py">carre_de_taille() # Erreur!</code></pre>
+<img src="informatique/appel_de_fonction_sans_argument_erreur.png" alt="une erreur si on appelle une fonction qui a besoin d'un argument sans argument">
+<p>On peut bien sûr mettre plusieurs arguments. (<a href="https://www.w3schools.com/python/python_functions.asp" class="a-deco">page qui détaille très bien les fonctions</a>) Utilisation de base:</p>
+<pre><code class="language-py">def additionner(a, b):
+    return a + b # "return" fait comprendre à python que la fonction vaut maintenant ça.
+print(additionner(10, 12)) # Résultat: 22
+# ou
+def polygone_regulier(cotes, taille, angle):
+    for i in range(cotes):
+        forward(taille)
+        left(angle) # ou "360 / cotes", et on a pas besoin de l'argument angle
+polygone_regulier(4, 100, 90) # carré
+polygone_regulier(5, 100, 72) # pentagone
 </code></pre>
 
+<h3 id="conditions">Conditions</h3>
+<p>Les valeurs que peuvent prendre les conditions sont le booléen, soit True (vrai) ou False (faux). 0 et 1 sont respectivement False et True. Il existe des opérateurs logiques - c'est comme ça qu'on appelle les opérations en rapport avec les booléens - qui permettent de les manipuler:</p>
+<pre><code class="language-py">print(10 > 9) # True
+print(10 == 9) # False, vérifie si 10 est égal à 9, à ne pas confondre avec le égal unique qui assigne une valeur à une variable
+print(10 != 9) # True, vérifie si 10 n'est pas (égal à) 9
+print(10 < 9) # False
+print(10 >= 9) # True, vérifie aussi si c'est égal, revient à:
+print(10 > 9 or 10 == 9)
+print(True - True == False) # True, 1-1==0
+print(not True) # False, "not" commute le booléen.
+print(True or False) # True, Vérifie si l'un des deux est vrai
+print(True and False) # False, Vérifie si les deux sont vrais</code></pre>
+<p>Un exemple, l'expression suivante:</p>
+<pre><code class="language-py">print(10 <= 9 or 1 != 30 // 6)</code></pre>
+<p>Python va l'évaluer selon <a href="https://www.w3schools.com/python/python_operators.asp#:~:text=Try%20it%20%C2%BB-,Operator%20Precedence,-Operator%20precedence%20describes" class="a-deco">l'ordre des opérations</a>, donc à la prochaine étape ce sera:</p>
+<pre>
+<code class="language-py">print(False or 1 != 5)</code>, et enfin
+<code class="language-py">print(False or True) # Résultat: True</code>
+</pre>
+<h3 id="si">Le bloc si</h3>
+<p>Le bloc si est étroitement lié aux conditions; en réalité c'est basé sur ça. "Bloc" car c'est aussi un mot qui requiert une indetation, tel que <code class="language-py">for</code>, <code class="language-py">if</code> ou le futur <code class="language-py">while</code>.</p>
+<p>Exemples</p>
+<pre><code class="language-py">x = 9
+y = 10
+if x == y: # C'est là
+    print("x est égal à y")
+if (x != y and x > y): # on met des parenthèses pour plus de clarté, bien que ce soit facultatif
+    print("x n'est pas égal à y")
+</code></pre>
+<p>Il bien mettre un double égal:</p>
+<pre class="dont"><code class="language-py">x = 10
+y = 11
+if x = y: # Erreur!
+</code></pre>
+<p>L'exemple précédent avec les deux "if" marche, mais il existe une manière plus élégante d'exprimer "si c'est faux, essayer" ou "sinon", à savoir <code class="language-py">elif</code> et <code class="language-py">else</code>.</p>
+<pre><code class="language-py">x = 10
+y = 11
+if x == y:
+    print("x est égal à y")
+elif x > y:
+    print("x est plus grand, leur différence est", x - y)
+else:
+    print("y est plus grand, de", y - x)
+</code></pre>
+<p>Une erreur qu'on peut faire, c'est d'être tenté de donner une condition à <code class="language-py">else</code>:</p>
+<pre class="dont"><code class="language-py">x = 10
+if x !=10:
+    print("x est égal à dix!")
+else x == 10: # C'est superflu et même faux!
+    print("x n'est pas dix!")
+</code></pre>
+<p>En résumé, <code class="language-py">if</code> est une condition, et peut être utilisé séparément. <code class="language-py">elif</code>, lui, n'est évalué que si son <code class="language-py">if</code> parent (car il ne peut pas être utilisé seul, il a besoin d'un <code class="language-py">if</code> avant) est faux. <code class="language-py">else</code> peut être utilisé après un <code class="language-py">if</code> ou un <code class="language-py">elif</code> et le code contenu à l'intérieur n'est éxécuté que si les deux conditions précédentes sont fausses.</p>
+
+<h3 id="while">La boucle <code class="language-py">while</code></h3>
+<button onclick="cacherLeTexteLa()">clique ici!</button>
+<p>La boucle <code class="language-py">for</code> diffère de la boucle <code class="language-py">while</code>, car on utilise cette dernière lorsqu'on ne connait pas le nombre de répétitions. Elle a besoin d'une indentation. Elle utilise une condition pour boucler. On évite de définir des boucles infinies (où la condition serait <code class="language-py">True</code> tout le temps), sauf si on utilise un <code class="language-py">if</code> contraire et <code class="language-py">break</code>. Chacune de ces phrases va être illustrée d'un exemple.</p>
+<p>Exemple : on essaie de voir le nombre de chiffres entre 1 et le nombre qu'un utilisateur entre</p>
+<pre><code class="language-py">nombre_a_chercher = int(input("Entrez un nombre. On verra combien de nombres il y a entre celui là et 15. :"))
+compteur = 0
+if nombre_a_chercher < 15:
+    while 15 > nombre_a_chercher:
+        nombre_a_chercher += 1 # équivalent à nombre_a_chercher = nombre_a_chercher + 1
+        compteur += 1
+elif nombre_a_chercher == 15:
+    print("C'est 15!")
+else:
+    while 15 < nombre_a_chercher:
+        nombre_a_chercher -= 1
+        compteur += 1
+print("Il y a ", compteur, "nombres entre votre entrée et quinze.")
+</code></pre>
+<p>On ne fait pas de boucle infinie (note, si vous le faites sur les Mac de l'école, faites Ctrl (oui, pas Cmd) + C dans le terminal / Interpréteur Thonny pour arrêter le programme) sauf si on a prévu un <code class="language-py">if</code> avec un <code class="language-py">break</code>:</p>
+<pre class="dont"><code class="language-py">compteur = 10
+while(not compteur == 15): # ça va continuer à l'infini et ce n'est généralement pas ce que vous voulez faire.
+# La plupart du temps, c'est un signe inversé, la mauvaise opération ou une condition impossible
+    print(compteur)
+    compteur = 2 # ç'aurait aussi pu être un égal mal placé, ou les mauvaises valeurs. Ici, les deux sont illustrées.
+</code></pre> 
+<p>Le code précédent n'était qu'un exemple sans réel but. Ci-après un exemple illustrant l'usage de boucles infinies et de if/break, bien que personnellement je trouve que c'est inutile (ou n'ai pas encore eu l'occasion d'en avoir l'usage) car il peut généralement être remplacé par <code class="language-py">not</code> suivi de la condition</p>
+<pre><code class="language-py">compteur = 0
+nombre = int(input("Entre un nombre INFÉRIEUR à 100: "))
+while True:
+    nombre += 1
+    compteur+=1
+    if not (nombre < 100):
+        break
+print(compteur)
+# pourrait être remplacé par un, plus simple,
+compteur = 0
+nombre = int(input("Entre un nombre INFÉRIEUR à 100: "))
+while (101 > nombre):
+    compteur += 1
+print(compteur)
+</code></pre>
+<p id="ff" style="display: none;">C'est <em>déjà</em> fini je crois! Merci d'avoir lu jusqu'au bout! C'est ça ce que faisait le bouton!</p>
 <h3 id="defs">Définitions</h3>
-<p>Ici vous retrouverez certaines définitions de "mots techniques"</p>
+<p>Ici vous retrouverez certaines définitions de "mots techniques" qui sont trop brefs pour mériter leur propre chapitre.</p>
 <p id="def-syntaxe">1: comment on utilise concrètement, ça veut dire que si vous copiez collez cette partie dans votre code, ça va être valide</p>
 <p id="def-definition">2: Définir une variable ou une fonction, c'est donner un sens à un mot. Si un mot n'a pas de définition, on ne pourra pas l'utiliser, et il y aura une erreur. C'est un peu comme le français, si on utilise un mot qui n'existe pas il y a un problème.</p>
 <p id="def-erreur-note">3, note: Erreur: notez que, quand il y a une erreur de syntaxe, les couleurs ("<a href="https://www.wikiwand.com/fr/articles/Coloration_syntaxique" class="a-deco">coloration syntaxique</a>") ne sont pas ce qu'elles devraient être</p>
 <p id="def-sensible-a-la-casse">4: la casse d'un mot est le fait qu'elle soit en MAJUCULE ou en minuscules, sensible à la casse signifie que "Poire" n'est pas égal à "poire" ou encore "PoIrE".</p>
+<p>(Cette page s'inspire grandement du style de <a class="a-deco" href="https://www.geeksforgeeks.org/jump-statements-in-python/">cet article</a>, le contenu n'est pas le mêeme)</p>
 <a href="/104">Retour à l&#x27;accueil</a>
     <script src="informatique/prism.js"></script>
+    <script>//allez un peu de _vrai_ code pour pas finir rouillé
+function cacherLeTexteLa(){
+    document.evaluate("/html/body/button", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.style.display= "none";
+    document.getElementById("ff").style.display = "block";
+}
+    </script>
 </body>
 
 </html>
