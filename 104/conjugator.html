@@ -130,8 +130,8 @@
             <p>Le meilleur conjugueur pour les verbes du feuilleté de grammaire. Chercher parmi:</p>  <select id="verbSetSelect" onchange="loadVerbSet()">
                 <option value="all">Tous les verbes</option>
                 <option	value="verbs-50.json">les verbes 1 à 50 (p52)</option>
+				<option value="verbs-51-99.json">les verbes 51 à 99 (p53)</option>
 				<option value="verbs-150.json">les verbes 126 à 150 (p56)</option>
-                <!-- Add more options as needed -->
             </select><p> Parfait
                 avec <a href="https://xpeuvr327.github.io/ecole/verbes.html">L'entraîneur de verbes</a><br><span
                     id="pc-tip">Astuce: utilise <code>Ctrl</code> + <code>F</code> pour chercher plus vite (sur mac c'est
@@ -153,13 +153,30 @@
 
         async function loadVerbSet() {
             const selectedFile = document.getElementById('verbSetSelect').value;
+            let fetchedVerbs = []; // Initialize to an empty array
+
             if (selectedFile === 'all') {
-                const files = ['verbs-150.json', 'verbs-50.json','verbs-wait.json']; // Add more files as needed
-                const promises = files.map(file => fetchVerbs(file));
-                verbs = (await Promise.all(promises)).flat();
+                const files = ['verbs-150.json', 'verbs-50.json', 'verbs-51-99.json','verbs-wait.json'];
+                // Use Promise.allSettled to allow some promises to fail without stopping others
+                const results = await Promise.allSettled(files.map(file => fetchVerbs(file)));
+
+                // Process the results from Promise.allSettled
+                fetchedVerbs = results.flatMap(result => {
+                    if (result.status === 'fulfilled') {
+                        return result.value; // Add the successfully fetched verbs
+                    } else {
+                        // Log the reason for rejection (the error from fetchVerbs)
+                        console.warn(`Failed to load a verb set: ${result.reason}`);
+                        return []; // Return empty array for failed files
+                    }
+                });
+
             } else {
-                verbs = await fetchVerbs(selectedFile);
+                fetchedVerbs = await fetchVerbs(selectedFile);
+                console.warn('useless call')
             }
+
+            verbs = fetchedVerbs; // Assign the successfully loaded verbs
             displaySearchResults('');
         }
 
