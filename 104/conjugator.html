@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -163,7 +164,16 @@
         }
 
         function displaySearchResults(searchTerm) {
-            const results = verbs.filter(verb => verb.deutsch.toLowerCase().includes(searchTerm.toLowerCase()) || verb.frtrad.toLowerCase().includes(searchTerm.toLowerCase()));
+            const normalizeString = (str) => {
+                return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            };
+
+            const normalizedSearchTerm = normalizeString(searchTerm).toLowerCase();
+
+            const results = verbs.filter(verb =>
+                normalizeString(verb.deutsch).toLowerCase().includes(normalizedSearchTerm) ||
+                normalizeString(verb.frtrad).toLowerCase().includes(normalizedSearchTerm)
+            );
 
             const resultsDiv = document.getElementById('searchResults');
 
@@ -181,8 +191,8 @@
                 `)
                 .join('');
 
-            document.getElementById('searchInput').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' && results.length === 1) {
+            document.getElementById('searchInput').addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && results.length === 1) {
                     const verbButton = resultsDiv.querySelector('.verb-button');
                     if (verbButton) {
                         verbButton.click();
@@ -190,7 +200,6 @@
                 }
             });
         }
-
         function getReflexiveForm(verb, pronoun, verbForm) {
             const reflexivePronouns = {
                 'ich': 'mich',
