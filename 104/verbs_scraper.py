@@ -21,9 +21,9 @@ def get_verb_conjugations(verb):
         "frtrad": "",
         "features": {
             "auxSein": 0,
-            "isIrreg": 1,
-            "hasReflect": 0,
-            "hasParticle": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
             "isInformal": 0
         }
     }
@@ -75,7 +75,7 @@ def get_verb_conjugations(verb):
         conjugations["features"]["auxSein"] = 1
 
     # Check for reflexive verb 'sich'
-    if all(x in all_text for x in (['mich', 'sich', 'uns'])):
+    if all(x in all_text for x in (['mich', 'dich'])): #uns is always present, sich too
         conjugations["features"]["hasReflect"] = 1
 
     # is inFormal
@@ -104,9 +104,10 @@ def add_particle_to_conjugations(conjugations, particle):
 def main():
     conjugations_list = []
     last_verb = None
-
+    irregState = 0
+    
     while True:
-        verb = input("Enter a German verb ('exit', 'compile ', 'particle ', 'comment '): ")
+        verb = input("Enter a German verb ('exit', 'compile ', 'particle ', 'comment ', 'irreg'): ")
         if verb.lower() == 'exit':
             break
         elif verb.lower().startswith('compile '):
@@ -135,9 +136,14 @@ def main():
             print(f"Added comment '{comment}' to the verb:")
             print(last_verb)
             continue
+        elif verb == "irreg":
+            irregState = 1- irregState
+            print("Irreg state is now", irregState)
+            continue
 
         conjugations = get_verb_conjugations(verb)
         if conjugations:
+            conjugations["features"]["isIrreg"] = irregState
             conjugations_list.append(conjugations)
             last_verb = conjugations
             print(',', conjugations)

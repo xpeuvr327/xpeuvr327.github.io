@@ -282,11 +282,8 @@
             <div class="menu-item" onclick="resetProgress()">
                 <i>🔄</i> Réinitialiser la progression
             </div>
-            <div class="menu-item" onclick="toggleStats()">
-                <i>📊</i> Afficher les statistiques
-            </div>
-            <div class="menu-item" onclick="toggleHint()">
-                <i>❗</i> Indice
+            <div class="menu-item">
+                <i>📖</i> <a href="/104/conjugator.html" style="text-decoration: none; color:black">Voir toutes les conjugaisons</a>
             </div>
         </div>
         <div class="modal" id="settingsModal">
@@ -317,7 +314,7 @@
         const LEVEL_THRESHOLD =3; 
 
         async function fetchVerbs() {
-            const response = await fetch('verbs-150.json');
+            const response = await fetch('/104/verbs-101-150.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

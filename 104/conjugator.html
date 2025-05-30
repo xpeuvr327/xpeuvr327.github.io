@@ -131,7 +131,7 @@
                 <option value="all">Tous les verbes</option>
                 <option	value="verbs-50.json">les verbes 1 à 50 (p52)</option>
 				<option value="verbs-51-99.json">les verbes 51 à 99 (p53)</option>
-				<option value="verbs-150.json">les verbes 126 à 150 (p56)</option>
+				<option value="verbs-101-150.json">les verbes 126 à 150 (p56)</option>
             </select><p> Parfait
                 avec <a href="https://xpeuvr327.github.io/ecole/verbes.html">L'entraîneur de verbes</a><br><span
                     id="pc-tip">Astuce: utilise <code>Ctrl</code> + <code>F</code> pour chercher plus vite (sur mac c'est
@@ -156,7 +156,7 @@
             let fetchedVerbs = []; // Initialize to an empty array
 
             if (selectedFile === 'all') {
-                const files = ['verbs-150.json', 'verbs-50.json', 'verbs-51-99.json','verbs-wait.json'];
+                const files = ['verbs-101-150.json', 'verbs-50.json', 'verbs-51-99.json','verbs-wait.json'];
                 // Use Promise.allSettled to allow some promises to fail without stopping others
                 const results = await Promise.allSettled(files.map(file => fetchVerbs(file)));
 
@@ -226,16 +226,19 @@
                 'ihr': 'euch',
                 'Sie': 'sich'
             };
-
-            if (verb.features?.isReflect === 1) {
+            
+            console.log(verb.features?.isReflect)
+             if (verb.features?.isReflect === 1) {
                 const reflexive = reflexivePronouns[pronoun];
                 const words = verbForm.split(' ');
-
                 if (words.length === 1) {
                     return words[0] + ' ' + reflexive;
+                    console.warn(2)
                 } else {
+                    console.warn("f")
                     return words[0] + ' ' + reflexive + ' ' + words.slice(1).join(' ');
                 }
+                console.log("f")
             }
             return verbForm;
         }
@@ -243,7 +246,6 @@
         function showConjugation(verbInfinitive) {
             const verb = verbs.find(v => v.deutsch === verbInfinitive);
             if (!verb) return;
-
             const pronouns = ["ich", "du", "er/sie/es", "wir", "ihr", "Sie"];
             const auxiliary = verb.features?.auxSein === 1 ? 'sein' : 'haben';
             const auxForms = {
