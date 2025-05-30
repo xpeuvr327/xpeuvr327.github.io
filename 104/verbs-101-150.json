@@ -1107,7 +1107,8 @@
         "frtrad": "s'endormir",
         "features": {
             "isParticle": 1,
-            "isIrreg": 1
+            "isIrreg": 1,
+            "auxSein": 1
         }
     },
     {
