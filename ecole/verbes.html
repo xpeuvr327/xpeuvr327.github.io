@@ -314,7 +314,12 @@
         const LEVEL_THRESHOLD =3; 
 
         async function fetchVerbs() {
-            const response = await fetch('/104/verbs-101-150.json');
+            // Generate a random UUID or a random string
+            const randomQueryParam = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        
+            // Append the random query parameter to the URL
+            const response = await fetch(`/104/verbs-101-150.json?uuid=${randomQueryParam}`);
+        
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
