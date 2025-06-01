@@ -296,7 +296,16 @@
                     <div class="settings-item active" data-tense="prt" onclick="toggleSetting(this, 'prt')">Prétérit</div>
                     <div class="settings-item active" data-tense="prk" onclick="toggleSetting(this, 'prk')">Passé composé</div>
                     <div class="settings-item active" data-tense="frtrad" onclick="toggleSetting(this, 'frtrad')">Traduction</div>
-                </div>                
+                </div>     
+            <div class="verb-selection">
+            <label for="verbFileSelect">Sélectionner un fichier de verbes:</label>
+            <select id="verbFileSelect" onchange="fetchVerbs()">
+                <option value="all">Tous les verbes</option>
+                <option value="verbs-1-50.json">Verbes 1-50</option>
+                <option value="verbs-51-100.json">Verbes 51-100</option>
+                <option value="verbs-101-150.json" selected>Verbes 101-150</option>
+            </select>
+        </div>           
             </div>
         </div>
     </div>
@@ -311,19 +320,32 @@
         let correctAnswers = 0;
         let incorrectAnswers = 0;
         let currentLevel = 1;
-        const LEVEL_THRESHOLD =3; 
 
         async function fetchVerbs() {
-            // Generate a random UUID or a random string
+            const verbFile = document.getElementById('verbFileSelect').value;
             const randomQueryParam = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        
-            // Append the random query parameter to the URL
-            const response = await fetch(`/104/verbs-101-150.json?uuid=${randomQueryParam}`);
-        
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+
+            if (verbFile === 'all') {
+                const files = ['verbs-1-50.json', 'verbs-51-100.json', 'verbs-101-150.json'];
+                const responses = await Promise.all(files.map(file => fetch(`/104/${file}?uuid=${randomQueryParam}`)));
+
+                const jsonPromises = responses.map(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                });
+
+                verbs = (await Promise.all(jsonPromises)).flat();
+            } else {
+                const response = await fetch(`/104/${verbFile}?uuid=${randomQueryParam}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                verbs = await response.json();
             }
-            verbs = await response.json();
+
             loadProgress();
             startTraining();
         }
@@ -694,7 +716,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     loadSettings();
     fetchVerbs();
-    startTraining();
 });
 
 

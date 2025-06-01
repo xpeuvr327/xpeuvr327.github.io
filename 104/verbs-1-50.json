@@ -1108,7 +1108,7 @@
             "hasReflect": 1,
             "hasParticle": 1
         }
-    },
+    },{"deutsch":"ankommen","prs":["komme an","kommst an","kommt an","kommen an","kommt an","kommen an"],"prt":["kam an","kamst an","kam an","kamen an","kamt an","kamen an"],"prk":"angekommen","frtrad":"p an","features":{"auxSein":1,"hasParticle":1}},
     {
         "deutsch": "aufstehen",
         "prs": [
@@ -1187,5 +1187,47 @@
             "hasReflect": 1,
             "hasParticle": 1
         }
+    },
+    {
+        "deutsch": "bringen",
+        "prs": [
+            "bringe",
+            "bringst",
+            "bringt",
+            "bringen",
+            "bringt",
+            "bringen"
+        ],
+        "prt": [
+            "brachte",
+            "brachtest",
+            "brachte",
+            "brachten",
+            "brachtet",
+            "brachten"
+        ],
+        "prk": "gebracht",
+        "frtrad": "apporter"
+    },
+    {
+        "deutsch": "wissen",
+        "prs": [
+            "wei\u00df",
+            "wei\u00dft",
+            "wei\u00df",
+            "wissen",
+            "wisst",
+            "wissen"
+        ],
+        "prt": [
+            "wusste",
+            "wusstest",
+            "wusste",
+            "wussten",
+            "wusstet",
+            "wussten"
+        ],
+        "prk": "gewusst",
+        "frtrad": "savoir (qch)"
     }
 ]
