@@ -1,0 +1,1163 @@
+[
+        {
+        "deutsch": "baden",
+        "prs": [
+            "bade",
+            "badest",
+            "badet",
+            "baden",
+            "badet",
+            "baden"
+        ],
+        "prt": [
+            "badete",
+            "badetest",
+            "badete",
+            "badeten",
+            "badetet",
+            "badeten"
+        ],
+        "prk": "gebadet",
+        "frtrad": "se baigner"
+    },
+    {
+        "deutsch": "bedeuten",
+        "prs": [
+            "bedeute",
+            "bedeutest",
+            "bedeutet",
+            "bedeuten",
+            "bedeutet",
+            "bedeuten"
+        ],
+        "prt": [
+            "bedeutete",
+            "bedeutetest",
+            "bedeutete",
+            "bedeuteten",
+            "bedeutetet",
+            "bedeuteten"
+        ],
+        "prk": "bedeutet",
+        "frtrad": "signifier, vouloir dire"
+    },
+    {
+        "deutsch": "beeilen",
+        "prs": [
+            "beeile",
+            "beeilst",
+            "beeilt",
+            "beeilen",
+            "beeilt",
+            "beeilen"
+        ],
+        "prt": [
+            "beeilte",
+            "beeiltest",
+            "beeilte",
+            "beeilten",
+            "beeiltet",
+            "beeilten"
+        ],
+        "prk": "beeilt",
+        "frtrad": "se d\u00e9p\u00eacher",
+        "features": {
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "brauchen",
+        "prs": [
+            "brauche",
+            "brauchst",
+            "braucht",
+            "brauchen",
+            "braucht",
+            "brauchen"
+        ],
+        "prt": [
+            "brauchte",
+            "brauchtest",
+            "brauchte",
+            "brauchten",
+            "brauchtet",
+            "brauchten"
+        ],
+        "prk": "gebraucht",
+        "frtrad": "avoir besoin de",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "glauben",
+        "prs": [
+            "glaube",
+            "glaubst",
+            "glaubt",
+            "glauben",
+            "glaubt",
+            "glauben"
+        ],
+        "prt": [
+            "glaubte",
+            "glaubtest",
+            "glaubte",
+            "glaubten",
+            "glaubtet",
+            "glaubten"
+        ],
+        "prk": "geglaubt",
+        "frtrad": "croire"
+    },
+    {
+        "deutsch": "kochen",
+        "prs": [
+            "koche",
+            "kochst",
+            "kocht",
+            "kochen",
+            "kocht",
+            "kochen"
+        ],
+        "prt": [
+            "kochte",
+            "kochtest",
+            "kochte",
+            "kochten",
+            "kochtet",
+            "kochten"
+        ],
+        "prk": "gekocht",
+        "frtrad": "faire la cuisine, cuire"
+    },
+    {
+        "deutsch": "kosten",
+        "prs": [
+            "koste",
+            "kostest",
+            "kostet",
+            "kosten",
+            "kostet",
+            "kosten"
+        ],
+        "prt": [
+            "kostete",
+            "kostetest",
+            "kostete",
+            "kosteten",
+            "kostetet",
+            "kosteten"
+        ],
+        "prk": "gekostet",
+        "frtrad": "co\u00fbter"
+    },
+    {
+        "deutsch": "lachen",
+        "prs": [
+            "lache",
+            "lachst",
+            "lacht",
+            "lachen",
+            "lacht",
+            "lachen"
+        ],
+        "prt": [
+            "lachte",
+            "lachtest",
+            "lachte",
+            "lachten",
+            "lachtet",
+            "lachten"
+        ],
+        "prk": "gelacht",
+        "frtrad": "rire"
+    },
+    {
+        "deutsch": "leben",
+        "prs": [
+            "lebe",
+            "lebst",
+            "lebt",
+            "leben",
+            "lebt",
+            "leben"
+        ],
+        "prt": [
+            "lebte",
+            "lebtest",
+            "lebte",
+            "lebten",
+            "lebtet",
+            "lebten"
+        ],
+        "prk": "gelebt",
+        "frtrad": "vivre",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "parken",
+        "prs": [
+            "parke",
+            "parkst",
+            "parkt",
+            "parken",
+            "parkt",
+            "parken"
+        ],
+        "prt": [
+            "parkte",
+            "parktest",
+            "parkte",
+            "parkten",
+            "parktet",
+            "parkten"
+        ],
+        "prk": "geparkt",
+        "frtrad": "(se) garer"
+    },
+    {
+        "deutsch": "rauchen",
+        "prs": [
+            "rauche",
+            "rauchst",
+            "raucht",
+            "rauchen",
+            "raucht",
+            "rauchen"
+        ],
+        "prt": [
+            "rauchte",
+            "rauchtest",
+            "rauchte",
+            "rauchten",
+            "rauchtet",
+            "rauchten"
+        ],
+        "prk": "geraucht",
+        "frtrad": "fumer",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "regnen",
+        "prs": [
+            null,
+            null,
+            "regnet",
+            null,
+            null,
+            null
+        ],
+        "prt": [
+            null,
+            null,
+            "regnete",
+            null,
+            null,
+            null
+        ],
+        "prk": "",
+        "frtrad": "pleuvoir",
+        "features": {
+            "isInformal": 1
+        }
+    },
+    {
+        "deutsch": "reisen",
+        "prs": [
+            "reise",
+            "reist",
+            "reist",
+            "reisen",
+            "reist",
+            "reisen"
+        ],
+        "prt": [
+            "reiste",
+            "reistest",
+            "reiste",
+            "reisten",
+            "reistet",
+            "reisten"
+        ],
+        "prk": "gereist",
+        "frtrad": "voyager",
+        "features": {
+            "auxSein": 1
+        }
+    },
+    {
+        "deutsch": "schenken",
+        "prs": [
+            "schenke",
+            "schenkst",
+            "schenkt",
+            "schenken",
+            "schenkt",
+            "schenken"
+        ],
+        "prt": [
+            "schenkte",
+            "schenktest",
+            "schenkte",
+            "schenkten",
+            "schenktet",
+            "schenkten"
+        ],
+        "prk": "geschenkt",
+        "frtrad": "offrir",
+        "comment": "+D +A"
+    },
+    {
+        "deutsch": "schmecken",
+        "prs": [
+            "schmecke",
+            "schmeckst",
+            "schmeckt",
+            "schmecken",
+            "schmeckt",
+            "schmecken"
+        ],
+        "prt": [
+            "schmeckte",
+            "schmecktest",
+            "schmeckte",
+            "schmeckten",
+            "schmecktet",
+            "schmeckten"
+        ],
+        "prk": "geschmeckt",
+        "frtrad": "\u00eatre bon (aliment)",
+        "comment": "+D"
+    },
+    {
+        "deutsch": "sparen",
+        "prs": [
+            "spare",
+            "sparst",
+            "spart",
+            "sparen",
+            "spart",
+            "sparen"
+        ],
+        "prt": [
+            "sparte",
+            "spartest",
+            "sparte",
+            "sparten",
+            "spartet",
+            "sparten"
+        ],
+        "prk": "gespart",
+        "frtrad": "\u00e9conomiser, \u00e9pargner",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "stimmen",
+        "prs": [
+            "stimme",
+            "stimmst",
+            "stimmt",
+            "stimmen",
+            "stimmt",
+            "stimmen"
+        ],
+        "prt": [
+            "stimmte",
+            "stimmtest",
+            "stimmte",
+            "stimmten",
+            "stimmtet",
+            "stimmten"
+        ],
+        "prk": "gestimmt",
+        "frtrad": "\u00eatre exact/juste"
+    },
+    {
+        "deutsch": "tanzen",
+        "prs": [
+            "tanze",
+            "tanzt",
+            "tanzt",
+            "tanzen",
+            "tanzt",
+            "tanzen"
+        ],
+        "prt": [
+            "tanzte",
+            "tanztest",
+            "tanzte",
+            "tanzten",
+            "tanztet",
+            "tanzten"
+        ],
+        "prk": "getanzt",
+        "frtrad": "danser"
+    },
+    {
+        "deutsch": "\u00fcbersetzen",
+        "prs": [
+            "\u00fcbersetze",
+            "\u00fcbersetzt",
+            "\u00fcbersetzt",
+            "\u00fcbersetzen",
+            "\u00fcbersetzt",
+            "\u00fcbersetzen"
+        ],
+        "prt": [
+            "\u00fcbersetzte",
+            "\u00fcbersetztest",
+            "\u00fcbersetzte",
+            "\u00fcbersetzten",
+            "\u00fcbersetztet",
+            "\u00fcbersetzten"
+        ],
+        "prk": "\u00fcbersetzt",
+        "frtrad": "traduire",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "verdienen",
+        "prs": [
+            "verdiene",
+            "verdienst",
+            "verdient",
+            "verdienen",
+            "verdient",
+            "verdienen"
+        ],
+        "prt": [
+            "verdiente",
+            "verdientest",
+            "verdiente",
+            "verdienten",
+            "verdientet",
+            "verdienten"
+        ],
+        "prk": "verdient",
+        "frtrad": "gagner (salaire), m\u00e9riter"
+    },
+    {
+        "deutsch": "verpassen",
+        "prs": [
+            "verpasse",
+            "verpasst",
+            "verpasst",
+            "verpassen",
+            "verpasst",
+            "verpassen"
+        ],
+        "prt": [
+            "verpasste",
+            "verpasstest",
+            "verpasste",
+            "verpassten",
+            "verpasstet",
+            "verpassten"
+        ],
+        "prk": "verpasst",
+        "frtrad": "manquer, rater (train, bus)",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "weinen",
+        "prs": [
+            "weine",
+            "weinst",
+            "weint",
+            "weinen",
+            "weint",
+            "weinen"
+        ],
+        "prt": [
+            "weinte",
+            "weintest",
+            "weinte",
+            "weinten",
+            "weintet",
+            "weinten"
+        ],
+        "prk": "geweint",
+        "frtrad": "pleurer"
+    },
+    {
+        "deutsch": "wiederholen",
+        "prs": [
+            "hole",
+            "holst",
+            "holt",
+            "holen",
+            "holt",
+            "holen"
+        ],
+        "prt": [
+            "holte",
+            "holtest",
+            "holte",
+            "holten",
+            "holtet",
+            "holten"
+        ],
+        "prk": "holt",
+        "frtrad": "r\u00e9p\u00e9ter",
+        "comment": "+A"
+    },
+    {
+        "deutsch": "abholen",
+        "prs": [
+            "hole ab",
+            "holst ab",
+            "holt ab",
+            "holen ab",
+            "holt ab",
+            "holen ab"
+        ],
+        "prt": [
+            "holte ab",
+            "holtest ab",
+            "holte ab",
+            "holten ab",
+            "holtet ab",
+            "holten ab"
+        ],
+        "prk": "abgeholt",
+        "frtrad": "aller chercher qqn",
+        "features": {
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "aufpassen",
+        "prs": [
+            "passe auf",
+            "passt auf",
+            "passt auf",
+            "passen auf",
+            "passt auf",
+            "passen auf"
+        ],
+        "prt": [
+            "passte auf",
+            "passtest auf",
+            "passte auf",
+            "passten auf",
+            "passtet auf",
+            "passten auf"
+        ],
+        "prk": "aufgepasst",
+        "frtrad": "faire attention \u00e0",
+        "comment": "auf +A",
+        "features": {
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "aufr\u00e4umen",
+        "prs": [
+            "r\u00e4ume auf",
+            "r\u00e4umst auf",
+            "r\u00e4umt auf",
+            "r\u00e4umen auf",
+            "r\u00e4umt auf",
+            "r\u00e4umen auf"
+        ],
+        "prt": [
+            "r\u00e4umte auf",
+            "r\u00e4umtest auf",
+            "r\u00e4umte auf",
+            "r\u00e4umten auf",
+            "r\u00e4umtet auf",
+            "r\u00e4umten auf"
+        ],
+        "prk": "aufger\u00e4umt",
+        "frtrad": "ranger, mettre en ordre",
+        "features": {
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "umtauschen",
+        "prs": [
+            "tausche um",
+            "tauschst um",
+            "tauscht um",
+            "tauschen um",
+            "tauscht um",
+            "tauschen um"
+        ],
+        "prt": [
+            "tauschte um",
+            "tauschtest um",
+            "tauschte um",
+            "tauschten um",
+            "tauschtet um",
+            "tauschten um"
+        ],
+        "prk": "umgetauscht",
+        "frtrad": "\u00e9changer",
+        "features": {
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "fliegen",
+        "prs": [
+            "fliege",
+            "fliegst",
+            "fliegt",
+            "fliegen",
+            "fliegt",
+            "fliegen"
+        ],
+        "prt": [
+            "flog",
+            "flogst",
+            "flog",
+            "flogen",
+            "flogt",
+            "flogen"
+        ],
+        "prk": "geflogen",
+        "frtrad": "voler, aller en avion",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "gewinnen",
+        "prs": [
+            "gewinne",
+            "gewinnst",
+            "gewinnt",
+            "gewinnen",
+            "gewinnt",
+            "gewinnen"
+        ],
+        "prt": [
+            "gewann",
+            "gewannst",
+            "gewann",
+            "gewannen",
+            "gewannt",
+            "gewannen"
+        ],
+        "prk": "gewonnen",
+        "frtrad": "gagner (jeu, concours)",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "halten",
+        "prs": [
+            "halte",
+            "h\u00e4ltst",
+            "h\u00e4lt",
+            "halten",
+            "haltet",
+            "halten"
+        ],
+        "prt": [
+            "hielt",
+            "hieltest",
+            "hielt",
+            "hielten",
+            "hieltet",
+            "hielten"
+        ],
+        "prk": "gehalten",
+        "frtrad": "tenir s'arr\u00eater",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "hei\u00dfen",
+        "prs": [
+            "hei\u00dfe",
+            "hei\u00dft",
+            "hei\u00dft",
+            "hei\u00dfen",
+            "hei\u00dft",
+            "hei\u00dfen"
+        ],
+        "prt": [
+            "hie\u00df",
+            "hie\u00dfest",
+            "hie\u00df",
+            "hie\u00dfen",
+            "hie\u00dft",
+            "hie\u00dfen"
+        ],
+        "prk": "gehei\u00dfen",
+        "frtrad": "s'appeler",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "helfen",
+        "prs": [
+            "helfe",
+            "hilfst",
+            "hilft",
+            "helfen",
+            "helft",
+            "helfen"
+        ],
+        "prt": [
+            "half",
+            "halfst",
+            "half",
+            "halfen",
+            "halft",
+            "halfen"
+        ],
+        "prk": "geholfen",
+        "frtrad": "aider qqn",
+        "comment": "+D",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "lassen",
+        "prs": [
+            "lasse",
+            "l\u00e4sst",
+            "l\u00e4sst",
+            "lassen",
+            "lasst",
+            "lassen"
+        ],
+        "prt": [
+            "lie\u00df",
+            "lie\u00dft",
+            "lie\u00df",
+            "lie\u00dfen",
+            "lie\u00dft",
+            "lie\u00dfen"
+        ],
+        "prk": "gelassen",
+        "frtrad": "laisser",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "schneiden",
+        "prs": [
+            "schneide",
+            "schneidest",
+            "schneidet",
+            "schneiden",
+            "schneidet",
+            "schneiden"
+        ],
+        "prt": [
+            "schnitt",
+            "schnittest",
+            "schnitt",
+            "schnitten",
+            "schnittet",
+            "schnitten"
+        ],
+        "prk": "geschnitten",
+        "frtrad": "couper",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "schwimmen",
+        "prs": [
+            "schwimme",
+            "schwimmst",
+            "schwimmt",
+            "schwimmen",
+            "schwimmt",
+            "schwimmen"
+        ],
+        "prt": [
+            "schwamm",
+            "schwammst",
+            "schwamm",
+            "schwammen",
+            "schwammt",
+            "schwammen"
+        ],
+        "prk": "geschwommen",
+        "frtrad": "nager",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "steigen",
+        "prs": [
+            "steige",
+            "steigst",
+            "steigt",
+            "steigen",
+            "steigt",
+            "steigen"
+        ],
+        "prt": [
+            "stieg",
+            "stiegst",
+            "stieg",
+            "stiegen",
+            "stiegt",
+            "stiegen"
+        ],
+        "prk": "gestiegen",
+        "frtrad": "monter",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "tragen",
+        "prs": [
+            "trage",
+            "tr\u00e4gst",
+            "tr\u00e4gt",
+            "tragen",
+            "tragt",
+            "tragen"
+        ],
+        "prt": [
+            "trug",
+            "trugst",
+            "trug",
+            "trugen",
+            "trugt",
+            "trugen"
+        ],
+        "prk": "getragen",
+        "frtrad": "porter",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "treffen",
+        "prs": [
+            "treffe",
+            "triffst",
+            "trifft",
+            "treffen",
+            "trefft",
+            "treffen"
+        ],
+        "prt": [
+            "traf",
+            "trafst",
+            "traf",
+            "trafen",
+            "traft",
+            "trafen"
+        ],
+        "prk": "getroffen",
+        "frtrad": "rencontrer",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "tun",
+        "prs": [
+            "tue",
+            "tust",
+            "tut",
+            "tun",
+            "tut",
+            "tun"
+        ],
+        "prt": [
+            "tat",
+            "tatest",
+            "tat",
+            "taten",
+            "tatet",
+            "taten"
+        ],
+        "prk": "getan",
+        "frtrad": "faire (sens g\u00e9n\u00e9ral)",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "unterschreiben",
+        "prs": [
+            "unterschreibe",
+            "unterschreibst",
+            "unterschreibt",
+            "unterschreiben",
+            "unterschreibt",
+            "unterschreiben"
+        ],
+        "prt": [
+            "unterschrieb",
+            "unterschriebst",
+            "unterschrieb",
+            "unterschrieben",
+            "unterschriebt",
+            "unterschrieben"
+        ],
+        "prk": "unterschrieben",
+        "frtrad": "signer",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "verbieten",
+        "prs": [
+            "verbiete",
+            "verbietest",
+            "verbietet",
+            "verbieten",
+            "verbietet",
+            "verbieten"
+        ],
+        "prt": [
+            "verbot",
+            "verbotest",
+            "verbot",
+            "verboten",
+            "verbotet",
+            "verboten"
+        ],
+        "prk": "verboten",
+        "frtrad": "interdire",
+        "comment": "+D +A",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "verlieren",
+        "prs": [
+            "verliere",
+            "verlierst",
+            "verliert",
+            "verlieren",
+            "verliert",
+            "verlieren"
+        ],
+        "prt": [
+            "verlor",
+            "verlorst",
+            "verlor",
+            "verloren",
+            "verlort",
+            "verloren"
+        ],
+        "prk": "verloren",
+        "frtrad": "perdre",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "versprechen",
+        "prs": [
+            "verspreche",
+            "versprichst",
+            "verspricht",
+            "versprechen",
+            "versprecht",
+            "versprechen"
+        ],
+        "prt": [
+            "versprach",
+            "versprachst",
+            "versprach",
+            "versprachen",
+            "verspracht",
+            "versprachen"
+        ],
+        "prk": "versprochen",
+        "frtrad": "promettre",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "waschen",
+        "prs": [
+            "wasche",
+            "w\u00e4schst",
+            "w\u00e4scht",
+            "waschen",
+            "wascht",
+            "waschen"
+        ],
+        "prt": [
+            "wusch",
+            "wuschest",
+            "wusch",
+            "wuschen",
+            "wuscht",
+            "wuschen"
+        ],
+        "prk": "gewaschen",
+        "frtrad": "laver",
+        "features": {
+            "isIrreg": 1
+        }
+    },
+    {
+        "deutsch": "annehmen",
+        "prs": [
+            "nehme an",
+            "nimmst an",
+            "nimmt an",
+            "nehmen an",
+            "nehmt an",
+            "nehmen an"
+        ],
+        "prt": [
+            "nahm an",
+            "nahmst an",
+            "nahm an",
+            "nahmen an",
+            "nahmt an",
+            "nahmen an"
+        ],
+        "prk": "angenommen",
+        "frtrad": "accepter, supposer",
+        "features": {
+            "isIrreg": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "ansehen",
+        "prs": [
+            "sehe an",
+            "siehst an",
+            "sieht an",
+            "sehen an",
+            "seht an",
+            "sehen an"
+        ],
+        "prt": [
+            "sah an",
+            "sahst an",
+            "sah an",
+            "sahen an",
+            "saht an",
+            "sahen an"
+        ],
+        "prk": "angesehen",
+        "frtrad": "regarder",
+        "features": {
+            "isIrreg": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "ansehen",
+        "prs": [
+            "sehe an",
+            "siehst an",
+            "sieht an",
+            "sehen an",
+            "seht an",
+            "sehen an"
+        ],
+        "prt": [
+            "sah an",
+            "sahst an",
+            "sah an",
+            "sahen an",
+            "saht an",
+            "sahen an"
+        ],
+        "prk": "angesehen",
+        "frtrad": "regarder",
+        "features": {
+            "isIrreg": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "anziehen",
+        "prs": [
+            "ziehe an",
+            "ziehst an",
+            "zieht an",
+            "ziehen an",
+            "zieht an",
+            "ziehen an"
+        ],
+        "prt": [
+            "zog an",
+            "zogst an",
+            "zog an",
+            "zogen an",
+            "zogt an",
+            "zogen an"
+        ],
+        "prk": "angezogen",
+        "frtrad": "(s')habiller",
+        "features": {
+            "isIrreg": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "ausziehen",
+        "prs": [
+            "ziehe aus",
+            "ziehst aus",
+            "zieht aus",
+            "ziehen aus",
+            "zieht aus",
+            "ziehen aus"
+        ],
+        "prt": [
+            "zog aus",
+            "zogst aus",
+            "zog aus",
+            "zogen aus",
+            "zogt aus",
+            "zogen aus"
+        ],
+        "prk": "ausgezogen",
+        "frtrad": "(se) d\u00e9sabiller",
+        "features": {
+            "isIrreg": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "umziehen",
+        "prs": [
+            "ziehe um",
+            "ziehst um",
+            "zieht um",
+            "ziehen um",
+            "zieht um",
+            "ziehen um"
+        ],
+        "prt": [
+            "zog um",
+            "zogst um",
+            "zog um",
+            "zogen um",
+            "zogt um",
+            "zogen um"
+        ],
+        "prk": "umgezogen",
+        "frtrad": "(se) changer",
+        "features": {
+            "isIrreg": 1,
+            "hasParticle": 1
+        }
+    }
+]

@@ -107,18 +107,18 @@ def main():
     irregState = 0
     
     while True:
-        verb = input("Enter a German verb ('exit', 'compile ', 'particle ', 'comment ', 'irreg'): ")
+        verb = input("Enter a German verb ('exit', 'Export ', 'Particle ', 'Comment ', 'Irreg'): ")
         if verb.lower() == 'exit':
             break
-        elif verb.lower().startswith('compile '):
+        elif verb.lower().startswith('e '):
             filename = verb.lower().split(' ')[1] + ".json"
             print(filename)
             minified_json = minify_json(conjugations_list)
             with open(filename, 'w') as f:
                 json.dump(minified_json, f, separators=(',', ':'))
-            print("Compiled and saved to ", filename)
+            print("Exported and saved to ", filename)
             continue
-        elif verb.lower().startswith('particle '):
+        elif verb.lower().startswith('p '):
             particle = verb.lower().split(' ')[1]
             if last_verb is None:
                 print("No verb to add a particle to. Please enter a verb first.")
@@ -127,7 +127,7 @@ def main():
             print(f"Modified conjugations with particle '{particle}':")
             print(',',last_verb)
             continue
-        elif verb.lower().startswith('comment '):
+        elif verb.lower().startswith('c '):
             comment = verb.split(' ', 1)[1]
             if last_verb is None:
                 print("No verb to add a comment to. Please enter a verb first.")
@@ -136,7 +136,7 @@ def main():
             print(f"Added comment '{comment}' to the verb:")
             print(last_verb)
             continue
-        elif verb == "irreg":
+        elif verb == "i":
             irregState = 1- irregState
             print("Irreg state is now", irregState)
             continue

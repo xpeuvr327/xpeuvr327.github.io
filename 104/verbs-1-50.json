@@ -1,0 +1,1191 @@
+[
+    {
+        "deutsch": "antworten",
+        "prs": [
+            "antworte",
+            "antwortest",
+            "antwortet",
+            "antworten",
+            "antwortet",
+            "antworten"
+        ],
+        "prt": [
+            "antwortete",
+            "antwortetest",
+            "antwortete",
+            "antworteten",
+            "antwortetet",
+            "antworteten"
+        ],
+        "prk": "geantwortet",
+        "frtrad": "r\u00e9pondre",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": "auf +A"
+    },
+    {
+        "deutsch": "arbeiten",
+        "prs": [
+            "arbeite",
+            "arbeitest",
+            "arbeitet",
+            "arbeiten",
+            "arbeitet",
+            "arbeiten"
+        ],
+        "prt": [
+            "arbeitete",
+            "arbeitetest",
+            "arbeitete",
+            "arbeiteten",
+            "arbeitetet",
+            "arbeiteten"
+        ],
+        "prk": "gearbeitet",
+        "frtrad": "travailler",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "besuchen",
+        "prs": [
+            "besuche",
+            "besuchst",
+            "besucht",
+            "besuchen",
+            "besucht",
+            "besuchen"
+        ],
+        "prt": [
+            "besuchte",
+            "besuchtest",
+            "besuchte",
+            "besuchten",
+            "besuchtet",
+            "besuchten"
+        ],
+        "prk": "besucht",
+        "frtrad": "rendre visite, visiter",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": "+A"
+    },
+    {
+        "deutsch": "bezahlen",
+        "prs": [
+            "bezahle",
+            "bezahlst",
+            "bezahlt",
+            "bezahlen",
+            "bezahlt",
+            "bezahlen"
+        ],
+        "prt": [
+            "bezahlte",
+            "bezahltest",
+            "bezahlte",
+            "bezahlten",
+            "bezahltet",
+            "bezahlten"
+        ],
+        "prk": "bezahlt",
+        "frtrad": "payer",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "entschuldigen",
+        "prs": [
+            "entschuldige",
+            "entschuldigst",
+            "entschuldigt",
+            "entschuldigen",
+            "entschuldigt",
+            "entschuldigen"
+        ],
+        "prt": [
+            "entschuldigte",
+            "entschuldigtest",
+            "entschuldigte",
+            "entschuldigten",
+            "entschuldigtet",
+            "entschuldigten"
+        ],
+        "prk": "entschuldigt",
+        "frtrad": "s'excuser",
+        "features": {
+            "isReflect": 1
+        },
+        "comment": "pas toujours r\u00e9fl\u00e9chi"
+    },
+    {
+        "deutsch": "erz\u00e4hlen",
+        "prs": [
+            "erz\u00e4hle",
+            "erz\u00e4hlst",
+            "erz\u00e4hlt",
+            "erz\u00e4hlen",
+            "erz\u00e4hlt",
+            "erz\u00e4hlen"
+        ],
+        "prt": [
+            "erz\u00e4hlte",
+            "erz\u00e4hltest",
+            "erz\u00e4hlte",
+            "erz\u00e4hlten",
+            "erz\u00e4hltet",
+            "erz\u00e4hlten"
+        ],
+        "prk": "erz\u00e4hlt",
+        "frtrad": "raconter (parler de)",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": "von +D"
+    },
+    {
+        "deutsch": "fragen",
+        "prs": [
+            "frage",
+            "fragst",
+            "fragt",
+            "fragen",
+            "fragt",
+            "fragen"
+        ],
+        "prt": [
+            "fragte",
+            "fragtest",
+            "fragte",
+            "fragten",
+            "fragtet",
+            "fragten"
+        ],
+        "prk": "gefragt",
+        "frtrad": "demander, interroger",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "grüßen",
+        "prs": [
+            "grüße",
+            "grüßt",
+            "grüßt",
+            "grüßen",
+            "grüßt",
+            "grüßen"
+        ],
+        "prt": [
+            "grüßte",
+            "grüßtest",
+            "grüßte",
+            "grüßten",
+            "grüßtet",
+            "grüßten"
+        ],
+        "prk": "gegrüßt",
+        "frtrad": "saluer",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": "+A"
+    },
+    {
+        "deutsch": "holen",
+        "prs": [
+            "hole",
+            "holst",
+            "holt",
+            "holen",
+            "holt",
+            "holen"
+        ],
+        "prt": [
+            "holte",
+            "holtest",
+            "holte",
+            "holten",
+            "holtet",
+            "holten"
+        ],
+        "prk": "geholt",
+        "frtrad": "aller chercher",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": "+A"
+    },
+    {
+        "deutsch": "hören",
+        "prs": [
+            "höre",
+            "hörst",
+            "hört",
+            "hören",
+            "hört",
+            "hören"
+        ],
+        "prt": [
+            "hörte",
+            "hörtest",
+            "hörte",
+            "hörten",
+            "hörtet",
+            "hörten"
+        ],
+        "prk": "gehört",
+        "frtrad": "entendre parler de",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        },
+        "comment": "von +D"
+    },
+    {
+        "deutsch": "kaufen",
+        "prs": [
+            "kaufe",
+            "kaufst",
+            "kauft",
+            "kaufen",
+            "kauft",
+            "kaufen"
+        ],
+        "prt": [
+            "kaufte",
+            "kauftest",
+            "kaufte",
+            "kauften",
+            "kauftet",
+            "kauften"
+        ],
+        "prk": "gekauft",
+        "frtrad": "acheter",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "lernen",
+        "prs": [
+            "lerne",
+            "lernst",
+            "lernt",
+            "lernen",
+            "lernt",
+            "lernen"
+        ],
+        "prt": [
+            "lernte",
+            "lerntest",
+            "lernte",
+            "lernten",
+            "lerntet",
+            "lernten"
+        ],
+        "prk": "gelernt",
+        "frtrad": "apprendre",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "machen",
+        "prs": [
+            "mache",
+            "machst",
+            "macht",
+            "machen",
+            "macht",
+            "machen"
+        ],
+        "prt": [
+            "machte",
+            "machtest",
+            "machte",
+            "machten",
+            "machtet",
+            "machten"
+        ],
+        "prk": "gemacht",
+        "frtrad": "faire",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "sagen",
+        "prs": [
+            "sage",
+            "sagst",
+            "sagt",
+            "sagen",
+            "sagt",
+            "sagen"
+        ],
+        "prt": [
+            "sagte",
+            "sagtest",
+            "sagte",
+            "sagten",
+            "sagtet",
+            "sagten"
+        ],
+        "prk": "gesagt",
+        "frtrad": "dire",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "schicken",
+        "prs": [
+            "schicke",
+            "schickst",
+            "schickt",
+            "schicken",
+            "schickt",
+            "schicken"
+        ],
+        "prt": [
+            "schickte",
+            "schicktest",
+            "schickte",
+            "schickten",
+            "schicktet",
+            "schickten"
+        ],
+        "prk": "geschickt",
+        "frtrad": "envoyer",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "spielen",
+        "prs": [
+            "spiele",
+            "spielst",
+            "spielt",
+            "spielen",
+            "spielt",
+            "spielen"
+        ],
+        "prt": [
+            "spielte",
+            "spieltest",
+            "spielte",
+            "spielten",
+            "spieltet",
+            "spielten"
+        ],
+        "prk": "gespielt",
+        "frtrad": "jouer",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "suchen",
+        "prs": [
+            "suche",
+            "suchst",
+            "sucht",
+            "suchen",
+            "sucht",
+            "suchen"
+        ],
+        "prt": [
+            "suchte",
+            "suchtest",
+            "suchte",
+            "suchten",
+            "suchtet",
+            "suchten"
+        ],
+        "prk": "gesucht",
+        "frtrad": "chercher",
+        "features": {
+            "auxSein": 0,
+            "isIrreg": 0,
+            "isReflect": 0,
+            "isParticle": 0,
+            "isInformal": 0
+        }
+    },
+    {
+        "deutsch": "verkaufen",
+        "prs": [
+            "verkaufe",
+            "verkaufst",
+            "verkauft",
+            "verkaufen",
+            "verkauft",
+            "verkaufen"
+        ],
+        "prt": [
+            "verkaufte",
+            "verkauftest",
+            "verkaufte",
+            "verkauften",
+            "verkauftet",
+            "verkauften"
+        ],
+        "prk": "verkauft",
+        "frtrad": "vendre"
+    },
+    {
+        "deutsch": "aufmachen",
+        "prs": [
+            "mache auf",
+            "machst auf",
+            "macht auf",
+            "machen auf",
+            "macht auf",
+            "machen auf"
+        ],
+        "prt": [
+            "machte auf",
+            "machtest auf",
+            "machte auf",
+            "machten auf",
+            "machtet auf",
+            "machten auf"
+        ],
+        "prk": "aufgemacht",
+        "frtrad": "ouvrir",
+        "features": {
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "einkaufen",
+        "prs": [
+            "kaufe ein",
+            "kaufst ein",
+            "kauft ein",
+            "kaufen ein",
+            "kauft ein",
+            "kaufen ein"
+        ],
+        "prt": [
+            "kaufte ein",
+            "kauftest ein",
+            "kaufte ein",
+            "kauften ein",
+            "kauftet ein",
+            "kauften ein"
+        ],
+        "prk": "eingekauft",
+        "frtrad": "faire des achats",
+        "features": {
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "zumachen",
+        "prs": [
+            "mache zu",
+            "machst zu",
+            "macht zu",
+            "machen zu",
+            "macht zu",
+            "machen zu"
+        ],
+        "prt": [
+            "machte zu",
+            "machtest zu",
+            "machte zu",
+            "machten zu",
+            "machtet zu",
+            "machten zu"
+        ],
+        "prk": "zugemacht",
+        "frtrad": "fermer",
+        "features": {
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+     {
+        "deutsch": "bekommen",
+        "prs": [
+            "bekomme",
+            "bekommst",
+            "bekommt",
+            "bekommen",
+            "bekommt",
+            "bekommen"
+        ],
+        "prt": [
+            "bekam",
+            "bekamst",
+            "bekam",
+            "bekamen",
+            "bekamt",
+            "bekamen"
+        ],
+        "prk": "bekommen",
+        "frtrad": "recevoir",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "bleiben",
+        "prs": [
+            "bleibe",
+            "bleibst",
+            "bleibt",
+            "bleiben",
+            "bleibt",
+            "bleiben"
+        ],
+        "prt": [
+            "blieb",
+            "bliebst",
+            "blieb",
+            "blieben",
+            "bliebt",
+            "blieben"
+        ],
+        "prk": "geblieben",
+        "frtrad": "rester",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "essen",
+        "prs": [
+            "esse",
+            "isst",
+            "isst",
+            "essen",
+            "esst",
+            "essen"
+        ],
+        "prt": [
+            "a\u00df",
+            "a\u00dft",
+            "a\u00df",
+            "a\u00dfen",
+            "a\u00dft",
+            "a\u00dfen"
+        ],
+        "prk": "gegessen",
+        "frtrad": "manger",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "fahren",
+        "prs": [
+            "fahre",
+            "f\u00e4hrst",
+            "f\u00e4hrt",
+            "fahren",
+            "fahrt",
+            "fahren"
+        ],
+        "prt": [
+            "fuhr",
+            "fuhrst",
+            "fuhr",
+            "fuhren",
+            "fuhrt",
+            "fuhren"
+        ],
+        "prk": "gefahren",
+        "frtrad": "aller",
+        "comment": "en v\u00e9hicule",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "finden",
+        "prs": [
+            "finde",
+            "findest",
+            "findet",
+            "finden",
+            "findet",
+            "finden"
+        ],
+        "prt": [
+            "fand",
+            "fandest",
+            "fand",
+            "fanden",
+            "fandet",
+            "fanden"
+        ],
+        "prk": "gefunden",
+        "frtrad": "trouver",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "geben",
+        "prs": [
+            "gebe",
+            "gibst",
+            "gibt",
+            "geben",
+            "gebt",
+            "geben"
+        ],
+        "prt": [
+            "gab",
+            "gabst",
+            "gab",
+            "gaben",
+            "gabt",
+            "gaben"
+        ],
+        "prk": "gegeben",
+        "frtrad": "donner",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "gefallen",
+        "prs": [
+            "gefalle",
+            "gef\u00e4llst",
+            "gef\u00e4llt",
+            "gefallen",
+            "gefallt",
+            "gefallen"
+        ],
+        "prt": [
+            "gefiel",
+            "gefielst",
+            "gefiel",
+            "gefielen",
+            "gefielt",
+            "gefielen"
+        ],
+        "prk": "gefallen",
+        "frtrad": "plaire",
+        "comment": "+d",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "gehen",
+        "prs": [
+            "gehe",
+            "gehst",
+            "geht",
+            "gehen",
+            "geht",
+            "gehen"
+        ],
+        "prt": [
+            "ging",
+            "gingst",
+            "ging",
+            "gingen",
+            "gingt",
+            "gingen"
+        ],
+        "prk": "gegangen",
+        "frtrad": "aller (\u00e0 pied)",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "kommen",
+        "prs": [
+            "komme",
+            "kommst",
+            "kommt",
+            "kommen",
+            "kommt",
+            "kommen"
+        ],
+        "prt": [
+            "kam",
+            "kamst",
+            "kam",
+            "kamen",
+            "kamt",
+            "kamen"
+        ],
+        "prk": "gekommen",
+        "frtrad": "venir",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "laufen",
+        "prs": [
+            "laufe",
+            "l\u00e4ufst",
+            "l\u00e4uft",
+            "laufen",
+            "lauft",
+            "laufen"
+        ],
+        "prt": [
+            "lief",
+            "liefst",
+            "lief",
+            "liefen",
+            "lieft",
+            "liefen"
+        ],
+        "prk": "gelaufen",
+        "frtrad": "marcher, courir",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "lesen",
+        "prs": [
+            "lese",
+            "liest",
+            "liest",
+            "lesen",
+            "lest",
+            "lesen"
+        ],
+        "prt": [
+            "las",
+            "lasest",
+            "las",
+            "lasen",
+            "last",
+            "lasen"
+        ],
+        "prk": "gelesen",
+        "frtrad": "lire",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "nehmen",
+        "prs": [
+            "nehme",
+            "nimmst",
+            "nimmt",
+            "nehmen",
+            "nehmt",
+            "nehmen"
+        ],
+        "prt": [
+            "nahm",
+            "nahmst",
+            "nahm",
+            "nahmen",
+            "nahmt",
+            "nahmen"
+        ],
+        "prk": "genommen",
+        "frtrad": "prendre",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "schlafen",
+        "prs": [
+            "schlafe",
+            "schl\u00e4fst",
+            "schl\u00e4ft",
+            "schlafen",
+            "schlaft",
+            "schlafen"
+        ],
+        "prt": [
+            "schlief",
+            "schliefst",
+            "schlief",
+            "schliefen",
+            "schlieft",
+            "schliefen"
+        ],
+        "prk": "geschlafen",
+        "frtrad": "dormir",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "schreiben",
+        "prs": [
+            "schreibe",
+            "schreibst",
+            "schreibt",
+            "schreiben",
+            "schreibt",
+            "schreiben"
+        ],
+        "prt": [
+            "schrieb",
+            "schriebst",
+            "schrieb",
+            "schrieben",
+            "schriebt",
+            "schrieben"
+        ],
+        "prk": "geschrieben",
+        "frtrad": "\u00e9crire",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "sehen",
+        "prs": [
+            "sehe",
+            "siehst",
+            "sieht",
+            "sehen",
+            "seht",
+            "sehen"
+        ],
+        "prt": [
+            "sah",
+            "sahst",
+            "sah",
+            "sahen",
+            "saht",
+            "sahen"
+        ],
+        "prk": "gesehen",
+        "frtrad": "voir",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "sprechen",
+        "prs": [
+            "spreche",
+            "sprichst",
+            "spricht",
+            "sprechen",
+            "sprecht",
+            "sprechen"
+        ],
+        "prt": [
+            "sprach",
+            "sprachst",
+            "sprach",
+            "sprachen",
+            "spracht",
+            "sprachen"
+        ],
+        "prk": "gesprochen",
+        "frtrad": "parler",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "trinken",
+        "prs": [
+            "trinke",
+            "trinkst",
+            "trinkt",
+            "trinken",
+            "trinkt",
+            "trinken"
+        ],
+        "prt": [
+            "trank",
+            "trankst",
+            "trank",
+            "tranken",
+            "trankt",
+            "tranken"
+        ],
+        "prk": "getrunken",
+        "frtrad": "boire",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "vergessen",
+        "prs": [
+            "vergesse",
+            "vergisst",
+            "vergisst",
+            "vergessen",
+            "vergesst",
+            "vergessen"
+        ],
+        "prt": [
+            "verga\u00df",
+            "verga\u00dft",
+            "verga\u00df",
+            "verga\u00dfen",
+            "verga\u00dft",
+            "verga\u00dfen"
+        ],
+        "prk": "vergessen",
+        "frtrad": "oublier",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "verstehen",
+        "prs": [
+            "verstehe",
+            "verstehst",
+            "versteht",
+            "verstehen",
+            "versteht",
+            "verstehen"
+        ],
+        "prt": [
+            "verstand",
+            "verstandest",
+            "verstand",
+            "verstanden",
+            "verstandet",
+            "verstanden"
+        ],
+        "prk": "verstanden",
+        "frtrad": "comprendre",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1
+        }
+    },
+    {
+        "deutsch": "abfahren",
+        "prs": [
+            "fahre ab",
+            "f\u00e4hrst ab",
+            "f\u00e4hrt ab",
+            "fahren ab",
+            "fahrt ab",
+            "fahren ab"
+        ],
+        "prt": [
+            "fuhr ab",
+            "fuhrst ab",
+            "fuhr ab",
+            "fuhren ab",
+            "fuhrt ab",
+            "fuhren ab"
+        ],
+        "prk": "abgefahren",
+        "frtrad": "partir (en v\u00e9hicule)",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "anfangen",
+        "prs": [
+            "fange an",
+            "f\u00e4ngst an",
+            "f\u00e4ngt an",
+            "fangen an",
+            "fangt an",
+            "fangen an"
+        ],
+        "prt": [
+            "fing an",
+            "fingst an",
+            "fing an",
+            "fingen an",
+            "fingt an",
+            "fingen an"
+        ],
+        "prk": "angefangen",
+        "frtrad": "commencer",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "aufstehen",
+        "prs": [
+            "stehe auf",
+            "stehst auf",
+            "steht auf",
+            "stehen auf",
+            "steht auf",
+            "stehen auf"
+        ],
+        "prt": [
+            "stand auf",
+            "standest auf",
+            "stand auf",
+            "standen auf",
+            "standet auf",
+            "standen auf"
+        ],
+        "prk": "aufgestanden",
+        "frtrad": "se lever",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "mitnehmen",
+        "prs": [
+            "nehme mit",
+            "nimmst mit",
+            "nimmt mit",
+            "nehmen mit",
+            "nehmt mit",
+            "nehmen mit"
+        ],
+        "prt": [
+            "nahm mit",
+            "nahmst mit",
+            "nahm mit",
+            "nahmen mit",
+            "nahmt mit",
+            "nahmen mit"
+        ],
+        "prk": "mitgenommen",
+        "frtrad": "prendre avec soi, amener",
+        "features": {
+            "isIrreg": 1,
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    },
+    {
+        "deutsch": "spazierengehen",
+        "prs": [
+            "gehe spazieren",
+            "gehst spazieren",
+            "geht spazieren",
+            "gehen spazieren",
+            "geht spazieren",
+            "gehen spazieren"
+        ],
+        "prt": [
+            "ging spazieren",
+            "gingst spazieren",
+            "ging spazieren",
+            "gingen spazieren",
+            "gingt spazieren",
+            "gingen spazieren"
+        ],
+        "prk": "spazierengegangen",
+        "frtrad": "aller se promener",
+        "features": {
+            "auxSein": 1,
+            "isIrreg": 1,
+            "hasReflect": 1,
+            "hasParticle": 1
+        }
+    }
+]
