@@ -128,7 +128,7 @@ def main():
             print(',',last_verb)
             continue
         elif verb.lower().startswith('comment '):
-            comment = verb.lower().split(' ', 1)[1]
+            comment = verb.split(' ', 1)[1]
             if last_verb is None:
                 print("No verb to add a comment to. Please enter a verb first.")
                 continue
