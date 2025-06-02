@@ -156,7 +156,7 @@
             let fetchedVerbs = []; // Initialize to an empty array
 
             if (selectedFile === 'all') {
-                const files = ['verbs-1-50.json', 'verbs-51-100.json', 'verbs-101-50.json','verbs-wait.json'];
+                const files = ['verbs-1-50.json', 'verbs-51-100.json', 'verbs-101-150.json','verbs-wait.json'];
                 // Use Promise.allSettled to allow some promises to fail without stopping others
                 const results = await Promise.allSettled(files.map(file => fetchVerbs(file)));
 
