@@ -1108,7 +1108,7 @@
             "hasReflect": 1,
             "hasParticle": 1
         }
-    },{"deutsch":"ankommen","prs":["komme an","kommst an","kommt an","kommen an","kommt an","kommen an"],"prt":["kam an","kamst an","kam an","kamen an","kamt an","kamen an"],"prk":"angekommen","frtrad":"p an","features":{"auxSein":1,"hasParticle":1}},
+    },{"deutsch":"ankommen","prs":["komme an","kommst an","kommt an","kommen an","kommt an","kommen an"],"prt":["kam an","kamst an","kam an","kamen an","kamt an","kamen an"],"prk":"angekommen","frtrad":"arriver","features":{"auxSein":1,"hasParticle":1}},
     {
         "deutsch": "aufstehen",
         "prs": [
