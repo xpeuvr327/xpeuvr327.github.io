@@ -1,36 +1,256 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Tous les quizlets pour réviser l'anglais. Verbes, voc, exercices.">
-<style></style>
-<title>Vocabulaire et verbes pour l'anglais</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tous les quizlets pour réviser l'anglais. Verbes, voc, exercices.">
+    <title>Vocabulaire et verbes pour l'anglais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: #4a5568;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .quiz-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            color: #4a5568;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        iframe {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        iframe:hover {
+            transform: scale(1.02);
+        }
+
+        .seo-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .seo-section h3 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .seo-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .quiz-section {
+                padding: 20px;
+            }
+            
+            iframe {
+                height: 600px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 40px;
+        }
+    </style>
 </head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-YQNZ0VLGHJ');
 </script>
-<body>
-<h1>Quizlet Anglais</h1>
 
-<p>Qu'est-ce que cette page? Il y a les quizlets d'anglais pour le vocabulaire de l'unité 3, (par deux personnes différentes mais c'est la même en vrai) les 100 verbes irréguliers. Notez qu'en bas de l'encadré il y a un choix de la méthode de révision. Tous ces modes sont sans pubs et gratuits.</p>
-<hr>
-<h2>100 verbes</h2>
-<iframe src="https://quizlet.com/1051771544/match/embed?i=515spg&x=1jj1" height="800vh" width="100%" style="border:0"></iframe>
-<hr>
-<h2>anglais voc unit 3</h2>
-<iframe src="https://quizlet.com/1052037216/match/embed?i=515spg&x=1jj1" height="800vh" width="100%" style="border:0"></iframe>
-<hr>
-<h2>anglais voc unit 3 (y en a trois en plus)</h2>
-<iframe src="https://quizlet.com/1050476451/match/embed?i=515spg&x=1jj1" height="800vh" width="100%" style="border:0"></iframe>
-<hr>
-<script src="/404.js"></script>
-<script src="/consent.js"></script>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇬🇧 Quizlet Anglais 🇫🇷</h1>
+            <div class="intro-text">
+                <p>Qu'est-ce que cette page? Il y a les quizlets d'anglais pour le vocabulaire de l'unité 3, (par deux personnes différentes mais c'est la même en vrai) les 100 verbes irréguliers. Notez qu'en bas de l'encadré il y a un choix de la méthode de révision. Tous ces modes sont <span class="highlight">sans pubs et gratuits</span>.</p>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h2><span class="icon">🎯</span>100 verbes irréguliers</h2>
+            <iframe src="https://quizlet.com/1051771544/match/embed?i=515spg&x=1jj1" height="800" width="100%" style="border:0"></iframe>
+        </div>
+
+        <div class="quiz-section">
+            <h2><span class="icon">📚</span>Anglais vocabulaire unité 3</h2>
+            <iframe src="https://quizlet.com/1052037216/match/embed?i=515spg&x=1jj1" height="800" width="100%" style="border:0"></iframe>
+        </div>
+
+        <div class="quiz-section">
+            <h2><span class="icon">📖</span>Anglais vocabulaire unité 3 (version étendue)</h2>
+            <iframe src="https://quizlet.com/1050476451/match/embed?i=515spg&x=1jj1" height="800" width="100%" style="border:0"></iframe>
+        </div>
+
+        <div class="seo-section">
+            <h3>🚀 Pourquoi utiliser nos Quizlets pour apprendre l'anglais ?</h3>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h4>🎮 Apprentissage interactif</h4>
+                    <p>Méthodes variées : flashcards, matching, tests</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📱 Accessible partout</h4>
+                    <p>Compatible mobile, tablette et ordinateur</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🆓 Totalement gratuit</h4>
+                    <p>Aucune publicité, aucun abonnement requis</p>
+                </div>
+            </div>
+
+            <p>Cette collection de quizlets d'anglais constitue un outil pédagogique complet pour les étudiants souhaitant maîtriser le vocabulaire essentiel et les verbes irréguliers anglais. Nos exercices interactifs permettent un apprentissage efficace et ludique de la langue anglaise.</p>
+
+            <h3>📈 Méthodes d'apprentissage disponibles</h3>
+            <p>Chaque quizlet propose plusieurs modes de révision adaptés à différents styles d'apprentissage : les <strong>flashcards</strong> pour la mémorisation visuelle, le mode <strong>apprentissage</strong> pour un suivi progressif, les <strong>tests</strong> pour évaluer vos connaissances, et le mode <strong>correspondance</strong> pour associer rapidement termes et définitions.</p>
+
+            <h3>🎯 Contenu pédagogique ciblé</h3>
+            <p>Notre sélection comprend les <strong>100 verbes irréguliers anglais</strong> les plus fréquents, indispensables pour construire des phrases correctes, ainsi que le vocabulaire spécialisé de l'unité 3, enrichi de termes supplémentaires pour approfondir vos connaissances lexicales en anglais.</p>
+
+            <h3>💡 Conseils pour optimiser votre apprentissage</h3>
+            <p>Pour maximiser l'efficacité de vos révisions, nous recommandons des sessions courtes mais régulières. Alternez entre les différents modes d'exercices pour stimuler votre mémoire sous plusieurs angles. N'hésitez pas à répéter les mots difficiles et à utiliser les nouveaux termes dans des phrases pour consolider votre apprentissage de l'anglais.</p>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 - Quizlet Anglais - pb</p>
+        </div>
+    </div>
+
+    <script src="/404.js"></script>
+    <script src="/consent.js"></script>
 </body>
 </html>
