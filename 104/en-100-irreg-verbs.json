@@ -1,0 +1,702 @@
+[
+    {
+        "english": "be",
+        "prs": ["am", "are", "is", "are", "are", "are"],
+        "prt": ["was", "were", "was", "were", "were", "were"],
+        "prk": "been",
+        "frtrad": "être"
+    },
+    {
+        "english": "beat",
+        "prs": ["beat", "beat", "beats", "beat", "beat", "beat"],
+        "prt": ["beat", "beat", "beat", "beat", "beat", "beat"],
+        "prk": "beaten",
+        "frtrad": "battre"
+    },
+    {
+        "english": "become",
+        "prs": ["become", "become", "becomes", "become", "become", "become"],
+        "prt": ["became", "became", "became", "became", "became", "became"],
+        "prk": "become",
+        "frtrad": "devenir"
+    },
+    {
+        "english": "begin",
+        "prs": ["begin", "begin", "begins", "begin", "begin", "begin"],
+        "prt": ["began", "began", "began", "began", "began", "began"],
+        "prk": "begun",
+        "frtrad": "commencer"
+    },
+    {
+        "english": "bend",
+        "prs": ["bend", "bend", "bends", "bend", "bend", "bend"],
+        "prt": ["bent", "bent", "bent", "bent", "bent", "bent"],
+        "prk": "bent",
+        "frtrad": "courber, pencher"
+    },
+    {
+        "english": "bet",
+        "prs": ["bet", "bet", "bets", "bet", "bet", "bet"],
+        "prt": ["bet", "bet", "bet", "bet", "bet", "bet"],
+        "prk": "bet",
+        "frtrad": "parier"
+    },
+    {
+        "english": "bite",
+        "prs": ["bite", "bite", "bites", "bite", "bite", "bite"],
+        "prt": ["bit", "bit", "bit", "bit", "bit", "bit"],
+        "prk": "bitten",
+        "frtrad": "mordre"
+    },
+    {
+        "english": "bleed",
+        "prs": ["bleed", "bleed", "bleeds", "bleed", "bleed", "bleed"],
+        "prt": ["bled", "bled", "bled", "bled", "bled", "bled"],
+        "prk": "bled",
+        "frtrad": "saigner"
+    },
+    {
+        "english": "blow",
+        "prs": ["blow", "blow", "blows", "blow", "blow", "blow"],
+        "prt": ["blew", "blew", "blew", "blew", "blew", "blew"],
+        "prk": "blown",
+        "frtrad": "souffler (vent)"
+    },
+    {
+        "english": "break",
+        "prs": ["break", "break", "breaks", "break", "break", "break"],
+        "prt": ["broke", "broke", "broke", "broke", "broke", "broke"],
+        "prk": "broken",
+        "frtrad": "casser"
+    },
+    {
+        "english": "bring",
+        "prs": ["bring", "bring", "brings", "bring", "bring", "bring"],
+        "prt": ["brought", "brought", "brought", "brought", "brought", "brought"],
+        "prk": "brought",
+        "frtrad": "amener, apporter"
+    },
+    {
+        "english": "build",
+        "prs": ["build", "build", "builds", "build", "build", "build"],
+        "prt": ["built", "built", "built", "built", "built", "built"],
+        "prk": "built",
+        "frtrad": "construire"
+    },
+    {
+        "english": "burst",
+        "prs": ["burst", "burst", "bursts", "burst", "burst", "burst"],
+        "prt": ["burst", "burst", "burst", "burst", "burst", "burst"],
+        "prk": "burst",
+        "frtrad": "éclater"
+    },
+    {
+        "english": "buy",
+        "prs": ["buy", "buy", "buys", "buy", "buy", "buy"],
+        "prt": ["bought", "bought", "bought", "bought", "bought", "bought"],
+        "prk": "bought",
+        "frtrad": "acheter"
+    },
+    {
+        "english": "catch",
+        "prs": ["catch", "catch", "catches", "catch", "catch", "catch"],
+        "prt": ["caught", "caught", "caught", "caught", "caught", "caught"],
+        "prk": "caught",
+        "frtrad": "attraper"
+    },
+    {
+        "english": "choose",
+        "prs": ["choose", "choose", "chooses", "choose", "choose", "choose"],
+        "prt": ["chose", "chose", "chose", "chose", "chose", "chose"],
+        "prk": "chosen",
+        "frtrad": "choisir"
+    },
+    {
+        "english": "come",
+        "prs": ["come", "come", "comes", "come", "come", "come"],
+        "prt": ["came", "came", "came", "came", "came", "came"],
+        "prk": "come",
+        "frtrad": "venir"
+    },
+    {
+        "english": "cost",
+        "prs": ["cost", "cost", "costs", "cost", "cost", "cost"],
+        "prt": ["cost", "cost", "cost", "cost", "cost", "cost"],
+        "prk": "cost",
+        "frtrad": "coûter"
+    },
+    {
+        "english": "cut",
+        "prs": ["cut", "cut", "cuts", "cut", "cut", "cut"],
+        "prt": ["cut", "cut", "cut", "cut", "cut", "cut"],
+        "prk": "cut",
+        "frtrad": "couper"
+    },
+    {
+        "english": "dig",
+        "prs": ["dig", "dig", "digs", "dig", "dig", "dig"],
+        "prt": ["dug", "dug", "dug", "dug", "dug", "dug"],
+        "prk": "dug",
+        "frtrad": "creuser"
+    },
+    {
+        "english": "do",
+        "prs": ["do", "do", "does", "do", "do", "do"],
+        "prt": ["did", "did", "did", "did", "did", "did"],
+        "prk": "done",
+        "frtrad": "faire"
+    },
+    {
+        "english": "draw",
+        "prs": ["draw", "draw", "draws", "draw", "draw", "draw"],
+        "prt": ["drew", "drew", "drew", "drew", "drew", "drew"],
+        "prk": "drawn",
+        "frtrad": "dessiner, tirer"
+    },
+    {
+        "english": "drink",
+        "prs": ["drink", "drink", "drinks", "drink", "drink", "drink"],
+        "prt": ["drank", "drank", "drank", "drank", "drank", "drank"],
+        "prk": "drunk",
+        "frtrad": "boire"
+    },
+    {
+        "english": "drive",
+        "prs": ["drive", "drive", "drives", "drive", "drive", "drive"],
+        "prt": ["drove", "drove", "drove", "drove", "drove", "drove"],
+        "prk": "driven",
+        "frtrad": "conduire, rouler"
+    },
+    {
+        "english": "eat",
+        "prs": ["eat", "eat", "eats", "eat", "eat", "eat"],
+        "prt": ["ate", "ate", "ate", "ate", "ate", "ate"],
+        "prk": "eaten",
+        "frtrad": "manger"
+    },
+    {
+        "english": "fall",
+        "prs": ["fall", "fall", "falls", "fall", "fall", "fall"],
+        "prt": ["fell", "fell", "fell", "fell", "fell", "fell"],
+        "prk": "fallen",
+        "frtrad": "tomber"
+    },
+    {
+        "english": "feed",
+        "prs": ["feed", "feed", "feeds", "feed", "feed", "feed"],
+        "prt": ["fed", "fed", "fed", "fed", "fed", "fed"],
+        "prk": "fed",
+        "frtrad": "(se) nourrir"
+    },
+    {
+        "english": "feel",
+        "prs": ["feel", "feel", "feels", "feel", "feel", "feel"],
+        "prt": ["felt", "felt", "felt", "felt", "felt", "felt"],
+        "prk": "felt",
+        "frtrad": "(se) sentir, éprouver"
+    },
+    {
+        "english": "fight",
+        "prs": ["fight", "fight", "fights", "fight", "fight", "fight"],
+        "prt": ["fought", "fought", "fought", "fought", "fought", "fought"],
+        "prk": "fought",
+        "frtrad": "se battre, combattre"
+    },
+    {
+        "english": "find",
+        "prs": ["find", "find", "finds", "find", "find", "find"],
+        "prt": ["found", "found", "found", "found", "found", "found"],
+        "prk": "found",
+        "frtrad": "trouver"
+    },
+    {
+        "english": "fly",
+        "prs": ["fly", "fly", "flies", "fly", "fly", "fly"],
+        "prt": ["flew", "flew", "flew", "flew", "flew", "flew"],
+        "prk": "flown",
+        "frtrad": "voler (ailes)"
+    },
+    {
+        "english": "forget",
+        "prs": ["forget", "forget", "forgets", "forget", "forget", "forget"],
+        "prt": ["forgot", "forgot", "forgot", "forgot", "forgot", "forgot"],
+        "prk": "forgotten",
+        "frtrad": "oublier"
+    },
+    {
+        "english": "forgive",
+        "prs": ["forgive", "forgive", "forgives", "forgive", "forgive", "forgive"],
+        "prt": ["forgave", "forgave", "forgave", "forgave", "forgave", "forgave"],
+        "prk": "forgiven",
+        "frtrad": "pardonner"
+    },
+    {
+        "english": "freeze",
+        "prs": ["freeze", "freeze", "freezes", "freeze", "freeze", "freeze"],
+        "prt": ["froze", "froze", "froze", "froze", "froze", "froze"],
+        "prk": "frozen",
+        "frtrad": "geler"
+    },
+    {
+        "english": "get",
+        "prs": ["get", "get", "gets", "get", "get", "get"],
+        "prt": ["got", "got", "got", "got", "got", "got"],
+        "prk": "got",
+        "frtrad": "obtenir, devenir, recevoir"
+    },
+    {
+        "english": "give",
+        "prs": ["give", "give", "gives", "give", "give", "give"],
+        "prt": ["gave", "gave", "gave", "gave", "gave", "gave"],
+        "prk": "given",
+        "frtrad": "donner"
+    },
+    {
+        "english": "go",
+        "prs": ["go", "go", "goes", "go", "go", "go"],
+        "prt": ["went", "went", "went", "went", "went", "went"],
+        "prk": "gone",
+        "frtrad": "aller"
+    },
+    {
+        "english": "grow",
+        "prs": ["grow", "grow", "grows", "grow", "grow", "grow"],
+        "prt": ["grew", "grew", "grew", "grew", "grew", "grew"],
+        "prk": "grown",
+        "frtrad": "grandir, croître"
+    },
+    {
+        "english": "hang",
+        "prs": ["hang", "hang", "hangs", "hang", "hang", "hang"],
+        "prt": ["hung", "hung", "hung", "hung", "hung", "hung"],
+        "prk": "hung",
+        "frtrad": "accrocher, suspendre"
+    },
+    {
+        "english": "have",
+        "prs": ["have", "have", "has", "have", "have", "have"],
+        "prt": ["had", "had", "had", "had", "had", "had"],
+        "prk": "had",
+        "frtrad": "avoir"
+    },
+    {
+        "english": "hear",
+        "prs": ["hear", "hear", "hears", "hear", "hear", "hear"],
+        "prt": ["heard", "heard", "heard", "heard", "heard", "heard"],
+        "prk": "heard",
+        "frtrad": "entendre"
+    },
+    {
+        "english": "hide",
+        "prs": ["hide", "hide", "hides", "hide", "hide", "hide"],
+        "prt": ["hid", "hid", "hid", "hid", "hid", "hid"],
+        "prk": "hidden",
+        "frtrad": "(se) cacher"
+    },
+    {
+        "english": "hit",
+        "prs": ["hit", "hit", "hits", "hit", "hit", "hit"],
+        "prt": ["hit", "hit", "hit", "hit", "hit", "hit"],
+        "prk": "hit",
+        "frtrad": "frapper"
+    },
+    {
+        "english": "hold",
+        "prs": ["hold", "hold", "holds", "hold", "hold", "hold"],
+        "prt": ["held", "held", "held", "held", "held", "held"],
+        "prk": "held",
+        "frtrad": "tenir"
+    },
+    {
+        "english": "hurt",
+        "prs": ["hurt", "hurt", "hurts", "hurt", "hurt", "hurt"],
+        "prt": ["hurt", "hurt", "hurt", "hurt", "hurt", "hurt"],
+        "prk": "hurt",
+        "frtrad": "faire mal (à), blesser"
+    },
+    {
+        "english": "keep",
+        "prs": ["keep", "keep", "keeps", "keep", "keep", "keep"],
+        "prt": ["kept", "kept", "kept", "kept", "kept", "kept"],
+        "prk": "kept",
+        "frtrad": "garder"
+    },
+    {
+        "english": "know",
+        "prs": ["know", "know", "knows", "know", "know", "know"],
+        "prt": ["knew", "knew", "knew", "knew", "knew", "knew"],
+        "prk": "known",
+        "frtrad": "savoir, connaître"
+    },
+    {
+        "english": "lay",
+        "prs": ["lay", "lay", "lays", "lay", "lay", "lay"],
+        "prt": ["laid", "laid", "laid", "laid", "laid", "laid"],
+        "prk": "laid",
+        "frtrad": "poser, étendre"
+    },
+    {
+        "english": "lead",
+        "prs": ["lead", "lead", "leads", "lead", "lead", "lead"],
+        "prt": ["led", "led", "led", "led", "led", "led"],
+        "prk": "led",
+        "frtrad": "conduire, mener"
+    },
+    {
+        "english": "leave",
+        "prs": ["leave", "leave", "leaves", "leave", "leave", "leave"],
+        "prt": ["left", "left", "left", "left", "left", "left"],
+        "prk": "left",
+        "frtrad": "laisser, quitter"
+    },
+    {
+        "english": "lend",
+        "prs": ["lend", "lend", "lends", "lend", "lend", "lend"],
+        "prt": ["lent", "lent", "lent", "lent", "lent", "lent"],
+        "prk": "lent",
+        "frtrad": "prêter"
+    },
+    {
+        "english": "let",
+        "prs": ["let", "let", "lets", "let", "let", "let"],
+        "prt": ["let", "let", "let", "let", "let", "let"],
+        "prk": "let",
+        "frtrad": "laisser, permettre"
+    },
+    {
+        "english": "lie",
+        "prs": ["lie", "lie", "lies", "lie", "lie", "lie"],
+        "prt": ["lay", "lay", "lay", "lay", "lay", "lay"],
+        "prk": "lain",
+        "frtrad": "être couché, étendu"
+    },
+    {
+        "english": "lose",
+        "prs": ["lose", "lose", "loses", "lose", "lose", "lose"],
+        "prt": ["lost", "lost", "lost", "lost", "lost", "lost"],
+        "prk": "lost",
+        "frtrad": "perdre"
+    },
+    {
+        "english": "make",
+        "prs": ["make", "make", "makes", "make", "make", "make"],
+        "prt": ["made", "made", "made", "made", "made", "made"],
+        "prk": "made",
+        "frtrad": "faire, fabriquer"
+    },
+    {
+        "english": "mean",
+        "prs": ["mean", "mean", "means", "mean", "mean", "mean"],
+        "prt": ["meant", "meant", "meant", "meant", "meant", "meant"],
+        "prk": "meant",
+        "frtrad": "signifier, vouloir dire"
+    },
+    {
+        "english": "meet",
+        "prs": ["meet", "meet", "meets", "meet", "meet", "meet"],
+        "prt": ["met", "met", "met", "met", "met", "met"],
+        "prk": "met",
+        "frtrad": "(se) rencontrer"
+    },
+    {
+        "english": "pay",
+        "prs": ["pay", "pay", "pays", "pay", "pay", "pay"],
+        "prt": ["paid", "paid", "paid", "paid", "paid", "paid"],
+        "prk": "paid",
+        "frtrad": "payer"
+    },
+    {
+        "english": "put",
+        "prs": ["put", "put", "puts", "put", "put", "put"],
+        "prt": ["put", "put", "put", "put", "put", "put"],
+        "prk": "put",
+        "frtrad": "mettre, poser"
+    },
+    {
+        "english": "read",
+        "prs": ["read", "read", "reads", "read", "read", "read"],
+        "prt": ["read", "read", "read", "read", "read", "read"],
+        "prk": "read",
+        "frtrad": "lire"
+    },
+    {
+        "english": "ride",
+        "prs": ["ride", "ride", "rides", "ride", "ride", "ride"],
+        "prt": ["rode", "rode", "rode", "rode", "rode", "rode"],
+        "prk": "ridden",
+        "frtrad": "faire du vélo, du cheval"
+    },
+    {
+        "english": "ring",
+        "prs": ["ring", "ring", "rings", "ring", "ring", "ring"],
+        "prt": ["rang", "rang", "rang", "rang", "rang", "rang"],
+        "prk": "rung",
+        "frtrad": "sonner"
+    },
+    {
+        "english": "rise",
+        "prs": ["rise", "rise", "rises", "rise", "rise", "rise"],
+        "prt": ["rose", "rose", "rose", "rose", "rose", "rose"],
+        "prk": "risen",
+        "frtrad": "s'élever, se lever (soleil)"
+    },
+    {
+        "english": "run",
+        "prs": ["run", "run", "runs", "run", "run", "run"],
+        "prt": ["ran", "ran", "ran", "ran", "ran", "ran"],
+        "prk": "run",
+        "frtrad": "courir"
+    },
+    {
+        "english": "say",
+        "prs": ["say", "say", "says", "say", "say", "say"],
+        "prt": ["said", "said", "said", "said", "said", "said"],
+        "prk": "said",
+        "frtrad": "dire"
+    },
+    {
+        "english": "see",
+        "prs": ["see", "see", "sees", "see", "see", "see"],
+        "prt": ["saw", "saw", "saw", "saw", "saw", "saw"],
+        "prk": "seen",
+        "frtrad": "voir"
+    },
+    {
+        "english": "sell",
+        "prs": ["sell", "sell", "sells", "sell", "sell", "sell"],
+        "prt": ["sold", "sold", "sold", "sold", "sold", "sold"],
+        "prk": "sold",
+        "frtrad": "vendre"
+    },
+    {
+        "english": "send",
+        "prs": ["send", "send", "sends", "send", "send", "send"],
+        "prt": ["sent", "sent", "sent", "sent", "sent", "sent"],
+        "prk": "sent",
+        "frtrad": "envoyer"
+    },
+    {
+        "english": "set",
+        "prs": ["set", "set", "sets", "set", "set", "set"],
+        "prt": ["set", "set", "set", "set", "set", "set"],
+        "prk": "set",
+        "frtrad": "poser, fixer"
+    },
+    {
+        "english": "shake",
+        "prs": ["shake", "shake", "shakes", "shake", "shake", "shake"],
+        "prt": ["shook", "shook", "shook", "shook", "shook", "shook"],
+        "prk": "shaken",
+        "frtrad": "secouer"
+    },
+    {
+        "english": "shine",
+        "prs": ["shine", "shine", "shines", "shine", "shine", "shine"],
+        "prt": ["shone", "shone", "shone", "shone", "shone", "shone"],
+        "prk": "shone",
+        "frtrad": "briller"
+    },
+    {
+        "english": "shoot",
+        "prs": ["shoot", "shoot", "shoots", "shoot", "shoot", "shoot"],
+        "prt": ["shot", "shot", "shot", "shot", "shot", "shot"],
+        "prk": "shot",
+        "frtrad": "tirer (fusil)"
+    },
+    {
+        "english": "show",
+        "prs": ["show", "show", "shows", "show", "show", "show"],
+        "prt": ["showed", "showed", "showed", "showed", "showed", "showed"],
+        "prk": "shown",
+        "frtrad": "montrer"
+    },
+    {
+        "english": "shut",
+        "prs": ["shut", "shut", "shuts", "shut", "shut", "shut"],
+        "prt": ["shut", "shut", "shut", "shut", "shut", "shut"],
+        "prk": "shut",
+        "frtrad": "fermer"
+    },
+    {
+        "english": "sing",
+        "prs": ["sing", "sing", "sings", "sing", "sing", "sing"],
+        "prt": ["sang", "sang", "sang", "sang", "sang", "sang"],
+        "prk": "sung",
+        "frtrad": "chanter"
+    },
+    {
+        "english": "sink",
+        "prs": ["sink", "sink", "sinks", "sink", "sink", "sink"],
+        "prt": ["sank", "sank", "sank", "sank", "sank", "sank"],
+        "prk": "sunk",
+        "frtrad": "couler, sombrer"
+    },
+    {
+        "english": "sit",
+        "prs": ["sit", "sit", "sits", "sit", "sit", "sit"],
+        "prt": ["sat", "sat", "sat", "sat", "sat", "sat"],
+        "prk": "sat",
+        "frtrad": "être assis"
+    },
+    {
+        "english": "sleep",
+        "prs": ["sleep", "sleep", "sleeps", "sleep", "sleep", "sleep"],
+        "prt": ["slept", "slept", "slept", "slept", "slept", "slept"],
+        "prk": "slept",
+        "frtrad": "dormir"
+    },
+    {
+        "english": "speak",
+        "prs": ["speak", "speak", "speaks", "speak", "speak", "speak"],
+        "prt": ["spoke", "spoke", "spoke", "spoke", "spoke", "spoke"],
+        "prk": "spoken",
+        "frtrad": "parler"
+    },
+    {
+        "english": "spend",
+        "prs": ["spend", "spend", "spends", "spend", "spend", "spend"],
+        "prt": ["spent", "spent", "spent", "spent", "spent", "spent"],
+        "prk": "spent",
+        "frtrad": "passer (temps), dépenser"
+    },
+    {
+        "english": "spread",
+        "prs": ["spread", "spread", "spreads", "spread", "spread", "spread"],
+        "prt": ["spread", "spread", "spread", "spread", "spread", "spread"],
+        "prk": "spread",
+        "frtrad": "(s') étaler, (se) répendre"
+    },
+    {
+        "english": "stand",
+        "prs": ["stand", "stand", "stands", "stand", "stand", "stand"],
+        "prt": ["stood", "stood", "stood", "stood", "stood", "stood"],
+        "prk": "stood",
+        "frtrad": "être debout"
+    },
+    {
+        "english": "steal",
+        "prs": ["steal", "steal", "steals", "steal", "steal", "steal"],
+        "prt": ["stole", "stole", "stole", "stole", "stole", "stole"],
+        "prk": "stolen",
+        "frtrad": "voler, dérober"
+    },
+    {
+        "english": "stick",
+        "prs": ["stick", "stick", "sticks", "stick", "stick", "stick"],
+        "prt": ["stuck", "stuck", "stuck", "stuck", "stuck", "stuck"],
+        "prk": "stuck",
+        "frtrad": "coller, piquer, enfoncer"
+    },
+    {
+        "english": "sting",
+        "prs": ["sting", "sting", "stings", "sting", "sting", "sting"],
+        "prt": ["stung", "stung", "stung", "stung", "stung", "stung"],
+        "prk": "stung",
+        "frtrad": "piquer (insectes)"
+    },
+    {
+        "english": "strike",
+        "prs": ["strike", "strike", "strikes", "strike", "strike", "strike"],
+        "prt": ["struck", "struck", "struck", "struck", "struck", "struck"],
+        "prk": "struck",
+        "frtrad": "frapper"
+    },
+    {
+        "english": "swear",
+        "prs": ["swear", "swear", "swears", "swear", "swear", "swear"],
+        "prt": ["swore", "swore", "swore", "swore", "swore", "swore"],
+        "prk": "sworn",
+        "frtrad": "jurer"
+    },
+    {
+        "english": "sweep",
+        "prs": ["sweep", "sweep", "sweeps", "sweep", "sweep", "sweep"],
+        "prt": ["swept", "swept", "swept", "swept", "swept", "swept"],
+        "prk": "swept",
+        "frtrad": "balayer"
+    },
+    {
+        "english": "swim",
+        "prs": ["swim", "swim", "swims", "swim", "swim", "swim"],
+        "prt": ["swam", "swam", "swam", "swam", "swam", "swam"],
+        "prk": "swum",
+        "frtrad": "nager"
+    },
+    {
+        "english": "take",
+        "prs": ["take", "take", "takes", "take", "take", "take"],
+        "prt": ["took", "took", "took", "took", "took", "took"],
+        "prk": "taken",
+        "frtrad": "prendre"
+    },
+    {
+        "english": "teach",
+        "prs": ["teach", "teach", "teaches", "teach", "teach", "teach"],
+        "prt": ["taught", "taught", "taught", "taught", "taught", "taught"],
+        "prk": "taught",
+        "frtrad": "enseigner, apprendre à qqun"
+    },
+    {
+        "english": "tear",
+        "prs": ["tear", "tear", "tears", "tear", "tear", "tear"],
+        "prt": ["tore", "tore", "tore", "tore", "tore", "tore"],
+        "prk": "torn",
+        "frtrad": "déchirer"
+    },
+    {
+        "english": "tell",
+        "prs": ["tell", "tell", "tells", "tell", "tell", "tell"],
+        "prt": ["told", "told", "told", "told", "told", "told"],
+        "prk": "told",
+        "frtrad": "dire à, raconter"
+    },
+    {
+        "english": "think",
+        "prs": ["think", "think", "thinks", "think", "think", "think"],
+        "prt": ["thought", "thought", "thought", "thought", "thought", "thought"],
+        "prk": "thought",
+        "frtrad": "penser, réfléchir"
+    },
+    {
+        "english": "throw",
+        "prs": ["throw", "throw", "throws", "throw", "throw", "throw"],
+        "prt": ["threw", "threw", "threw", "threw", "threw", "threw"],
+        "prk": "thrown",
+        "frtrad": "jeter, lancer"
+    },
+    {
+        "english": "understand",
+        "prs": ["understand", "understand", "understands", "understand", "understand", "understand"],
+        "prt": ["understood", "understood", "understood", "understood", "understood", "understood"],
+        "prk": "understood",
+        "frtrad": "comprendre"
+    },
+    {
+        "english": "wake",
+        "prs": ["wake", "wake", "wakes", "wake", "wake", "wake"],
+        "prt": ["woke", "woke", "woke", "woke", "woke", "woke"],
+        "prk": "woken",
+        "frtrad": "(se) réveiller"
+    },
+    {
+        "english": "wear",
+        "prs": ["wear", "wear", "wears", "wear", "wear", "wear"],
+        "prt": ["wore", "wore", "wore", "wore", "wore", "wore"],
+        "prk": "worn",
+        "frtrad": "porter (vêtements)"
+    },
+    {
+        "english": "win",
+        "prs": ["win", "win", "wins", "win", "win", "win"],
+        "prt": ["won", "won", "won", "won", "won", "won"],
+        "prk": "won",
+        "frtrad": "gagner"
+    },
+    {
+        "english": "write",
+        "prs": ["write", "write", "writes", "write", "write", "write"],
+        "prt": ["wrote", "wrote", "wrote", "wrote", "wrote", "wrote"],
+        "prk": "written",
+        "frtrad": "écrire"
+    }
+]
