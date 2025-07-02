@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>reverse</title>
+</head>
+<body>
+  <h1>
+    reverse text!! (refresh2clr)
+  </h1>
+  <textarea id="de"placeholder="entre le code"></textarea>
+  <button onclick="wj()">action</button>
+  <div id="res"></div>
+ <script>
+  let newLst = [];
+  function LTN(letter) {
+    return letter.charCodeAt(0) - 96;
+  }
+
+  function subp1(str) {
+    for (let i = 0; i < str.length; i++) {
+      newLst.push(str[i]);
+    }
+  }
+
+  function NTL(num) {
+    return String.fromCharCode(96 + num);
+  }
+
+  function dbg(msg) {
+    document.getElementById("res").textContent += msg;
+  }
+
+  function wj() {
+    const entr=document.getElementById('de').value;
+    const res=document.getElementById('res');
+    for (let i = 0; i < entr.length; i++) {
+      let num = LTN(entr[i]);
+      // inversion en bas!!
+      const newNum = 27 - num;
+      //
+      const newLetter = NTL(newNum);
+      newLst.push(newLetter);
+    }
+
+    // Display the result
+    res.textContent = newLst.join('');
+    console.log(newLst.join(''));
+  }
+  //listify
+  //27-list elem
+  //return new
+</script>
+
+  </body>
+</html>
