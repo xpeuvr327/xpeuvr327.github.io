@@ -12,9 +12,11 @@
   </h1>
   <textarea id="de"placeholder="entre le code"></textarea>
   <button onclick="wj()">action</button>
-  <div id="res"></div>
+  <textarea id="res"readonly placeholder="résultat"></textarea>
+  <input type="checkbox"id="fo"checked>
+  <label>coche la case pour supprimer l'ancien résultat</label>
  <script>
-  let newLst = [];
+  
   function LTN(letter) {
     return letter.charCodeAt(0) - 96;
   }
@@ -34,6 +36,7 @@
   }
 
   function wj() {
+    let newLst=[]
     const entr=document.getElementById('de').value;
     const res=document.getElementById('res');
     for (let i = 0; i < entr.length; i++) {
@@ -46,8 +49,11 @@
     }
 
     // Display the result
-    res.textContent = newLst.join('');
-    console.log(newLst.join(''));
+     let shouldClear = document.getElementById("fo").checked
+      if (shouldClear){
+        res.innerHTML=""}
+    res.value = newLst.join("");
+    console.log(newLst.join(""));
   }
   //listify
   //27-list elem
