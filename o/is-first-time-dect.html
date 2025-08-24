@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Visit Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        if (localStorage.getItem('visited') === null) {
+            // First visit
+            document.body.style.backgroundColor = 'green';
+            document.body.innerHTML = '<h1>First visit?</h1>';
+            localStorage.setItem('visited', 'true');
+        } else {
+            // Not first visit
+            document.body.style.backgroundColor = 'red';
+            document.body.innerHTML = '<h1>No, it\'s not your first time</h1>';
+        }
+    </script>
+</body>
+</html>

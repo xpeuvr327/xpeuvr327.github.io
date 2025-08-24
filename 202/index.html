@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Portal | Dynamic Generation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>#searchInput,body{background-color:var(--bg-color);color:var(--text-primary)}#searchInput,.card h3,.tab:hover,body{color:var(--text-primary)}.card a,.tab{font-weight:500}:root{--bg-color:#f8f9fa;--header-bg:#ffffff;--card-bg:#ffffff;--text-primary:#212529;--text-secondary:#6c757d;--accent-color:#007bff;--border-color:#dee2e6;--shadow-color:rgba(0, 0, 0, 0.08);--font-family:'Inter',sans-serif;--header-height:120px;--border-radius:8px}@media (prefers-color-scheme:dark){:root{--bg-color:#121212;--header-bg:#1e1e1e;--card-bg:#1e1e1e;--text-primary:#e9ecef;--text-secondary:#adb5bd;--accent-color:#3391ff;--border-color:#495057;--shadow-color:rgba(0, 0, 0, 0.25)}}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font-family);line-height:1.6}.site-header{position:sticky;top:0;z-index:1000;background-color:var(--header-bg);padding:1rem 1.5rem;box-shadow:0 2px 4px var(--shadow-color)}.search-container{position:relative;margin-bottom:1rem}#clearSearchBtn,.search-icon{position:absolute;top:50%;transform:translateY(-50%);color:var(--text-secondary)}.search-icon{left:1rem;width:18px;height:18px}#searchInput{width:100%;padding:.75rem 1rem .75rem 3rem;font-size:1rem;border:1px solid var(--border-color);border-radius:var(--border-radius);transition:border-color .2s,box-shadow .2s}#searchInput:focus{outline:0;border-color:var(--accent-color);box-shadow:0 0 0 3px rgba(0,123,255,.25)}#clearSearchBtn{right:1rem;background:0 0;border:none;cursor:pointer;font-size:1.5rem;line-height:1;padding:.25rem;display:none}.filter-tabs-container{position:relative;overflow-x:auto;mask-image:linear-gradient(to right,black 80%,transparent 100%);-webkit-mask-image:linear-gradient(to right,black 80%,transparent 100%);transition:mask-image .3s,-webkit-mask-image .3s}.filter-tabs-container.no-fade{mask-image:none;-webkit-mask-image:none}.filter-tabs-container::-webkit-scrollbar{display:none}.filter-tabs{display:flex;gap:.5rem;border-bottom:1px solid var(--border-color)}.tab{padding:.75rem 1.25rem;font-size:1rem;cursor:pointer;border:none;background-color:transparent;color:var(--text-secondary);border-bottom:3px solid transparent;transition:color .2s,border-color .2s}.tab.active{color:var(--accent-color);border-bottom-color:var(--accent-color)}main{padding:1.5rem}.resource-section{scroll-margin-top:calc(var(--header-height) + 1rem)}.section-title{font-size:1.75rem;margin-bottom:1.5rem;margin-top:1.5rem;padding-bottom:.5rem;border-bottom:1px solid var(--border-color);text-transform:capitalize}#no-results{text-align:center;padding:3rem;font-size:1.2rem;color:var(--text-secondary);display:none}.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}.card{background-color:var(--card-bg);border:1px solid var(--border-color);border-radius:var(--border-radius);padding:1.5rem;box-shadow:0 4px 6px var(--shadow-color);transition:transform .2s ease-in-out,box-shadow .2s ease-in-out;display:flex;flex-direction:column}.card:hover{transform:translateY(-5px);box-shadow:0 8px 12px var(--shadow-color)}.card h3{font-size:1.25rem;margin-bottom:.5rem}.card p{color:var(--text-secondary);flex-grow:1;margin-bottom:1rem}.card a{display:inline-block;text-decoration:none;color:var(--accent-color);transition:opacity .2s}.card a:hover{opacity:.8}@media (max-width:768px){.filter-tabs{display:inline-flex;white-space:nowrap;padding-bottom:5px;border-bottom:none}.tab{border-bottom:3px solid var(--border-color)}.tab.active{border-bottom-color:var(--accent-color)}}</style>
+</head>
+<body>
+
+    <header class="site-header">
+        <h2 style="margin-bottom:1.2rem;">Ressources 2e collège</h2>
+        <div class="search-container">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z" /></svg>
+            <input type="text" id="searchInput" placeholder="Rechercher des ressources...">
+            <ul id="autocompleteList" style="position:absolute; top:100%; left:0; right:0; background: var(--card-bg); border:1px solid var(--border-color); border-top:none; border-radius:0 0 8px 8px; list-style:none; padding:0; margin:0; max-height:200px; overflow-y:auto; display:none; z-index:1001;"></ul>
+
+            <button id="clearSearchBtn" title="Effacer la recherche">&times;</button>
+        </div>
+        <div class="filter-tabs-container">
+            <nav class="filter-tabs"></nav>
+        </div>
+    </header>
+
+    <main>
+        <div id="no-results">
+            <h3>Aucun résultat trouvé</h3>
+            <p><u id="clearSearchLink" style="cursor:pointer">Essayez avec d'autres termes</u> ou parcourez par catégorie.</p>
+        </div>
+
+    
+        <section id="Français" class="resource-section">
+
+            <div class="resource-grid">
+                <div class="card" data-keywords="parfum gustave flaubert sentir baladins resume francais un%20parfum">
+                    <h3>Un parfum à sentir</h3>
+                    <p>Résumé de "Un parfum à sentir ou Les Baladins" par Gustave Flaubert. (en cours)</p>
+                    <a href="/resumes/francais/un-parfum-a-sentir-ou-les-baladins/resume.html">Voir ça &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="Anglais" class="resource-section">
+            <div class="resource-grid">
+                <div class="card" data-keywords="quizlet">
+                    <h3>La Révolution Française</h3>
+                    <p>Un résumé des événements clés de la Révolution Française de 1789.</p>
+                    <a href="#">Voir ça &rarr;</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="Mathématiques" class="resource-section">
+            <div class="resource-grid">
+                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths">
+                    <h3>Théorème de Pythagore</h3>
+                    <p>Explication et exemples d'application du théorème de Pythagore.</p>
+                    <a href="#">Voir ça &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="Informatique" class="resource-section"> <!-- EDIT THIS AND COPY BELOW BLOCK TO UPDATE AND ADD OTHER SECTIONS-->
+            <div class="resource-grid">
+                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths"> <!-- TAGS ARE OPTIONAL-->
+                    <h3>Algorithmes</h3>
+                    <p>Algorithmes</p>
+                    <a href="#">Voir ça &rarr;</a> <!-- DON'T FORGET TO EDIT THE PATH! USE ABSOLUTES.-->
+                </div>
+            </div>
+        </section>
+
+        <section id="Géographie" class="resource-section">
+            <div class="resource-grid">
+                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths">
+                    <h3>Chefs-Lieux / Cantons</h3>
+                    <p>Révision des lieux par cantons, ça se présente sous une carte et il faut replacer les chefs lieux.</p>
+                    <a href="https://www.geoguessr.com/fr/vgp/3358">Geoguessr Quiz &nearr;</a>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="À&nbsp;Propos" class="resource-section">
+            <div class="resource-grid">
+                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths">
+                    <h3>Informations</h3>
+                    <p>Qui? Pourquoi? La raison de ce site, expliquée. [Il n'y a encore rien]</p>
+                    <a href="#">Voir ça &rarr;</a>
+                </div>
+                <div class="card" data-keywords="aide">
+                    <h3>Flèches: légende</h3>
+                    <p>Les cartes avec une flèche vers le haut, une fois cliquées, vous donneront une simple info.</p>
+                    <a onclick="alert('Comme ceci')">Infobulle &uparrow;</a>
+                </div>
+                <div class="card" data-keywords="aide">
+                    <h3>Flèches: légende</h3>
+                    <p>Les cartes avec une flèche à droite, une fois cliquées, vous dirigereront vers une page du site.</p>
+                    <a href="info-test.html">Voir ça &rarr;</a>
+                </div>
+                <div class="card" data-keywords="aide">
+                    <h3>f</h3>
+                    <p>Les cartes avec une flèche à droite, une fois cliquées, vous dirigereront vers une page du site.</p>
+                    <a href="#">Page externe &nearr;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. DYNAMIC CONTENT GENERATION ---
+            const sections = document.querySelectorAll('.resource-section');
+            const tabsContainer = document.querySelector('.filter-tabs');
+
+            sections.forEach((section, index) => {
+                const sectionId = section.id;
+
+                // A. Populate or create the section title (h2)
+                let titleElement = section.querySelector('.section-title');
+                if (!titleElement) {
+                    // Create the title element if it doesn't exist
+                    titleElement = document.createElement('h2');
+                    titleElement.className = 'section-title';
+                    
+                    // Insert it at the beginning of the section (before resource-grid)
+                    const resourceGrid = section.querySelector('.resource-grid');
+                    if (resourceGrid) {
+                        section.insertBefore(titleElement, resourceGrid);
+                    } else {
+                        section.appendChild(titleElement);
+                    }
+                }
+                // Now populate the title
+                titleElement.textContent = sectionId;
+
+                // B. Create and append the filter tab button
+                const tabButton = document.createElement('button');
+                tabButton.className = 'tab';
+                tabButton.textContent = sectionId;
+                tabButton.dataset.section = sectionId;
+                
+                // Make the first tab active by default
+                if (index === 0) {
+                    tabButton.classList.add('active');
+                }
+                
+                tabsContainer.appendChild(tabButton);
+            });
+
+            // --- 2. ELEMENT REFERENCES (after dynamic generation) ---
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            document.getElementById('clearSearchLink').addEventListener('click', clearSearch);
+            const cards = document.querySelectorAll('.card');
+            const noResultsMessage = document.getElementById('no-results');
+            // Select the tabs *after* they have been created
+            const tabs = document.querySelectorAll('.tab');
+
+            // --- 3. CORE FUNCTIONS (unchanged) ---
+            function normalizeString(str) {
+                if (!str) return '';
+                return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            }
+
+            function filterContent() {
+                const query = normalizeString(searchInput.value);
+                let resultsFound = false;
+
+                clearSearchBtn.style.display = searchInput.value.length > 0 ? 'block' : 'none';
+
+                cards.forEach(card => {
+                    const title = normalizeString(card.querySelector('h3').textContent);
+                    const description = normalizeString(card.querySelector('p').textContent);
+                    const keywords = normalizeString(card.dataset.keywords);
+                    const cardContent = `${title} ${description} ${keywords}`;
+                    const isVisible = cardContent.includes(query);
+                    card.style.display = isVisible ? 'flex' : 'none';
+                    if (isVisible) resultsFound = true;
+                });
+                
+                updateSectionVisibility();
+                noResultsMessage.style.display = resultsFound ? 'none' : 'block';
+            }
+            
+            function updateSectionVisibility() {
+                 sections.forEach(section => {
+                    const visibleCards = section.querySelectorAll('.card:not([style*="display: none"])');
+                    section.style.display = visibleCards.length > 0 ? 'block' : 'none';
+                });
+            }
+
+            function clearSearch() {
+                searchInput.value = '';
+                filterContent();
+                searchInput.focus();
+            }
+
+            // --- 4. EVENT LISTENERS ---
+            searchInput.addEventListener('input', filterContent);
+            clearSearchBtn.addEventListener('click', clearSearch);
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Clear search
+                    searchInput.value = '';
+                    clearSearchBtn.style.display = 'none';
+                    filterContent();
+
+                    // Update tab states
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Scroll to section
+                    const sectionId = this.getAttribute('data-section');
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Initial call to set correct visibility on load
+            updateSectionVisibility();
+            const scrollContainer = document.querySelector('.filter-tabs-container');
+
+            function updateFadeEffect() {
+            const atEnd = scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 1;
+            if (atEnd) {
+                scrollContainer.classList.add('no-fade');
+            } else {
+                scrollContainer.classList.remove('no-fade');
+            }
+            }
+            function checkFadeConditions() {
+            const shouldFade = scrollContainer.scrollWidth > scrollContainer.clientWidth;
+            if (!shouldFade) {
+                scrollContainer.classList.add('no-fade');
+            } else {
+                updateFadeEffect(); // keep normal behavior
+            }
+            }
+            window.addEventListener('resize', checkFadeConditions);
+            checkFadeConditions(); // on load
+            // Run once on load
+            updateFadeEffect();
+
+            // Run every time user scrolls the tab bar
+            scrollContainer.addEventListener('scroll', updateFadeEffect);
+
+
+            const sectionElements = document.querySelectorAll('.resource-section');
+
+            function onScroll() {
+                let currentSectionId = null;
+                const scrollOffset = window.innerHeight * 0.45;
+
+                sectionElements.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= scrollOffset && rect.bottom >= scrollOffset) {
+                        currentSectionId = section.id;
+                    }
+                });
+
+                if (currentSectionId) {
+                    tabs.forEach(tab => {
+                        const isActive = tab.dataset.section === currentSectionId;
+                        tab.classList.toggle('active', isActive);
+
+                        if (isActive) {
+                            // Ensure the active tab scrolls into view
+                            tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        }
+                    });
+                }
+            }
+
+            window.addEventListener('scroll', onScroll);
+                    const autocompleteList = document.getElementById('autocompleteList');
+        let allKeywords = [];
+
+        // Step 1: Collect all keywords
+        cards.forEach(card => {
+            const keywords = card.dataset.keywords || '';
+            allKeywords.push(...normalizeString(keywords).split(' '));
+        });
+        allKeywords = [...new Set(allKeywords)]; // Remove duplicates
+
+        function showAutocompleteSuggestions(inputValue) {
+            const query = normalizeString(inputValue.trim());
+            if (query.length < 2) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+
+            const suggestions = allKeywords
+                .filter(word => word.startsWith(query))
+                .slice(0, 7); // Limit to 7 suggestions
+
+            // If no suggestions, hide list
+            if (suggestions.length === 0) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+
+            autocompleteList.innerHTML = '';
+            suggestions.forEach(suggestion => {
+                const li = document.createElement('li');
+                li.textContent = suggestion;
+                li.style.padding = '0.5rem 1rem';
+                li.style.cursor = 'pointer';
+                li.addEventListener('click', () => {
+                    searchInput.value = suggestion;
+                    filterContent();
+                    autocompleteList.style.display = 'none';
+                });
+                li.addEventListener('mouseenter', () => li.style.background = 'var(--bg-color)');
+                li.addEventListener('mouseleave', () => li.style.background = 'transparent');
+                autocompleteList.appendChild(li);
+            });
+
+            autocompleteList.style.display = 'block';
+        }
+
+        // Attach to input
+        searchInput.addEventListener('input', () => {
+            filterContent(); // Keep existing filter working
+            showAutocompleteSuggestions(searchInput.value);
+        });
+
+        // Hide suggestions on click outside
+        document.addEventListener('click', (e) => {
+            if (!autocompleteList.contains(e.target) && e.target !== searchInput) {
+                autocompleteList.style.display = 'none';
+            }
+        });
+
+    
+        });
+            const tabContainer = document.querySelector('.filter-tabs-container');
+
+            setTimeout(() => {
+            tabContainer.scrollTo({
+                left: 60,
+                behavior: 'smooth'
+            });
+            setTimeout(() => {
+                tabContainer.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+                });
+            }, 600); // wait and scroll back
+            }, 400); // slight delay after load
+
+    </script>
+
+</body>
+</html>
