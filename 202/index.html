@@ -46,7 +46,7 @@
         <section id="Français" class="resource-section">
 
             <div class="resource-grid">
-                <div class="card" data-keywords="parfum gustave flaubert sentir baladins resume francais un%20parfum">
+                <div class="card" data-keywords="parfum gustave flaubert sentir baladins resume français">
                     <h3>Un parfum à sentir</h3>
                     <p>Résumé de "Un parfum à sentir ou Les Baladins" par Gustave Flaubert. (en cours)</p>
                     <a href="/resumes/francais/un-parfum-a-sentir-ou-les-baladins/resume.html">Voir ça &rarr;</a>
@@ -63,30 +63,29 @@
                 </div>
             </div>
         </section>
-
-        <section id="Informatique" class="resource-section"> <!-- EDIT THIS AND COPY BELOW BLOCK TO UPDATE AND ADD OTHER SECTIONS-->
+        <section id="Allemand" class="resource-section">
             <div class="resource-grid">
-                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths"> <!-- TAGS ARE OPTIONAL-->
-                    <h3>Algorithmes</h3>
-                    <p>Algorithmes (note; il n'y a encore rien)</p>
-                    <a href="#">Voir ça &rarr;</a> <!-- DON'T FORGET TO EDIT THE PATH! USE ABSOLUTES.-->
+                <div class="card" data-keywords="allemand traduction Novemberschnee">
+                    <h3>Quizlet</h3>
+                    <p>Compte quizlet "officiel" avec toutes les listes en anglais.</p>
+                    <a href="https://quizlet.com/user/asodintsov/sets">Voir ça &nearr;</a>
                 </div>
             </div>
         </section>
 
-        <section id="Physique" class="resource-section">
+        <section id="Physique" class="resource-section"><!-- EDIT THIS AND COPY BELOW BLOCK TO UPDATE AND ADD OTHER SECTIONS-->
             <div class="resource-grid">
-                <div class="card" data-keywords="'">
+                <div class="card" data-keywords="physique"><!-- TAGS ARE OPTIONAL-->
                     <h3>Ressources externes</h3>
                     <p>Le site recommandé par la prof, théorie et exercices de mécanique.</p>
-                    <a href="https://physique.merici.ca/mecanique.html">Voir ça &nearr;</a>
+                    <a href="https://physique.merici.ca/mecanique.html">Voir ça &nearr;</a><!-- DON'T FORGET TO EDIT THE PATH! USE ABSOLUTES.-->
                 </div>
             </div>
         </section>
 
         <section id="Géographie" class="resource-section">
             <div class="resource-grid">
-                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths">
+                <div class="card" data-keywords="géographie suisse chef-lieu canton revision">
                     <h3>Chefs-Lieux / Cantons</h3>
                     <p>Révision des lieux par cantons, ça se présente sous une carte et il faut replacer les chefs lieux.</p>
                     <a href="https://www.geoguessr.com/fr/vgp/3358">Geoguessr Quiz &nearr;</a>
@@ -95,12 +94,12 @@
         </section>
 
 
-        <section id="À&nbsp;Propos" class="resource-section">
+        <section id="À&nbsp;Propos" class="resource-section" data-keywords="">
             <div class="resource-grid">
-                <div class="card" data-keywords="théorème pythagore mathématiques triangle rectangle maths">
+                <div class="card" data-keywords="informations">
                     <h3>Informations</h3>
-                    <p>Qui? Pourquoi? La raison de ce site, expliquée. [Il n'y a encore rien]</p>
-                    <a href="#">Voir ça &rarr;</a>
+                    <p>Qu'est-ce que ce site? C'est la suite du site dans le lien.</p>
+                    <a href="/104">Découvrir &rarr;</a>
                 </div>
                 <div class="card" data-keywords="aide">
                     <h3>Flèches: légende</h3>
@@ -121,7 +120,7 @@
         </section>
     </main>
 
-    <script>document.addEventListener("DOMContentLoaded",function(){function a(a){return a?a.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""):""}function b(){const b=a(j.value);let d=!1;k.style.display=0<j.value.length?"block":"none",l.forEach(c=>{const e=a(c.querySelector("h3").textContent),f=a(c.querySelector("p").textContent),g=a(c.dataset.keywords),h=`${e} ${f} ${g}`.includes(b);c.style.display=h?"flex":"none",h&&(d=!0)}),c(),m.style.display=d?"none":"block"}function c(){h.forEach(a=>{const b=a.querySelectorAll(".card:not([style*=\"display: none\"])");a.style.display=0<b.length?"block":"none"})}function d(){j.value="",b(),j.focus()}function e(){const a=o.scrollLeft+o.clientWidth>=o.scrollWidth-1;a?o.classList.add("no-fade"):o.classList.remove("no-fade")}function f(){const a=o.scrollWidth>o.clientWidth;a?e():o.classList.add("no-fade")}function g(c){const d=a(c.trim());if(2>d.length)return void(q.style.display="none");const e=r.filter(a=>a.startsWith(d)).slice(0,7);return 0===e.length?void(q.style.display="none"):void(q.innerHTML="",e.forEach(a=>{const c=document.createElement("li");c.textContent=a,c.style.padding="0.5rem 1rem",c.style.cursor="pointer",c.addEventListener("click",()=>{j.value=a,b(),q.style.display="none"}),c.addEventListener("mouseenter",()=>c.style.background="var(--bg-color)"),c.addEventListener("mouseleave",()=>c.style.background="transparent"),q.appendChild(c)}),q.style.display="block")}const h=document.querySelectorAll(".resource-section"),i=document.querySelector(".filter-tabs");h.forEach((a,b)=>{const c=a.id;let d=a.querySelector(".section-title");if(!d){d=document.createElement("h2"),d.className="section-title";const b=a.querySelector(".resource-grid");b?a.insertBefore(d,b):a.appendChild(d)}d.textContent=c;const e=document.createElement("button");e.className="tab",e.textContent=c,e.dataset.section=c,0===b&&e.classList.add("active"),i.appendChild(e)});const j=document.getElementById("searchInput"),k=document.getElementById("clearSearchBtn");document.getElementById("clearSearchLink").addEventListener("click",d);const l=document.querySelectorAll(".card"),m=document.getElementById("no-results"),n=document.querySelectorAll(".tab");j.addEventListener("input",b),k.addEventListener("click",d),n.forEach(a=>{a.addEventListener("click",function(){j.value="",k.style.display="none",b(),n.forEach(a=>a.classList.remove("active")),this.classList.add("active");const a=this.getAttribute("data-section"),c=document.getElementById(a);c&&c.scrollIntoView({behavior:"smooth",block:"start"})})}),c();const o=document.querySelector(".filter-tabs-container");window.addEventListener("resize",f),f(),e(),o.addEventListener("scroll",e);const p=document.querySelectorAll(".resource-section");window.addEventListener("scroll",function(){let a=null;const b=.45*window.innerHeight;p.forEach(c=>{const d=c.getBoundingClientRect();d.top<=b&&d.bottom>=b&&(a=c.id)}),a&&n.forEach(b=>{const c=b.dataset.section===a;b.classList.toggle("active",c),c&&b.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})})});const q=document.getElementById("autocompleteList");let r=[];l.forEach(b=>{const c=b.dataset.keywords||"";r.push(...a(c).split(" "))}),r=[...new Set(r)],j.addEventListener("input",()=>{b(),g(j.value)}),document.addEventListener("click",a=>{q.contains(a.target)||a.target===j||(q.style.display="none")})});const tabContainer=document.querySelector(".filter-tabs-container");setTimeout(()=>{tabContainer.scrollTo({left:60,behavior:"smooth"}),setTimeout(()=>{tabContainer.scrollTo({left:0,behavior:"smooth"})},600)},400);</script>
+    <script>document.addEventListener("DOMContentLoaded",function(){function a(a){return a?a.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""):""}function b(){const b=a(j.value);let d=!1;k.style.display=0<j.value.length?"block":"none",l.forEach(c=>{const e=a(c.querySelector("h3").textContent),f=a(c.querySelector("p").textContent),g=a(c.dataset.keywords),h=`${e} ${f} ${g}`.includes(b);c.style.display=h?"flex":"none",h&&(d=!0)}),c(),m.style.display=d?"none":"block"}function c(){h.forEach(a=>{const b=a.querySelectorAll(".card:not([style*=\"display: none\"])");a.style.display=0<b.length?"block":"none"})}function d(){j.value="",b(),j.focus()}function e(){const a=o.scrollLeft+o.clientWidth>=o.scrollWidth-1;a?o.classList.add("no-fade"):o.classList.remove("no-fade")}function f(){const a=o.scrollWidth>o.clientWidth;a?e():o.classList.add("no-fade")}function g(c){const d=a(c.trim());if(1>d.length)return void(q.style.display="none");const e=r.filter(a=>a.startsWith(d)).slice(0,7);return 0===e.length?void(q.style.display="none"):void(q.innerHTML="",e.forEach(a=>{const c=document.createElement("li");c.innerHTML=a,c.style.padding="0.5rem 1rem",c.style.cursor="pointer",c.addEventListener("click",()=>{j.value=a,b(),q.style.display="none"}),c.addEventListener("mouseenter",()=>c.style.background="var(--bg-color)"),c.addEventListener("mouseleave",()=>c.style.background="transparent"),q.appendChild(c)}),q.style.display="block")}const h=document.querySelectorAll(".resource-section"),i=document.querySelector(".filter-tabs");h.forEach((a,b)=>{const c=a.id;let d=a.querySelector(".section-title");if(!d){d=document.createElement("h2"),d.className="section-title";const b=a.querySelector(".resource-grid");b?a.insertBefore(d,b):a.appendChild(d)}d.textContent=c;const e=document.createElement("button");e.className="tab",e.textContent=c,e.dataset.section=c,0===b&&e.classList.add("active"),i.appendChild(e)});const j=document.getElementById("searchInput"),k=document.getElementById("clearSearchBtn");document.getElementById("clearSearchLink").addEventListener("click",d);const l=document.querySelectorAll(".card"),m=document.getElementById("no-results"),n=document.querySelectorAll(".tab");j.addEventListener("input",b),k.addEventListener("click",d),n.forEach(a=>{a.addEventListener("click",function(){j.value="",k.style.display="none",b(),n.forEach(a=>a.classList.remove("active")),this.classList.add("active");const a=this.getAttribute("data-section"),c=document.getElementById(a);c&&c.scrollIntoView({behavior:"smooth",block:"start"})})}),c();const o=document.querySelector(".filter-tabs-container");window.addEventListener("resize",f),f(),e(),o.addEventListener("scroll",e);const p=document.querySelectorAll(".resource-section");window.addEventListener("scroll",function(){let a=null;const b=.45*window.innerHeight;p.forEach(c=>{const d=c.getBoundingClientRect();d.top<=b&&d.bottom>=b&&(a=c.id)}),a&&n.forEach(b=>{const c=b.dataset.section===a;b.classList.toggle("active",c),c&&b.scrollIntoView({behavior:"smooth",inline:"center",block:"nearest"})})});const q=document.getElementById("autocompleteList");let r=[];l.forEach(b=>{const c=b.dataset.keywords||"";r.push(...a(c).split(" "))}),r=[...new Set(r)],j.addEventListener("input",()=>{b(),g(j.value)}),document.addEventListener("click",a=>{q.contains(a.target)||a.target===j||(q.style.display="none")})});const tabContainer=document.querySelector(".filter-tabs-container");setTimeout(()=>{tabContainer.scrollTo({left:60,behavior:"smooth"}),setTimeout(()=>{tabContainer.scrollTo({left:0,behavior:"smooth"})},600)},400);</script>
     <script src="/consent.js"></script>
 </body>
 </html>
