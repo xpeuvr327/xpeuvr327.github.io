@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /o
 Allow: /104
 Allow: /resumes/francais/le-roman-de-renart
+Allow: /
