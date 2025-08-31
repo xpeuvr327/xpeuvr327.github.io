@@ -86,16 +86,37 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
                         <span>Voir ça &nearr;</span>
                     </div>
                 </a>
+                <a href="/pdf/key-anglais-scan-workbook-insight-college-intermediate-reponse-answers_OCR.pdf" class="card-link">
+                    <div class="card" data-keywords="key anglais insight reponses scan pdf corrige">
+                        <h3>Réponses Insight et transcriptions audio</h3>
+                        <p>Scan des réponses du workbook de l'unité 5.</p>
+                        <span>Télécharger &downarrow;</span>
+                    </div>
+                </a>
             </div>
         </section>
 
         <section id="Allemand" class="resource-section">
             <div class="resource-grid">
-                <a onclick="alert('jpp faire ça va falloir rechecker frro my bad')">
-                    <div class="card" data-keywords="allemand traduction Novemberschnee livre">
-                        <h3>Novemberschnee</h3>
-                        <p>Les traductions et résumés seront prochainement disponibles.</p>
-                        <span>M'informer dès que ce sera prêt &uparrow;</span>
+                <a href="/resumes/allemand/novemberschnee/resume.html" class="card-link">
+                    <div class="card" data-keywords="allemand résumé Novemberschnee livre">
+                        <h3>Novemberschnee Résumé</h3>
+                        <p>Résumé de Novemberschnee en français.</p>
+                        <span>Feuilleter &rarr;</span>
+                    </div>
+                </a>
+                <a href="/resumes/allemand/novemberschnee/traduction.html" class="card-link">
+                    <div class="card" data-keywords="allemand traduction resume Novemberschnee livre">
+                        <h3>Novemberschnee Traduction</h3>
+                        <p>Traduction intégrale de Novemberschnee en français.</p>
+                        <span>Lire &rarr;</span>
+                    </div>
+                </a>
+                <a href="/pdf/novemberschnee%20lernwortschatz.pdf" class="card-link">
+                    <div class="card" data-keywords="allemand voc novemberschnee pdf">
+                        <h3>Novemberschnee Lernwortschatz</h3>
+                        <p>Voc de Novemberschnee pour les évals.</p>
+                        <span>Télécharger &downarrow;</span>
                     </div>
                 </a>
             </div>
@@ -160,6 +181,13 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
                         <h3>Flèches: légende</h3>
                         <p>Les cartes avec une flèche vers en haut à droite, une fois cliquées, vous dirigeront vers une page externe au site.</p>
                         <span>Page externe &nearr;</span>
+                    </div>
+                </a>
+                <a href="/pdf/reforme_humanisme_ocred_stbl_tout_ocred_stbl.pdf" class="card-link">
+                    <div class="card" data-keywords="aide">
+                        <h3>Flèches: légende</h3>
+                        <p>Les cartes avec une flèche vers le bas, une fois cliqués, téléchargeront un fichier, généralement PDF, ou lancera un aperçu.</p>
+                        <span>Téléchargement &downarrow;</span>
                     </div>
                 </a>
             </div>
@@ -227,30 +255,31 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
             function filterContent() {
                 const query = normalizeString(searchInput.value);
                 let resultsFound = false;
-
                 clearSearchBtn.style.display = searchInput.value.length > 0 ? 'block' : 'none';
-
                 cards.forEach(card => {
+                    // Get the parent container, which is the actual grid item
+                    const cardContainer = card.closest('.card-link');
+                    if (!cardContainer) return; // Failsafe
                     const title = normalizeString(card.querySelector('h3').textContent);
                     const description = normalizeString(card.querySelector('p').textContent);
                     const keywords = normalizeString(card.dataset.keywords);
                     const cardContent = `${title} ${description} ${keywords}`;
                     const isVisible = cardContent.includes(query);
-                    card.style.display = isVisible ? 'flex' : 'none';
+                    // Apply display style to the parent container, not the card itself
+                    cardContainer.style.display = isVisible ? 'block' : 'none';
                     if (isVisible) resultsFound = true;
                 });
-                
                 updateSectionVisibility();
                 noResultsMessage.style.display = resultsFound ? 'none' : 'block';
             }
             
             function updateSectionVisibility() {
-                 sections.forEach(section => {
-                    const visibleCards = section.querySelectorAll('.card:not([style*="display: none"])');
-                    section.style.display = visibleCards.length > 0 ? 'block' : 'none';
-                });
-            }
-
+              sections.forEach(section => {
+                     // Check for visible card-links, not cards
+                     const visibleContainers = section.querySelectorAll('.card-link:not([style*="display: none"])');
+                     section.style.display = visibleContainers.length > 0 ? 'block' : 'none';
+              });
+             }
             function clearSearch() {
                 searchInput.value = '';
                 filterContent();
@@ -355,7 +384,7 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
 
         function showAutocompleteSuggestions(inputValue) {
             const query = normalizeString(inputValue.trim());
-            if (query.length < 2) {
+            if (query.length < 1) {
                 autocompleteList.style.display = 'none';
                 return;
             }
@@ -421,6 +450,6 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
 
     </script>
 
-    <script src="/consent.js" defer></script>></script>
+    <script src="/consent.js" defer></script>
 </body>
 </html>
