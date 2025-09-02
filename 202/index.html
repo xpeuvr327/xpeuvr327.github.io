@@ -407,20 +407,77 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
             }
 
             autocompleteList.innerHTML = '';
-            suggestions.forEach(suggestion => {
+            let currentFocus = -1; // Track the currently focused suggestion
+
+            suggestions.forEach((suggestion, index) => {
                 const li = document.createElement('li');
                 li.textContent = suggestion;
                 li.style.padding = '0.5rem 1rem';
                 li.style.cursor = 'pointer';
+                li.setAttribute("tabindex", "0");
+
+                // Highlight the focused suggestion
+                li.addEventListener('mouseenter', () => {
+                    li.style.background = 'var(--bg-color)';
+                });
+                li.addEventListener('mouseleave', () => {
+                    li.style.background = 'transparent';
+                });
+
+                // Select suggestion on click
                 li.addEventListener('click', () => {
                     searchInput.value = suggestion;
                     filterContent();
                     autocompleteList.style.display = 'none';
                 });
-                li.addEventListener('mouseenter', () => li.style.background = 'var(--bg-color)');
-                li.addEventListener('mouseleave', () => li.style.background = 'transparent');
+
+                // Select suggestion on Enter key press
+                li.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        searchInput.value = suggestion;
+                        filterContent();
+                        autocompleteList.style.display = 'none';
+                        e.preventDefault(); // Prevent form submission or other default behavior
+                    }
+                });
+
                 autocompleteList.appendChild(li);
+        });
+
+        // Add keyboard navigation to the autocomplete list
+        searchInput.addEventListener('keydown', (e) => {
+            const suggestions = autocompleteList.querySelectorAll('li');
+
+            // Arrow DOWN key
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                currentFocus = (currentFocus + 1) % suggestions.length;
+                updateFocus(suggestions);
+            }
+            // Arrow UP key
+            else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                currentFocus = (currentFocus - 1 + suggestions.length) % suggestions.length;
+                updateFocus(suggestions);
+            }
+            // Escape key (optional: close the autocomplete list)
+            else if (e.key === 'Escape') {
+                autocompleteList.style.display = 'none';
+            }
+        });
+
+        // Helper function to update focus and highlight
+        function updateFocus(suggestions) {
+            suggestions.forEach((li, index) => {
+                if (index === currentFocus) {
+                    li.style.background = 'var(--bg-color)';
+                    li.focus();
+                } else {
+                    li.style.background = 'transparent';
+                }
             });
+        }
+
 
             autocompleteList.style.display = 'block';
         }
@@ -441,7 +498,7 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
     
         });
             const tabContainer = document.querySelector('.filter-tabs-container');
-
+            //UX trick: make the tabs move a bit to specify to the user that it's scrollable
             setTimeout(() => {
             tabContainer.scrollTo({
                 left: 60,
