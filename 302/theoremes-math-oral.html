@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>Théorèmes — démonstrations pas à pas</title>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f4ef;
+      --card: #fffefa;
+      --ink: #202824;
+      --muted: #68736b;
+      --green: #315b48;
+      --green-soft: #eaf0e9;
+      --line: #e5e4dc;
+      --shadow: 0 14px 42px rgb(37 48 39 / 7%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 85% 0%, rgb(222 230 216 / 65%), transparent 34rem),
+        var(--paper);
+      line-height: 1.7;
+    }
+
+    .page {
+      width: min(100% - 32px, 800px);
+      margin: 0 auto;
+      padding: 54px 0 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.4rem, 7vw, 4rem);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.1;
+    }
+
+    .intro {
+      max-width: 640px;
+      margin: 16px 0 30px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .theorem-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .theorem {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      animation: appear .4s both;
+    }
+
+    .theorem summary {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 28px;
+      align-items: center;
+      gap: 14px;
+      padding: 21px 23px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .theorem summary::-webkit-details-marker { display: none; }
+
+    .theorem summary::after {
+      content: "+";
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border: 1px solid #dce5da;
+      border-radius: 50%;
+      color: var(--green);
+      font-size: 1.15rem;
+      line-height: 1;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .theorem[open] summary::after {
+      content: "−";
+      background: var(--green-soft);
+    }
+
+    .theorem summary:focus-visible {
+      outline: 3px solid #91ad92;
+      outline-offset: -4px;
+      border-radius: 17px;
+    }
+
+    .theorem-title {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.04rem;
+      font-weight: 730;
+    }
+
+    .theorem-formula {
+      display: block;
+      color: var(--green);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.05rem, 3.6vw, 1.35rem);
+    }
+
+    .proof {
+      padding: 0 23px 23px;
+      border-top: 1px solid var(--line);
+    }
+
+    .proof-intro {
+      margin: 18px 0;
+      color: var(--muted);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 17px;
+    }
+
+    .step-number {
+      display: grid;
+      width: 29px;
+      height: 29px;
+      place-items: center;
+      border: 1px solid #dce5da;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: .82rem;
+      font-weight: 750;
+    }
+
+    .step h3 {
+      margin: 1px 0 5px;
+      font-size: .95rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: #4e5951;
+    }
+
+    .math-block {
+      overflow-x: auto;
+      margin: 10px 0 2px;
+      padding: 11px 14px;
+      border-left: 2px solid #b9cbb9;
+      background: #f7f8f4;
+    }
+
+    .image-placeholder {
+      display: grid;
+      min-height: 130px;
+      margin: 18px 0 4px;
+      place-items: center;
+      border: 1px dashed #b9c3b7;
+      border-radius: 12px;
+      background: #f8f8f3;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .image-placeholder figcaption {
+      padding: 18px;
+      font-size: .9rem;
+    }
+
+    .image-placeholder strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--green);
+    }
+
+    .note {
+      margin-top: 16px;
+      padding: 13px 15px;
+      border: 1px solid #eee3cf;
+      border-radius: 12px;
+      background: #fbf7ee;
+      color: #65573f;
+      font-size: .92rem;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: .85rem;
+      text-align: center;
+    }
+
+    mjx-container { max-width: 100%; }
+    mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 520px) {
+      .page { width: min(100% - 22px, 800px); padding-top: 36px; }
+      .theorem summary { padding: 18px 16px; }
+      .proof { padding: 0 16px 18px; }
+      .step { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    window.MathJax = {
+      loader: {
+        load: ['input/asciimath', 'output/chtml', 'ui/menu']
+      },
+      options: {    renderActions: {
+      addMenu: [],
+      checkLoading: []
+    }, skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/startup.js"></script>
+
+  <main class="page">
+    <header>
+      <p class="eyebrow">Mathématiques · démonstrations</p>
+      <h1>Des formules à comprendre</h1>
+      <p class="intro">
+        Ouvrez une carte pour découvrir sa démonstration, étape par étape.
+        Les formules s’écrivent en ASCIIMath, entre backticks&nbsp;: `lim_(x->0) (sin x)/x = 1`.
+      </p>
+    </header>
+
+    <section id="theorem-list" class="theorem-list" aria-label="Théorèmes">
+
+      <details class="theorem" style="animation-delay: 0ms">
+        <summary>
+          <span>
+            <span class="theorem-title">Limite remarquable du sinus</span>
+            <span class="theorem-formula">`lim_(x->0) (sin x)/x = 1`</span>
+          </span>
+        </summary>
+
+        <div class="proof">
+          <p class="proof-intro">
+            On suppose que les angles sont mesurés en radians. On commence par les
+            valeurs `x > 0`, puis on conclut pour les deux côtés.
+          </p>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+            <div>
+              <h3>Comparer les aires</h3>
+              <p>
+                Sur le cercle unité, pour `0 < x < pi/2`, le triangle intérieur, le
+                secteur circulaire et le triangle tangent extérieur donnent cet
+                encadrement des aires&nbsp;:
+              </p>
+              <div class="math-block">`(1/2) sin x < x/2 < (1/2) tan x.`</div>
+              <figure class="image-placeholder" role="img"
+                aria-label="À compléter : cercle unité montrant le triangle intérieur, le secteur d’angle x et le triangle tangent.">
+                <figcaption>
+                  <strong>Visualisation à venir</strong>
+                  À compléter : cercle unité montrant le triangle intérieur, le secteur
+                  d’angle x et le triangle tangent.
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+            <div>
+              <h3>Encadrer le quotient</h3>
+              <p>
+                En utilisant `tan x = (sin x)/(cos x)`, puis en divisant par les
+                quantités positives appropriées, on obtient&nbsp;:
+              </p>
+              <div class="math-block">`cos x < (sin x)/x < 1.`</div>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+            <div>
+              <h3>Appliquer le théorème des gendarmes</h3>
+              <p>
+                Quand `x -> 0^+`, les deux bornes tendent vers `1`. Donc
+                `lim_(x->0^+) (sin x)/x = 1`. Le quotient est pair, puisque
+                `sin(-x) = -sin x`, donc la limite à gauche est la même.
+              </p>
+              <div class="math-block">`lim_(x->0) (sin x)/x = 1.`</div>
+            </div>
+          </section>
+
+          <aside class="note">
+            <strong>À retenir&nbsp;</strong>
+            Cette limite vaut `1` lorsque `x` est exprimé en radians.
+          </aside>
+        </div>
+      </details>
+
+      <details class="theorem" style="animation-delay: 70ms">
+        <summary>
+          <span>
+            <span class="theorem-title">Dérivée du sinus</span>
+            <span class="theorem-formula">`(d/dx) sin x = cos x`</span>
+          </span>
+        </summary>
+
+        <div class="proof">
+          <p class="proof-intro">
+            On utilise la définition de la dérivée et les identités trigonométriques.
+          </p>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+            <div>
+              <h3>Partir de la définition</h3>
+              <p>La dérivée de `sin x` est la limite du taux d’accroissement&nbsp;:</p>
+              <div class="math-block">`(d/dx) sin x = lim_(h->0) (sin(x+h) - sin x)/h.`</div>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+            <div>
+              <h3>Développer le sinus d’une somme</h3>
+              <p>Avec `sin(x+h) = sin x cos h + cos x sin h`, on réorganise&nbsp;:</p>
+              <div class="math-block">`(sin(x+h) - sin x)/h = sin x · (cos h - 1)/h + cos x · (sin h)/h.`</div>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+            <div>
+              <h3>Faire tendre h vers zéro</h3>
+              <p>
+                On sait que `lim_(h->0) (sin h)/h = 1` et que
+                `lim_(h->0) (cos h - 1)/h = 0`. Il reste donc&nbsp;:
+              </p>
+              <div class="math-block">`(d/dx) sin x = sin x · 0 + cos x · 1 = cos x.`</div>
+              <figure class="image-placeholder" role="img"
+                aria-label="À compléter : courbe du sinus et tangente en un point d’abscisse x.">
+                <figcaption>
+                  <strong>Visualisation à venir</strong>
+                  À compléter : courbe du sinus et tangente en un point d’abscisse x.
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <aside class="note">
+            <strong>À retenir&nbsp;</strong>
+            Les angles doivent être mesurés en radians pour que la dérivée soit `cos x`.
+          </aside>
+        </div>
+      </details>
+
+      <details class="theorem" style="animation-delay: 140ms">
+        <summary>
+          <span>
+            <span class="theorem-title">Dérivée d’une fonction réciproque</span>
+            <span class="theorem-formula">`(f^-1)'(y) = 1/(f'(f^-1(y)))`</span>
+          </span>
+        </summary>
+
+        <div class="proof">
+          <p class="proof-intro">
+            Soit `f` dérivable et bijective sur un intervalle, avec `f'(x) != 0`.
+            La fonction réciproque `f^-1` est alors dérivable aux points considérés.
+          </p>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">1</div>
+            <div>
+              <h3>Écrire la relation entre les fonctions</h3>
+              <p>Par définition de la fonction réciproque, pour `y = f(x)`, on a&nbsp;:</p>
+              <div class="math-block">`f^-1(f(x)) = x.`</div>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">2</div>
+            <div>
+              <h3>Dériver des deux côtés</h3>
+              <p>La règle de dérivation d’une composée donne&nbsp;:</p>
+              <div class="math-block">`(f^-1)'(f(x)) · f'(x) = 1.`</div>
+            </div>
+          </section>
+
+          <section class="step">
+            <div class="step-number" aria-hidden="true">3</div>
+            <div>
+              <h3>Isoler la dérivée recherchée</h3>
+              <p>
+                Comme `f'(x) != 0`, on divise par `f'(x)`. Puis on remplace `x` par
+                `f^-1(y)`, puisque `y = f(x)`&nbsp;:
+              </p>
+              <div class="math-block">`(f^-1)'(y) = 1/(f'(f^-1(y))).`</div>
+              <figure class="image-placeholder" role="img"
+                aria-label="À compléter : courbes de f et de sa réciproque, symétriques par rapport à la droite y = x.">
+                <figcaption>
+                  <strong>Visualisation à venir</strong>
+                  À compléter : courbes de f et de sa réciproque, symétriques par rapport
+                  à la droite y = x.
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <aside class="note">
+            <strong>À retenir&nbsp;</strong>
+            La formule s’applique là où la fonction réciproque existe et où `f'`
+            ne s’annule pas.
+          </aside>
+        </div>
+      </details>
+
+      <details class="theorem" style="animation-delay: 210ms">
+        <summary>
+          <span>
+            <span class="theorem-title">Définition de la dérivée et interprétation géométrique</span>
+            <span class="theorem-formula">`(f^-1)'(y) = 1/(f'(f^-1(y)))`</span>
+          </span>
+        </summary>
+      </details>
+
+    </section>
+
+    <footer>Des démonstrations repliables, pensées pour les petits et grands écrans.</footer>
+  </main>
+</body>
+</html>
