@@ -41,7 +41,21 @@ main{padding:1.5rem}
 .card-link{text-decoration:none;color:inherit;display:block}
 .card-link{text-decoration:none;color:inherit;display:block}
 .card{cursor:pointer}
-span{display:inline-block;text-decoration:none;color:var(--accent-color);transition:opacity 0.2s}</style>
+span{display:inline-block;text-decoration:none;color:var(--accent-color);transition:opacity 0.2s}
+.level-tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--bg-color);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+}</style>
+
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQNZ0VLGHJ"></script>
@@ -59,24 +73,6 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
         </div>
     </header>
     <main>
-        <section id="Troisième" class="resource-section">
-            <div class="resource-grid">
-                <a href="https://clip.place/w/eHEHcGSBtdmcXmrV5avLpU" class="card-link">
-                    <div class="card" data-keywords="3e 12angry men hommes">
-                        <h3>12 Hommes en colère VOST</h3>
-                        <p>Un poil tard</p>
-                        <span>Regarder sur Clip.Place &rarr;</span>
-                    </div>
-                </a>
-                <a href="/302/ehj.pdf" class="card-link">
-                    <div class="card" data-keywords="pdf traduction">
-                        <h3>Er hiess Jan</h3>
-                        <p>Traduction en français avec parties en allemand</p>
-                        <span>Lire ça &rarr;</span>
-                    </div>
-                </a>
-            </div>
-        </section>
         <section id="Français" class="resource-section">
             <div class="resource-grid">
                 <a href="/resumes/francais/un-parfum-a-sentir-ou-les-baladins/resume.html" class="card-link">
@@ -93,10 +89,38 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
                         <span>Lire ça &rarr;</span>
                     </div>
                 </a>
+                <a href="/resumefrancais/" class="card-link">
+                    <div class="card">
+                        <h3>Nouvelles orientales</h3>
+                        <span class="level-tag">1ere</span>
+                        <p>Résumés nouvelle par nouvelle des nouvelles orientales. À la main, sans IA!</p>
+                        <span>Lire ça &rarr;</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <section id="Maths" class="resource-section">
+            <div class="resource-grid">
+                <a href="/math/analyse-fonction.html" class="card-link">
+                    <div class="card">
+                        <h3>Analyse de fonctions</h3>
+                        <span class="level-tag">3e</span>
+                        <p>Un memento avec toutes les étapes et ses petits pièges</p>
+                        <span>Consulter &rarr;</span>
+                    </div>
+                </a>
             </div>
         </section>
         <section id="Anglais" class="resource-section">
             <div class="resource-grid">
+                <a href="https://clip.place/w/eHEHcGSBtdmcXmrV5avLpU" class="card-link">
+                    <div class="card" data-keywords="3e 12angry men hommes">
+                        <h3>12 Hommes en colère VOST</h3>
+                        <span class="level-tag">3e</span>
+                        <p>Un poil tard</p>
+                        <span>Regarder sur Clip.Place &rarr;</span>
+                    </div>
+                </a>
                 <a href="https://quizlet.com/user/asodintsov/sets" class="card-link">
                     <div class="card" data-keywords="quizlet anglais voc">
                         <h3>Quizlet</h3>
@@ -125,10 +149,26 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
                         <span>Lire &nearr;</span>
                     </div>
                 </a>
+                <a href="/resumes/anglais/passing-for-white/index.html" class="card-link">
+                    <div class="card">
+                        <h3>Passing for white</h3>
+                        <span class="level-tag">1ere</span>
+                        <p>Le résumé OG</p>
+                        <span>Lire &rarr;</span>
+                    </div>
+                </a>
             </div>
         </section>
         <section id="Allemand" class="resource-section">
             <div class="resource-grid">
+                <a href="/302/ehj.pdf" class="card-link">
+                    <div class="card" data-keywords="pdf traduction">
+                        <h3>Er hiess Jan</h3>
+                        <span class="level-tag">3e</span>
+                        <p>Traduction en français avec parties en allemand</p>
+                        <span>Lire ça &rarr;</span>
+                    </div>
+                </a>
                 <a href="/pdf/Novemberschnee traduction - export chap 4 01 09 2025_Optimized.pdf" class="card-link">
                     <div class="card" data-keywords="allemand traduction resume Novemberschnee livre lecture kdrive">
                         <h3>Novemberschnee Traduction Facile à lire pour téléphone</h3>
@@ -177,6 +217,14 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
                         <h3>Verbes Allemands</h3>
                         <p>Verbes du feuilleté, exercice d'entrainement, quiz des verbes, rose, pages 56 à 58</p>
                         <span>S'entrainer&rarr;</span>
+                    </div>
+                </a>
+                <a href="/resumes/allemand/olli-aus-ossiland.html" class="card-link">
+                    <div class="card">
+                        <h3>Olli aus Ossiland</h3>
+                        <span class="level-tag">1ère</span>
+                        <p>Résumés et traductions de Olli aus Ossiland</p>
+                        <span>Lire&rarr;</span>
                     </div>
                 </a>
             </div>
@@ -430,12 +478,12 @@ span{display:inline-block;text-decoration:none;color:var(--accent-color);transit
             window.addEventListener('scroll', onScroll);
             //UX trick: make the tabs move a bit to specify to the user that it's scrollable
             setTimeout(() => {
-            tabContainer.scrollTo({
+            scrollContainer.scrollTo({
                 left: 60,
                 behavior: 'smooth'
             });
             setTimeout(() => {
-                tabContainer.scrollTo({
+                scrollContainer.scrollTo({
                 left: 0,
                 behavior: 'smooth'
                 });
