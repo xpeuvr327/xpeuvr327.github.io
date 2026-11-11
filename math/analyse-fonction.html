@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passion et vertu | Résumé</title>
+    <title>Analyse de fonction</title>
     
-    <meta name="description" content="Mazza, douce et rêveuse jeune femme, mariéée et mère de deux enfants, succombe au charme d'un arriviste. Aveuglée par la passion, elle se transforme en une criminelle sans merci pour s'enfuir avec son amant.">
+    <meta name="description" content="L'analyse de fonction en 3e est une compétence clef. Cette page met tout en lumière">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/202/main-styles.css">
     <script src="/consent.js" defer></script>
-    <script type="text/javascript" src="/302/ASCIIMathML.js"></script>
-    
+  <script>
+    window.MathJax = {
+      loader: {
+        load: ['input/asciimath', 'output/chtml', 'ui/menu']
+      },
+      options: {    renderActions: {
+      addMenu: [],
+      checkLoading: []
+    }, skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/startup.js"></script>
+
 </head>
 <body>
 
@@ -31,7 +42,7 @@
             <header class="article-header">
                 <h1>Analyse de fonction</h1>
                 <p class="article-meta">
-                    Un livre de Gustave Flaubert
+                    Aide mémoire des méthodes à employer
                 </p>
             </header>
             <h2>Table des matières</h2>
@@ -41,8 +52,18 @@
             </ul>
 
             <article class="article-content">
-                <p> <span class="theorem-formula">`lim_(x->0) (sin x)/x = 1`</span>
-</p>
+                <section id="content">
+                    <h2>Aide-mémoire</h2>
+                    <p>En version papier si vous préférez:
+                        <a href="/pdf/étude de fonction théorie.pdf">La théorie de l'étude de fonctions</a>, <a href="/pdf/exemple 2 étude de fonction.pdf">Exemple d'étude de fonction, théorie scannée</a>    
+                        <ol>
+                            <li>Détermination du `D_f` :
+                                la détermination du domaine de définition se fait assez facilement en `3^e`. Il faut trouver les valeurs négatives à l'intérieur des racines, et/ou les zéros sous les fractions ou divisions. Si c'est une fonction trigonométrique vérifier pour `tan`
+                            </li>
+                            <li>Détermination des intersections avec les axes. Il faut faire `f(0)=y` qui donne `(0,y)` pour l'ordonnée à l'origine ainsi que `f(x)=0` pour trouver les zéros/racines. Petit rappel, si on a affaire à une fraction, p.ex. `(2x^2)/(-2x^2-3)`, il suffit de résoudre `2x^2=0` pour x, une fois que l'on s'est assuré que le dénominateur `ne0`, puisque la fraction ne vaudra `0` que si le numérateur vaut ça.</li>
+                        </ol>
+                    </p>
+                </section>
             </article>
         </div>
     </main>

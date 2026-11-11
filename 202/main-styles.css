@@ -127,7 +127,9 @@
         .article-content li {
             margin-bottom: 0.5rem;
         }
-
+        .article-content a {
+            color: inherit;
+        }
         /* ------------------------- */
         /* ---      Footer       --- */
         /* ------------------------- */
